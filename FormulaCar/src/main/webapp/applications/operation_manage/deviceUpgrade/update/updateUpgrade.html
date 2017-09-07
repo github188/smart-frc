@@ -1,0 +1,107 @@
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:545px;margin:20px auto;width:950px;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;margin-top: 10px;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#28b5d6;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:6.5px 90px;font-size: 14px;}
+#status li.active{background-color:#09c;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;}
+.page{padding:20px 30px;width:93%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+.page h4{height:22px; font-size:16px; padding-bottom:5px}
+.configtable {border: 1px solid rgba(115, 120, 126, 0.32);text-align: center;height:40px;}
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+		<li class="active" id="tab1"><strong>1.</strong><span lang="text:upgrade_content"></span></li>
+		<li id="tab2"><strong>2.</strong><span lang="text:choose_device"></span></li>
+	</ul>
+	<div class="items">
+	   
+	    <div class="page" id="baseInfo">
+	         <div style="height:425px;width:910px;overflow: auto;">
+	           <div style="height: 190px;">
+	            <table width="100%">
+	             <tr><td width="20%"><label style='color:red;'>*</label><label><span lang="text:upgrade_name"></span></label></td><td><input type="text" class="input"  id="upgradeName" name="upgradeName" style="width:200px;height:25px;"/></td></tr>
+	             <tr>
+		             <td width='20%'><label style='color:red;'></label> <span style="margin-left: 6px;" lang="text:type"></span></td>
+			         <td id='form_packing'>
+				         <select id='upgradeType'  name='upgradeType' style='border-radius: 4px;height: 35px;width: 202px;'>
+	                       <option value='1' lang="text:automat_app_upgrade"></option>
+	                       <option value='2' lang="text:firmware_upgrade"></option>
+	                       <option value='3' lang="text:vmc_upgrade"></option>
+	                     </select>
+			        </td>
+		         </tr>
+		         <tr>
+		             <td width='20%'><label style='color:red;'>*</label> <span lang="text:vender"></span></td>
+			         <td style="line-height: 50px;">
+				         <select id='vender'  name='vender' style='border-radius: 4px;height: 35px;width: 202px;'>
+	                       
+	                     </select>
+			        </td>
+		         </tr>
+		         <tr>
+		            <td width='20%'><label style='color:red;'>*</label> <span lang="text:price_activity_descript"></span></td>
+		            <td><textarea id="content_desc" name="content_desc" cols ="80" rows = "5" style='margin-top: 10px;'></textarea></td>
+		         </tr>
+	             <tr>
+	                 <td width="20%"><label style='color:red;'>*</label><label><span lang="text:upload_files"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit' id="upload" style="margin-top: 5px;"/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:81%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;" id="configTable">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th class="configtable"><span lang="text:record_container"></span></th>
+                                  <th style="width:100px;" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th class="configtable"><span lang="text:operate"></span></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	           </div>
+	         </div>
+
+	         <div class="btn_nav">
+
+                  <input type="button" class='btn btn-primary submit' id="comBase" style="margin-left:10px;width: 115px;height: 32px;padding-right: 1px;padding-left: 1px;" /> 
+
+                  <input type="button" class='btn btn-primary submit' id="nextBase" style="margin-left:10px;width: 105px;height: 32px;"/>
+             </div>
+	    </div>
+	 
+	    <div class="page" id="deviceList">
+            <h4><span lang="text:all_vending_list"></span></h4>
+            <div id="list" style="height: 400px;overflow: auto;border: 1px #D7C9C9 solid;"></div>
+  
+	         <div class="btn_nav">
+	           <table style="width:100%;">
+                 <tr>
+                 <td style="width:90%;">
+                    <input type="button" class='btn btn-primary submit' id="lastBase" style="width: 115px;height: 32px;" /> 
+                 </td>
+                 <td style="width:90%;">
+                    <input type="button" class='btn btn-primary submit' id="saveBase" style="margin-left:10px;width: 115px;height: 32px;" /> 
+                 </td>
+                 <td style="width:90%;">
+                    <input type="button" class='btn btn-primary submit' id="nowBase" style="margin-left:10px;width: 115px;height: 32px;" /> 
+                  </td>
+                 </tr>
+               </table>
+             </div>
+        </div>
+	</div>
+</div>

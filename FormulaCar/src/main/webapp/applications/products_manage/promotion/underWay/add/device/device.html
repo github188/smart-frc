@@ -1,0 +1,76 @@
+ <style>
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;}
+</style>
+ <div id='con3'>
+   <table>
+      <tr>
+          <td style="width:55%;">
+            <div id="left" style="width:100%">
+	         <table style="border: 1px solid #C7C1C1;">
+	          <tr>
+	            <td> 
+	             <div style='width: 100%;background: #e9e9e9;text-align: center;font-size: 15px;'> 
+	               <span lang="text:automat_all_automat"></span>
+	             </div>
+	            </td>
+	          </tr>
+	          <tr>
+	            <td>
+	              <div id='input_text_btn' style='height: 24px;width: 100%;'>
+	                 <input type='text'  id='que_text' placeholder='' style='width: 80%;'>
+	                 <input type='button' id='que'  style='height: 29px;width: 85px;'>
+	              </div>
+	            </td>
+	         </tr>
+	         <tr>
+	            <td>
+	               <div id='con3_left' style='float: left;margin-bottom: 5px;display: block;height: 338px;overflow: auto;width: 100%;margin-top: 5px;'></div>
+	            </td>
+	         </tr>
+	         <tr>
+	            <td>
+	               <div id='left_bottom' style='position: relative;width: 100%;height: 20px;'></div>
+	            </td>
+	         </tr>
+	      </table>
+	     </div>
+        </td>
+        <td>
+           <div id='con3_cen' class='group-move'  style='width: 42px; height: 140px; float: left; margin-left: 20%;margin-top: -25%;'> 
+		    <ul>
+		       <li class='group-move-remove-one group-remove-button' id="addDevice" style='margin: 0px;cursor:pointer' lang='{title:add_one,alt:add_one}'></li>
+		    	<li class='group-move-add-one group-add-button' id="removeDevice" style='margin-top: 10px;cursor:pointer' lang='{title:remove_one,alt:remove_one}'></li>
+		   </ul>
+	       </div>
+        </td>
+        <td style="width:37%;">
+          <div id="right" style="width:100%">
+	         <table style="border: 1px solid #C7C1C1;">
+	          <tr>
+	            <td> 
+	             <div style='width: 100%;text-align:center;background:#e9e9e9;font-size: 15px;'>
+	                <span lang="text:have_been_choosed_machine"></span>
+	              </div>
+	            </td>
+	          </tr>
+	         <tr>
+	            <td>
+	               <div id='con3_content' style='float: left;margin-bottom: 5px;display: block;height: 400px;overflow: auto;width: 100%;border-top: 1px solid #C7C1C1;'></div>
+	            </td>
+	         </tr>
+	      </table>
+	     </div>
+       </td>
+     </tr>
+     <tr>
+        <td colspan="3"> 
+          <h1 style="border-bottom:1px dotted #ccc;"></h1>
+	      <div class="btn_nav">
+	         <input type="button" class='btn btn-primary submit' id="beforeStep"/>
+             <input type="button" class='btn btn-primary submit' id="nextStep" style="margin-left:10px;"/>
+          </div>
+        </td>
+     </tr>
+	 </table>
+	
+</div>

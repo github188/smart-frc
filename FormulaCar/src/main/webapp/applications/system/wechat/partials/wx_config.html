@@ -1,0 +1,100 @@
+<div class="cs-col-slide-main-hd">
+    <h2 lang="{text:wechat_config}">微信配置</h2>
+</div>
+<div class="cs-col-slie-main-bd">
+    <div class="menu-edit-area-wrapper">
+        <form id="wx-config">
+            <div class="config-row">
+                <label for="wx-config-devUserName" class="config-row-lable" lang="{text:developer_id}">开发者账号</label>
+                <input id="wx-config-devUserName" class="config-row-input ">
+            </div>
+            <div class="config-row">
+                <label for="wx-config-appId" class="config-row-lable" lang="{text:app_id}">应用标识</label>
+                <input id="wx-config-appId" class="config-row-input ">
+            </div>
+            <div class="config-row">
+                <label for="wx-config-appSecret" class="config-row-lable" lang="{text:app_secret}">应用密钥</label>
+                <input type="password" id="wx-config-appSecret" class="config-row-input ">
+            </div>
+            <div class="config-row">
+                <label for="wx-config-handShakeUrl" class="config-row-lable row-for-textarea" lang="{text:handshake_url}">握手接口URL</label>
+                <textarea id="wx-config-handShakeUrl" class="config-row-textarea"></textarea>
+                <p id="error-tip"></p>
+            </div>
+            <div class="config-row">
+                <label for="wx-config-handShakeToken" class="config-row-lable" lang="{text:handshake_token}">握手Token</label>
+                <input id="wx-config-handShakeToken" class="config-row-input ">
+            </div>
+
+        </form>
+        <div class="btn-wrp">
+            <div class="edit-btn">
+                <a id="wx-config-edit" class="btn btn-default btn-editing" lang="{text:edit_url}"></a>
+            </div>
+            <div class="save-btn">
+                <a id="wx-config-save" class="btn btn-primary submit" lang="{text:save}"></a>
+                <a id="wx-config-cancel" class="btn btn-default" lang="{text:fall_back}"></a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<style type="text/css">
+    .menu-edit-area-wrapper{
+        padding: 0;
+    }
+    .config-row-input {
+        width: 300px!important;
+        height: 32px!important;
+        line-height: 23px!important;
+        padding: 0 5px!important;
+        border: solid 1px rgb(152, 152, 152)!important;
+    }
+    .config-row{
+        padding: 8px 0;
+    }
+    .config-row-lable{
+        width: 100px;
+    }
+    #wx-config{
+        /*max-width: 765px;*/
+        margin: 50px auto 0px auto;
+        text-align: center;
+    }
+    label.config-row-lable {
+        width: 130px;
+        display: inline-block;
+    }
+    .config-row-textarea{
+        border-color: rgb(152, 152, 152);
+        padding: 5px;
+        width: 302px;
+        height: 22px;
+        resize: none;
+        overflow: hidden;
+    }
+    .row-for-textarea{
+        position: relative;
+        top: -13px;
+    }
+    .btn-wrp{
+        max-width: 375px;
+        margin: 32px auto 0px auto;
+    }
+    input:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    textarea:disabled{
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    #error-tip{
+        display: none;
+        color: #F00F0F;
+        line-height: 20px;
+    }
+</style>

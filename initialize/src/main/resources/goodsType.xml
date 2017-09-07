@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<initialize>
+  <goodsTypes>
+         <type>功能饮料</type>
+	 <type>碳酸饮料</type>
+	 <type>矿泉水</type>
+	 <type>乳饮料</type>
+	 <type>咖啡饮料</type>
+	 <type>果蔬汁饮料</type>
+	 <type>茶饮料</type>
+  </goodsTypes>
+</initialize>

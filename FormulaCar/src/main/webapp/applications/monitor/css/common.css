@@ -1,0 +1,97 @@
+.mask-wrapper,  .img-mask,   .mask-bg, .mask-img {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 80px; 
+}
+
+.mask-wrapper {
+    top: 0px;
+    left: 5px;
+    overflow: hidden;
+    display:none;
+}
+
+.mask-monitor-img {
+    background: transparent url(../images/saledonw.png) no-repeat 10% 20px;
+    background-size: 55px;
+    position: absolute;
+    display: block;
+    width: 70px;
+    height: 80px;
+}
+.mask-qrimg {
+	background: transparent url(../images/qrcode.png) no-repeat 50% 12px;
+    background-size: 25px;
+    height: 35px;
+	width: 35px;
+	position: absolute;
+	top: 40px;
+	right: 5px;
+}
+.mask-left{
+	background: transparent url(../images/left_green.png) no-repeat;
+    background-size: 38px;
+    width: 38px;
+    height: 38px;
+    display: block;
+    cursor:pointer;
+
+}
+.mask-right{
+	background: transparent url(../images/right_green.png) no-repeat;
+    background-size: 38px;
+    width: 38px;
+    height: 38px;
+    display: block;
+    cursor:pointer;
+
+}
+.wclose{
+	background: transparent url(../images/close.png) no-repeat;
+    background-size: 38px;
+    width: 38px;
+    height: 38px;
+    display: block;
+    cursor:pointer;
+
+}
+.onem{
+	width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 15px;
+    font-size: 14px;
+    background: #CDC9C9;
+    color: white;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+	
+}
+.fivem{
+	
+	width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 15px;
+    font-size: 14px;
+    background: #DAA520;
+    color: white;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 5px;
+}
+
+.soldouttd{
+	background-color: white;
+    color: red;
+    text-align: center;
+}

@@ -1,0 +1,91 @@
+<div id="trade" style="height:800px;overflow: auto;position: relative;">
+	<div id="tradeHeads" style="height:60%;">
+	  <div style="margin-top: 5px;margin-bottom: 5px;height: 8%;">
+	     <div style="float:left;margin-left: 65%;">
+	        <select id='reportType'  name='reportType' style='width:120px;height: 28px;'></select>
+	     </div>
+    	 <div style='float:left;height: 28px;margin-left:5px;'>
+    	    <input style='width:150px' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='summary_date' />
+         </div>
+         <div style='float:left;height: 28px;margin-left:5px;'>
+  	        <input style='width:150px' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='summary_month'/>
+  	     </div>
+  	     <div style='float:left;height: 28px;margin-left:5px;'>
+  	        <select id='summary_year' style="height: 28px;">
+  	            <option value='2016' selected='selected'>2016</option>
+  	            <option value='2017'>2017</option>
+  	            <option value='2018'>2018</option>
+  	            <option value='2019'>2019</option>
+  	            <option value='2020'>2020</option>
+  	        </select>
+  	     </div>
+  	     <div id='buttonDiv' style='float:left;height: 28px;margin-left:5px;'></div>
+      </div>
+      <div class="index_show_area" style="margin-left:20px;">
+        <div style="width:47%;float:left;">
+            <table style="width:100%;border: 1px solid rgba(154, 158, 158, 0.5);">
+              <tr>
+                <td>
+                  <div class="div_trade" style="width:100%;text-align: center; height: 80px;line-height: 80px;">
+                    <span style="color: black;font-size: 28px;" lang="{text:total_turnover}"></span>
+                    <span id="amount" style="color: #19B6BB;font-size: 28px;"></span>
+                    <span style="color: #19B6BB;font-size: 28px;" lang="{text:china_yuan}"></span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                    <div id="payAlert" style="width:42%;height:65px;font-size: 12px; padding-left: 20px;  padding-right: 20px;padding-top: 10px;position:absolute;border-radius:5px;border:1px solid rgb(224, 224, 224);background:#EEE;opacity: 0.96;display:none;">
+         
+                    </div>
+                    </tr>
+              <tr>
+                <td>
+                   <div id="payAmount"><table style="width:100%;"><tr id="payStyleTr"></tr></table></div>
+                </td>
+              </tr>
+            </table>
+        </div>
+        <div style="width:47%;float:left;margin-left:20px;">
+             <table style="width:100%;border: 1px solid rgba(154, 158, 158, 0.5);">
+              <tr>
+                <td>
+                  <div class="div_trade" style="width:100%;text-align: center; height: 80px;line-height: 80px;">
+                    <span style="color: black;font-size: 28px;" lang="{text:total_volume}"></span>
+                    <span id="sum" style="color: #19B6BB;font-size: 28px;"></span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                    <div id="payAlertSum" style="width:42%;height:65px;font-size: 12px; padding-left: 20px;  padding-right: 20px;padding-top: 10px;position:absolute;border-radius:5px;border:1px solid rgb(224, 224, 224);background:#EEE;opacity: 0.96;display:none;">
+         
+                    </div>
+                    </tr>
+              <tr>
+                <td>
+                   <div id="paySum"><table style="width:100%;"><tr id="payStyleSumTr"></tr></table></div>
+                </td>
+              </tr>
+            </table>
+            
+        </div>
+        <div style="width:100%;">
+            <table style="width:40%;margin-left:30%;">
+              <tr>
+               <td><div style="height: 10px;width: 10px;background-color: #1AB5BD;"></div></td>
+               <td><div><span style="font-size: 14px;" lang="{text:trade_wx_pay}"></span></div></td>
+               <td><div style="height: 10px;width: 10px;background-color: #FD6B6C;"></div></td>
+               <td><div><span style="font-size: 14px;" lang="{text:trade_alipay}"></span></div></td>
+               <td><div style="height: 10px;width: 10px;background-color: #BCBD91;"></div></td>
+               <td><div><span style="font-size: 14px;" lang="{text:trade_baifubao}"></span></div></td>
+               <td><div style="height: 10px;width: 10px;background-color: #ACCCBD;"></div></td>
+               <td><div><span style="font-size: 14px;" lang="{text:device_cash_pay}"></span></div></td>
+               <td><div style="height: 10px;width: 10px;background-color: #44b549;"></div></td>
+               <td><div><span style="font-size: 14px;" lang="{text:trade_soundwave_pay}"></span></div></td>
+              </tr>
+            </table>
+        </div>
+         <div class='line-content' id='line-content' style="border: 1px solid rgba(154, 158, 158, 0.5);width: 95.5%;"></div>
+      </div>
+	</div>
+	<div id="tradeContents" style="margin-top:30px;height:30%;margin-left: 1.6%;width:94%;border: 1px solid rgba(154, 158, 158, 0.5);"></div>
+</div>

@@ -1,0 +1,111 @@
+.replenish {
+	width: 20%;
+    height: 93%;
+    vertical-align: middle;
+    display: inline-block;
+    background: url("../img/smartvm.jpg")  no-repeat;
+    background-size: 100% 100%;
+    float:left;
+    box-shadow: 0 0 15px #574E4E;
+}
+.icon_index_temperature {
+	width: 100px;
+    height: 100px;
+    vertical-align: middle;
+    display: inline-block;
+    background: url("../img/thermometer-self.png")  no-repeat;
+    background-size:100% 100%; 
+}
+.div_trade_status{
+	width:20%;
+	display: inline-block;
+	margin-top: 2%;
+}
+.div_trade{
+	width:24.5%;
+	color: #fff;
+	display: inline-block;
+	margin-right:5px;
+}
+.date-section a {
+    display: block;
+    padding: 0 22px;
+    min-width: 60px;
+    height: 30px;
+    border: 1px solid #e6e7ec;
+    background: #fff;
+    line-height: 30px;
+    color: #222;
+    text-align: center;
+}
+.sub_menu {
+    background: #f4f5f9;
+    box-shadow: none;
+    border-color: #e7e7eb;
+    padding: 5px 20px;
+    min-height: 32px;
+    line-height: 1em;
+    border-top: 1px solid #d8d8d8;
+}
+.time_lable {
+   line-height: 32px;
+}
+.date-section {
+    margin: 0;
+    margin-right: -1px;
+    font-size: 14px;
+}
+li {
+   display: list-item;
+   text-align: -webkit-match-parent;
+}
+.index_show_area {
+   padding-bottom: 16px;
+   text-align: justify;
+   text-justify: distribute-all-lines;
+   font-size: 0;
+}
+.icon_index_count {
+	width: 34px;
+    height: 34px;
+    vertical-align: middle;
+    display: inline-block;
+    background: url("../img/page_index_z21bbfa.png") 0 -44px no-repeat;
+}
+.icon_index_tap {
+	width: 34px;
+    height: 34px;
+    vertical-align: middle;
+    display: inline-block;
+    background: url("../img/page_index_z21bbfa.png") 0 -132px no-repeat;
+}
+.titles {
+  display: block;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-top: -10px;
+  margin-left:10px;
+}
+.inner {
+  background-color: #7cbae5;
+  border: 1px solid #6eb0dd;
+  height:80px;
+}
+.total{
+  background-color: #60d295;
+  border: 1px solid #57c78b;
+  height:80px;
+}
+.number {
+margin-left: 5px;
+font-weight: 400;
+font-style: normal;
+vertical-align: middle;
+font-size: 35px;
+}
+
+
+
+

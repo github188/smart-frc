@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="DN4_Frontend_APP_DeviceNetwork_trunk"
+  id="myeclipse.1354691199728"
+  context-root="/FormulaCar"
+  j2ee-spec="6.0"
+  archive="DN4_Frontend_APP_DeviceNetwork_trunk.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,284 @@
+/* ============================================================
+   鍏叡鏍峰紡
+   ============================================================ */
+::-webkit-scrollbar {
+   width: 0.5em;
+}
+body,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,fieldset,legend,input,select,textarea,button,th,td,img{margin:0;padding:0;}
+body{
+    min-width:1200px;
+    color:#222222;
+    -webkit-font-smoothing: antialiased;
+	font-family: "12px/1.5 Microsoft YaHei,tahoma,arial,Hiragino Sans GB,\\5b8b\4f53,sans-serif;";
+	font-size: 12px;
+}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:400;}
+ul,dl,ol{list-style:none;}
+img,fieldset{border:none;}
+i,em{font-style:normal;}
+img{vertical-align:top;}
+/* table{
+	width:100%;
+	border-collapse:collapse;
+	border-spacing:0;
+	empty-cells:hide;
+	word-break:break-all;
+	word-wrap:break-word;
+	border-top: 2px solid #e7e7eb;
+} */
+thead{
+	border-top: 2px solid #e7e7eb;
+}
+textarea{resize:none;overflow-y:auto;font-size:100%;} 
+p{word-break:break-all;word-wrap:break-word;}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{color:#a3a3a3;}
+input:-moz-placeholder, textarea:-moz-placeholder{color:#a3a3a3;}
+input::-moz-placeholder, textarea::-moz-placeholder{color:#a3a3a3;}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder{color:#a3a3a3;}
+
+a{color:#459ae9;text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+.red{color:#e15f63!important;}
+.green{color:#44b549!important;}
+.yellow{color:#ffb103!important;}
+.gray{color:#8d8d8d!important;}
+.black{color:#222222!important;}
+
+.tl{text-align:left!important;}.tc{text-align:center!important;}.tr{text-align:right!important;}
+ 
+.mb10{margin-bottom:10px!important;}
+.mb20{margin-bottom:20px!important;}
+.mb30{margin-bottom:30px!important;}
+
+/* 椤甸潰鎻愮ず*/
+.guide-msg{padding:14px 30px;color:#8d8d8d;background:#f4f5f9;}
+.guide-msg .border{ border:1px solid #e7e7eb; margin-top:10px; padding:10px 20px;}
+
+.gap{margin:0 4px;}      /* 宸﹀彸闂撮殧 */
+.gapl{margin-left:4px;}  /* 宸﹁竟闂撮殧 */
+.gapr{margin-right:4px;} /* 鍙宠竟闂撮殧 */
+.gap-wide{margin:0 14px;}      /* 宸﹀彸澶ч棿闅�*/
+.gapl-wide{margin-left:14px;}  /* 宸﹁竟澶ч棿闅�*/
+.gapr-wide{margin-right:14px;} /* 鍙宠竟澶ч棿闅�*/
+
+/*闅愯棌*/
+.hide{ display:none !important}
+
+/* 娓呴櫎娴姩 */
+.clr:after,.wrap:after,.form-item:after{content:".";clear:both;display:block;height:0;visibility:hidden;}
+.clr,.wrap,.form-item{zoom:1;}
+
+
+/* 澶撮儴 */
+/* 澶撮儴 */
+.wrap{width:1025px;margin:0 auto;overflow:hidden;zoom:1;}
+.container{margin:25px auto;}
+.header{position:relative; z-index:9;background-color:#fff;border-top:3px solid #44b549;border-bottom:1px solid #d9dadc;}
+.header .wrap{height:56px;position:relative;overflow:visible; z-index:10}
+
+.header .logo{float:left;width:232px;padding:9px 140px 10px 0;}
+.header .logo a{display:block;height:40px;line-height:999px;overflow:hidden;background:url(../img//logo.png) no-repeat;}
+.header .sub-logo{float:left;width:100px;margin:9px 0 0 -128px;}
+.header .sub-logo a{display:block;height:36px;line-height:999px;overflow:hidden;}
+.header .sub-logo .logo-dev{background:url(../img/logo_dev.png) no-repeat;}
+/*.header .logo{float:left;width:365px;padding:5px 140px 14px 0;}
+.header .logo a{display:block;height:40px;line-height:999px;overflow:hidden;background:url(../img/logo.png) no-repeat;}
+*/
+
+.header .link{float:right; line-height:56px;color:#ccc;}
+.header .link .vs{margin:0 10px;}
+.header .link a{color:#222;}
+.header .link a:hover{color:#459ae9}
+
+.header .pole-msg {display:inline-block; *display:inline; position:relative;}
+.header .pole-msg a.content-us{ display:inline-block;width:85px; height:56px; position:relative;z-index:9;}
+.header .pole-msg a.content-us:hover{ color:#222; text-decoration:none;}
+.header .pole-msg.show-popup a.content-us{ background:#fff; border-left:1px solid #e7e7eb;border-right:1px solid #e7e7eb; padding-left:15px;  margin-left:-17px;*left:-17px;}
+
+.header .popup{ display:none; position:absolute; top:55px; left:-16px; border:1px solid #e7e7eb; z-index:8; width:146px;}
+.header .show-popup .popup{ display:block; line-height:26px; padding:20px; background:#fff;}
+.header .show-popup .popup p{ font-size:12px; color:#999}
+.header .show-popup .popup p.tel{ color:#333333; font-size:17px;}
+.header .show-popup .popup .bor-top{ border-top:1px solid #e7e7eb; margin-top:10px; padding-top:10px;} 
+
+.query .wrap{ position:relative; overflow:visible}
+.query .wrap .postion{ position:absolute; right:10px; top:63px;}
+.page-single .query .wrap .postion{ top:53px;}
+.query .wrap .kf,.query .wrap .vs{ display:none}
+.query .wrap .vs{margin:0 10px; color:#ccc}
+.page-single .query .wrap a{ display:none}
+/* 鑴氶儴 */
+
+.footer{padding-bottom:30px;color:#8d8d8d;text-align:center;font:12px/1.6 tahoma,arial,"Hiragino Sans GB",\5B8B\4F53,sans-serif;}
+.footer p{margin-bottom:10px;}
+.footer a{color:#8d8d8d;}
+.footer a:hover{color:#459ae9}
+.footer .vs{color:#CCC;margin:0 10px;font-family:arial;} /* 鍨傜洿鍒嗛殧绾�*/
+
+
+/* 鍐呭 */
+.wrap{width:98%;margin:0 auto;}
+.container{margin:8px auto 30px;border:1px solid #d9dadc;background:#fff;overflow:hidden;}
+.container-hd{padding:0 20px;line-height:30px;height:30px;background: #97999C;font-size: 12px;color: white;}
+.container-bd{padding:0px;height: auto;min-height:400px;_height:400px;}
+
+.sidebar{float:left;width:208px;border-right:1px solid #e7e7eb;}
+.content{width:991px;height:auto;min-height:600px;_height:600px;}
+/*.content,.sidebar{margin-bottom:-9999px;padding-bottom:9999px;}*/
+.content-hd h2{padding:0 30px;line-height:75px;font-size:16px;}
+.content-hd h2.with-border{border-bottom:1px solid #e7e7eb;}
+.content-hd .title-tab{margin-top:-14px;}
+.content-hd .title-tab ul{line-height:40px;border-bottom:1px solid #e7e7eb;}
+.content-hd .title-tab li{float:left;margin-bottom:-1px;}
+.content-hd .title-tab li:hover{border-bottom:3px solid #a0a3ab;}
+.content-hd .title-tab li.first a{padding-left:30px;}
+.content-hd .title-tab li.selected{border-bottom:3px solid #44b549;}
+.content-hd .title-tab li a{display:block;padding:0 22px;color:#222222;}
+.content-hd .title-tab li a:hover{text-decoration:none;}
+.content-hd .more-info{line-height:43px;margin-top:-43px;padding-right:30px;text-align:right;}
+.content-hd .more-info.align-title{line-height:75px;margin-top:-75px;}
+.content-hd .more-info.align-bread{line-height:22px;margin-top:-22px;}
+.content-bd{padding:30px;}
+.content-bd p{ margin-bottom:5px;}
+
+/* 鍗曟爮椤甸潰*/
+.page-single .wrap{width:1085px;}
+
+/* 鏁版嵁妗�鏍囬鍦ㄨ〃鏍煎)*/
+.data-box{margin-bottom:30px;}
+.data-box .data-hd{margin-bottom:20px;height:14px;line-height:14px;padding-left:7px;border-left:3px solid #44b549;}
+.data-box.with-padding .data-bd{padding:0 10px;}
+.data-box.with-button .data-hd .more-info{margin-top:-9px;}
+
+/* 琛ㄦ牸 */
+.table-wrp{margin-bottom:20px;}
+.table-wrp .table{background:#ffffff;border:1px solid #e7e7eb;border-width:1px 0;}
+.table-wrp .table tr.sub-th td{padding-bottom:0;border-bottom:0;}
+.table-wrp .table tr.sub-th td .th-item{;margin-right:30px;color:#8d8d8d;}
+.table-wrp .table th{padding:8px 15px;font-weight:400;text-align:left;background:#f4f5f9;border-bottom:1px solid #e7e7eb;}
+.table-wrp .table td{padding:8px 15px;border-bottom:1px solid #e7e7eb;empty-cells:show;}
+.table-wrp .table .ico-drag{cursor:move;}
+.table-wrp.with-border table{border:1px solid #e7e7eb;}
+.table-wrp.with-divide table th,.table-wrp.with-divide table td{border-right:1px solid #e7e7eb;}
+.table-wrp.inside-table table th{padding-top:4px;padding-bottom:4px;}
+.table-wrp.nowrap-table table td,.table-wrp.nowrap-table table th{white-space:nowrap;}
+
+.table-wrp .table .name{ width:100px;}
+.table-wrp .table .var{ width:100px;}
+.table-wrp .table .type{width:92px;}
+.table-wrp .table .require{ width:45px;}
+.table-wrp .table .example{ width:158px;}
+.table-wrp .table .description{}
+.table-wrp .table .opr{ width:80px;}
+
+.table-auto{ width:auto;}
+.table-padd{ padding-left:10px;}
+ 
+
+
+
+/* 澶囨敞 */
+.marks-msg.with-title{padding-left:30px;}
+.marks-msg h4{float:left;margin-left:-30px;}
+
+
+
+
+/* 鑿滃崟 */
+.menu{padding-bottom:13px;}
+.menu dl{ line-height:41px; border-bottom:1px solid #e7e7eb;}
+.menu dl:last-child{border-bottom:none;}
+.menu dl a{display:block;color:#222;} 
+.menu dl a:hover{text-decoration:none;} 
+.menu dl dt{color:#8d8d8d;}
+.menu dl dt .type-ico{margin-left:30px; }
+.menu dl dd a{display:block;padding-left:48px;}
+.menu dl dd a:hover,.menu dl dt a:hover{background:#f4f5f9;}
+.menu dl dt a{height:41px; line-height:41px;}
+.menu dl dd a{height:34px; line-height:34px;}
+.menu .open .on a,.menu .open .on  a:hover{color:#ffffff;background:#44b549;color:#fff;}
+.menu dd{display:none;}
+.menu .open dd{display:block;}
+.menu  .ico-arrows{ margin-left:30px;}
+.ico-arrows{ float:left;display:inline-block;width:0;height:0;border-width:6px;border-style:dashed;border-color:transparent;border-right-width:0;border-left-color:#666666;border-left-style:solid; margin-right:10px; margin-top:16px; }
+.menu .open .ico-arrows{border-width:6px;border-style:dashed;border-color:transparent;border-bottom-width:0;border-top-color:#666666;border-top-style:solid; margin-left:26px; margin-right:10px; margin-top:20px;}
+
+ 
+ 
+/*寮�彂鏂囨。棣栭〉*/
+.guide-main-li-ico{display:inline-block;width:75px;height:57px; background:url(../img/technology.png) no-repeat;}
+.ico-mp{background-position:3px 0;}
+.ico-app{background-position:9px -207px;}
+.ico-code{background-position:1px -71px;}
+.ico-shuaka{background-position:5px -135px;}
+.ico-coupon{background-position:7px -358px;}
+.ico-hongbao{background-position:13px -495px;}
+.ico-money{background-position:0 -569px;}
+.ico-clearance{background-position:9px -642px;}
+
+
+.guide-main{}
+.guide-main li{width:240px;background-color:#FFFFFF;float:left;margin-right:18px;text-align:center}
+.guide-main .guide-main-li-4,.guide-main .guide-main-li-8{margin-right:0;}
+.guide-main li a{width:239px;height:296px;display:block;position:relative;border:1px solid #e5e5e5;}
+
+.guide-main li .title{display:block;color:#000000;font-size:16px;line-height:1;margin-top:25px;font-weight:normal}
+.guide-main li .info{display:block;color:#999999;font-size:12px;margin-top:14px; padding:0 10px;}
+.guide-main li .info .strong{font-weight:bold;}
+.guide-main-li-ico{margin-top:72px;-webkit-transition:margin-top 0.2s linear;-moz-transition:margin-top 0.2s linear;-ms-transition:margin-top 0.2s linear;-o-transition:margin-top 0.2s linear;transition:margin-top 0.2s linear;}
+.guide-main li .btngreen{display:none;margin:20px auto 0;width:171px;height:35px;line-height:35px;background-color:#00C800;font-size:14px;color:#FFFFFF;border-bottom:1px solid #00A000;}
+.guide-main li .btngray{background-color:#E6E6E6!important;color:#666666!important;border-bottom:1px solid #CCCCCC;}
+.guide-main-li-3 .tips{display:none;font-size:12px;color:#FF9900;line-height:1;}
+.guide-main-li-3 .tips .ico-info-orange{vertical-align:-3px;*vertical-align:1px;margin-right:5px;margin-top:12px;}
+.guide-main li a{}
+.guide-main li a:hover{border:1px solid #00c800;text-decoration:none}
+.guide-main li a:hover .btngreen{display:block;}
+.guide-main li a:hover .tips{display:block;}
+.guide-main li a:hover .guide-main-li-ico{margin-top:45px;-webkit-transition:margin-top 0.2s linear;-moz-transition:margin-top 0.2s linear;-ms-transition:margin-top 0.2s linear;-o-transition:margin-top 0.2s linear;transition:margin-top 0.2s linear;}
+.guide-link{padding-top:120px;padding-bottom:58px;position:relative;height:24px;}
+.guide-link-a{color:#00C800;font-size:18px;height:24px;width:162px;}
+.guide-link-a .ico-arrow-right{vertical-align:-2px;*vertical-align:3px;margin-left:8px;cursor:pointer;}
+.guide-link-code{display:none;position:absolute;border:1px solid #C9C9C9;padding:6px;background-color:#FFFFFF;width:105px;height:105px;top:67px;left:50%;margin-left:90px;}
+.show-code .guide-link-code{display:block;}
+.show-code .ico-arrow-right{-webkit-transform:scale(-1, 1);-moz-transform:scale(-1, 1);-ms-transform:scale(-1, 1);-o-transform:scale(-1, 1);transform:scale(-1, 1);}
+
+/*鎸夐挳*/
+.btn{display:inline-block;min-width:30px;padding:0 22px;height:28px;line-height:28px;*line-height:28px;vertical-align:middle;text-align:center;font-size:12px;text-decoration:none;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:0px;border:1px solid #e6e7ec;cursor:pointer;background:#ffffff;}
+.btn:hover{text-decoration:none;background:#e6e7ec;border-color:#dadbe0;}
+.btn-default{background:#ffffff;color:#222222;border-color:#e7e7eb;}
+.btn-default:hover{background:#e6e7ec;border-color:#dadbe0;}
+.btn-primary{background:#28b5d6;color:#ffffff;border-color:#28b5d6;}
+.btn-primary:hover,.btn-primary.activate{background:#09c;border-color:#09c;}.btn-primary.activate{cursor:default;}
+.btn-warn{background:#f24d4d;color:#ffffff;border-color:#f24d4d;}
+.btn-warn:hover{background:#c43232;border-color:#c43232;}
+
+
+.ipt,.taa{width:100%;height:22px;padding:4px 0;*padding:3px 0;background:transparent;border:0;outline:0;font-family:"Microsoft YaHei","\5FAE\8F6F\96C5\9ED1",Helvetica,"\9ED1\4F53",Arial,Tahoma;}
+.taa{height:100px;} /* 鏂囨湰鍖哄煙 */
+.ipt-box,.taa-box{display:inline-block;*display:inline;*zoom:1;border:1px solid #e7e7eb;background:#ffffff;}
+.ipt-box.disabled,.taa-box.disabled{background:#eeeeee;}
+.ipt-box.disabled .ipt,.taa-box.disabled .taa{cursor:default;}
+.ipt-box{width:258px;height:30px;line-height:30px;padding:0 10px;vertical-align:middle;}
+.taa-box{width:288px;padding-left:10px;}
+.taa-box.large{width:587px;}
+
+/* 琛ㄥ崟 */
+.form .sub-form{margin-top:10px;}
+.form .label{clear:both;float:left;width:90px;padding-top:4px;position:relative;}
+.form .label .required{position:absolute;top:4px;left:-10px;color:#e15f63;font-family:SimSun;}
+.form .element{margin-left:90px;height:auto;min-height:26px;_height:26px;}
+.form .element .tel-pre{width:30px;margin-right:4px;} /* 鐢佃瘽鍙风爜鍓嶇紑鍙�*/
+.form .element .tel-num{width:218px;} /* 鐢佃瘽鍙风爜 */
+.form .element .tel-sms{padding:0 10px;margin-left:4px;} /* 鐢佃瘽鍙风爜 */
+.form .form-item{margin-bottom:20px;}
+.form .form-item.deal .btn{margin-right:14px;}
+.form .tips-info{padding-top:4px;color:#8d8d8d;}
+.form .tips-error{padding-top:4px;color:#e15f63;}
+/* 澶氫釜琛ㄥ崟椤规樉绀哄湪涓� */
+.form .form-group .form-item{float:left;width:42%;}
+.form .form-group .form-item.small{ width:10%}
+.txt-box{display:inline-block;*display:inline;*zoom:1;padding-top:4px;word-break:break-all;word-wrap:break-word;}
+.break-word{word-break:break-all;}
+
+/*  |xGv00|14ed05501dad2819fab5c3da604dea90 */

@@ -1,0 +1,18 @@
+<style>
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;}
+video{/*设置高就可以，以免播放按钮错位*/ max-height:440px;max-width: 900px; top: 70px; position: absolute; z-index: 99999;}
+</style>
+<div id="medias_list2" class="list_div_height" style="position: relative;">
+	<div id="medias_list_bar2" style="height:35px;"></div>
+	<div id="medias_list_table2" style="height:380px;overflow:auto"></div>
+    <div class="btn_nav" >
+    	<input type="button" class='btn btn-primary submit' id="medias-sure" style="width: 105px;height: 32px;margin-top: -15px; margin-right: 20px;"/>
+    </div>
+</div>
+<div id="fullbg2" onclick="javascript:$('#fullbg2,#img_preview2').hide();$('#medias_list2').css('opacity','1');">
+    <img id="img_preview2" style="max-height:400px;max-width:700px;margin-left: 200px;top: 80px;position: absolute;z-index: 99999;" src="" />
+</div> 
+<!--视频地址-->
+<div id="checkimg2" style="margin-top: 40px; display: none;" onclick="javascript:$('#checkimg2,#vi_preview2').hide();$('#medias_list2').css('opacity','1');">
+	<video id="vi_preview2" src="" controls></video>
+</div> 

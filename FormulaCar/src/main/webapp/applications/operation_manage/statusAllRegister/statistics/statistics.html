@@ -1,0 +1,126 @@
+<div id="statistics_bar" style="height:35px;"></div>
+<div id="trade"  style="position: relative;overflow: auto;">
+    <div id="tradeHead">
+
+        <div class="index_show_area" style="margin-top:15px;margin-left:20px;">
+            <div style="width:48.4%;float:left;">
+                <table style="width:100%;border: 1px solid rgba(154, 158, 158, 0.5);">
+                    <tr>
+                        <td>
+                            <div class="div_trade" style="width:100%;text-align: center; height: 80px;line-height: 80px;">
+                                <span style="color: black;font-size: 28px;" lang="{text:all_register_user_number}"></span>
+                                <span id="amount" style="color: #19B6BB;font-size: 28px;"></span>
+                                <!-- <span style="color: #19B6BB;font-size: 28px;" lang="{text:china_yuan}"></span> -->
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                    <div id="payAlert" style="width:44.5%;height:65px;font-size: 12px; padding-left: 20px;  padding-right: 20px;padding-top: 10px;position:absolute;border-radius:5px;border:1px solid rgb(224, 224, 224);background:#EEE;opacity: 0.96;display:none;">
+         
+                    </div>
+                    </tr>
+                    <tr>
+                        <td>                           
+                            <div id="payAmount"><table style="width:100%;"><tr id="payStyleTr"></tr></table></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="width:48.4%;float:left;margin-left:20px;">
+                <table style="width:100%;border: 1px solid rgba(154, 158, 158, 0.5);">
+                    <tr>
+                        <td>
+                            <div class="div_trade" style="width:100%;text-align: center; height: 80px;line-height: 80px;">
+                                <span style="color: black;font-size: 28px;" lang="{text:all_register_cars_number}"></span>
+                                <span id="sum" style="color: #19B6BB;font-size: 28px;"></span>
+                                <span style="color: #19B6BB;font-size: 28px;" lang="{text:ren}"></span>
+                            </div>
+                        </td>
+                    </tr>
+                   <!--  <tr>
+                       <div id="payAlertSum" style="width:44.5%;height:65px;font-size: 12px; padding-left: 20px;  padding-right: 20px;padding-top: 10px;position:absolute;border-radius:5px;border:1px solid rgb(224, 224, 224);background:#EEE;opacity: 0.96;display:none;">
+                                
+                       </div>
+                   </tr> -->
+                    <!-- <tr>
+                        <td>
+                            <div id="paySum"><table style="width:100%;"><tr id="payStyleSumTr"></tr></table></div>
+                        </td>
+                    </tr> -->
+                </table>
+
+            </div>
+            <div style="width:100%;">
+                <table style="width:90%; margin-left: 5%;">
+                    <tr id="colorPayStyleTr">
+                        
+                    </tr>
+                </table>
+            </div>
+            <div class='line-content' id='line-content' style="border: 1px solid rgba(154, 158, 158, 0.5);width: 98.1%;"></div>
+
+            <div id="goods_statistics_tabs" style="width:98.1%;padding-top:20px">
+                <div style="min-height:10px;" class="notown-goods-tabs"  id="statistics_trade_detail_table"></div>
+            </div>
+
+        </div>
+    </div>
+    <!--  <div id="tradeContent" style="margin-top:10px; height:130px;"></div>-->
+    	<div id="tradeContent" style="margin-top:10px; height:130px;width:97%;padding-left:1.5%;" >
+		<div id="statistics_tabs" style="margin-bottom: 40px;">
+		  	<ul>
+			    <li><a href="#trade_detail_table" id="tabs-trade" lang="{text:automat_trade_detail}"></a></li>
+			    <li><a href="#time_detail_table" id="tabs-time" lang="{text:time_summary}"></a></li>
+		  	</ul>
+			<div style="min-height:10px;" class="notown-goods-tabs"  id="trade_detail_table">
+			</div>
+			<div  id="time_detail_table" class="notown-type-tabs"  style="position: relative;min-height:10px;">
+			</div>
+    	</div>
+	</div>
+</div>
+
+<style>
+	#fullbg { 
+		background-color:gray; 
+		left:0; 
+		opacity:0.5; 
+		position:absolute; 
+		top:0; 
+		z-index:3; 
+		filter:alpha(opacity=50); 
+		-moz-opacity:0.5; 
+		-khtml-opacity:0.5; 
+	} 
+	#dialog { 
+		background-color:#fff; 
+		border:5px solid rgba(0,0,0, 0.4); 
+		height:250px; 
+		left:50%; 
+		margin:-150px 0 0 -100px; 
+		padding:1px; 
+		position:fixed !important; /* 浮动对话框 */ 
+		position:absolute; 
+		top:50%; 
+		width:400px; 
+		z-index:5; 
+		border-radius:5px; 
+		display:none; 
+	} 
+	#dialog p { 
+		margin:0 0 12px; 
+		height:24px; 
+		line-height:24px; 
+		background:#CCCCCC; 
+	} 
+	#dialog p.close { 
+		text-align:right; 
+		padding-right:10px; 
+	} 
+	#dialog p.close a { 
+		color:#fff; 
+		text-decoration:none; 
+	} 
+
+</style>

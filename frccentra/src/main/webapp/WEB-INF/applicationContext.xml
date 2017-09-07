@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+        http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd">
+
+    <import resource="spring/rootContext.xml"/>
+    <bean class="cn.com.inhand.common.oauth2.TokenClient" lazy-init="true">
+        <constructor-arg ref="config"/>
+    </bean>
+    
+    <rabbit:queue-arguments id="queueArguments">
+        <entry key="x-ha-policy" value="all"/>
+    </rabbit:queue-arguments>
+    
+    <!-- 广告播放统计消息 START -->
+   <rabbit:queue id="broadcastArguments"
+		name="broadcastStatisticQueue" queue-arguments="queueArguments"/>  
+    <rabbit:topic-exchange name="dn.exchange.broadcastStatistic" id="dn.exchange.broadcastStatistic">
+		<rabbit:bindings>
+			<rabbit:binding pattern="dn.key.broadcast.Statistic" queue="broadcastStatisticQueue" />
+		</rabbit:bindings>
+    </rabbit:topic-exchange>
+    <!-- 广告播放统计消息 END -->
+    
+    <!-- 交易统计消息 START -->
+   <rabbit:queue id="orderArguments"
+		name="tradeStatisticQueue" queue-arguments="queueArguments"/>  
+    <rabbit:topic-exchange name="dn.exchange.tradeStatistic" id="dn.exchange.tradeStatistic">
+		<rabbit:bindings>
+			<rabbit:binding pattern="dn.key.trade.Statistic" queue="tradeStatisticQueue" />
+		</rabbit:bindings>
+    </rabbit:topic-exchange>
+    <!-- 交易统计消息 END -->
+    
+    <!-- 交易出货统计消息 START -->
+    <rabbit:queue id="deliverArguments"
+		name="deliverStatisticQueue" queue-arguments="queueArguments"/>  
+    <rabbit:topic-exchange name="dn.exchange.deliverStatistic" id="dn.exchange.deliverStatistic">
+		<rabbit:bindings>
+			<rabbit:binding pattern="dn.key.trade.deliver.Statistic" queue="deliverStatisticQueue" />
+		</rabbit:bindings>
+    </rabbit:topic-exchange>
+    <!-- 交易统计消息 END -->
+    
+     <!-- 推送补货消息  -->
+    
+    <rabbit:queue id="sendReplenishMsgArguments"
+		name="sendReplenishMsgQueue" queue-arguments="queueArguments"/>  
+    <rabbit:topic-exchange name="dn.exchange.sendReplenishMsg" id="dn.exchange.sendReplenishMsg">
+		<rabbit:bindings>
+			<rabbit:binding pattern="dn.key.send.replenish.msg" queue="sendReplenishMsgQueue" />
+		</rabbit:bindings>
+    </rabbit:topic-exchange>
+    <!-- 设备状态变化  -->
+   <rabbit:queue id="sendDeviceStatusMsgArguments"
+		name="sendDeviceStatusMsgQueue" queue-arguments="queueArguments"/>  
+    <rabbit:topic-exchange name="dn.exchange.sendDeviceStatusMsg" id="dn.exchange.sendDeviceStatusMsg">
+		<rabbit:bindings>
+			<rabbit:binding pattern="dn.key.send.device.status.msg" queue="sendDeviceStatusMsgQueue" />
+		</rabbit:bindings>
+    </rabbit:topic-exchange>
+    
+    
+    <!-- 心跳消息 Start -->
+    <rabbit:queue id="deviceHeartBeatArguments"
+		name="smartvm.device.heartbeat" queue-arguments="queueArguments"/>  
+    <rabbit:topic-exchange name="smartvm.exchange.deviceInfo.config" id="smartvm.exchange.deviceInfo.config">
+		<rabbit:bindings>
+			<rabbit:binding pattern="smartvm.key.device.info" queue="deviceHeartBeatArguments" />
+		</rabbit:bindings>
+    </rabbit:topic-exchange>
+    <rabbit:listener-container concurrency="10"
+                               connection-factory="rabbitConnectionFactory"
+                               acknowledge="auto" requeue-rejected="false"
+                               message-converter="mqMessageConverter">
+        <rabbit:listener ref="deviceHeartBeatMessageHandler" queues="deviceHeartBeatArguments"/>
+    </rabbit:listener-container>
+    <!-- 心跳消息 end -->
+    
+    <rabbit:admin id="amqpAdmin" connection-factory="rabbitConnectionFactory"/>
+    
+    <task:annotation-driven />
+    <task:executor id="executor" pool-size="5-100" queue-capacity="10000"/>
+</beans>

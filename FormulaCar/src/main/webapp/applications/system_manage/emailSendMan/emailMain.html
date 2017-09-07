@@ -1,0 +1,57 @@
+<style type="text/css" media="screen">
+  .textarea {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear .2s, box-shadow linear .2s;
+    -moz-transition: border linear .2s, box-shadow linear .2s;
+    -o-transition: border linear .2s, box-shadow linear .2s;
+    transition: border linear .2s, box-shadow linear .2s;
+    padding: 4px 6px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #555555;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    vertical-align: middle;
+    outline: none;
+    height: 400px;
+  }
+  </style>
+<div id="emailMain"  style="position: relative;">
+	<div id="email_left" style="width:40%;float:left;border-right: 1px solid #97999C;"></div>
+	<div id="email_right" style="width:60%;margin-left:40%;">
+	   <div style="margin: 10px;position: absolute;" id="emailContent">
+	     <table style="width:96%;">
+	      <tr style='height: 35px;'>
+	         <td style="width:10%;"><label><span>收件人</span></label></td>
+	         <td>
+	           <input style='width: 100%;height: 22px;' type='text' id='toemail' name='toemail' />
+	         </td>
+	      </tr>
+	      <tr style='height: 35px;'>
+	         <td style="width:10%;"><label><span>主题</span></label></td>
+	         <td>
+	           <input style='width: 100%;height: 22px;' type='text' id='titleemail' name='titleemail' />
+	         </td>
+	      </tr>
+	       <tr>
+	         <td style="width:10%;"><label><span>内容</span></label></td>
+	         <td>
+	            <textarea id='content' style='width: 100%;height:400px;overflow: auto;margin-top:5px;' >平台更新内容如下：<br>1.新增了发送邮件的功能<br>2.修改了机构列表<br>3.新增了帮助文档功能<br>4.修改了点位管理<br>如有问题，请联系
+	            </textarea>
+	         </td>
+	      </tr>
+	       <tr style='height: 35px;'>
+	         <td style="width:10%;"></td>
+	         <td style="text-align: right;">
+	             <a id='send-submit' class='btn btn-primary submit' style='margin-top: 8px;'>发送</a>
+	         </td>
+	      </tr>
+	   </table>
+	  </div>
+	</div>
+</div>

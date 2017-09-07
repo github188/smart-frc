@@ -1,0 +1,196 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="bookmark" href="favicon.ico"/>
+		<!--<title lang="text:inhand_network+-+home"></title>-->
+        <title lang="text:people_daily"></title>
+		<link rel="stylesheet" href="css/index.css" type="text/css" />
+		<link rel="stylesheet" href="css/jquery.validationEngine.css" type="text/css" />
+		<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+        <link rel="stylesheet" href="css/verifyBrowser.css" type="text/css" />
+        <!-- <script type="text/javascript" src="js/jquery.js"></script> -->
+	</head>
+	<body>
+		<div id="common-header" style="height:57px">
+			<div class="home-header-box" id="home-header-box">
+				<div class="home-header" id="home-header">
+					<div class="home-header-corp">
+						<ul class="home-header-corp-ul">
+							<a href="./"><li class="home-header-corp-ul-cloud"></li></a>
+							<!--<a href="./"><li class="home-header-corp-ul-text" lang="text:welcome_to_inhand"></li></a>-->
+						</ul>
+					</div>
+					<div class="home-header-tool" style="">
+						<ul class="home-header-tool-share" style="display:none">
+							<a><li id="rss" class="home-header-tool-share-r"></li></a>
+							<a><li id="twitter" class="home-header-tool-share-t"></li></a>
+							<a><li id="facebook" class="home-header-tool-share-f"></li></a>
+						</ul>
+						<ul class="home-header-tool-lang">
+							<li><a href="javascript:void(0)" id="lang-zh">中文</a></li>
+							<li class="home-header-tool-lang-vertical">|</li>
+							<li><a href="javascript:void(0)" id="lang-en">English</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="common-nav" style="height:63px">
+			<div id="home-nav-box" class="home-nav-box">
+				<div id="home-nav" class="home-nav">
+					<ul>
+						<li id="home-nav-index"><a href="./index.html" lang="text:home"></a></li>
+						<!--<li id="home-nav-login"><a href="javascript:void(0)" lang="text:sign_in"></a></li>-->
+						<li id="home-nav-reg"><a href="javascript:void(0)" lang="text:registration"></a></li>
+						<li id="home-nav-devforum" style="display:none"><a href="javascript:void(0)" lang="text:forum"></a></li>
+						<!--<li id="home-nav-aboutus"><a href="http://www.inhand.com.cn" target="_blank" lang="text:inhand"></a></li>-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="home-content" class="home-content">
+			<div class="home-content-top-box">
+				<div id="home-content-top" class="home-content-top">
+					<div class="home-content-login-box">
+						<div id="home-content-login"  class="home-content-login">
+							<form id="formID" autocomplete="off">
+							<ul>
+								<li class="home-content-login-text"></li>
+								<li class="home-content-login-user" id="home-content-login-user">
+									<input autocomplete="off" type="text" id="home-input-user" name="username" spellcheck="false" class="validate[required,custom[email],funcCall[cloudInput]] home-input-user"/>
+								</li>
+								<li class="home-content-login-text"></li>
+								<li class="home-content-login-pwd">
+									<input type="text" class="home-input-pwd-text" id="home-input-pwd-text" lang="value:case_sensitive"/>
+									<input type="password" style="display:none" class="validate[required,funcCall[cloudInput]] home-input-pwd-password" id="home-input-pwd-password"/>
+								</li>
+								<li class="home-content-login-vercode" id="home-content-login-vercode">
+									<p class="home-content-login-ver">
+										<input type="text" class="home-input-ver-default" id="home-input-ver-default" lang="value:case_insensitive" />
+										<input type="text" style="display:none" class="validate[required,custom[systemAuthcode],funcCall[cloudInput]] home-input-ver-custom" id="home-input-ver-custom" />
+									</p>
+									<a>
+										<p class="home-verimg" id="home-verimg">
+										<img lang="title:click_to_change" title="" src="" />
+										</p>
+									</a>
+								</li>
+								<li>
+									<input type="checkbox" id='remember-me' class='remember-me'/><label lang="text:rempwd" for='remember-me'></label>
+								</li>
+								
+								<li>
+									<a><input lang="{value:sign_in,title:sign_in}" type="button" value="" class="home-input-submit" id="home-input-submit"></a>
+									<p id="home-login-forget" class="home-login-forget"><a href="javascript:void(0)" lang="text:forgot_pwd"></a></p>
+								</li>
+								<li class="tips-login">
+									<p class="tips-content" id="tips-content"></p>
+								</li>
+							</ul>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--<div id="home-content-bottom-div">
+				<div id="home-content-bottom-div-top">
+					<div id="home-content-bottom-div-top-text">&gt;&gt; <span lang="text:inhand_provides"></span></div>
+				</div>
+				<div id="home-content-bottom-div-center">
+					<div class="home-content-bottom-div-center-item">
+						<div class="home-content-bottom-div-center-item-image">
+							<img alt="DeviceTouch" src="./images/DT.png" title="DeviceTouch">
+						</div>
+						<div class="home-content-bottom-div-center-item-text">
+							<div class="home-content-bottom-div-center-text-top">
+								DeviceTouch
+							</div>
+							<div class="home-content-bottom-div-center-text-center" lang="text:maintain_devices"></div>
+							<div class="home-content-bottom-div-center-text-button-box">
+								<div id="home-content-bottom-div-center-text-button-DT" class="home-content-bottom-div-center-text-button" lang="text:more"></div>
+							</div>
+						</div>
+					</div>
+					<div class="home-content-bottom-div-center-black"></div>
+					<div class="home-content-bottom-div-center-item">
+						<div class="home-content-bottom-div-center-item-image">
+							<img alt="DeviceTouch" src="./images/DS.png"  title="DeviceSense">
+						</div>
+						<div class="home-content-bottom-div-center-item-text">
+							<div class="home-content-bottom-div-center-text-top">
+								DeviceSense
+							</div>
+							<div class="home-content-bottom-div-center-text-center" lang="text:monitor_devices"></div>
+							<div class="home-content-bottom-div-center-text-button-box">
+								<div id="home-content-bottom-div-center-text-button-DS" class="home-content-bottom-div-center-text-button" lang="text:more"></div>
+							</div>
+						</div>
+					</div>
+					<div class="home-content-bottom-div-center-black"></div>
+					<div class="home-content-bottom-div-center-item">
+						<div class="home-content-bottom-div-center-item-image">
+							<img alt="DeviceTouch" src="./images/DM.png" title="DeviceManager">
+						</div>
+						<div class="home-content-bottom-div-center-item-text">
+							<div class="home-content-bottom-div-center-text-top">
+								DeviceManager
+							</div>
+							<div class="home-content-bottom-div-center-text-center" lang="text:manage_network"></div>
+							<div class="home-content-bottom-div-center-text-button-box">
+								<div id="home-content-bottom-div-center-text-button-DM" class="home-content-bottom-div-center-text-button" lang="text:more"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>-->
+		</div>
+		<div id="common-footer">
+			<div id="home-footer-box" class="home-footer-box">
+				<div id="home-footer" class="home-footer">
+					<a href="javascript:void(0)" lang="text:about_us"></a>
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="javascript:void(0)" lang="text:service_terms"></a>
+						&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="javascript:void(0)" lang="text:copyright"></a>
+			</div>
+		</div>
+		</div>
+		<div id="change-language"></div>
+		<script type="text/javascript" src="js/jquery.validationEngine.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+			<script type='text/javascript'>
+	var url={
+		"default":"www",
+		//"localhost":"www/",
+		"www.itkdn.com":"index/itkdn",
+		"www.dahongyuan.com":"index/dahongyuan",
+        "182.92.159.210":"index/whiteboard",
+        "42.96.188.34":"index/whiteboard",
+        "temp":"index/peopledigital",
+        "yun.u2wifi.cn":"index/whiteboard",
+        "yun.u2o2o.cn":"index/whiteboard"
+//        "ceshi.com":"index/peopledigital"
+    };
+		document.body.onload=function(){
+            window.localStorage.setItem("indexURL",url["temp"]);
+			var currentHost=window.location.hostname;
+			if(url[currentHost]){
+				window.localStorage.setItem("indexURL",url[currentHost]);
+				if(url[currentHost]=="www"){
+					window.location.replace("../../"+url[currentHost]);
+                }else if(url[currentHost]!="index/whiteboard"&&url[currentHost]!="index/peopledigital")
+                {
+					window.location.replace("../../"+url[currentHost])
+				}
+			}
+			else{
+                window.localStorage.setItem("indexURL",url["default"]);
+                window.location.replace("../../"+url["default"]);}
+		};
+	</script>
+	</body>
+</html>

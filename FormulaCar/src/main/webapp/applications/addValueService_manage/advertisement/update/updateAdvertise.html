@@ -1,0 +1,854 @@
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:545px;margin:20px auto;width:950px;overflow:hidden;margin-top: 10px;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#28b5d6;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:8px 70px;font-size: 14px;}
+#status li.active{background-color:#09c;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;}
+.page{padding:0px;width:100%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px;text-align: right;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+.page h4{height:22px; font-size:16px; border-bottom:1px dotted #ccc; padding-bottom:5px}
+.configtable {border: 1px solid rgba(115, 120, 126, 0.32);text-align: center;height:40px;}
+video{/*设置高就可以，以免播放按钮错位*/ height:460px;width: 900px; margin-top:-20px}
+.adsConfigtable{border: 1px solid rgba(115, 120, 126, 0.32);text-align: center;}
+#adsForm {/*border:1px solid #CFD8CE;*/font-size:12px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;margin-bottom: 15px;}
+#adsForm .adheader{height:34px;/*border-bottom: 1px solid #ddd;*//* background:#e6e6e6; *//*padding-left:25px !important;*/}
+.adheader li{float:left;color:#fff;padding:7px 6px;font-size: 14px;width: 70px;height: 19px;border:1px solid #CFD8CE;}
+.adheader li.active{background-color:#dadada;font-weight:normal;}
+.adheader li a:hover {
+    text-decoration: none;
+}
+.policy {
+    /* height: 200px; */
+    padding: 10px;
+    border: 1px dashed #ddd;
+    margin-top: 10px;
+    margin-left: 10px;
+    overflow: auto;
+    float:left
+}
+</style>
+
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+  <script>
+  $(function() {
+    $( "#tabs" ).tabs();
+  });
+  </script>
+<div id="deviceForm">
+    <ul id="status">
+		<li class="active" id="tab1" style="height: 19px;"><strong>1.</strong><span lang="text:ad_content"></span></li>
+		<li id="tab2" style="height: 19px;"><strong>2.</strong><span lang="text:choose_device"></span></li>
+	</ul>
+	<div class="items">
+	    <!-- 广告内容-->
+	    <div class="page" id="baseInfo">
+	    
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1"><span lang="text:ad_tabs_1"></span></a></li>
+    <li><a href="#tabs-2"><span lang="text:ad_tabs_2"></span></a></li>
+    <li><a href="#tabs-3"><span lang="text:ad_tabs_3"></span></a></li>
+  </ul>
+  <div id="tabs-1">
+  
+      <div style="height:385px;width:100%;overflow: auto;">
+	           <div style="height: 100px; margin-left: 10px; padding: 10px;">
+	            <table width="100%">
+	             <tr><td width="12%"><label style='color:red;'>*</label><label><span lang="text:advertise_detail"></span></label></td>
+	             <td><input type="text" class="input"  id="adName" name="adName" style="width:200px;height:25px;"/><input type='hidden' id='filelength' name='filelength' /></td></tr>
+	           	
+	         	 <tr>
+	                 <td width="12%"><label style='color:red;'></label><label><span lang="text:addpolicy"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit addpolicy'  id="tab1_addpolicy"/></td>
+	             </tr>
+	   <!--           <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:material_all"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload' /></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr> -->
+	            </table>
+	           </div>
+	           <div style="width: 100%;;overflow: auto;" id="policyInfo" class="policyInfo">
+	           </div>
+	     </div>
+  </div>
+  <div id="tabs-2">
+  <div style="height:385px;width:100%;overflow: auto;" id="adver-box">
+  	
+  <!-- 2----0 -->
+        <div> <input type="button" class="btn btn-primary submit" id="addAds" style="width: 160px;height: 28px;/*margin-left: 10px; */margin-bottom: 10px;" value="增加一个广告位"></div>
+        
+    
+  			<!--子广告位header-->
+ 		   <div style=" overflow: auto;height: 35px; " id="adsForm" class="adver-header-box" >
+ 			 	   <ul id="home_adver_header" class="adheader">
+ 			         <li class="active adver-header" style="margin:0px;" id="home_0" >
+ 			        	 <a><span lang="text:home_sub_ad0"></span></a>
+ 			         </li>
+   					 <li id="home_1" class="adver-header" style="margin:0px;"><a><span lang="text:home_sub_ad1"></span></a></li>
+ 				     <li id="home_2" class="adver-header" style="margin:0px;"><a><span lang="text:home_sub_ad2"></span></a></li>
+ 				     <li id="home_3" class="adver-header" style="margin:0px;"><a><span lang="text:home_sub_ad3"></span></a></li>
+ 				     <li id="home_4" class="adver-header" style="margin:0px;"><a><span lang="text:home_sub_ad4"></span></a></li>
+ 				     <li id="home_5" class="adver-header" style="margin:0px;"><a><span lang="text:home_sub_ad5"></span></a></li>
+ 				     <li id="home_6" class="adver-header" style="margin:0px;"><a><span lang="text:home_sub_ad6"></span></a></li>
+ 				     <li id="home_7" class="adver-header" style="margin:0px;"><a><span lang="text:home_sub_ad7"></span></a></li>
+ 				     <li id="home_8" class="adver-header" style="margin:0px;"><a><span lang="text:home_sub_ad8"></span></a></li>
+ 				     <li id="home_9" class="adver-header" style="margin:0px;"><a><span lang="text:home_sub_ad9"></span></a></li>
+                   </ul>
+                    </div>
+ 		           <div style=" height:310px;" id="adver_content" >
+ 		   	
+
+ 		            </div>
+<!--  	  	       <table width="100%" style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" class="adsConfigtable">
+ 		            <thead class="adsConfigtable">
+ 		       		    <tr class="adsConfigtable">
+                             <th width="100" class="adsConfigtable">
+                             	<input type="button" class='btn btn-primary submit home_sub_ad0' value="0" />
+                             </th>
+                             <th width="100" class="adsConfigtable">
+                             	<input type="button" class='btn btn-primary submit home_sub_ad1' value="1" />
+                             </th>
+                             <th width="100" class="adsConfigtable"><span lang="text:home_sub_ad2"></span></th>
+                             <th width="100" class="adsConfigtable"><span lang="text:home_sub_ad3"></span></th>
+                             <th width="100" class="adsConfigtable"><span lang="text:home_sub_ad4"></span></th>
+                             <th width="100" class="adsConfigtable"><span lang="text:home_sub_ad5"></span></th>
+                             <th width="100" class="adsConfigtable"><span lang="text:home_sub_ad6"></span></th>
+                             <th width="100" class="adsConfigtable"><span lang="text:home_sub_ad7"></span></th>
+                             <th width="100" class="adsConfigtable"><span lang="text:home_sub_ad8"></span></th>
+                             <th width="100" class="adsConfigtable"><span lang="text:home_sub_ad9"></span></th>
+                         </tr>
+                      </thead>
+ 		       </table> -->
+ 		  
+ 		   
+<!--  		   <div style="height: 190px;overflow: auto;" id="adver_content" class="homesub">
+                <table width="100%">
+                   	 <tr>
+	                 <td width="12%"><label style='color:red;'></label><label><span lang="text:addpolicy"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit addpolicy' /></td>
+	                </tr>
+                </table>
+ 		   </div> -->
+
+<!--            <div style="height: 190px;overflow: auto;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:home_sub_ad0"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload' /></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable0">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig0">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	       <!-- 2----1 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:home_sub_ad1"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload' /></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable1">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig1">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	       <!-- 2----2 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:home_sub_ad2"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable2">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig2">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	      	       <!-- 2----3 -->
+	    <!--   <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:home_sub_ad3"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable3">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig3">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 2----4 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:home_sub_ad4"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable4">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig4">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	   
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:home_sub_ad5"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable5">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig5">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 2----6 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:home_sub_ad6"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable6">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig6">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 2----7 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:home_sub_ad7"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable7">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig7">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 2----8 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:home_sub_ad8"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable8">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig8">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 2----9 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:home_sub_ad9"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable9">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig9">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	      
+  </div>
+
+  </div>
+  <div id="tabs-3">
+<div style="height:385px;width:100%;overflow: auto;">
+       <div> <input type="button" class="btn btn-primary submit" id="addSvmAds" style="width: 160px;height: 28px;/*margin-left: 10px; */margin-bottom: 10px;" value="增加一个广告位"></div>
+	<!--销售广告位header-->
+ 		   <div style=" overflow: auto; height: 35px;" id="adsForm" class="svm-header-box">
+ 			 	   <ul id="svm_adver_header" class="adheader" >
+ 			         <li class="active adver-header" style="margin:0px;" id="svm_0" >
+ 			        	 <a><span lang="text:svm_sub_ad0"></span></a>
+ 			         </li>
+   					 <li id="svm_1" class="adver-header" style="margin:0px;"><a><span lang="text:svm_sub_ad1"></span></a></li>
+ 				     <li id="svm_2" class="adver-header" style="margin:0px;"><a><span lang="text:svm_sub_ad2"></span></a></li>
+ 				     <li id="svm_3" class="adver-header" style="margin:0px;"><a><span lang="text:svm_sub_ad3"></span></a></li>
+ 				     <li id="svm_4" class="adver-header" style="margin:0px;"><a><span lang="text:svm_sub_ad4"></span></a></li>
+ 				     <li id="svm_5" class="adver-header" style="margin:0px;"><a><span lang="text:svm_sub_ad5"></span></a></li>
+ 				     <li id="svm_6" class="adver-header" style="margin:0px;"><a><span lang="text:svm_sub_ad6"></span></a></li>
+ 				     <li id="svm_7" class="adver-header" style="margin:0px;"><a><span lang="text:svm_sub_ad7"></span></a></li>
+ 				     <li id="svm_8" class="adver-header" style="margin:0px;"><a><span lang="text:svm_sub_ad8"></span></a></li>
+ 				     <li id="svm_9" class="adver-header" style="margin:0px;"><a><span lang="text:svm_sub_ad9"></span></a></li>
+                   </ul>
+             </div>
+ 		     <div style=" height:310px; " id="svm_content" >
+ 		   	
+
+ 		     </div>
+  <!-- 3----0 -->
+         <!--   <div style="height: 190px;overflow: auto;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:svm_sub_ad0"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload' /></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable10">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig10">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	       <!-- 3----1 -->
+	 <!--      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:svm_sub_ad1"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload' /></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable11">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig11">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	       <!-- 3----2 -->
+	  <!--     <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:svm_sub_ad2"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable12">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig12">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	      	       <!-- 3----3 -->
+	      <!-- <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:svm_sub_ad3"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable13">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig13">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 3----4 -->
+	  <!--     <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:svm_sub_ad4"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable14">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig14">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 3----5 -->
+	    <!--   <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:svm_sub_ad5"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable15">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig15">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 3----6 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:svm_sub_ad6"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable16">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig16">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 3----7 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:svm_sub_ad7"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable17">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig17">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 3----8 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:svm_sub_ad8"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable18">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig18">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+	             <!-- 3----9 -->
+<!-- 	      <div style="height: 190px;overflow: auto;margin-top: 10px;">
+	            <table width="100%">
+	             <tr>
+	                 <td width="20%"><label style='color:red;'></label><label><span lang="text:svm_sub_ad9"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit upload'/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable19">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="100" class="configtable"><span lang="text:material_name"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:type"></span></th>
+                                  <th width="200" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:ad_preview"></span></th>
+                                  <th width="220" class="configtable"><span lang="text:ad_play_time"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig19">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	      </div> -->
+  </div>
+  
+  </div>
+</div>
+	         
+	         <div id="fullbg" onclick="javascript:$('#fullbg,#img_preview').hide();">
+	         
+	        	 <img id="img_preview" style="max-height:300px;max-width:400px" src="" />
+
+	         </div> 
+	         <!--视频地址-->
+	         <div id="checkimg" style="margin-top: -400px; display: none;position:absolute" onclick="javascript:$('#checkimg,#vi_preview').hide();">
+	         	         
+				<video id="vi_preview" src="" controls></video>
+	         </div>  
+             
+	         <div class="btn_nav" style="margin-top: 1px;">
+                  <input type="button" class='btn btn-primary submit' id="nextBase" style="width: 105px;height: 32px;"/>
+             </div>
+	    </div>
+	    <!-- 选择售货机 -->
+	    <div class="page" id="deviceList">
+            <h4><span lang="text:all_vending_list"></span></h4>
+            <div id="list" style="height: 435px;overflow: auto;border: 1px #D7C9C9 solid;"></div>
+             
+	         <div class="btn_nav">
+	           <table style="width:100%;">
+                 <tr>
+                 <td style="width:90%;">
+                    <input type="button" class='btn btn-primary submit' id="lastBase"  style="width: 105px;height: 32px;"/> 
+                  </td>
+                 <td style="width:90%;">
+                    <input type="button" class='btn btn-primary submit' id="saveBase" style="margin-left:10px;width: 130px;height: 32px;" /> 
+                  </td>
+                  <td style="width:90%;">
+                    <input type="button" class='btn btn-primary submit' id="nowBase"  style="margin-left:10px;width: 105px;height: 32px;"/> 
+                  </td>
+                 </tr>
+               </table>
+             </div>
+        </div>
+	</div>
+</div>
+<style>
+	#fullbg { 
+		background-color:gray; 
+		left:0; 
+		opacity:0.9; 
+		position:absolute; 
+		top:0; 
+		z-index:3; 
+		filter:alpha(opacity=50); 
+		-moz-opacity:0.5; 
+		-khtml-opacity:0.5; 
+		 padding-top: 120px;
+		 text-align: center;
+	} 
+	#img_preview { 
+		  top:25%;
+		  z-index: 10;
+		  opacity: 1;
+
+	} 
+
+
+</style>

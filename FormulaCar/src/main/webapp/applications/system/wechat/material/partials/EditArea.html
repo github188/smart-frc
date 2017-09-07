@@ -1,0 +1,84 @@
+<div class="appmsg_editor" style="margin-top: 0px;">
+    <div class="inner">
+        <div class="appmsg_edit_item">
+            <label for="" class="frm_label">标题</label>
+            <span class="frm_input_box"><input type="text" class="frm_input js_title"></span>
+        </div>
+        <div class="appmsg_edit_item">
+            <label for="" class="frm_label">
+                <strong class="title">作者</strong>
+
+                <p class="tips l">（选填）</p>
+            </label>
+            <span class="frm_input_box"><input type="text" class="frm_input js_author "></span>
+        </div>
+        <div class="appmsg_edit_item">
+            <label for="" class="frm_label">
+                <strong class="title">封面</strong>
+
+                <p class="js_cover_tip tips">（大图片建议尺寸：900像素 * 500像素）</p>
+            </label>
+
+            <div class="upload_wrap">
+                <div class="upload_box">
+                    <div class="upload_area">
+                        <a id="js_appmsg_upload_cover"
+                           class="btn btn_upload" width="106" height="32">
+                            上传 </a>
+                        <ul class="upload_file_box" style="display: none;"></ul>
+                    </div>
+                </div>
+                &nbsp;
+                <p class="js_cover upload_preview" style="display: none;">
+                    <img class="img_preview">
+                    <a class="js_removeCover" href="javascript:void(0);" onclick="return false;">删除</a>
+                </p>
+            </div>
+            <p class="frm_tips">
+                <label for="" class="frm_checkbox_label js_show_cover_pic selected">
+                    <i class="icon_checkbox"></i>
+                    <input type="checkbox" class="frm_checkbox" checked="">
+                    封面图片显示在正文中
+                </label>
+            </p>
+        </div>
+
+        <p><a class="js_addDesc" href="javascript:void(0);" onclick="return false;"
+              style="display: none;">添加摘要</a></p>
+
+        <div class="js_desc_area dn appmsg_edit_item">
+            <label for="" class="frm_label">摘要</label>
+            <span class="frm_textarea_box"><textarea class="js_desc frm_textarea"></textarea></span>
+        </div>
+        <div id="js_ueditor" class="appmsg_edit_item content_edit">
+            <a href="javascript:void(0);" class="icon16_common close jsClose" onclick="return false;">关闭</a>
+            <label for="" class="frm_label">
+                <strong class="title">正文</strong>
+
+                <!--<p class="tips">
+                    &lt;!&ndash;<em id="js_auto_tips">（自动保存：2014/10/14 11:44:45）</em>&ndash;&gt;
+                    <a id="js_cancle" style="display: none;" href="javascript:void(0);"
+                       onclick="return false;">取消</a>
+                </p>-->
+            </label>
+
+            <div id="js_editor" class="edui_editor_wrp edui-default">
+
+            </div>
+            <div class="tool_bar tc">
+                <a id="js_finish_zoom" onclick="return false;" href="javascript:void(0);"
+                   class="btn btn_primary">完成编辑</a>
+            </div>
+        </div>
+        <p><a class="js_addURL" href="javascript:void(0);" onclick="return false;" style="display: none;">添加原文链接</a></p>
+
+        <div class="js_url_area dn appmsg_edit_item" >
+            <label for="" class="frm_label">原文链接</label>
+            <span class="frm_input_box"><input type="text" class="js_url frm_input"></span>
+        </div>
+
+    </div>
+    <i class="arrow arrow_out" style="margin-top: 0px;"></i>
+    <i class="arrow arrow_in" style="margin-top: 0px;"></i>
+
+</div>

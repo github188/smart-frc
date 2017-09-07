@@ -1,0 +1,71 @@
+.weightContainer{
+    display: inline-block;
+}
+.sta-box-title{
+    padding-top: 10px;
+    padding-bottom: 5px;
+    text-align: right;
+    margin-right: 19%;
+}
+.sta-box-info{
+    font-size: 48px;
+}
+.sta-box-transaction-number{
+	background-color:#578ebe;
+}
+.sta-box-transaction-rate{
+	background-color:#44b6ae;
+}
+.sta-box-transaction-money{
+	background-color:#be5851;
+}
+.sta-box-transaction-count{
+	background-color:#8775a7;
+}
+.sta-box-stay .sta-box-info,.sta-box-interval .sta-box-info{
+    font-size: 10px;
+}
+.sta-box-stay .sta-box-details,.sta-box-details{
+    text-align: right;
+    margin-top: 0px;
+}
+.stay-number  {
+    font-size: 16px;
+    margin-right: 12px;
+}
+.stay-number.stay-max  {
+    font-size: 43px;
+}
+
+.sta-box-marker ,.sta-box-details{
+    display: inline-block;
+}
+.sta-box-details{
+    min-width: 120px;
+    text-align: center;
+    float: right;
+    margin: 3px 28px 0 0;
+}
+.sta-box-info img{
+    position: relative;
+    left: -6px;
+    height:  85px;
+    opacity: 0.3;
+}
+.sta-box{
+    cursor: pointer ;
+    box-shadow: 2px 2px 4px #B0B1B5;
+    color: white;
+    height: 128px;
+    margin: 15px;
+}
+.sta-box-description{
+    font-size: 10px;
+}
+.sta-box-description span{
+    margin-left: 8px;
+    font-size: 16px;
+}
+.hover-shadow{
+    box-shadow: 3px 3px 6px #4b4b4b;
+}

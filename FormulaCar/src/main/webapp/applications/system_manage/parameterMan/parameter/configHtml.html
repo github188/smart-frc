@@ -1,0 +1,157 @@
+
+<div class="cs-col-slie-main-bd">
+    <div class="static_div_height" style="overflow: auto;">
+        <form id="sms-config">
+        
+        
+<!--             <div class="config-row">
+                <label for="dataStyle"  class="config-row-lable" style="margin-left: -156px;width:222px">结账数据采用方式</label>
+   
+                <select id='dataStyle'  name='dataStyle' style='width:150px;height: 28px;'>
+			                <option value='1' lang="text:replenish_data_style_1"></option>
+			                <option value='2' lang="text:replenish_data_style_2"></option>
+
+			    </select>
+            </div> -->
+        
+            <div class="config-row">
+                <label for="accept" class="config-row-lable" lang="{text:interfaceAccept}">允许接入</label>
+                <input id="accept" type="checkbox" class="config-row-input "  value="0" style="width: 23px; margin-right: 293px;height: 20px;line-height: 20px;">
+            </div>
+            <div class="config-row">
+                <label for="interfaceType" class="config-row-lable" style="margin-left: -215px;" lang="{text:interface_type}"></label>
+                <select id='interfaceType'  name='interfaceType' style='display:inline-block;width:100px;height: 33px;-webkit-border-radius: 5px;'>
+			                <option value='1' lang="text:interface_http"></option>
+			                <option value='2' lang="text:interface_webservice"></option>
+			    </select>
+            </div>
+            <div id='parameterWS_div' style='margin-left:5px;display:none'>
+                    <input id="parameterWS" style="width:120px" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <div class="config-row">
+                <label for="tradeMsgUrl" class="config-row-lable" lang="{text:interface_tradeMsgUrl}">交易推送地址</label>
+                <input id="tradeMsgUrl" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <div class="config-row">
+                <label for="statusMsgUrl" class="config-row-lable" lang="{text:interface_statusMsgUrl}">设备状态推送地址</label>
+                <input id="statusMsgUrl" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <div class="config-row">
+                <label for="codeAuthMsgUrl" class="config-row-lable" lang="{text:interface_codeAuthMsgUrl}">取货码验证地址</label>
+                <input id="codeAuthMsgUrl" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <div class="config-row">
+                <label for="codeCancelMsgUrl" class="config-row-lable" lang="{text:interface_codeCancelMsgUrl}">取货码核销地址</label>
+                <input id="codeCancelMsgUrl" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <div class="config-row">
+                <label for="codeLength" class="config-row-lable" lang="{text:interface_codeLength}">取货码长度</label>
+                <input id="codeLength" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <div class="config-row">
+                <label for="replenishMsgUrl" class="config-row-lable" lang="{text:interface_replenishMsgUrl}">结账信息推送地址</label>
+                <input id="replenishMsgUrl" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <div class="config-row">
+                <label for="deviceMsgUrl" class="config-row-lable" lang="{text:interface_deviceMsgUrl}">设备变更推送地址</label>
+                <input id="deviceMsgUrl" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <!-- <div class="config-row">
+                <label for="key" class="config-row-lable" lang="{text:shipment_notice}">KEY</label>
+                <textarea rows="7" cols="60" id="BaiShipmentNotice" style="border-radius: 4px;width:315px;border: solid 1px rgb(152, 152, 152);"></textarea>
+            </div> -->
+        </form>
+
+        <div class="btn-wrp">
+            <div class="save-btn" style="margin-left: 50%;">
+                <a id="sms-config-save" class="btn btn-primary submit" lang="{text:save}">保存</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<style type="text/css">
+    .menu-edit-area-wrapper{
+        padding: 0;
+    }
+    .config-row-input, #sms-config-passwd {
+        width: 300px;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row-select{
+        width: 314px;
+        height: 23px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row{
+        padding: 8px 0;
+    }
+    .config-row-lable{
+        width: 100px;
+    }
+    #sms-config{
+        /*max-width: 765px;*/
+        margin: 20px auto 0px auto;
+        text-align: center;
+    }
+    label.config-row-lable {
+        width: 230px;
+        display: inline-block;
+    }
+    .config-row-textarea{
+        border-color: rgb(152, 152, 152);
+        padding: 5px;
+        width: 302px;
+        max-height: 50px;
+        resize: none;
+        overflow: hidden;
+    }
+    .row-for-textarea{
+        position: relative;
+        top: -13px;
+    }
+    .btn-wrp{
+        max-width: 375px;
+        margin: 32px auto 0px auto;
+    }
+    #sms-config .config-row input:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    textarea:disabled{
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    select:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    #error-tip{
+        display: none;
+        color: #F00F0F;
+        line-height: 20px;
+    }
+    .config-row-input.config-createTime{
+        width: 160px;
+        margin: 0 140px 0 0;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+
+
+
+
+
+
+</style>

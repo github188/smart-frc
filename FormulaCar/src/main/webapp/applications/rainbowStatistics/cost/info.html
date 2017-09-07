@@ -1,0 +1,64 @@
+<div class="package-info-wrapper">
+    <form id="package-info-form">
+
+        <input type="text" id="package-info-name" class=" validate[required,custom[giveName],minSize[0],maxSize[30],funcCall[cloudInput]]">
+
+        <div class="package-info-btn"></div>
+        <div class="package-info-button"></div>
+        <div class="package-info-default"></div>
+
+        <div class="package-info-row">
+            <label for="package-info-base" class="package-info-label" lang="text:basic_charges+:">套餐基本资费:</label>
+            <input type="text" id="package-info-base" class="validate[required,custom[number],min[1]]">
+            <!--<select id="package-info-base-unit">-->
+                <!--<option value="0">￥</option>-->
+                <!--<option value="1">$</option>-->
+            <!--</select>-->
+            <span id="package-info-base-unit">￥</span>
+        </div>
+        <div class="package-info-row">
+            <label for="package-info-flow" class="package-info-label" lang="text:package_flow+:">套餐流量:</label>
+            <input type="text" id="package-info-flow" class="validate[required,custom[number],min[1]]">
+            <div class="package-info-flow-unit">
+                <input type="radio" name="unit" value="1">MB
+                <input type="radio" name="unit" value="2" checked="checked">GB
+            </div>
+        </div>
+        <div class="package-info-row">
+            <label for="package-info-cost" class="package-info-label" lang="text:extra_charges+:">超额资费:</label>
+            <input type="text" id="package-info-cost" class="validate[required,custom[number],min[0]]">
+            <span id="package-info-cost-unit">￥</span><span>/M</span>
+        </div>
+
+    </form>
+</div>
+<style type="text/css">
+    .package-info-wrapper{
+        margin: 10px;
+    }
+    #package-info-name{
+        margin: 0 10px 10px 0;
+    }
+    #package-info-base,#package-info-flow,#package-info-cost{
+        width: 35px;
+        margin: 0 8px 0 3px;
+    }
+    #package-info-base-unit{
+        width: 40px;
+    }
+    .package-info-row ,.package-info-default{
+        margin: 10px 0;
+    }
+    .package-info-btn ,.package-info-flow-unit{
+        display: inline-block;
+    }
+    .package-info-button a{
+        margin: 0 14px 0 0;
+    }
+    .package-info-label{
+        width:75px;
+        display: inline-block;
+    }
+
+
+</style>

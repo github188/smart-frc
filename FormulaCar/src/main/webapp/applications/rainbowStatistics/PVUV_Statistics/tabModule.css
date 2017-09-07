@@ -1,0 +1,49 @@
+.tabmodule-header{
+    /*background-color: rgb(196, 196, 196);*/
+    line-height: 24px;
+    height: 30px;
+}
+
+.tabmodule-toggler{
+    margin-left: 12px;
+}
+
+.tabmodule-id{
+    margin-left: 10px;
+    /*color: #fef6ff;*/
+}
+
+.tabmodule-container .dataTables_wrapper{
+    display: inline-block;
+}
+
+.tabmodule-container{
+    width: 99%;
+    margin-bottom: 7px;
+    background: white;
+    box-shadow: gray 1px 1px 5px;
+    border: 1px rgb(233, 233, 233) solid;
+    color: rgb(85, 85, 85);
+}
+/*.tabmodule-container .main-header{*/
+    /*background-color: rgb(142, 142, 142);*/
+/*}*/
+
+.tabmodule-subContainer{
+    margin: 10px;
+    /*max-height: 480px;*/
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.pvuvTable-content{
+    margin:10px;
+}
+
+.pvuvTable-container{
+    margin: 0px 10px;
+}
+.tabmodule-btn ,.tabmodule-morebtn{
+    display: inline-block;
+    width: 33px;
+}

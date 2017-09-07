@@ -1,0 +1,150 @@
+<div class="cs-col-slide-main-hd">
+    <h2 lang="{text:sms_config}"></h2>
+
+    <div class="switch  has-switch "  >
+        <div class="switch-on switch-animate ">
+            <input  type="checkbox" checked="">
+            <span class="switch-left" lang="{text:turn_on}"></span><label class="">&nbsp;</label><span class="switch-right " lang="{text:turn_off}"></span>
+        </div>
+    </div>
+</div>
+<div class="cs-col-slie-main-bd">
+    <div class="menu-edit-area-wrapper">
+        <form id="sms-config">
+            <div class="config-row">
+                <label for="sms-config-provider" class="config-row-lable" lang="{text:provider}">提供商</label>
+                <select id="sms-config-provider" class="config-row-select ">
+                    <option value="guodu" lang="">国都</option>
+                    <option value="custom" lang="">自定义</option>
+                </select>
+            </div>
+            <div class="config-row">
+                <label for="sms-config-url" class="config-row-lable row-for-textarea" lang="{text:sms_url}">短信服务端URL</label>
+                <textarea id="sms-config-url" class="config-row-textarea "></textarea>
+                <p id="error-tip"></p>
+            </div>
+            <!--<div class="config-row">
+                <label for="sms-config-httpBody" class="config-row-lable" lang="{text:request_load}">请求body体</label>
+                <input id="sms-config-httpBody" class="config-row-input ">
+            </div>
+            <div class="config-row">
+                <label for="sms-config-httpMethod" class="config-row-lable" lang="{text:request_method}">请求方法</label>
+                <input id="sms-config-httpMethod" class="config-row-input ">
+            </div>-->
+            <div class="config-row">
+                <label for="sms-config-account" class="config-row-lable" lang="{text:sms_account}">短信验证用户名</label>
+                <input id="sms-config-account" class="config-row-input ">
+            </div>
+            <div class="config-row">
+                <label for="sms-config-passwd" class="config-row-lable" lang="{text:sms_passwd}">短信验证密码</label>
+                <input id="sms-config-passwd" type="password" class="config-row-input ">
+            </div>
+            <div class="config-row">
+                <label for="sms-config-content" class="config-row-lable row-for-textarea" lang="{text:sms_content}">发送短信内容</label>
+                <textarea id="sms-config-content" class="config-row-textarea"></textarea>
+            </div>
+
+
+            <!--<div class="config-row">
+                <label for="sms-config-createTime" class="config-row-lable" lang="{text:create_time}">创建时间</label>
+                <input id="sms-config-createTime" type="text" readonly="readonly" class="config-row-input config-createTime">
+            </div>-->
+
+        </form>
+        <div class="btn-wrp">
+            <div class="edit-btn">
+                <a id="sms-config-edit" class="btn btn-default btn-editing" lang="{text:edit_url}"></a>
+            </div>
+            <div class="save-btn">
+                <a id="sms-config-save" class="btn btn-primary submit" lang="{text:save}"></a>
+                <a id="sms-config-cancel" class="btn btn-default" lang="{text:fall_back}"></a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<style type="text/css">
+    .menu-edit-area-wrapper{
+        padding: 0;
+    }
+    .config-row-input, #sms-config-passwd {
+        width: 300px;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row-select{
+        width: 314px;
+        height: 23px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row{
+        padding: 8px 0;
+    }
+    .config-row-lable{
+        width: 100px;
+    }
+    #sms-config{
+        /*max-width: 765px;*/
+        margin: 20px auto 0px auto;
+        text-align: center;
+    }
+    label.config-row-lable {
+        width: 120px;
+        display: inline-block;
+    }
+    .config-row-textarea{
+        border-color: rgb(152, 152, 152);
+        padding: 5px;
+        width: 302px;
+        max-height: 50px;
+        resize: none;
+        overflow: hidden;
+    }
+    .row-for-textarea{
+        position: relative;
+        top: -13px;
+    }
+    .btn-wrp{
+        max-width: 375px;
+        margin: 32px auto 0px auto;
+    }
+    #sms-config .config-row input:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    textarea:disabled{
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    select:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    #error-tip{
+        display: none;
+        color: #F00F0F;
+        line-height: 20px;
+    }
+    .config-row-input.config-createTime{
+        width: 160px;
+        margin: 0 140px 0 0;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+
+
+
+
+
+
+</style>

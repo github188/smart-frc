@@ -1,0 +1,7 @@
+.cloud-table .dataTable .content-table-select-column{
+	text-align: center;
+}
+table.dataTable tbody tr.content-table-black{
+    /*background-color:rgb(0,0,0) ;*/
+    color: rgb(172, 10, 10);
+}

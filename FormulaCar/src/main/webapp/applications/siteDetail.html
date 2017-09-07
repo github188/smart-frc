@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<link href="resources/css/detail.css" rel="stylesheet" type="text/css" />
+<script src="resources/js/jquery-1.7.1.js"></script>
+<script type="application/javascript" src="/cloud/base/loader.js"></script>
+<script language="JavaScript" src="./index.js"></script>
+<!-- <script language="JavaScript" src="./siteDetail.js"> -->
+<script type="application/javascript">
+require(['cloud/base/cloud','siteDetail'],function(cloud,siteDetail){
+    new siteDetail({
+        //selector:$('#container')
+    })
+});
+
+</script>
+<script type="text/javascript" language="javascript">
+function getdata(){
+   var searchStr = GetRequest();
+   var siteId = searchStr['siteId'];
+   var tag = searchStr['tag'];
+   var online = searchStr['online'];
+   
+   $("#siteId").val(siteId);
+   $("#tag").val(tag);
+   $("#online").val(online);
+}
+function GetRequest() {
+   var url = location.search; 
+   var theRequest = new Object();
+   if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      strs = str.split("&");
+      for(var i = 0; i < strs.length; i ++) {
+         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+      }
+   }
+   return theRequest;
+}
+</script>
+</head>
+<body onload="getdata();" >
+<div class="head_box">
+   <div>
+      <table width="100%" border="0">
+          <tr>
+              <td width="3%"> <div id="online"></div></label></td>
+              <td width="35%"> <label id="siteName"></td>
+              <td width="20%"> <label id="deviceName"></td>
+              <td><label id="deviceNumber"> </td>
+          </tr>
+      </table>
+   </div>
+</div>
+<div style="overflow:auto;height:90%;margin-top:10px;">
+  <input type='hidden' id='siteId' value=''/>
+  <input type='hidden' id='tag' value=''/>
+  <div class="wechat-head"></div>
+     <div class="wechat-body">
+        <div class="workspace-wrapper">
+           <div>
+             <div class="col-slide-main" id="col_slide_main"></div>
+           </div>
+        </div>
+     </div>
+   </div>  
+</div>   
+</body>
+</html>

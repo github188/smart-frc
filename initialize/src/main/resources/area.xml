@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<initialize>
+  <areas>
+     <area>
+	     <continent>asia</continent>
+         <continentName>亚洲</continentName>
+         <country>cn</country>
+		 <countryName>中国</countryName>
+		 <city>北京</city>
+		 <code>pek</code>
+		 <zones>
+		      <zone>
+		         <name>朝阳区</name>
+			     <code>chaoyang</code>
+			  </zone>
+			  <zone>
+		         <name>海淀区</name>
+			     <code>haidian</code>
+			  </zone>
+		 </zones>
+	 </area>
+	 <area>
+	     <continent>asia</continent>
+         <continentName>亚洲</continentName>
+         <country>cn</country>
+		 <countryName>中国</countryName>
+		 <city>上海</city>
+		 <code>sha</code>
+		 <zones>
+		      <zone>
+		         <name>浦东新区</name>
+			     <code>pudongxinqu</code>
+			  </zone>
+			  <zone>
+		         <name>浦西</name>
+			     <code>puxi</code>
+			  </zone>
+		 </zones>
+	 </area>
+	
+  </areas>
+</initialize>

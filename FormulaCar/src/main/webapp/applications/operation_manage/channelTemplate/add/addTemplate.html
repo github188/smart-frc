@@ -1,0 +1,79 @@
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:545px;margin:20px auto;width:1000px;overflow:hidden;position:relative;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#28b5d6;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:6px 90px;font-size: 14px;}
+#status li.active{background-color:#09c;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;}
+.page{padding:0px 0px;width:100%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px; margin:-160px auto;text-align: right;width:910px;position:absolute;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+.page h1{ border-bottom:1px dotted #ccc;margin-top: 10px;width:1250px; }
+.configtable {border: 1px solid rgba(115, 120, 126, 0.32);text-align: center;height:40px;}
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+		<li class="active" id="tab1"><strong>1.</strong><span lang="text:model_configuration"></span></li>
+        <li id="tab2" style="cursor: pointer;"><strong>2.</strong><span lang="text:relate_automat"></span></li>
+	</ul>
+	
+	<div class="items">
+	    <!-- 模板基本信息 -->
+	    <div class="page" id="baseInfo">
+	         <div style="height:110px;width:100%;">
+	           <div style="height: 190px;overflow:auto;">
+	            <table width="100%">
+	             <tr>
+	             	<td width="10%"><label style='color:red;'>*</label><label><span lang="text:template_name"></span></label></td><td><input type="text" class="input" id="template_name" name="template_name" style="width:200px;height:25px;"/></td>
+		         </tr>
+		         <tr>
+	                <td width="10%"><label style='color:red;'>*</label><label><span lang="text:model_manufacturer"></span></label></td>
+	                <td>
+			             <select id='vender_0'  name='vender_0' onchange='selectModelName()' style='width:202px;height: 33px;margin-top: 0px;'>
+		                 </select>
+	                </td>
+	                <td width="10%"><label style='color:red;'>*</label><label><span lang="text:device_shelf_type"></span></label></td><td>
+		                 <select id='machineType_0'  name='machineType_0' onchange='selectModelName()' style='width:202px;height: 33px; margin-top: 0px;'><option value='select' lang='text:please_select'></option>
+			             </select>
+	                </td>
+             	    <td width="5%"><label style='color:red;'>*</label><label><span lang="text:purchase_model"></span></label></td><td>
+		                 <select id='modelname_0'  name='modelname_0'   style='width:202px;height: 33px; margin-top: 0px;'>
+		                    <option value='select' lang='text:please_select'></option> 
+			             </select>
+                    </td>
+                    <input id="modelid_0" value="0" style="display:none"/>
+	             </tr>
+	             
+	            </table>
+	           </div>
+	         </div>
+	        <div style="  width: 200px;height: 60px;margin-top: -30px;">
+		        <a id="mutilmark" style="height: 20px;width: 60px;font-size: 13px;display: inline-block;margin-top: 30px;position: absolute;text-align: center;" for="mutilmark" lang="text:check_all"></a>
+		        <!-- <span  class="mask-check"></span> -->
+		        <a id="cancelmark" style="height: 20px;width: 60px;font-size: 13px;display: inline-block;margin-top: 30px;position: absolute;margin-left:60px" for="cancelmark" lang="text:cancell_text"></a>
+		       <!--  <span  class="mask-cross"></span> -->
+	        </div>
+			<div id="selfConfigInfo" style="overflow:auto;height:500px;">
+			     <div id='cargo_road_info' style='height:320px;width:100%;overflow: auto;border: 1px solid rgba(115, 120, 126, 0.32);'>
+			     </div>
+			</div>
+			<div class="btn_nav" style="margin-left: 40px;width:940px">
+      
+                  <input type="button" class='btn btn-primary submit' id="nextBase" style="margin-left:10px;margin-top: -20px;width: 105px;height: 32px;"/>
+             </div>
+             
+	        
+	    </div>
+	    <div class="page" id="relateAutomatConfig" style="width:100%;margin-left:0px;padding: 0px 0px;display:none;">
+            <div id="relateAutomatInfo"></div>
+            
+            
+        </div>
+	</div>
+</div>

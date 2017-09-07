@@ -1,0 +1,108 @@
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:545px;margin:20px auto;width:950px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#44b549;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:8px 70px;font-size: 14px;}
+#status li.active{background-color:#587950;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;}
+.page{padding:5px 20px;width:100%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;margin-right: 40px;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+		<li class="active" id="tab1" style="height: 19px;"><strong>1.</strong><span lang="text:add_basic_information"></span></li>
+		<li id="tab2" style="height: 19px;"><strong>2.</strong><span lang="text:choose_device"></span></li>
+	</ul>
+	<div class="items">
+	    <div class="page" id="baseInfo">
+	         <div style="height:350px;float:left;margin-left: 30px;">
+	           <div style="height: 190px;">
+	            <table width="100%" style="border-collapse: separate;border-spacing: 10px;">
+	             <tr>
+	                <td width="20%"><label style='color:red;'>*</label><label><span lang="text:name1"></span>:</label></td>
+	                <td><input type="text" class="input"  id="discountName" name="discountName" style="width:200px;height:25px;"/></td>
+	             </tr>
+	             <tr>
+	                <td width="20%"><label style='color:red;'>*</label><label><span lang="text:discount_percentages"></span>:</label></td>
+	                <td>
+	                   <input type="text" class="input"  id="coupon" name="coupon" style="width:200px;height:25px;"/>
+	                   <label><span lang="text:the_original_price_is_1"></span></label>    
+	                </td>
+	             </tr>
+	             <tr>
+	                <td width="20%"><label style='color:red;'>*</label><label><span lang="text:discount_threshold_amount"></span>:</label></td>
+	                <td>
+	                   <label><span lang="text:buy_spending"></span></label>  
+	                   <input type="text" class="input"  id="threshold" name="threshold" style="width:200px;height:25px;"/>
+	                   <label><span lang="text:yuan_can_enjoy_discount"></span></label>  
+	                </td>
+	             </tr>
+	             <tr>
+	                <td width="20%"><label style='color:red;'>*</label><label><span lang="text:limited_period"></span>:</label></td>
+	                <td>
+	                    <input style='width:125px' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='startTime' />
+	                   <span id="dataTo"></span><input style='width:125px' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='endTime' />
+	                </td>
+	             </tr>
+	              <tr>
+	                <td width="20%"><label style='color:red;'>*</label><label><span lang="text:the_number_of_users_can_discount"></span>:</label></td>
+	                <td>
+	                   <input type="text" class="input"  id="user_couponc_count" name="user_couponc_count" style="width:200px;height:25px;"/>
+	                   <label><span lang="text:times"></span></label>    
+	                </td>
+	             </tr>
+	             <tr>
+	                <td width="20%"><label style='color:red;'>*</label><label><span lang="text:the_total_discount_amount_limit"></span>:</label></td>
+	                <td>
+	                   <input type="text" class="input"  id="coupon_amount" name="coupon_amount" style="width:200px;height:25px;"/>
+	                   <label><span lang="text:yuan"></span></label>    
+	                </td>
+	             </tr>
+	              <tr>
+	                <td width="20%"><label style='color:red;'>*</label><label><span lang="text:trade_pay_style"></span>:</label></td>
+	                <td>
+	                   <label><span lang="text:trade_wx_pay"></span></label>    
+	                </td>
+	             </tr>
+	             <tr>
+	                <td width="20%"><label style='color:red;'>*</label><label><span lang="text:whether_micro_channel_public_concern_no"></span>:</label></td>
+	                <td>
+	                   <input style='width:60px; height: 18px;' type='checkbox'  id='isFollow'  />
+	                </td>
+	             </tr>
+	            </table>
+	           </div>
+	         </div>
+	         
+	         <div class="btn_nav" style='margin-top: 45%;'>
+                  <input type="button" class='btn btn-primary submit' id="nextBase" style="margin-left:10px;width:105px;height:32px;"/>
+             </div>
+	    </div>
+	    <div class="page" id="devicelist" style="padding: 0px 0px;display:none;">
+            <div id="devicelistInfo" style="overflow: auto;border: 1px #D7C9C9 solid;"></div>
+             <div class="btn_nav">
+	           <table style="width:100%;">
+                 <tr>
+                 <td style="width:90%;">
+                    <input type="button" class='btn btn-primary submit' id="lastBase" style="width: 105px;height: 32px;" /> 
+                 </td>
+                 <td style="width:90%;">
+                    <input type="button" class='btn btn-primary submit' id="saveBase" style="margin-left:10px;width: 105px;height: 32px;" /> 
+                 </td>
+                 <td style="width:90%;">
+                    <input type="button" class='btn btn-primary submit' id="nowBase" style="margin-left:10px;width: 105px;height: 32px;" /> 
+                  </td>
+                 </tr>
+               </table>
+             </div>
+        </div>
+     </div>
+ </div> 

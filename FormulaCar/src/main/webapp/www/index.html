@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+        <link rel="bookmark" href="images/favicon.ico"/> -->
+        <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+        <title lang="text:formula_g_raching_car">泥巴方程式FRC</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="css/jquery.validationEngine.css" type="text/css" />
+        <link rel="stylesheet" href="css/index.css" type="text/css"/>
+        <link rel="stylesheet" href="css/verifyBrowser.css" type="text/css" />
+        <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+        <!--<script type="text/javascript" src="js/jquery.js"></script>-->
+        <meta property="qc:admins" content="3412046143135516175263601545636" />
+        <meta property="wb:webmaster" content="836f4e7738dea5f6" />
+        <!--<script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" data-appid="101149405" data-redirecturi="http://qq.360yutu.cn/DeviceNetwork/www/success.html" charset="utf-8"></script>-->
+        <!--<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=427142461" type="text/javascript" charset="utf-8"></script>-->
+    </head>
+    <script>
+    function changeTab(tabCon_num){
+        for(i=0;i<=1;i++) {
+        document.getElementById("tabCon_"+i).style.display="none"; //将所有的层都隐藏
+        }
+        if(tabCon_num == '0'){
+            $("#style0").css("border-bottom","3px solid #09c");
+            $("#style1").css("border-bottom","0px");
+        }else if(tabCon_num == '1'){
+            $("#style1").css("border-bottom","3px solid #09c");
+            $("#style0").css("border-bottom","0px");
+        }
+        document.getElementById("tabCon_"+tabCon_num).style.display="block";//显示当前层
+    }
+    </script>
+    <style>
+    </style>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                    <div class="container">
+                        <div class="home-header-corp">
+                            <ul class="home-header-corp-ul">
+                                <li id="smallLogo" class="home-header-corp-ul-cloud"></li>
+                                <li class="home-header-corp-ul-text" style="margin-top: 13px;">
+                                    <span lang="text:welcome_to_formula_g_raching_car">欢迎来到泥巴方程式</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav pull-right">
+                                <li id="home-nav-reg" style="display:none"><a href="#" lang="text:registration">注册</a></li>
+                                <li id="home-nav-aboutus"><a lang="text:about_us" id="about_us" href="javascript:void(0)">联系我们</a></li>
+                                <!-- <li style="display:block;">
+                                    <select class="form-control language-select" id="language-select">
+                                        <option value="zh_CN" id="lang-zh">中文</option>
+                                        <option value="en" id="lang-en">English</option>
+                                    </select>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div></div>
+            <div class="row main-content-set" id="biglogo">
+                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                </div>
+                <div class="col-xs-3 col-sm-4 col-md-4 col-lg-3">
+                    <div class="container-fluid form-wrapper" id="domestic">
+                        <div id="tab" style="margin-bottom: 15px;border-bottom: 1px solid #d3d3d3;padding: px;width: 288px;margin-left: -15px;height: 30px;margin-top: 10px;">
+                            <ul>
+                                <li onclick="changeTab('0')" id="style0" style='list-style: none;cursor: pointer;float:left;width: 144px;height: 30px;border-bottom: 3px solid #09c;'>扫码登录</li>
+                                <li onclick="changeTab('1')" id="style1" style='list-style: none;cursor: pointer;height: 30px;width:144px;float: left;'><span lang="text:account_login"></span></li>
+                            </ul>
+                        </div>
+                        <div id="tabCon">
+                            <div id="tabCon_0"  style="text-align:center;">
+                                <img src='' id ="loginCode" style='width: 150px;height: 150px;'>
+                                <label style="margin-top:5px;">请打开微信客户端“扫一扫”</label><br>
+                                <label id="bing"  style="margin-top:5px;font-size: 12px;color: rgb(40, 181, 214);" title="">未绑定?</label>
+                            </div>
+                            <div id="tabCon_1" style="display: none;text-align:center;">
+                                <form role="form" id="formID">
+                                    <div class="form-group" id="home-content-login-user">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-user"></span>
+                                            </div>
+                                            <input lang="placeholder:enter_email" id="home-input-user" class="form-control validate[required,custom[email]]" autocomplete="off" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <span class="glyphicon glyphicon-lock"></span>
+                                            </div>
+                                            <input lang="placeholder:enter_password" class="form-control validate[required]" id="home-input-pwd-password" type="password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="home-content-login-vercode">
+                                        <div class="input-group">
+                                            <span class="home-verimg pull-left" id="home-verimg">
+                                                <img lang="title:click_to_change" title="" src="" />
+                                            </span>
+                                            <input lang='{placeholder:please_input_captcha}' autocomplete="off" type="text" class="form-control validate[required,custom[systemAuthcode]] home-input-ver-custom" id="home-input-ver-custom" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="remember-me">
+                                                <span lang="text:rempwd">记住我</span>
+                                            </label>
+                                            <a href="#" lang="text:forgot_pwd" class="forget-password" id="home-login-forget">忘记密码?</a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <button lang="{text:sign_in,title:sign_in}" class="btn btn-success login-btn" id="home-input-submit">登录</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <p id="tips-content"></p>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+                    <div class="container">
+                        <div class="collapse navbar-collapse" style="text-align: center;">
+                            <!-- <a  id="mall" style="display: none;" lang="text:company_full_name" href="http://www.inhandnetworks.com" class="text-center line-height-nav-p">北京映翰通网络技术股份有限公司 © CopyRight 2014</a>
+                            <a  id="aokema" style="display: none;" lang="text:aokema_company_full_name" href="http://www.inhandnetworks.com" class="text-center line-height-nav-p">北京映翰通网络技术股份有限公司 © CopyRight 2014</a>
+                            <a  id="fsbs" style="display: none;" lang="text:fsbs_company_full_name" href="http://dfb1010.cn.china.cn/" class="text-center line-height-nav-p">大连富士冰山自动售货机有限公司</a>
+                            <a  id="zidongbao" style="display: none;" href="http://www.nongfuspring.com/" class="text-center line-height-nav-p">农夫山泉股份有限公司(c) COPYRIGHT 1990-2009 . ALL RIGHTS RESERVED</a> -->
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <script type="text/javascript" src="js/jquery.validationEngine.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type='text/javascript'>
+        //        QC.Login({
+        //            btnId:"qqLoginBtn"    //插入按钮的节点id
+        //        },function(reqData, opts){//登录成功
+        //            //根据返回数据，更换按钮显示状态方法
+        //            var dom = document.getElementById(opts['btnId']),
+        //                    _logoutTemplate=[
+        //                        //头像
+        //                        '<span><img src="{figureurl}" class="{size_key}"/></span>',
+        //                        //昵称
+        //                        '<span>{nickname}</span>',
+        //                        //退出
+        //                        '<span><a href="javascript:QC.Login.signOut();">退出</a></span>'
+        //                    ].join("");
+        //            dom && (dom.innerHTML = QC.String.format(_logoutTemplate, {
+        //                nickname : QC.String.escHTML(reqData.nickname), //做xss过滤
+        //                figureurl : reqData.figureurl
+        //            }));
+        //        }, function(opts){//注销成功
+        //            alert('QQ登录 注销成功');
+        //        });
+        //        WB2.anyWhere(function (W) {
+        //            W.widget.connectButton({
+        //                id: "sinaLoginBtn",
+        //                type: '3,2',
+        //                callback: {
+        //                    login: function (o) { //登录后的回调函数
+        //                        alert("login: " + o.screen_name)
+        //                    },
+        //                    logout: function () { //退出后的回调函数
+        //                        alert('logout');
+        //                    }
+        //                }
+        //            });
+        //        });
+        //var cbLoginFun = function(oInfo, oOpts){
+        //    alert(oInfo.nickname); // 昵称
+        //    alert(oOpts.btnId);    // 点击登录的按钮Id
+        //};
+        //QC.Login({btnId:"qqLoginBtn"}, cbLoginFun);
+        var url={
+        "default":"www",
+        //"localhost":"www/",
+        "www.itkdn.com":"index/itkdn",
+        "www.dahongyuan.com":"index/dahongyuan",
+        "182.92.159.210":"index/whiteboard",
+        "42.96.188.34":"index/whiteboard",
+        "yun.u2wifi.cn":"index/whiteboard",
+        "yun.u2o2o.cn":"index/whiteboard"
+        //        "ceshi.com":"index/peopledigital"
+        };
+        function randomWord(randomFlag, min, max){
+        var str = "",
+        range = min,
+        arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+        
+        // 随机产生
+        if(randomFlag){
+        range = Math.round(Math.random() * (max-min)) + min;
+        }
+        for(var i=0; i<range; i++){
+        pos = Math.round(Math.random() * (arr.length-1));
+        str += arr[pos];
+        }
+        return str;
+        }
+        function makeParamToQueryString(param){
+                    var arr = [];
+                    for(var attr in param){
+                        if($.isArray(param[attr])){
+                            arr.push(attr + "=" + param[attr].join(","));
+                        }else{
+                                arr.push(attr + "=" + param[attr]);
+                        }
+                    }
+                    return arr.join("&");
+                }
+        
+        document.body.onload=function(){
+            $("#bing").hover(function(){
+                $(this).text("1.先用帐号登录平台 2.系统->安全登录,绑定");
+            },function(){
+            $(this).text("未绑定?");
+        });
+        var currentHost=window.location.hostname;
+        if(currentHost == "longyuniot.com"){//澳柯玛longyuniot.com
+            $("#aokema").css("display","block");
+            $("#fsbs").css("display","none");
+            $("#mall").css("display","none");
+            $("#zidongbao").css("display","none");
+            $("#home-nav-reg").css("display","none");
+            
+            $("#smallLogo").removeClass("home-header-corp-ul-cloud");
+            $("#biglogo").removeClass("main-content-set");
+            
+            $("#smallLogo").addClass("home-header-corp-ul-cloud-aokema");
+            $("#biglogo").addClass("main-content-set-aokema");
+        
+        }else if(currentHost == "www.dfbs-vm.com"){//富士冰山
+            $("#fsbs").css("display","block");
+            $("#aokema").css("display","none");
+            $("#zidongbao").css("display","none");
+            $("#mall").css("display","none");
+            $("#smallLogo").removeClass("home-header-corp-ul-cloud");
+            $("#smallLogo").addClass("home-header-corp-ul-cloud-fsbs");
+            $("#biglogo").removeClass("main-content-set");
+            $("#biglogo").addClass("main-content-set-fsbs");
+        }else if(currentHost == "nf.zidongbox.com"){
+            $("#zidongbao").css("display","block");
+            $("#aokema").css("display","none");
+            $("#mall").css("display","none");
+            $("#fsbs").css("display","none");
+        }else {
+            $("#aokema").css("display","none");
+            $("#zidongbao").css("display","none");
+            $("#fsbs").css("display","none");
+            $("#mall").css("display","block");
+        }
+        if(url[currentHost]){
+        window.localStorage.setItem("indexURL",url[currentHost]);
+        if(url[currentHost]=="www"){
+        window.location.replace("../../"+url[currentHost]);
+        }else if(url[currentHost]!="www")
+        {
+        window.location.replace("../"+url[currentHost])
+        }
+        }
+        else{
+        window.localStorage.setItem("indexURL",url["default"]);
+        }
+        
+        var language = $("#language-select").val();
+            if(language == 'en'){
+                $("#style1").click();
+                changeTab("1");
+            }else{
+                $("#style0").click();
+                changeTab("0");
+                var key = randomWord(false, 20);
+                var currentHost=window.location.hostname;
+                var pay_url = "http://"+currentHost+"/vapi/oper/"+key;
+                $.ajax({
+        url: "/api/encode?pay_url="+pay_url,
+        type: "GET",
+        dataType: "json",
+        success: function(data){
+        var src = data;
+        $("#loginCode").attr("src",src);
+        
+        var eventSource =  new EventSource("/vapi/oper/scanLogin/"+key);
+        console.log(eventSource);
+        eventSource.onmessage = function(event) {
+            if(event && event.data){
+                var username = event.data.split(":")[0];
+        var password = event.data.split(":")[1];
+        
+        password = password.toUpperCase();
+                    var option={};
+                    option.param={
+                        client_id:"000017953450251798098136",
+                        client_secret:"08E9EC6793345759456CB8BAE52615F3",
+                        grant_type:"password",
+                        username:username,
+                        password:password,
+                        password_type:"2",
+                        language:locale.current()
+                };
+                    option.data=encodeURIComponent("clientSecret")+"="+encodeURIComponent("08E9EC6793345759456CB8BAE52615F3");
+                        option.url="/oauth2/access_token"+"?"+self.makeParamToQueryString(option.param);
+                        option.type="POST";
+                        option.contentType="application/x-www-form-urlencoded";
+                        option.dataType="JSON";
+                        option.processData=false;
+                        option.timeout=1200000;
+                        option.error=function(error){
+                    };
+                    option.success=function(data){
+                        sessionStorage.setItem("accessToken",data.access_token);
+                            sessionStorage.setItem("refreshToken",data.refresh_token);
+                            self.failedTimes=sessionStorage.getItem("failedTimes");
+                            if(self.failedTimes<2){
+                                self.failedTimes=0;
+            sessionStorage.setItem("failedTimes",self.failedTimes);
+                            }
+                        var indexUrl=localStorage.getItem("indexURL");
+                        if(indexUrl!="www"){
+                                location.replace("../../applications/index.html")
+                            }else{
+                                location.replace("../applications/index.html");
+                            }
+                    };
+                    $.ajax(option);
+            }
+        };
+        }
+        });
+            }
+        };
+        locale.render({
+        element: "body"
+        })
+        </script>
+    </body>
+</html>

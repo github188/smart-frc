@@ -1,0 +1,32 @@
+  	<div class="login">
+  		<div class="login-common">
+  		<form id="windowFormID" name="formen" class="formular" action=""  enctype="multipart/form-data" method="post" >
+  		<table style='margin-left:5%;margin-top:5%;' border='1' width='90%'>
+		  <tr style='height:40px;'>
+			<td height='30px' style='font-size: 14px;font-weight: bold;width:60%;'>
+			    <div style="float:left;">
+			       <a id='selectFile' class='btn btn-primary submit' onclick="document.formen.doc.click()" lang="text:please_select_file" style="width:140px;float:left;"></a>
+			       <input name="path" readonly="readonly" style="float:left;height:28px;margin-left:2px;width:140px;">
+			    </div>
+				
+				<input class="info-form-file" type="file" id="doc" name="doc" style="display:none;" onChange="document.formen.path.value=this.value"/>
+			</td>
+			<td height='30px' style='font-size: 14px;font-weight: bold;'>
+				<span id='marks'></span>&nbsp;&nbsp;&nbsp;&nbsp;
+			</td>
+		  </tr>
+		 <tr style='height:40px;'>
+			<td style="text-align:center;" colspan=2>
+			   <div style='text-align: right;width: 100%;margin-top: 10px;border-top: 1px solid #f2f2f2;'>
+			     <a id='input-submit' class='btn btn-primary submit' style='margin-top: 8px;' lang="text:upload_files"></a>
+			     <a id='cancel' style='margin-left: 10px;margin-top: 8px;' class='btn btn-primary submit' lang="text:cancell_text"></a></div>
+			   </div>
+			</td>
+		 </tr>
+		</table>
+  		
+  		</form>
+  		</div>
+		
+  	</div>
+  	

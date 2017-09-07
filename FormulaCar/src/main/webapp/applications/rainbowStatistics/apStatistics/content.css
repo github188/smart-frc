@@ -1,0 +1,197 @@
+.ApSta-left{
+    z-index: 101;
+    left: 0px;
+    top: 62px;
+    position: fixed;
+    background-color: rgb(236, 236, 236);
+    width: 301px;
+    /*height: 100%;*/
+    box-shadow: rgb(104, 104, 104) 2px 1px 20px;
+}
+.ApSta-container{
+    height: 100%;
+}
+.ApSta-bar{
+    position: fixed;
+    opacity: 0;
+    left: 300px;
+    width: 15px;
+    height: 37px;
+    top: 45%;
+    border: 1px rgb(185, 185, 185) solid;
+    z-index: 102;
+    background-color: rgb(215, 215, 215);
+    border-radius: 0 17px 17px 0;
+    box-shadow: rgb(104, 104, 104) 2px 1px 6px;
+}
+.ApSta-bar img{
+    opacity: 0.3;
+    margin: 7px 0 0 -4px;
+}
+.ApSta-sitelist-tb-item{
+    height : 100%;
+    line-height : 100%;
+}
+.ApSta-toolbar-search{
+    float: right;
+    margin: 2px 2px 0 0;
+}
+#ApSta-tag-overview{
+    width: 176px;
+    height: 300px;
+}
+.ApSta-container{
+    /*padding-top: 5px;*/
+    margin: 0px auto 0px auto;
+    max-width: 1600px;
+    width: 96%;
+    min-width: 1280px;
+}
+.ApStaContent{
+    overflow-y: auto;
+}
+.Sta-name{
+    font-size: 25px;
+    margin: 8px 0 0 5%;
+    color: rgb(143, 139, 139);
+}
+.online-user,.online-terminal ,.regist-user{
+    height: 320px;
+}
+.online-user-header,.online-terminal-header ,.regist-user-header{
+    height: 110px;
+    margin: auto 5px;
+}
+.online-chart-container ,regist-chart-container{
+    margin:10px auto;
+}
+.online-user-content,.online-terminal-content ,.regist-user-content{
+    height: 210px;
+    width: 99%;
+    margin: 0 auto;
+}
+
+.weightContainer{
+    display: inline-block;
+}
+.sta-item-block{
+    height: 82%;
+    margin: 1% 2%;
+    width: 29%;
+    display: inline-block;
+    color: white;
+}
+.sta-item-block-title{
+    margin-top: 7px;
+    text-align: center;
+}
+.sta-item-block-value{
+    text-align: center;
+    margin-top: 11px;
+    font-size: 40px;
+}
+
+.onlineuser-item-current,.onlineterminal-item-current ,.registuser-item-today{
+    background-color: #578ebe;
+}
+.onlineuser-item-average,.onlineterminal-item-average ,.registuser-item-week{
+    background-color: #8775a7;
+}
+.onlineuser-item-max,.onlineterminal-item-max ,.registuser-item-month{
+    background-color: #44b6ae;
+}
+.sta-box-user,.sta-box-terminal{
+    background-color: #578ebe ;
+}
+.sta-box-active-user,.sta-box-active-terminal{
+    background-color: #be5851;
+}
+.sta-box-stay{
+    background-color: #8775a7 ;
+}
+.sta-box-interval{
+    background-color: #44b6ae ;
+}
+.sta-box-title{
+    padding-top: 10px;
+    padding-bottom: 5px;
+    text-align: right;
+    margin-right: 19%;
+}
+.sta-box-info{
+    font-size: 48px;
+}
+.sta-box-stay .sta-box-info,.sta-box-interval .sta-box-info{
+    font-size: 10px;
+}
+.sta-box-stay .sta-box-details,.sta-box-interval .sta-box-details{
+    text-align: right;
+    margin-top: 0px;
+}
+.stay-number  {
+    font-size: 16px;
+    margin-right: 12px;
+}
+.interval-number{
+    font-size: 14px;
+    margin-right: 12px;
+}
+.stay-number.stay-max  {
+    font-size: 43px;
+}
+.interval-number.interval-max{
+    font-size: 39px;
+}
+.sta-box-marker ,.sta-box-details{
+    display: inline-block;
+}
+.sta-box-details{
+    min-width: 120px;
+    text-align: center;
+    float: right;
+    margin: 3px 28px 0 0;
+}
+.sta-box-info img{
+    position: relative;
+    left: -6px;
+    height:  85px;
+    opacity: 0.3;
+}
+.sta-box{
+    cursor: pointer ;
+    box-shadow: 2px 2px 4px #B0B1B5;
+    color: white;
+    height: 128px;
+    margin: 15px;
+}
+.sta-box-description{
+    font-size: 10px;
+}
+.sta-box-description span{
+    margin-left: 8px;
+    font-size: 16px;
+}
+.hover-shadow{
+    box-shadow: 3px 3px 6px #4b4b4b;
+}
+img.question-btn{
+    width: 11px;
+    height: 11px;
+    opacity: 0.5;
+    position: relative;
+    left: 6px;
+}
+.tip-content{
+    padding: 10px 25px 15px 25px;
+    max-width: 300px;
+}
+.tip-content p{
+    font-size: 12px;
+    line-height: 24px;
+}
+.qtip-opacity{
+    opacity: 0.9 !important;
+}
+.hight-light{
+    color: #4BD8DF;
+}

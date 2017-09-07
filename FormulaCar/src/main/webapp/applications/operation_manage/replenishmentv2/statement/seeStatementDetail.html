@@ -1,0 +1,41 @@
+
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:475px;margin:20px auto;width:950px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#28b5d6;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:6px 70px;font-size: 14px;}
+#status li.active{background-color:#09c;font-weight:normal;}
+.input{width:200px; height:22px; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;}
+.page{width:93%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;margin-top: 451px;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+		<li class="active" id="tab1" style="cursor: pointer;"><span lang="text:transaction_flow"></span></li>
+		
+		
+	</ul>
+
+	<div class="items">
+
+	    <div class="page" id="baseInfo">
+
+			<div id="trades_list" class="list_div_height" style="position: absolute;height: 440px;width:100%">
+                <!--  <div id="trade_list_bar" style="height:30px;margin-bottom: 5px;"></div> -->
+				 <div id="trade_list_table" style="height:410px;overflow:hidden;width:100%"></div>
+				 <div id="trade_list_paging" style='border-top: 1px solid #e7e7eb;height: 8%;background-color: #f4f5f9;z-index: 9999;'></div>
+			
+			</div>
+
+	    </div>  
+
+     </div>
+ </div> 

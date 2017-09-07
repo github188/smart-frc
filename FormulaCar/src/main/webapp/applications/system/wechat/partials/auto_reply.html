@@ -1,0 +1,123 @@
+<div class="cs-col-slide-main-hd">
+    <h2 lang="{text:auto_reply}"></h2>
+    <!--<a class="btn btn-primary submit release" lang="{text:auto_reply}"></a>-->
+</div>
+<div class="cs-col-slie-main-bd">
+    <div class="content_wrap page_advanced_reply">
+        <div class="global_mod mt_layout reply_tab_wrp">
+            <div class="section_tab">
+                <ul class="tab_navs" id="nav_bar">
+                    <li class="tab_nav  selected nav_auto_reply_added">
+                        <a lang="text:added_auto_replay">被添加自动回复</a>
+                    </li>
+                    <li class="tab_nav nav_message_auto_reply">
+                        <a lang="text:message_auto_reply">消息自动回复</a>
+                    </li>
+                    <li class="tab_nav nav_key_words_reply">
+                        <a lang="text:keywords_atuo_reply">关键词自动回复</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="msg_sender small" id="auto_reply_added" style="display: none">
+            <div class="msg_tab">
+                <ul class="tab_navs">
+                    <li class="tab_nav tab_text width5 selected">
+                        <a>
+                            <i class="icon_msg_sender"></i>
+                        </a>
+                    </li>
+                    <li class="tab_nav tab_appmsg width5 no_extra">
+                        <a>
+                            <i class="icon_msg_sender"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab_panel">
+                    <div class="tab_content text_content" style="display: none">
+                        <div class="js_textArea inner no_extra">
+                            <div class="emotion_editor">
+                                <div class="edit_area js_editorArea" contenteditable="true" style="overflow-y: auto; overflow-x: hidden;"></div>
+                                <div class="editor_toolbar">
+                                    <!--<a class="icon_emotion emotion_switch js_switch"></a>-->
+                                    <p class="editor_tip js_editorTip">
+                                        <span id="letter_limit_pre">还可输入</span>
+                                        <em>600</em>
+                                        <span lang="text:word" id="letter_limit_aft">字</span>
+                                    </p>
+                                    <div class="emotion_wrp js_emotionArea">
+                                        <span class="emotions_preview js_emotionPreviewArea"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab_content model_content" style="display: none;">
+                        <div class="js_appmsgArea inner ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="msg_sender small" id="message_auto_reply" style="display: none">
+            <div class="msg_tab">
+                <ul class="tab_navs">
+                    <li class="tab_nav tab_text width5 selected">
+                        <a>
+                            <i class="icon_msg_sender"></i>
+                        </a>
+                    </li>
+                    <li class="tab_nav tab_appmsg width5 no_extra">
+                        <a>
+                            <i class="icon_msg_sender"></i>
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab_panel">
+                    <div class="tab_content text_content" style="display: none">
+                        <div class="js_textArea inner no_extra">
+                            <div class="emotion_editor">
+                                <div class="edit_area js_editorArea" contenteditable="true" style="overflow-y: auto; overflow-x: hidden;"></div>
+                                <div class="editor_toolbar">
+                                    <!--<a class="icon_emotion emotion_switch js_switch"></a>-->
+                                    <p class="editor_tip js_editorTip">
+                                        <span id="letter_limit_pre">还可输入</span>
+                                        <em>600</em>
+                                        <span lang="text:word" id="letter_limit_aft">字</span>
+                                    </p>
+                                    <div class="emotion_wrp js_emotionArea">
+                                        <span class="emotions_preview js_emotionPreviewArea"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab_content model_content" style="display: none;">
+                        <div class="js_appmsgArea inner ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tool_bar">
+            <a href="javascript:void(0);" class="btn btn-primary" lang="text:save" id="editSave"></a>
+            <a href="javascript:void(0);" class="btn btn-default" lang="text:clear_content" id="editBack"></a>
+        </div>
+        <div class="key_words_content" id="key_words_content" style="display: none">
+            <div class="btn_wrp">
+                <a href="javascript:void(0);" class="btn btn_add btn_primary" id="Js_rule_add" data-status="not"><i class="icon14_common add_white"></i>添加规则</a>
+            </div>
+            <ul id="Js_newRule" class="keywords_rule_list">
+
+
+
+            </ul>
+            <ul id="Js_ruleList" class="keywords_rule_list">
+
+
+
+            </ul>
+
+        </div>
+    </div>
+</div>

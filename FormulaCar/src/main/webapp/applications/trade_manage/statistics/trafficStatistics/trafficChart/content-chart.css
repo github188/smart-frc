@@ -1,0 +1,16 @@
+.content-chart-toolbar-panel-right{
+	margin-left: 5px;
+}
+.content-chart-toolbar-panel{
+	float: left;
+    margin-top: 1px;
+}
+.content-chart-toolbar {
+	display: inline-block;
+    width: 100%;
+}
+.content-chart-chartplugin{
+	height: 100%;
+	width: 100%;
+	display: inline-block;
+}

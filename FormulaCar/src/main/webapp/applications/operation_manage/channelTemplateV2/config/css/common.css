@@ -1,0 +1,27 @@
+.mask-wrapper,  .img-mask,   .mask-bg, .mask-img {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 80px; 
+}
+
+.mask-wrapper {
+    top: 0px;
+    left: 5px;
+    overflow: hidden;
+    display:none;
+}
+
+.mask-img {
+    background: transparent url(../images/saledonw.png) no-repeat 50% 10px;
+    background-size: 85px;
+}
+
+.mask-pin {
+	
+	background: transparent url(../images/selected.png) no-repeat 50%;
+	background-size: 25px;
+	height: 25px;
+	width: 25px;  
+	display: inline-block;
+}

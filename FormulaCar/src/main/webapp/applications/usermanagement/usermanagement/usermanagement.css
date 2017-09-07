@@ -1,0 +1,48 @@
+#toolbar-search-box{
+    margin:3px 0 0 0;
+    float:left;
+    width:auto;
+    height:20px;
+}
+
+#toolbar-search-hint{
+    color:#999;
+}
+
+#toolbar-search-hint,#toolbar-search-input{
+    margin:0;
+    padding:0;
+    float:left;
+    width:220px;
+    height:20px;
+}
+
+#toolbar-search-button{
+    margin-left:5px;
+    float:left;
+    width:48px;
+    height:20px;
+    background:url("./resources/images/search.png");
+    border:0;
+    cursor:pointer;
+}
+#winContent{
+    height:530px
+}
+.toolbar-sort-multiselect{
+    margin-top: 3px ;
+}
+.toolbar-sort-text{
+    margin: 0 5px 0 20px;
+}
+/*
+#ui-window-content{
+    overflow-y:hidden
+}
+#login_history{
+    height:530px
+}
+#ui-window-body{
+    overflow: hidden;
+    position:relative;
+}*/

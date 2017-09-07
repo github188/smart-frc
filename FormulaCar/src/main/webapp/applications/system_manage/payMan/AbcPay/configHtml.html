@@ -1,0 +1,102 @@
+
+<div class="cs-col-slie-main-bd">
+    <div class="static_div_height" style="overflow: auto;">
+        <form id="sms-config">
+            <div class="config-row">
+                <label for="times" class="config-row-lable" lang="{text:number_of_participating_activities}"></label>
+                <input id="times" class="config-row-input " style="border-radius: 4px;">
+            </div>
+        </form>
+        <div class="btn-wrp">
+            <div class="save-btn" style="margin-left: 50%;">
+                <a id="sms-config-save" class="btn btn-primary submit" lang="{text:save}"></a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<style type="text/css">
+    .menu-edit-area-wrapper{
+        padding: 0;
+    }
+    .config-row-input, #sms-config-passwd {
+        width: 300px;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row-select{
+        width: 314px;
+        height: 23px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row{
+        padding: 3px 0;
+    }
+    .config-row-lable{
+        width: 100px;
+    }
+    #sms-config{
+        /*max-width: 765px;*/
+        margin: 20px auto 0px auto;
+        text-align: center;
+    }
+    label.config-row-lable {
+        width: 230px;
+        display: inline-block;
+    }
+    .config-row-textarea{
+        border-color: rgb(152, 152, 152);
+        padding: 5px;
+        width: 302px;
+        max-height: 50px;
+        resize: none;
+        overflow: hidden;
+    }
+    .row-for-textarea{
+        position: relative;
+        top: -13px;
+    }
+    .btn-wrp{
+        max-width: 375px;
+        margin: 32px auto 0px auto;
+    }
+    #sms-config .config-row input:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    textarea:disabled{
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    select:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    #error-tip{
+        display: none;
+        color: #F00F0F;
+        line-height: 20px;
+    }
+    .config-row-input.config-createTime{
+        width: 160px;
+        margin: 0 140px 0 0;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+
+
+
+
+
+
+</style>

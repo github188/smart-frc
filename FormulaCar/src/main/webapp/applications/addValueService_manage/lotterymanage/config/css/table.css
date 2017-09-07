@@ -1,0 +1,42 @@
+.automat-toolbar-container{
+    display: inline-block;
+    line-height: 32px;
+    height: 32px;
+}
+#automat-toolbar-total{
+    color: rgb(181, 63, 119);
+    font-weight: bolder;
+}
+
+.automat-toolbar-total ,.automat-toolbar-time ,.automat-toolbar-package ,.automat-toolbar-name {
+    margin-left: 15px;
+}
+
+#automat-toolbar-time{
+    width: 65px;
+    margin-left: 5px;
+}
+
+.automat-toolbar-package{
+    margin-right: 5px;
+}
+#automat-toolbar-name{
+    margin-left: 5px;
+    height: 20px;
+}
+.automat-toolbar-searchbtn,.automat-toolbar-changebtn{
+    margin-left: 15px;
+    line-height: 20px;
+    display: inline-block;
+}
+#automat-toolbar-onlyover{
+    margin-left: 15px;
+    position: relative;
+    top: 3px;
+}
+#automat-toolbar-selectall{
+    margin-left: 15px;
+}
+.automat-toolbar-selectall-text{
+    margin-left: 5px;
+}

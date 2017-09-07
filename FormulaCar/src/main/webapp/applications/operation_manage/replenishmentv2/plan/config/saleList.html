@@ -1,0 +1,86 @@
+
+
+<style type="text/css">
+table {
+  margin-top: 10px;
+
+}
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+    width: 650px;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    display:none;
+    
+}
+table.gridtable th {
+
+	padding: 8px;
+	border-style: solid;
+	width:130px;
+
+}
+table.gridtable td {
+
+	padding: 8px;
+	border-style: solid;
+
+}
+table.gridtable tr {
+border-bottom: 1px solid #ddd;
+}
+.linecell{
+    display: inline-block;
+    height: 30px;
+
+    vertical-align: middle;
+    margin-top: 20px;
+    padding-top: 8px;
+    border: 2px solid #C5C1AA;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    margin-left: -5px;
+    cursor: pointer;
+    background-color:#ddd;
+    width: 160px;
+
+}
+
+.Bar ,.Bars { position: relative; width: 100px;
+    /* 宽度 */ border: 1px solid #B1D632; padding: 1px; } 
+.Bar div,.Bars div { display: block; position: relative;
+/* 进度条背景颜色 */ color: #333333;
+ height: 10px; /* 高度 */ line-height: 10px;
+  /* 必须和高度一致，文本才能垂直居中 */ } 
+.Bars div{ background:#090} 
+.Bar div span,.Bars div span { position: absolute; width: 100px;
+ /* 宽度 */ text-align: center; font-weight: bold; } 
+.cent{ 
+    width: 100px;
+    margin-top: 14px;
+    margin-left: 55px;
+
+} 
+</style>
+<div style="height: 50px;">
+	            <table width="100%" style="text-align: center;">
+	             <tr>
+	                <td><label style='color:red;'></label><label><span lang="text:replenish_plan_name"></span>:</label></td>
+	                <td><input type="text" class="input"  id="planName3" name="planName3" readonly='readonly' style="height:25px;border: 1px solid white;"/></td>
+	             <td><label style='color:red;'></label><label class='notice-bar-calendar-text'><span lang="text:replenish_plan_executive_time"></span>:</label></td>
+	                <td><input style='width:125px;border: 1px solid white;' type='text' readonly='readonly' id='executiveTime3' /></td>
+	             <td><label style='color:red;'></label><label><span lang="text:replenish_plan_executive_person"></span>:</label></td>
+	                <td><input type="text" class="input"  id="executivePerson3" name="executivePerson3" readonly='readonly' style="height:25px;border: 1px solid white;"/></td>
+	             
+	             </tr>
+
+	            </table>
+	           </div>
+<div id="sale_list" class="list_div_height" style="position: relative;width: 910px;height: 450px; overflow: auto; border: 1px solid #ddd;border-radius: 5px; margin: 0 auto;">
+
+</div>
+

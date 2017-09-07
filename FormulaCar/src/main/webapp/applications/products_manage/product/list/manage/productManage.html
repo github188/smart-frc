@@ -1,0 +1,211 @@
+<style>
+    #deviceForm {border:1px solid #CFD8CE;font-size:12px;height:550px;margin: 5px auto;width:850px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+    #deviceForm .items{width:100%; clear:both; position:absolute;}
+    #deviceForm .right{float:right;}
+    #deviceForm #status{height:35px;background:#28b5d6;}
+    #status li{float:left;color:#fff;padding:8px 70px;font-size: 14px;}
+    #status li.active{background-color:#09c;font-weight:normal;}
+    .input{width:16px; height:16px; margin:8px auto; line-height:16px; border:1px solid #d3d3d3; padding:2px;}
+    .label{height: 24px;line-height: 16px;display: inline-block;vertical-align: middle;}
+    .page{width:100%;float:left;}
+    .page h3
+    {
+      font-size: 14px;
+      border-bottom: 1px dotted #ccc;
+      margin-bottom: 20px;
+      padding: 5px;
+      text-align: left;
+    }
+    .selfTable{
+       background: black;
+       margin: 3px;
+       color: white;
+       width: 20px;
+       height: 20px;
+       text-align: center;
+       border-radius: 4px;
+       font-size: 10px;
+       line-height: 20px;
+       cursor: pointer;
+    }
+      .selfTable_grey{
+          background: #C3B8B8;
+          margin: 3px;
+          color: white;
+          width: 15px;
+          height: 15px;
+          text-align: center;
+          font-size: 10px;
+          line-height: 15px;
+    }
+      .selfTable_red{
+          background: #BD2F34;
+          margin: 3px;
+          color: white;
+          width: 15px;
+          height: 15px;
+          text-align: center;
+          border-radius: 10px;
+          font-size: 14px;
+          line-height: 15px;
+          cursor: pointer;
+    }
+    .selfTableOther{
+       background: #5694D9;
+       margin: 3px;
+       color: white;
+       width: 40px;
+       height: 15px;
+       text-align: center;
+       font-size: 10px;
+       line-height: 15px;
+       cursor: pointer;
+    }
+    .page h3 em{font-size:12px; font-weight:500; font-style:normal}
+    .page p{line-height:24px;}
+    .page p label{font-size:14px; display:block;}
+    .btn_nav{height:36px; line-height:36px; margin-right: 4.6%;margin-top: 3%;text-align: right;}
+    .prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+    .page h1{ border-bottom:1px dotted #ccc;margin-top: 55%; }
+    .configtable {border: 1px solid rgba(115, 120, 126, 0.32);text-align: center;height:40px;}
+    .trClass{
+       border: 1px solid #e7e7eb;
+    }
+    .TDClass{
+       text-align: center;height: 30px;width:150px;
+       border: 1px solid #e7e7eb;
+    }
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+        <li class="active" id="tab1" style="height: 19px;">1.<span lang="text:the_required_information"></span></li>
+        <li id="tab2" style="height: 19px;"><strong>2.</strong><span lang="text:the_optional_information"></span></li>
+    </ul>
+    <div class="items">
+        <div class="page" id="baseInfo">
+            <div style="float:left;width: 100%;height:480px;overflow:auto;">
+                    <table width="98%" style="margin:0px 15px 15px 15px;">
+                        <tr>
+                            <td width="15%"><label style='color:red;'>*</label><label><span lang="text:product_number"></span></label></td>
+                            <td><input type="text" class="input" id="number" name="number" style="width:200px;height:25px;"/></td>
+                        </tr>
+                        <tr>
+                            <td width="15%"><label style='color:red;'>*</label><label><span lang="text:product_full_name"></span></label></td>
+                            <td><input type="text" class="input" id="fullName" name="fullName" style="width:200px;height:25px;"/></td>
+                        </tr>
+                        <tr>
+                            <td width="15%"><label style='color:red;'>*</label><label><span lang="text:product_name"></span></label></td>
+                            <td><input type="text" class="input" id="name" name="name" style="width:200px;height:25px;"/></td>
+                        </tr>
+                         <tr>
+                            <td width="15%"><label style='color:red;'>*</label><label><span lang="text:product_type"></span></label></td>
+                            <td>
+                             <select id="types" name="types" style="width:200px;height: 30px;"></select>
+                             <span id='select_type_button'></span>
+                            </td>
+                        </tr>
+
+                         <tr>
+                            <td width="15%"><label style='color:red;'>*</label><label><span lang="text:product_retail_price"></span></label></td>
+                            <td><input type="text" class="input" id="price" name="price" style="width:200px;height:25px;"/></td>
+                        </tr>
+                         <tr>
+                            <td width="15%"><label style='color:red;'>*</label><label><span lang="text:product_form_of_packing"></span></label></td>
+                            <td>
+                             <select id="packingForm" name="packingForm" style="width:200px;height: 30px;">
+                             </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="15%"><label style='color:red;'>*</label><label><span id="product_netContent"></span></label></td>
+                            <td><input type="text" class="input" id="netContent" name="netContent" style="width:200px;height:25px;"/></td>
+                        </tr>
+                         <tr id="goods_state">
+                            <td width="15%"><label style='color:red;'>*</label><label><span id="product_status"></span></label></td>
+                            <td>
+                              <select id="goodState" name="goodState" style="width:200px;height: 30px;margin-bottom: 8px;">
+                             </select>
+                            </td>
+                        </tr>
+                        <tr>
+						   <td width="5%"><input style='width:250px' type='hidden' id='imagepath3' name='imagepath3'  /><input style='width:250px' type='hidden' id='imageMd53' name='imageMd53'  /></td>
+						</tr>
+						<tr>
+						  <td width="15%"><label style='color:red;'>*</label> <label><span lang="text:product_image"></span></label></td>
+					      <td><span id='select_file_button'></span><label id='picture'><span id="imageLimit"></span></label></td>
+						</tr>
+						<tr>
+						   <td width='15%'><input style='width:250px' type='hidden' id='imagepath' name='imagepath'  /><input style='width:250px' type='hidden' id='imageMd5' name='imageMd5'  /></td>
+						   <td style='background-color: rgba(163, 150, 150, 0.17);'><img id='photoFileId' width='80' height='80' src='' style='margin-top:10px;'/></td>
+						</tr>
+                    </table>
+            </div>
+            <h1></h1>
+            <div class="btn_nav">
+               <table style="width:100%;">
+                 <tr>
+                  <td>
+                    <input type="button" class='btn btn-primary submit' id="nextBase" style="margin-left:10px;width: 105px;margin-top: -40px;height: 30px;"/>
+                    <input type="button" class='btn btn-primary submit' id="save1" style="margin-left:10px;width: 105px;margin-top: -40px;height: 30px;"/>
+                 </td>
+                 </tr>
+               </table>
+            </div>
+        </div>
+        
+        <div class="page" id="otherConfig" style="padding: 0px 0px;display:none;">
+            <div style="float:left;width: 100%;height:450px;overflow:auto;">
+               <table width="98%" style="margin:15px;">
+                <tr>
+                    <td width="15%"><label style='color:red;'>&nbsp;</label><label><span lang="text:product_manufacturer"></span></label></td>
+                    <td><input type="text" class="input" id="manufacturer" name="manufacturer" style="width:200px;height:25px;"/></td>
+                </tr>
+                <tr>
+                    <td width="15%"><label style='color:red;'>&nbsp;</label><label><span lang="text:product_specifications"></span></label></td>
+                    <td><input type="text" class="input" id="everyRong" name="everyRong" style="width:200px;height:25px;"/></td>
+                </tr>
+                <tr>
+                    <td width="15%"><label style='color:red;'>&nbsp;</label><label><span lang="text:product_nutritional"></span></label></td>
+                    <td> <div id='nutritionalTable' style='width: 450px;overflow: auto;text-align: center;margin-top:5px;'> </div></td>
+                </tr>
+                <tr>
+                    <td width="15%"></td>
+                    <td>
+                        <input type="button" class='btn btn-primary submit' id="add" style="width: 105px;height: 30px;margin-top: 5px;"/>
+                        <span>(单击蓝色字体可编辑内容)</span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="15%"><label style='color:red;'>&nbsp;</label><label><span id="remark1"></span></label></td>
+                    <td><input type="text" class="input" id="descript1" name="descript1" style="width:300px;height:25px;"/></td>
+                </tr>
+                <tr>
+                    <td width="15%"><label style='color:red;'>&nbsp;</label><label><span id="remark2"></span></label></td>
+                    <td><input type="text" class="input" id="descript2" name="descript2" style="width:300px;height:25px;"/></td>
+                </tr>
+                <tr>
+                    <td width="15%"><label style='color:red;'>&nbsp;</label><label><span id="remark3"></span></label></td>
+                    <td><span id='select_file_button3'></span><label id='picture3'></label></td>
+                </tr>
+                
+                
+                
+
+           </table>
+           </div>
+
+            <div class="btn_nav">
+               <table style="width:100%;">
+                 <tr>
+                 <td>
+                    <input type="button" class='btn btn-primary submit' id="laststep" style="margin-left:10px;width: 105px;margin-top: -40px;height: 30px;"/>
+                    <input type="button" class='btn btn-primary submit' id="saveBase2" style="margin-left:10px;width: 105px;margin-top: -40px;height: 30px;"/>
+                 </td>
+                 </tr>
+               </table>
+          </div>
+        </div>
+        </div>
+</div>

@@ -1,0 +1,76 @@
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:545px;margin:20px auto;width:950px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#28b5d6;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:8px 70px;font-size: 14px;}
+#status li.active{background-color:#09c;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;}
+.page{padding:5px 20px;width:93%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;margin-top: 451px;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+.configtable {border: 1px solid rgba(115, 120, 126, 0.32);text-align: center;height:40px;}
+.channelTable{
+	border: 1px solid rgba(115, 120, 126, 0.32);
+	text-align: center;
+	height:40px;
+}
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+		<li class="active" id="tab1" style="height: 19px;"><span lang="text:pickup_code_management"></span></li>
+	</ul>
+	<div class="items">
+	    <div class="page" id="baseInfo">
+	         <div style="height:420px;float:left;margin-top: 30px;margin-left: 30px;overflow: auto;width: 100%;">
+	           <div style="height: 190px;">
+	            <table width="100%" style="border-collapse: separate;border-spacing: 20px;">
+	              <tr>
+	             	<td><label style='color:red;'>*</label><label class="config-row-lable"><span lang="text:pickupcode_count"></span></label></td>
+	             	<td><input id="count" type="text" class="config-row-input " style="width: 200px;height: 23px;line-height: 23px;"></td>
+	             </tr>
+	             <tr>
+	                <td width="15%"><label style='color:red;'>*</label><label><span lang="text:type"></span></label></td>
+	                <td>
+	                  <select id="style" name="style" style="width:200px;height: 28px;">
+	                    <option value="0">---请选择---</option>
+	                    <option value="1">基于价格</option>
+	                    <option value="2">基于商品</option>
+	                  </select>
+	                </td>
+	             </tr>
+	             <tr>
+	                <td width="15%"><label style='color:red;'>*</label><label><span lang="text:limited_period"></span></label></td>
+	                <td>
+	                   <input style='width:150px;' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='startTime' />&nbsp;~
+	                   <input style='width:150px;' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='endTime' />
+	                </td>
+	             </tr>
+	             <tr id='basePrice' style="display:none;position: absolute;">
+	                <td><label style='color:red;margin-left: -20px;'>*</label><label class="config-row-lable"><span lang="text:shelf_goods_price"></span>(小于等于)</label></td>
+	             	<td><input id="price" type="text" class="config-row-input " style="width: 200px;height: 23px;line-height: 23px;margin-left: 16px;"></td>
+	             </tr>
+	             <tr id='baseGoods' style="display:none;position: absolute;">
+	                 <td><label style='color:red;margin-left: -15px;'>*</label><label class="config-row-lable"><span lang="text:shelf_goods_name"></span></label></td>
+	             	 <td>
+	             	   <input id="goods" type="text" class="config-row-input " readonly='readonly' style="width: 150px;height: 23px;line-height: 23px;    margin-left: 65px;">
+	             	   <input id="goodsId" type="hidden" /">
+	             	   <input type="button" class='btn btn-primary submit' id="choose" style="margin-left:10px;width:150px;height:32px;"/>
+	             	 </td>
+	             </tr>
+	            </table>
+	           </div>
+	         </div>
+	         
+	         <div class="btn_nav" style="margin-top: 464px;margin-right: 4px;">
+                  <input type="button" class='btn btn-primary submit' id="saveBase" style="margin-left:10px;width:105px;height:32px;"/>
+             </div>
+	    </div>
+        
+     </div>
+ </div> 

@@ -1,0 +1,67 @@
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:545px;margin:20px auto;width:950px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#44b549;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:9px 80px;font-size: 14px;}
+#status li.active{background-color:#587950;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;}
+.page{padding:20px 30px;width:93%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+.page h1{ border-bottom:1px dotted #ccc;margin-top: 10px; }
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+		<li class="active" id="tab1"><strong>1.</strong><span lang="text:price_activity_information"></span></li>
+		<li id="tab2"><strong>2.</strong><span lang="text:price_vender"></span></li>
+		<li id="tab3"><strong>3.</strong><span lang="text:price_merchandise_and_concessions"></span></li>
+	</ul>
+	<div class="items">
+	    <!-- 基本信息 -->
+	    <div class="page" id="baseInfo">
+	         <h3><span lang="text:create_a_new_activity"></span><br/><em><span lang="text:please_fill_in_the_basic_information_of_the_activity"></span></em></h3>
+	         <div style="height:340px;">
+	            <table width="100%">
+	              <tr>
+	                 <td width="25%"><label style='color:red;'>*</label> <span lang="text:price_activity_name"></span></td>
+	                 <td><input type="text" class="input" id="activity_name" name="activity_name" style="width:300px;height:22px;"/></td>
+	              </tr>
+	              <tr>
+	                <td width='25%'></td>
+					<td><p><input type='checkbox' name='' id='nolimitTime' value='0'><span lang="text:price_no_limit_time"></span></p></td>
+				  </tr>
+				  <tr>
+				    <td width='25%'><label style='color:red;'>*</label> <span lang="text:automat_start_time"></span></td>
+				    <td><input style='width:300px;height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='startTime1' /></td>
+				  </tr>
+				   <tr>
+				    <td width='25%'><label>&nbsp;</label> <span lang="text:automat_end_time"></span></td>
+				    <td><input style='width:300px;height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='endTime1' /></td>
+				  </tr>
+				  <tr>
+					<td width='25%'><label>&nbsp;</label> <span lang="text:price_activity_descript"></span></td>
+					<td><textarea rows='7' cols='90' id='descript' /></td>
+				  </tr>
+	            </table>
+	         </div>
+	         <h1></h1>
+	         <div class="btn_nav">
+                  <input type="button" class='btn btn-primary submit' id="nextBase" style="margin-left:10px;"/>
+             </div>
+	    </div>
+	    <!--  售货机-->
+	    <div class="page" id="deviceConfig">
+			
+        </div>
+        <!--  商品-->
+        <div class="page" id="goodsConfig">
+			
+        </div>
+	</div>
+</div>

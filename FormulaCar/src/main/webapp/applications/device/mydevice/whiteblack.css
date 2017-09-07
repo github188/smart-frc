@@ -1,0 +1,28 @@
+.normal_default{
+    background-color:rgb(225, 242, 245);
+    color:rgb(0,0,0)
+}
+.active_default{
+    background-color: rgb(51, 137, 229);
+    color:rgb(255,255,255)
+}
+.white-black-list-li{
+    height:25px;
+    line-height: 25px;
+    width: 390px;
+}
+.jishuhang{
+    background-color: #EBE9E9;
+}
+.oushuhang{
+    background-color: #bcbcbc;
+}
+.left-margin{
+    margin-left:5px;
+}
+.website_description{
+    width: 250px;
+    text-overflow: ellipsis;
+    display: inline-block;
+    overflow: hidden;
+}

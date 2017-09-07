@@ -1,0 +1,50 @@
+.road_td_image{
+	text-align:center;
+	background-repeat: no-repeat;
+	background-position:center;
+	background-image:url("../images/add_image.png")
+}
+.road_td_image:hover{
+	background-image:url("../images/add_image_over.png");
+	cursor:pointer;
+}
+.good_image_hover{
+	cursor:pointer;
+}
+.automatContent{
+    overflow-y: auto;
+}
+.automat-right{
+    z-index: 101;
+    right: 0px;
+    top: 63px;
+    position: fixed;
+    background-color: white;
+    width: 301px;
+    /*height: 100%;*/
+    box-shadow: rgb(104, 104, 104) 2px 1px 20px;
+}
+.automat-container{
+    height: 100%;
+}
+.automat-container{
+    height: 100%;
+}
+.automat-bar{
+    position: fixed;
+    opacity: 0;
+    right: 300px;
+    width: 15px;
+    height: 37px;
+    top: 45%;
+    border: 1px rgb(185, 185, 185) solid;
+    z-index: 102;
+    background-color: rgb(215, 215, 215);
+    border-radius: 17px 0 0 17px ;
+    box-shadow: rgb(104, 104, 104) 2px 1px 6px;
+}
+.automat-bar img{
+    opacity: 0.3;
+    margin: 7px 0 0 -4px;
+}
+

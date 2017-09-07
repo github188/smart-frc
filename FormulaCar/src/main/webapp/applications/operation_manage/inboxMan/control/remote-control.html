@@ -1,0 +1,289 @@
+
+<div class="remote-control">
+  <div class="remote-control-head">
+
+    <p class="remote-control-head-title">
+      <span id="current-device-assetid"></span>
+      <span> - </span><span lang="text:remote_control_tool">Remote Control Tool</span>
+    </p>
+  </div>
+  <div class="remote-control-body">
+
+    <div class="remote-control-body-title">
+      <span lang="text:welcome_to_Remote_control_tool">Welcome to Remote Control Tool</span><br/>
+			<span> Last login: </spa>
+        <span id="remote-control-user-lasttime"></span>
+			<span> from </span>
+			<span id="remote-control-user-lastip"></span>
+    </div>
+    <div id="remote-control-content" class="remote-control-body-content">
+
+    </div>
+
+  </div>
+ 
+  <div id="remote-control-foot" class="remote-control-foot">
+    <form>
+       <div class="remote-control-foot-command-list" style="margin-top: 10px;">
+        <input type="button" class="remote-control-button" id="remote-control-sysrestart" lang="value:system_restart"
+                   value=""/>
+        <input type="button" class="remote-control-button" id="remote-control-apprestart" lang="value:app_restart"
+                   value=""/>
+        <input type="button" class="remote-control-button" id="remote-control-getconfig" lang="value:get_config"
+                   value=""/>
+        <div>
+        <input type="button" class="remote-control-button" id="remote-control-pushconfig" lang="value:push_config"
+                   value=""/>
+                   
+        <input type="button" disabled="disabled" style="position: absolute;width: 80px;margin-left: -80px;z-index:-9999;display:none" class="remote-control-button" id="remote-control-pushconfig2" lang="value:push_config"
+                   value=""/>
+        </div>
+      </div>
+      
+      <div class="remote-control-foot-command-list" style="width: 450px;left: 370px;margin-top: 10px;">
+        <select id="command-list" style="width:220px;margin-left: 177px;">
+         <option value="normal" lang="text:normal_mode" selected="selected"></option>
+         <option value="advanced" lang="text:advanced_mode"></option>
+        </select>
+        
+      <input type="button" class="remote-control-button" id="remote-control-cleanscreen" lang="value:clean_screen"
+                   value="" style="margin-left: 410px;"/>
+      </div>
+      <div class="remote-control-foot-command-run">
+
+        <div id="command-run-commandline" class="remote-control-foot-command-run-commandline" style="display:none;margin-left: 778px;">
+
+            
+            <input type="button" class="remote-control-button" id="remote-control-submit" lang="value:submit"
+                   value=""/>
+            
+            
+
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+<input type="text" id="command-input" class="command-input" />
+<style type="text/css">
+#command-input{
+
+    position: absolute;
+    margin-top: -57px;
+    width: 760px;
+    margin-left: 14px;
+    line-height: 40px;
+    height: 25px;
+    display:none;
+
+}
+
+  .remote-control {
+    margin: 0 auto;
+    width: 837px;
+    border: 8px solid #DADADA;
+  }
+
+  .remote-control-head {
+    position: relative;
+    width: 100%;
+    height: 35px;
+    text-align: center;
+    border-top: 1px solid #A0A0A0;
+    border-right: 1px solid #A0A0A0;
+    border-left: 1px solid #A0A0A0;
+    border-bottom: 2px solid #A0A0A0;
+    background: #EBEBEB;
+  }
+
+  .remote-control-head-mode {
+    position: absolute;
+    width: 100%;
+    line-height: 10px;
+    text-align: left;
+    z-index: 100;
+  }
+
+  .remote-control-head-mode label {
+    margin: 10px 0 0 10px;
+    float: left;
+  }
+
+  .remote-control-head-mode input, .remote-control-head-mode p {
+    float: left;
+  }
+
+  .remote-control-head-mode p {
+    margin-left: 2px;
+  }
+
+  .remote-control-head-title {
+    position: absolute;
+    width: 100%;
+    line-height: 35px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1;
+  }
+
+  .remote-control-body {
+    overflow: scroll;
+    width: 832px;
+    height: 448px;
+    line-height: 18px;
+    padding: 5px 0 0 5px;
+    border-top: 1px solid #696969;
+    border-right: 1px solid #A0A0A0;
+    border-left: 1px solid #A0A0A0;
+    border-bottom: 1px solid #A0A0A0;
+  }
+
+  .remote-control-body-content {
+
+    width: 812px;
+    height: 390px;
+    padding: 5px 0 0 0;
+    white-space: normal;
+    overflow-y: scroll;
+    position: relative;
+    word-wrap: break-word;
+    overflow-x: auto;
+  }
+
+  .remote-control-body-current {
+    overflow: hidden;
+    padding-left: 5px;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: left;
+    font-weight: bold;
+  }
+
+  .remote-control-body-current div {
+    float: left;
+  }
+
+  .remote-control-body-current-machines p, .remote-control-body-current-machines form {
+    float: left;
+  }
+
+  .remote-control-body-current-machines form {
+    margin: 2px 0 0 5px;
+  }
+
+  .remote-control-body-current-machines form select {
+    width: 80px;
+    border-radius: 2px;
+  }
+
+  .remote-control-body-current-arrow {
+    margin: 0 5px;
+    font-size: 10px;
+  }
+
+  .remote-control-foot {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    border-right: 1px solid #A0A0A0;
+    border-left: 1px solid #A0A0A0;
+    border-bottom: 1px solid #A0A0A0;
+    background: #F0F0F0;
+  }
+
+  .remote-control-foot-command-list {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    padding-top: 3px;
+  }
+
+  .remote-control-foot-command-list select {
+    position: absolute;
+    margin: 3px 0 0 2px;
+    width: 100%;
+    height: 29px;
+    border-radius: 2px;
+  }
+
+  .remote-control-foot-command-run {
+    position: absolute;
+    width: 100%;
+    height: 35px;
+    float: left;
+    margin-top: 50px;
+  }
+
+  .remote-control-foot-command-run-normal {
+    margin: 0 0 0 3px;
+  }
+
+  .remote-control-button {
+    margin: 3px 0 0 2px;
+    float: left;
+    width: 50px;
+    height: 29px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .remote-control-foot-command-run-commandline {
+
+  }
+
+  .remote-control-foot-command-run-commandline .remote-control-input {
+    margin: 3px 0 0 5px;
+    float: left;
+    width: 665px;
+    height: 23px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .remote-control-foot-hex-crlf {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    height: 25px;
+  }
+
+  .remote-control-foot-hex-crlf label {
+    margin: 10px 0 0 5px;
+    float: left;
+  }
+
+  .remote-control-foot-hex-crlf input, .remote-control-foot-hex-crlf p {
+    float: left;
+  }
+
+  .remote-control-foot-hex-crlf p {
+    margin: -1px 0 0 2px;
+  }
+
+  .remote-control-stop-task {
+    cursor: pointer;
+    text-decoration: underline;
+    color: green;
+    font-weight: bold;
+  }
+  
+  #remote-control-sysrestart{
+    width: 80px;
+    margin-left: 5px;
+}
+#remote-control-apprestart{
+    width: 80px;
+    margin-left: 10px;
+}
+#remote-control-getconfig{
+    width: 80px;
+    margin-left: 10px;
+}
+#remote-control-pushconfig{
+    width: 80px;
+    margin-left: 10px;
+}
+</style>

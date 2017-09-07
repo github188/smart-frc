@@ -1,0 +1,54 @@
+<div id="trade" style="height:1000px;position: relative;">
+	<div id="tradeHead" style="height:15%;">
+	  <div class="sub_menu">
+	     <div style="float:left;margin-left: 65%;">
+	        <select id='reportType'  name='reportType' style='width:120px;height: 28px;'></select>
+	     </div>
+         <div style='float:left;height: 28px;margin-left:5px;'>
+  	        <input style='width:150px' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='summary_month'/>
+  	     </div>
+  	     <div style='float:left;height: 28px;margin-left:5px;'>
+  	        <select id='summary_year' style="height: 28px;">
+  	            <option value='2015' selected='selected'>2015</option>
+  	            <option value='2016'>2016</option>
+  	            <option value='2017'>2017</option>
+  	            <option value='2018'>2018</option>
+  	            <option value='2019'>2019</option>
+  	        </select>
+  	     </div>
+  	     <div id='buttonDiv' style='float:left;height: 28px;margin-left:5px;'></div>
+	    </div>
+	   
+	    <div class="index_show_area" style="margin-top:10px;margin-left:10px;">
+           <div class="div_trade">
+             <ul class="inner">
+               <li style="text-align:center;">
+                    <span class="tap_inner">
+                      <!--   <i class="icon_index_taps"></i>-->
+                       <em class="number" id="event"></em>
+                       <strong class="titles" lang="{text:event}"></strong>
+                    </span>
+               </li>
+             </ul>
+           </div>
+           <div class="div_trade">
+              <ul class="total">
+                <li style="text-align:center;">
+                    <span class="tap_inner">
+                     <!--  <i class="icon_index_taps"></i>-->
+                       <em class="number" id="alarm"></em>
+                       <strong class="titles" lang="{text:automat_alarm}"></strong>
+                    </span>
+               </li>
+              </ul>
+           </div>
+        </div>
+	</div>
+	<div id="tradeFooter" style="margin-top:0px;" class='volumes'>
+	   <div class='volumes-content' id='volumes-content' style='float: left;'></div>
+       <div class='line-content' id='line-content'   style='float: left;'></div>
+       <div class='pie-content' id='pie-content'></div>
+       <div  id='bar-content'></div>
+       <div  id='barModel-content'></div>
+	</div>
+</div>

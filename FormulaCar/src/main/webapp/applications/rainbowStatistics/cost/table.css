@@ -1,0 +1,48 @@
+.cost-package-toolbar-left{
+    line-height: 26px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.cost-sim-toolbar-container{
+    display: inline-block;
+    line-height: 32px;
+    height: 32px;
+}
+#cost-sim-toolbar-total{
+    color: rgb(181, 63, 119);
+    font-weight: bolder;
+}
+
+.cost-sim-toolbar-total ,.cost-sim-toolbar-time ,.cost-sim-toolbar-package ,.cost-sim-toolbar-name {
+    margin-left: 15px;
+}
+
+#cost-sim-toolbar-time{
+    width: 65px;
+    margin-left: 5px;
+}
+
+.cost-sim-toolbar-package{
+    margin-right: 5px;
+}
+#cost-sim-toolbar-name{
+    margin-left: 5px;
+    height: 20px;
+}
+.cost-sim-toolbar-searchbtn,.cost-sim-toolbar-changebtn{
+    margin-left: 15px;
+    line-height: 20px;
+    display: inline-block;
+}
+#cost-sim-toolbar-onlyover{
+    margin-left: 15px;
+    position: relative;
+    top: 3px;
+}
+#cost-sim-toolbar-selectall{
+    margin-left: 15px;
+}
+.cost-sim-toolbar-selectall-text{
+    margin-left: 5px;
+}

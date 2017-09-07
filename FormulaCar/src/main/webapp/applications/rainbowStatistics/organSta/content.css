@@ -1,0 +1,71 @@
+.Sta-container{
+    margin: 22px auto 0px auto;
+}
+.userStaContent{
+    overflow-y: auto;
+}
+.usercount-left ,.terminalcount-left{
+    float: left;
+    margin: 12px 0 12px 12px;
+}
+.usercount-right ,.terminalcount-right{
+    float: right;
+    width : 388px;
+    height : 200px;
+    margin:5px 3px 0 0 ;
+}
+.item-block{
+    width: 110px;
+    height: 77px;
+    background-color: gainsboro;
+    /*border-radius: 6px;*/
+    box-shadow: 1px 1px 2px #B0B1B5;
+}
+.item-block p{
+    text-align: center;
+    height: 31px;
+    line-height: 29px;
+    color: #3b3c54;
+}
+.usercount-item-historyblock ,.terminalcount-item-historyblock{
+    margin-top: 10px;
+}
+.item-block-title{
+    vertical-align: middle;
+}
+.item-block-value{
+    font-size: 24px;
+    font-weight: 700;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.usercount-chart-container,.user-activecount-chart-container,.terminalcount-chart-container,.terminal-activecount-chart-container{
+    margin: 10px;
+}
+
+.registcount, .user-activecount,.terminal-activecount,.device-activecount{
+    width : 410px;
+    height : 200px;
+    margin:5px auto 0  auto;
+}
+.onlinecount{
+    height: 200px;
+    margin:5px auto 0  auto;
+}
+.Sta-leftside-bar{
+    width: 100%;
+    height: 30px;
+}
+.Sta-leftside-content{
+    width: 94%;
+    /*display: inline-block;*/
+    margin: auto;
+}
+#Sta-search-input{
+    width: 115px;
+    margin: 3px;
+}
+.Sta-search-btn{
+    margin-bottom: 3px;
+}

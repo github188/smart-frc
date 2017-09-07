@@ -1,0 +1,240 @@
+.blue {
+        background:#bcd4ec;  
+}
+
+
+.edgediv{
+	
+	background-color: white;
+	border: 1px solid #CFD8CE;
+	z-index: 9999;
+	width: 250px;
+	height: 99%;
+	position: absolute;
+	left: 2px;
+	box-shadow: 0 0 3px #000;
+	
+}
+.edgetime{
+	
+	width: 100%;
+	font-size: 16px;
+	font-weight: bold;
+	margin-left: 10px;
+	line-height: 40px;
+}
+.edgeul{
+	border-top: 2px solid #EEEEE0;
+	border-bottom: 2px solid #EEEEE0;
+	
+}
+.edgeul li{
+	display: inline-block;
+    width: 46%;
+    line-height: 35px;
+    cursor: pointer;
+    text-align: center;
+}
+.titleinput{
+	margin-left: 15px;
+	background: transparent url(../images/check.png) no-repeat;
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    margin-top: 7px;
+	
+}
+.titleinputed{
+	margin-left: 15px;
+	background: transparent url(../images/checkbox.png) no-repeat;
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    margin-top: 7px;
+	
+}
+::-webkit-scrollbar {
+		  width: 8px;
+	} /* 这是针对缺省样式 (必须的) */
+.edgeul li a{
+	color: #6B6B6B;
+	margin-left: 8px;
+}
+.edgecontent{
+	margin-top: 3px;
+	height: 100px;
+}
+.edgetitle{
+	height: 30px;
+	background-color: #ddd;
+}
+.titlespan{
+	display: inline-block;
+	width: 80%;
+	line-height: 30px;
+	padding-left: 5px;
+	font-size: 12px;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.content1{
+	display: inline-block;
+	width: 100%;
+	line-height: 15px;
+	font-size:12px;
+}
+.cspan1{
+	width: 40%;
+	display: inline-block;
+}
+.cspan2{
+	display: inline-block;
+	width: 60%;
+}
+.content2{
+	display: inline-block;
+	width: 100%;
+	line-height: 12px;
+	font-size:12px;
+}
+
+.addbottom{
+	border-bottom:2px solid #09c;
+	margin-bottom:-2px;
+}
+.site{
+	background: transparent url(../images/site.png) no-repeat;
+    background-size: 15px;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 12px;
+}
+.machine{
+	background: transparent url(../images/machine.png) no-repeat;
+    background-size: 15px;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 12px;
+}
+.salenum{
+	background: transparent url(../images/salenum.png) no-repeat;
+    background-size: 15px;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 12px;
+}
+.salemon{
+	background: transparent url(../images/salemon.png) no-repeat;
+    background-size: 15px;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 12px;
+}
+.margleft{
+	margin-left:10px;
+}
+
+.footspan{
+	font-size: 12px;
+    width: 40px;
+    display: inline-block;
+}
+
+.online{
+	background: transparent url(../images/1.png) no-repeat;
+    background-size: 12px;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 12px;
+}
+.outline{
+	background: transparent url(../images/2.png) no-repeat;
+    background-size: 12px;
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-top: 12px;
+}
+
+.detail-div span{
+	
+	display: inline-block;
+    width: 98%;
+    line-height: 25px;
+    padding-left: 10px;
+	
+}
+.search{
+	background-color: #91bd09;
+	display: inline-block;
+	padding: 3px 10px 5px;
+	color: #fff;
+	text-decoration: none;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+	
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	position: relative;
+	cursor: pointer;
+	margin-left: 10px;
+    width: 58px;
+}
+.search:visited {
+	background-color: #749a02;
+	
+}
+
+.tradetitle{
+	
+	display: inline-block;
+    width: 100%;
+    line-height: 25px;
+}
+.tradetitle span{
+	display: inline-block;
+    width: 30%;
+}
+
+.monitor-info{
+  width:500px;
+}
+.detail-head-ul{
+border-bottom: 2px solid #EEEEE0;
+}
+.detail-head-ul li{
+	display: inline-block;
+    width: 23%;
+    line-height: 35px;
+    cursor: pointer;
+    text-align: center;
+}
+.detail-content{
+    height: 365px;
+    overflow: auto;
+}

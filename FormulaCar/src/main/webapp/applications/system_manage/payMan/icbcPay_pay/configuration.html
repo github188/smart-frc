@@ -1,0 +1,176 @@
+
+<div class="cs-col-slie-main-bd">
+    <div class="static_div_height" style="overflow: auto;">
+        <form id="sms-config">
+            <div class="config-row">
+                <label for="accept" class="config-row-lable" lang="{text:payAccept}">PayAccept</label>
+                <input id="accept" type="checkbox" class="config-row-input " value="1" style="width: 23px; margin-right: 293px;height: 20px;line-height: 20px;">
+            </div>
+           <!--  <div class="config-row" id="refundDiv">
+                <label for="delayRefund" id="label_delay" class="config-row-lable" lang="{text:delay_refund}" style="margin-left: 50px;"></label>
+                <input id="delayRefund" type="checkbox" class="config-row-input " value="0"  style="width: 23px;height: 20px;line-height: 20px;">
+                <select id='delayRefund_time'  name='delayRefund_time' style='display:none;width:150px;height: 28px;'>
+                            <option value='0' lang="text:please_select"></option>
+			                <option value='1' lang="text:five_minutes"></option>
+			                <option value='2' lang="text:thirty_minutes"></option>
+			                <option value='3' lang="text:sixty_minutes"></option>
+			                <option value='4' lang="text:sixscore_minutes"></option>
+			                <option value='5' lang="text:immediate_refund"></option>
+			    </select>
+			    
+            <div id='refund_div' style='margin-left:5px;display:none'>
+                    <select  id='refund_reason'  multiple='multiple'  style='width:130px;height: 28px;'>
+                            <option value='2' lang="text:merchandise_sold_out" ></option>
+			                <option value='3' lang="text:shipment_faild"></option>
+			                <option value='4' lang="text:network_reason"></option>
+                            <option value='5' lang="text:payment_timeout"></option>
+                    </select>
+            </div>
+            
+            </div> -->
+            <div class="config-row">
+                <label for="appId" class="config-row-lable" lang="{text:wechat_appID}">appId</label>
+                <input id="appId" class="config-row-input ">
+            </div>
+           
+            <div class="config-row">
+                 <label for=localPubKey class="config-row-lable"  style='margin-left: -210px;'>本地公钥文件</label>
+                 <a id="localPubKey" class="btn  submit" lang="{text:upload_files}" style="border-color: #28b5d6;color: #333;border: 1px solid #ddd;background-color: #f7f7f7;"></a>
+                 <label id="localPubKey_filename" style="display:none;width: 100px;margin-left: 60%;margin-top: -26px;"></label>
+            </div>
+            <div class="config-row" style="margin-top:5px">
+                 <label for=localPrivKey class="config-row-lable"  style='margin-left: -210px;'>本地私钥文件名称</label>
+                 <a id="localPrivKey" class="btn  submit" lang="{text:upload_files}" style="border-color: #28b5d6;color: #333;border: 1px solid #ddd;background-color: #f7f7f7;"></a>
+                 <label id="localPrivKey_filename" style="display:none;width: 100px;margin-left: 60%;margin-top: -26px;"></label>
+            </div>
+            <div class="config-row" style="margin-top:5px">
+                 <label for=platformPubKey class="config-row-lable" style='margin-left: -210px;'>平台公钥文件名称</label>
+                 <a id="platformPubKey" class="btn submit" lang="{text:upload_files}" style="border-color: #28b5d6;color: #333;border: 1px solid #ddd;background-color: #f7f7f7;"></a>
+                 <label id="platformPubKey_filename" style="display:none;width: 100px;margin-left: 60%;margin-top: -26px;"></label>
+            </div>
+          </div>
+        </form>
+
+    </div>
+   
+</div>
+ <div style="height: 50px;line-height: 40px;position: fixed;width: 98%;bottom:0;">
+            <div class="save-btn" style="border-top: 1px solid #e7e7eb;text-align: right;">
+                <a id="sms-config-save" class="btn btn-primary submit" lang="{text:save}" style="margin-right: 20px;"></a>
+            </div>
+  </div>
+
+<style type="text/css">
+.testing{
+    display: none;
+    min-width: 30px;
+    padding: 0 22px;
+    height: 28px;
+    line-height: 28px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 12px;
+    text-decoration: none;
+    border-radius: 0px;
+    border: 1px solid #e6e7ec;
+    cursor: default;
+    background: #ddd;
+    width: 72px;
+    margin-top: -30px;
+    position: absolute;
+    margin-left: -59px;
+}
+.test-label{
+display: inline-block;
+width: 60px;
+font-size: 14px;
+
+}
+.test-span{
+display: inline-block;
+font-size: 14px;
+margin-left: 30px;
+}
+    .menu-edit-area-wrapper{
+        padding: 0;
+    }
+    .config-row-input, #sms-config-passwd {
+        width: 300px;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row-select{
+        width: 314px;
+        height: 23px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row{
+        padding: 3px 0;
+    }
+    .config-row-lable{
+        width: 100px;
+    }
+    #sms-config{
+        /*max-width: 765px;*/
+        margin: 10px auto 0px auto;
+        text-align: center;
+    }
+    label.config-row-lable {
+        width: 230px;
+        display: inline-block;
+    }
+    .config-row-textarea{
+        border-color: rgb(152, 152, 152);
+        padding: 5px;
+        width: 302px;
+        max-height: 50px;
+        resize: none;
+        overflow: hidden;
+    }
+    .row-for-textarea{
+        position: relative;
+        top: -13px;
+    }
+    .btn-wrp{
+        max-width: 375px;
+        margin: 32px auto 0px auto;
+    }
+    #sms-config .config-row input:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    textarea:disabled{
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    select:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    #error-tip{
+        display: none;
+        color: #F00F0F;
+        line-height: 20px;
+    }
+    .config-row-input.config-createTime{
+        width: 160px;
+        margin: 0 140px 0 0;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+
+
+
+
+
+
+</style>

@@ -1,0 +1,117 @@
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:565px;margin:20px auto;width:950px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#44b549;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:8px 70px;font-size: 14px;}
+#status li.active{background-color:#587950;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;}
+.page{padding:5px 20px;width:93%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;margin-top: 451px;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+
+</style>
+<style type="text/css">
+table {
+  margin-top: 10px;
+
+}
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:#333333;
+    width: 650px;
+    position: absolute;
+    right: 30px;
+    top: 20px;
+    display:none;
+    
+}
+table.gridtable th {
+
+	padding: 8px;
+	border-style: solid;
+	width:130px;
+
+}
+table.gridtable td {
+
+	padding: 8px;
+	border-style: solid;
+
+}
+table.gridtable tr {
+border-bottom: 1px solid #ddd;
+}
+.linecell{
+    display: inline-block;
+    height: 30px;
+
+    vertical-align: middle;
+    margin-top: 20px;
+    padding-top: 8px;
+    border: 2px solid #C5C1AA;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    margin-left: -5px;
+    cursor: pointer;
+    background-color:#ddd;
+    width: 160px;
+
+}
+
+.Bar ,.Bars { position: relative; width: 100px;
+    /* 宽度 */ border: 1px solid #B1D632; padding: 1px; } 
+.Bar div,.Bars div { display: block; position: relative;
+/* 进度条背景颜色 */ color: #333333;
+ height: 10px; /* 高度 */ line-height: 10px;
+  /* 必须和高度一致，文本才能垂直居中 */ } 
+.Bars div{ background:#090} 
+.Bar div span,.Bars div span { position: absolute; width: 100px;
+ /* 宽度 */ text-align: center; font-weight: bold; } 
+.cent{ 
+    width: 100px;
+    margin-top: 14px;
+    margin-left: 55px;
+
+} 
+
+</style>
+<div id="deviceForm">
+    <ul id="status">
+		<li class="active" id="tab1" style="height: 19px;"><span lang="text:replenish_plan_detail"></span></li>
+
+		
+	</ul>
+	<div class="items">
+	    
+	    <div class="page" id="baseInfo">
+	    
+	    <div style="height: 50px;">
+	            <table width="100%" style="text-align: center;">
+	             <tr>
+	                <td><label style='color:red;'></label><label><span lang="text:replenish_plan_name"></span>:</label></td>
+	                <td><input type="text" class="input"  id="planName" name="planName" readonly='readonly' style="height:25px;border: 1px solid white;"/></td>
+	             <td><label style='color:red;'></label><label class='notice-bar-calendar-text'><span lang="text:replenish_plan_executive_time"></span>:</label></td>
+	                <td><input style='width:125px;border: 1px solid white;' type='text' readonly='readonly' id='executiveTime' /></td>
+	             <td><label style='color:red;'></label><label><span lang="text:replenish_plan_executive_person"></span>:</label></td>
+	                <td><input type="text" class="input"  id="executivePerson" name="executivePerson" readonly='readonly' style="height:25px;border: 1px solid white;"/></td>
+	             
+	             </tr>
+
+	            </table>
+	           </div>
+
+				<div id="sale_list" class="list_div_height" style="position: relative;width: 910px;height: 450px; overflow: auto; border: 1px solid #ddd;border-radius: 5px;">
+				
+				</div>
+	         
+	    </div>  
+
+     </div>
+ </div> 

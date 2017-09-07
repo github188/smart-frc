@@ -1,0 +1,364 @@
+body{
+    padding-top: 70px;
+    padding-bottom: 70px;
+    font-family: "Helvetica Neue",Helvetica,"Hiragino Sans GB","Segoe UI","Microsoft Yahei",Tahoma,Arial,STHeiti,sans-serif;;
+}
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-align: center;
+}
+.line-height-nav-p{
+    line-height: 50px;
+}
+.main-content-set{
+    height:488px;
+    background: url("../images/BG_bus.jpg");
+}
+.form-wrapper{
+    border: 1px solid black;
+    position: relative;
+    top: 100px;
+    left:45px;
+    padding-top: 50px;
+    background: white;
+    border-radius: 5px
+}
+.login-btn{
+    display: inline-block;
+    width: 100px;
+}
+.forget-password{
+    margin-left:30px
+}
+.language-select{
+    margin-top:8px
+}
+form.content-main{
+    width:700px;
+    height:560px;
+    background-color:#FFFFFF;
+    border-radius:4px;
+    border:1px solid #ccc;
+    position:absolute;
+    z-index:1;
+}
+form.content-main input{
+    /*padding:0px;*/
+    display:inline-block;
+    border-radius:4px;
+    border:1px solid #ccc;
+    outline:none;
+    width:270px;
+    height:30px;
+    line-height:20px;
+}
+div.title-for-company{
+    position:absolute;
+    top:-37px;
+    width:530px;
+    height:34px;
+    text-align:left;
+    padding-left:70px;
+    line-height:34px;
+    font-family:'微软雅黑', 'Lucida Grande', 'Lucida Sans', Helvetica, Arial, Sans;
+    font-size:24px;
+    text-shadow:0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #70CB57,0 0 30px #70CB57;
+    background:url("../images/home-bg.png") 0 -16px no-repeat;
+}
+div.regist-title{
+    width:690px;
+    height:34px;
+    border-bottom:1px solid #f2f2f2;
+    text-align:left;
+    font-size:14px;
+    font-weight:bold;
+    font-family:'微软雅黑', 'Lucida Grande', 'Lucida Sans', Helvetica, Arial, Sans;
+    line-height:34px;
+    padding-left:10px
+}
+li.form-line-wrapper{
+    width:510px;
+//height:32px;
+    margin-top:20px;
+//margin-left:30px;
+    position:relative;
+//overflow:hidden
+}
+.label-for-input{
+    display:inline-block;
+    width:120px;
+    height:38px;
+    margin-right:60px;
+    text-align:right;
+    font-size:14px;
+    font-weight:bold;
+}
+#forget-window input:focus,#form-for-registe input:focus{
+    -webkit-box-shadow:1px 1px 10px rgba(95,171,64,0.75);
+    box-shadow:1px 1px 10px rgba(95,171,64,0.75);
+    border:1px solid rgb(95,171,64);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    line-height:20px
+}
+input:focus::-webkit-input-placeholder,input:focus::-moz-placeholder{
+    color:#EEEEEE;
+}
+input{
+    padding: 6px 12px;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #999;
+    font-size: 14px;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #999;
+    font-size: 14px;
+
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #999;
+    font-size: 14px;
+
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #999;
+    font-size: 14px;
+
+}
+li.secure-code-wrapper{
+    width:460px;
+    margin-left:25px
+}
+label.label-secure-code{
+    width:90px
+}
+input#regist-secure-code{
+    width:150px;
+}
+input#simg-holder{
+    width:150px;
+}
+img#imgVcode{
+    width:90px;
+    height:30px;
+    float:right;
+    vertical-align:middle
+}
+li.for-service-rule{
+    width:700px
+}
+p.bottom-service-rule{
+    height:54px;
+    width:600px;
+    line-height:54px;
+    padding-left:100px;
+    overflow:visible;
+    text-align:left;
+    font-size: 10px;
+}
+a.anchor-service-rule{
+    color:#70CB57;
+    text-decoration:underline
+}
+.forget-form button,#form-for-registe button{
+    padding:6px 12px;
+    border-radius:4px;
+    outline-width:0px;
+    cursor:pointer;
+    color:#FFF;
+    border:1px solid #5FAB40;
+    background-color:#5FAB40;
+    font-weight:bold;
+    display:inline-block;
+    width:110px;
+    height:30px;
+    margin-left:-170px
+}
+.forget-form button:hover,#form-for-registe button:hover{
+    border:1px solid #008000;
+    background-color:#008000;
+}
+.email-auto-completion{
+    background-color:#FCFCFC;
+    position:relative;
+    z-index:99;
+    border:1px solid #D3D3D3;
+    border-radius:4px;
+    overflow:auto
+}
+#email-auto-completion > li{
+    height:20px;
+    margin-left:0px;
+//padding-left:30px
+}
+#home-content-login-user{
+    height: 34px;
+}
+.li-mouseover-style{
+    cursor:pointer;
+    background-color:#E8E8E8;
+    border-radius:4px;
+    border:1px solid #E8E8E8
+}
+.home-input-ver-custom{
+    width: 50% !important;
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius:4px !important;
+}
+a#home-login-forget{
+    color:#449d44!important;
+}
+a#home-login-forget:hover{
+    color:#449d44!important;
+}
+.forget-window {
+    background-color: rgb(255,255,255);
+    width: 540px;
+    height: 230px;
+    padding: 0px 20px 20px 20px;
+    border-top: 1px solid #f2f2f2;
+    border-radius: 4px;
+}
+.forget-notice {
+    text-align: left;
+    margin: 15px 0 0 10px;
+    width: 480px;
+    height: 30px;
+    border-bottom: 1px solid #f2f2f2;
+}
+.forget-form {
+    float: left;
+    width: 420px;
+    text-align: left;
+}
+ul.forget-form-ul {
+    margin: 0 0 0 10px;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+ul.forget-form-ul li {
+    clear: left;
+    float: left;
+    margin: 15px 0 0 0;
+}
+ul.forget-form-ul li p {
+    float: left;
+}
+.forget-row-title {
+    margin-right: 9px;
+    width: 99px;
+    height: 23px;
+    line-height: 30px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+#forget-input-email {
+    margin: 0;
+    /*padding: 0;*/
+    float: left;
+    width: 294px;
+    height: 29px;
+    line-height: 20px;
+    background: #fff;
+    border-radius: 4px;
+}
+#forget-input-vcode-default {
+    color: #999;
+}
+element.style {
+}
+#forget-input-vcode-default {
+    color: #999;
+}
+#forget-input-vcode-default, #forget-input-vcode-custom {
+    margin: 0;
+    /*padding: 0;*/
+    float: left;
+    width: 120px;
+    height: 29px;
+    line-height: 20px;
+    background: #fff;
+    border-radius: 4px;
+}
+.forget-window a {
+    color: #0100ce;
+    text-decoration: underline;
+    float: left;
+}
+li.tips-button-line {
+    width: 360px;
+}
+.forget-button-sure {
+    float: left;
+    margin-left: 0px!important;
+}
+span.forgetpwd-tips {
+    float: right;
+    line-height: 32px;
+    color: red;
+}
+.form-special-input{
+    /*padding: 2px 0px;*/
+    width: 110px;
+    height: 18px;
+    display: inline-block;
+    background-color: #fff;
+    border: 1px solid #c9c9c9;
+    text-indent: 3px;
+}
+#tips-content{
+    color: red;
+}
+div.title-for-company {
+    position: absolute;
+    top: -37px;
+    width: 530px;
+    height: 34px;
+    text-align: left;
+    padding-left: 70px;
+    line-height: 34px;
+    font-family: '微软雅黑', 'Lucida Grande', 'Lucida Sans', Helvetica, Arial, Sans;
+    font-size: 24px;
+    text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #70CB57,0 0 30px #70CB57;
+    background: url("../images/home-bg.png") 0 -16px no-repeat;
+}
+div.registration-success-prompt {
+    width: 400px;
+    height: 70px;
+    margin: 0px auto;
+    font-size: 14px;
+    line-height: 35px;
+    position: absolute;
+    top: 100px;
+    left: 120px;
+}
+button.btn-send-email-again {
+    width: 250px!important;
+    height: 40px!important;
+    position: absolute!important;
+    top: 230px!important;
+    left: 300px!important;
+}
+button.btn-sign-in-platform {
+    width: 100px!important;
+    height: 40px!important;
+    position: absolute!important;
+    top: 230px!important;
+    left: 600px!important;
+}
+.regist-tips {
+    color: red;
+    position: absolute;
+    left: 510px;
+    top: 0px;
+    display: block;
+    width: 150px;
+    height: 32px;
+    line-height: 32px;
+}

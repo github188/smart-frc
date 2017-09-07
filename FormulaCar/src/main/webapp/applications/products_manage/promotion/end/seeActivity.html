@@ -1,0 +1,88 @@
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:545px;margin:20px auto;width:950px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#44b549;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:9px 80px;font-size: 14px;}
+#status li.active{background-color:#587950;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;}
+.page{padding:20px 30px;width:93%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+.page h1{ border-bottom:1px dotted #ccc;margin-top: 10px; }
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+		<li class="active" id="tab1"><strong>1.</strong><span lang="text:price_activity_information"></span></li>
+		<li id="tab2"><strong>2.</strong><span lang="text:price_vender"></span></li>
+		<li id="tab3"><strong>3.</strong><span lang="text:price_merchandise_and_concessions"></span></li>
+	</ul>
+	<div class="items">
+	    <!-- 基本信息 -->
+	    <div class="page" id="baseInfo">
+	         <div style="height:400px;">
+	            <table width="100%">
+	              <tr>
+	                 <td width="25%"><label style='color:red;'>&nbsp;</label> <span lang="text:price_activity_name"></span></td>
+	                 <td><input type="text" class="input" id="activity_name" name="activity_name" style="width:300px;height:22px;" readonly='readonly'/></td>
+	              </tr>
+				  <tr>
+				    <td width='25%'><label style='color:red;'>&nbsp;</label> <span lang="text:automat_start_time"></span></td>
+				    <td><input style='width:300px;height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;'  type='text' readonly='readonly' id='startTime3' /></td>
+				  </tr>
+				   <tr>
+				    <td width='25%'><label>&nbsp;</label> <span lang="text:automat_end_time"></span></td>
+				    <td><input style='width:300px;height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;'  type='text' readonly='readonly' id='endTime3' /></td>
+				  </tr>
+				  <tr>
+					<td width='25%'><label>&nbsp;</label> <span lang="text:price_activity_descript"></span></td>
+					<td><textarea rows='7' cols='90' id='descript' readonly='readonly'/></td>
+				  </tr>
+	            </table>
+	         </div>
+	         <h1></h1>
+	         <div class="btn_nav">
+                  <input type="button" class='btn btn-primary submit' id="nextBase1" style="margin-left:10px;"/>
+             </div>
+	    </div>
+	    <!--  售货机-->
+	    <div class="page" id="deviceConfig">
+	     <div style="height:450px;">
+	         <table width="100%">
+	          <tr><td><div id='con2_content' style='margin-top: 10px;border: 1px solid #CCC3C3;'></div></td></tr>
+			  <tr>
+			    <td>
+			       <h1></h1>
+	               <div class="btn_nav">
+	                <input type="button" class='btn btn-primary submit' id="beforeBase1"/>
+                    <input type="button" class='btn btn-primary submit' id="nextBase2" style="margin-left:10px;"/>
+                   </div>
+			    </td>
+			  </tr>
+             </table>
+          </div>
+        </div>
+        <!--  商品-->
+        <div class="page" id="goodsConfig">
+          <div style="height:450px;">
+	         <table width="100%">
+	          <tr><td><div id='con3_content' style='margin-top: 10px;border: 1px solid #CCC3C3;'></div></td></tr>
+			  <tr>
+			    <td>
+			       <h1></h1>
+	               <div class="btn_nav">
+	                 <input type="button" class='btn btn-primary submit' id="beforeBase2"/>
+                     <input type="button" class='btn btn-primary submit' id="finish" style="margin-left:10px;"/>
+                   </div>
+			    </td>
+			  </tr>
+             </table>
+          </div>
+        </div>
+	</div>
+</div>

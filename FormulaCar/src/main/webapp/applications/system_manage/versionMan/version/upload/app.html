@@ -1,0 +1,71 @@
+<style>
+#status li{float:left;color:#fff;padding:7px 90px;font-size: 14px;}
+#status li.active{background-color:#587950;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;}
+.page{padding:20px 30px;width:93%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+.page h1{ border-bottom:1px dotted #ccc;margin-top: 10px; }
+.page h4{height:22px; font-size:16px; border-bottom:1px dotted #ccc; padding-bottom:5px}
+.configtable {border: 1px solid rgba(115, 120, 126, 0.32);text-align: center;height:40px;}
+.channelTable{
+	border: 1px solid rgba(115, 120, 126, 0.32);
+	text-align: center;
+	height:40px;
+}
+</style>
+	    <div class="page" id="baseInfo" style="height: 400px;  width: 720px;">
+	         <div style="height:360px;width:100%;overflow: auto;">
+	           <div style="height: 190px;">
+	            <table width="100%">
+	             <tr><td width="20%"><label style='color:red;'>*</label><label><span lang="text:current_version"></span></label></td><td><input type="text" class="input"  id="version" name="version" style="width:200px;height:25px;"/></td></tr>
+	             <tr>
+	                 <td width="20%"><label style='color:red;'>*</label><label><span lang="text:upload_config_files"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit' id="upload" style="margin-top: 5px;"/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:100%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;" id="configTable">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th style="width:400px;" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th class="configtable"><span lang="text:operate"></span></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"><label style='color:red;'>*</label><label><span lang="text:upload_app_files"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit' id="uploadApp" style="margin-top: 5px;"/></td>
+	             </tr>
+	              <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:100%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;" id="configTable_app">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th style="width:400px;" class="configtable"><span lang="text:ad_filename"></span></th>
+                                  <th class="configtable"><span lang="text:operate"></span></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editAppConfig">
+                             </tbody>
+	                     </table>
+	                 </td>
+	             </tr>
+	            </table>
+	           </div>
+	         </div>
+	         <h1></h1>
+	         <div class="btn_nav">
+                  <input type="button" class='btn btn-primary submit' id="saveBase" style="margin-left:10px;"/>
+             </div>
+	    </div>

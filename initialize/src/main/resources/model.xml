@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<initialize>
+  <models>
+     <model>
+	 <name>test01</name>
+         <vender>fuji</vender>
+         <machineType>1</machineType>
+         <shelves>
+             <shelvesId>3</shelvesId>
+             <shelvesId>4</shelvesId>
+             <shelvesId>5</shelvesId>
+             <shelvesId>6</shelvesId>
+         </shelves>
+         <config>
+             <channel>
+                 <row>1</row>
+                 <number>2</number>
+             </channel>
+             <channel>
+                 <row>2</row>
+                 <number>2</number>
+             </channel>            
+         </config>   
+     </model>
+     <model>
+	 <name>test02</name>
+         <vender>aucma</vender>
+         <machineType>2</machineType>
+         <shelves>
+             <shelvesId>13</shelvesId>
+             <shelvesId>14</shelvesId>
+             <shelvesId>15</shelvesId>
+             <shelvesId>16</shelvesId>
+         </shelves>
+         <config>
+             <channel>
+                 <row>3</row>
+                 <number>4</number>
+             </channel>         
+         </config>   
+     </model>
+  </models>
+</initialize>

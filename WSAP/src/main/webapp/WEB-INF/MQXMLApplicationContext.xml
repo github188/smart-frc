@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit" 
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" 
+       xmlns:task="http://www.springframework.org/schema/task" 
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd 
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+    <!-- rabbit configuration *** beging *** -->   
+    <context:component-scan base-package="cn.com.inhand.devicenetworks.ap" />  
+    <mvc:annotation-driven /> 
+    <rabbit:connection-factory id="connectionFactory"  host="rabbitmq.networks.com" username="inhand"
+        password="chenjian" port="5672" />
+        
+    
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">      
+        <property name="location">  
+               <value>file:/home/inhand/Applications/config/config.properties</value>        
+        </property> 
+    </bean> 
+    
+    <rabbit:template id="amqpTemplate" connection-factory="connectionFactory"/><!-- exchange="taskSmart1" routing-key="dn.key.taskSmart.add"/-->
+    
+    <rabbit:admin connection-factory="connectionFactory" />
+
+    <rabbit:queue name="${task.notice}" />
+	
+    <rabbit:topic-exchange name="taskSmart1">
+        <rabbit:bindings>
+            <rabbit:binding queue="${task.notice}" pattern="dn.key.taskSmart.add" />
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+	
+	
+    <bean id="taskNotificationConsumer" class="cn.com.inhand.devicenetworks.ap.mq.rabbitmq.TaskNotificationConsumer" >
+        <constructor-arg ref="connectionInfo"></constructor-arg>
+        <constructor-arg ref="msgParser"></constructor-arg>
+    </bean>
+ <!-- transcation notice -->   
+        <rabbit:queue name="${deliver.notice}" />
+	
+    <rabbit:topic-exchange name="delivering_notice">
+        <rabbit:bindings>
+            <rabbit:binding queue="${deliver.notice}" pattern="delivering.notice" />
+        </rabbit:bindings>
+    </rabbit:topic-exchange>	
+    <bean id="deliveringNoticeConsumer" class="cn.com.inhand.devicenetworks.ap.mq.rabbitmq.DeliveringNoticeConsumer" >
+        <constructor-arg ref="connectionInfo"></constructor-arg>
+        <constructor-arg ref="msgParser"></constructor-arg> 
+    </bean>
+   
+    <bean id="deliveringResultProducer"
+          class="cn.com.inhand.devicenetworks.ap.mq.rabbitmq.DeliveringResultProducer">
+        <property name="rabbitTemplate">
+            <ref bean="amqpTemplate" />
+        </property>
+        <property name="exchange" value="delivering_result"></property>
+        <property name="routingKey" value="delivering.result"></property>
+    </bean>
+    
+    <bean id="sessionStatusProducer"
+          class="cn.com.inhand.devicenetworks.ap.mq.rabbitmq.SessionStatusProducer">
+        <property name="rabbitTemplate">
+            <ref bean="amqpTemplate" />
+        </property>
+        <property name="exchange" value="smartvm.exchange.deviceInfo.config"></property>
+        <property name="routingKey" value="smartvm.key.device.info"></property>
+    </bean>
+    
+    <bean id="apStatusProducer"
+          class="cn.com.inhand.devicenetworks.ap.mq.rabbitmq.ApStatusMessageProducer">
+        <property name="rabbitTemplate">
+            <ref bean="amqpTemplate" />
+        </property>
+        <property name="exchange" value="smartvm.exchange.frc.status.upload"></property>
+        <property name="routingKey" value="smartvm.key.frc.status.upload"></property>
+    </bean>
+    
+    <bean id="InitializeProducer"
+          class="cn.com.inhand.devicenetworks.ap.mq.rabbitmq.InitializeProducer">
+        <property name="rabbitTemplate">
+            <ref bean="amqpTemplate" />
+        </property>
+        <property name="exchange" value="smartvm.exchange.frc.ap.initial"></property>
+        <property name="routingKey" value="smartvm.key.frc.ap.initial"></property>
+    </bean>
+    
+    <rabbit:listener-container connection-factory="connectionFactory">
+        <rabbit:listener ref="taskNotificationConsumer" method="listen" queue-names="${task.notice}" />
+        <rabbit:listener ref="deliveringNoticeConsumer" method="listen" queue-names="${deliver.notice}" />
+    </rabbit:listener-container>
+
+    <!-- rabbit configuration *** end *** --> 
+
+
+    <!-- websocket configuration *** begin *** -->       
+    <websocket:handlers>
+        <websocket:mapping path="/websocket" handler="myHandler"/>
+        <websocket:handshake-interceptors>
+            <bean class="cn.com.inhand.devicenetworks.ap.websocket.HandshakeInterceptor"/>
+        </websocket:handshake-interceptors>
+    </websocket:handlers>
+
+    <bean id="myHandler" class="cn.com.inhand.devicenetworks.ap.websocket.WSDNAccessPoint">
+        <constructor-arg ref="connectionInfo"></constructor-arg>
+        <constructor-arg ref="msgParser"></constructor-arg>        
+        <constructor-arg ref="deliveringResultProducer"></constructor-arg>
+        <constructor-arg ref="sessionStatusProducer"></constructor-arg>
+        <constructor-arg value="nginx.networks.com"></constructor-arg>
+        <property name="restTemplate">
+            <ref bean="restTemplate" />
+        </property>
+        <property name="mapper">
+            <ref bean="objectMapper" />
+        </property>
+    </bean>
+    
+    <bean id="myTask" class="cn.com.inhand.devicenetworks.ap.timer.MonitorTask">
+        <property name="apStatusProducer">
+            <ref bean="apStatusProducer" />
+        </property>
+        <property name="mapper">
+            <ref bean="objectMapper" />
+        </property>
+    </bean>
+    
+    <bean id="connectionInfo" class="cn.com.inhand.devicenetworks.ap.websocket.ConnectionInfo"/>
+    <bean id="msgParser" class="cn.com.inhand.devicenetworks.ap.websocket.processor.WSv1Processor"/>
+    
+    <!--For client side WebSocket configuration, 
+    you should use WebSocketContainerFactoryBean (XML) 
+    or ContainerProvider.getWebSocketContainer() (Java config). -->
+    <bean class="org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean">
+        <property name="maxTextMessageBufferSize" value="8192"/>
+        <property name="maxBinaryMessageBufferSize" value="8192"/>
+        <property name="AsyncSendTimeout" value="10000"/>
+        <property name="MaxSessionIdleTimeout" value="200000"/>
+    </bean>
+
+    <!-- websocket configuration *** end *** -->     
+    <!--  rest api client   begin  -->
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <!--property name="messageConverters">
+            <list>
+                <ref bean="mappingJackson2HttpMessageConverter" />
+				    
+                <bean id="formHttpMessageConverter" class="org.springframework.http.converter.FormHttpMessageConverter"></bean>
+                <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter"></bean>
+            </list>
+        </property-->
+    </bean>
+    
+    <bean id="mappingJackson2HttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="objectMapper" ref="objectMapper" />
+    </bean>
+    <bean id="objectMapperFactory" class="cn.com.inhand.common.jackson.ObjectMapperFactory" />
+    <bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"
+              factory-bean="objectMapperFactory" factory-method="getMapper" />
+
+    <!--  rest api client   end  -->
+    
+    <task:annotation-driven />
+    <task:executor id="executor" pool-size="5-100" queue-capacity="10000"/>
+  	
+</beans>

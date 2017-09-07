@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<link href="resources/css/detail.css" rel="stylesheet" type="text/css" />
+<script src="resources/js/jquery-1.7.1.js"></script>
+<script type="application/javascript" src="/cloud/base/loader.js"></script>
+
+<script language="JavaScript" src="./index.js"></script>
+
+
+<style>
+.queryDiv{
+    width: 1000px;
+    float: left;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.queryDiv label{
+
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #44b549;
+}
+.queryDiv input{
+
+    border-radius: 5px;
+    margin-left: 5px;
+}
+</style>
+
+</head>
+<body>
+
+<div style="overflow:auto;height:100%;margin-top:10px;">
+<div class="queryDiv" id="update">
+
+</div>
+
+  <div id="sales_list" class="list_div_height" style="position: relative;height:100%;margin-top:50px">
+	<div id="sales_list_table" style="height:90%;overflow:auto"></div>
+	<div id="sales_list_paging" style="bottom: 10px;width: 130%;position: fixed;"></div>
+  </div>
+   </div>  
+</div> 
+<script type="application/javascript">
+require(['cloud/base/cloud','salesDetail'],function(cloud,salesDetail){
+    new salesDetail({   	
+        //selector:$('#container')
+    })
+});
+
+</script>
+  
+</body>
+</html>

@@ -1,0 +1,262 @@
+<div id="add_view" style="overflow:auto;height:615px;">
+	<form id="automat-site-form-add">
+	
+	<input id="orderNo"  type="hidden" value="" />
+	<input id="oid"  type="hidden" value="" />
+	<input id="_id"  type="hidden" value="" />
+	<input id="payStyles"  type="hidden" value="" />
+	<table style='margin-left:5%;margin-top:2%;width:95%;border-top: 0px solid #e7e7eb;' border='1'>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:order_no+:">订单号:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="order_no"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:trade_no+:">交易号:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="tradeNo"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:trade_order_time+:">订单创建时间:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="trade_time"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:automat_no1+:">售货机编号:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="trade_automat_number"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:product_name+:">商品名称:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="trade_product_name"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:trade_price+:">交易价格:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="trade_price"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<!-- <tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:trade_time+:">交易时间:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="trade_times"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:counts_of_phone+:">数量:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="counts_of_phone"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr> -->
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:trade_pay_style+:">支付方式:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="trade_pay_style"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:special_offer_price+:">优惠金额:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="special_offer_price"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:special_offer_type+:">优惠方式:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="special_offer_type"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr id='card_num' style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:pos_card_num+:">卡号:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="pos_card_num"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr id='terminal_num' style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:pos_terminal_num+:">刷卡机终端号:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="pos_terminal_num"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr id='trans_sn'  style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:pos_trans_sn+:">刷卡机扣款流水号:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="pos_trans_sn"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr id='trans_time' style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:pos_trans_time+:">扣款日期时间:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="pos_trans_time"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr id='sys_sn' style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:pos_sys_sn+:">POS系统流水号:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="pos_sys_sn"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr id='merchant_num' style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:pos_merchant_num+:">刷卡机商户号:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="pos_merchant_num"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:trade_pay_status+:">支付状态:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="trade_pay_status"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:trade_pay_time+:">支付时间:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="trade_pay_time"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:deliver_status+:">出货状态:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="deliver_status"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:deliver_style+:">出货方式:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="deliver_style"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:notice_time+:">通知时间:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="notice_ts"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:deliver_time+:">出货时间:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="exec_ts"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:running_no+:">流水号:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="runningNo"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:mobile_number+:">手机号:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="phone"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:refund_status+:">退款状态:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="refundStatus1"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:refund_fail_reason+:">退款失败原因:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="refundFailReason"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+
+		</tr>
+		<tr style='height:32px;'>
+			<td height='25px' style='font-size: 14px;font-weight: bold;'>
+				<span lang="text:refund_time+:">退款时间:</span>
+			</td>
+			<td style="text-align:center;">
+				<span id="refundTime"  type="text" style="border-radius: 4px;width: 200px;height: 25px;" class="input-search c666 module-input-row-el"/>
+			</td>
+		</tr>
+		<!--  <tr style='height:32px;'>
+			<td style="text-align:center;" colspan=2>
+			   <div style='text-align: right;width: 100%;margin-top: 6px;border-top: 1px solid #f2f2f2;'>
+			    <div style="float:left;">
+			     <a id='automat_site_add' class='btn btn-primary submit' style='margin-top: 6px;display:none;' lang="text:refund">退款</a>
+			    </div>
+			    <div>
+			     <a id='automat-site-cancel' style='margin-left: 10px;margin-top: 6px;' class='btn btn-primary submit' lang="text:close">关闭</a>
+			    </div>
+			   </div>
+			</td>
+		</tr>
+		-->
+	</table>
+	</form>
+</div>
+<div style="position: fixed;width: 400px;bottom: 10px;">
+	<div style='text-align: right;width: 100%;margin-top: 15px;border-top: 1px solid #f2f2f2;'>
+		<div style="float:left;margin-left: 15px;">
+			<a id='automat_site_add' class='btn btn-primary submit' style='margin-top: 6px;display:none;' lang="text:refund">退款</a>
+		</div>
+		<div>
+			<a id='automat-site-cancel' style='margin-left: 10px;margin-top: 6px;' class='btn btn-primary submit' lang="text:close">关闭</a>
+		</div>
+	</div>
+</div>

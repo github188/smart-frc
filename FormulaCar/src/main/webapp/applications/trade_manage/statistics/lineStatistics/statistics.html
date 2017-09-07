@@ -1,0 +1,42 @@
+<div id="line_statistics" style="height: 100%;">
+	<div id="tradeHead" style="height:35px;">
+	  <div class="sub_menu">
+	     <div style="float:left;">
+	        <select id='reportType'  name='reportType' style='width:130px;height: 28px;'></select>
+	     </div>
+    	 <div style='float:left;height: 28px;margin-left:8px;margin-right: -4px;'>
+    	    <input style='width:150px' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='summary_date' />
+         </div>
+         <div style='float:left;height: 28px;margin-left:4px;margin-right: 8px;'>
+  	        <input style='width:150px;display:none;' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='summary_month'/>
+  	     </div>
+  	     <div style='float:left;height: 28px;margin-left:-8px; margin-right: 13px;'>
+  	        <select id='summary_year' style="height: 28px;display:none; border-radius: 4px;">
+  	            <option value='2015' selected='selected'>2015</option>
+  	            <option value='2016'>2016</option>
+  	            <option value='2017'>2017</option>
+  	            <option value='2018'>2018</option>
+  	            <option value='2019'>2019</option>
+  	        </select>
+  	     </div>
+  	      <!--<div style="float:left;margin-left:-5px;">
+	        <select multiple='multiple'  id='assetId'  name='assetId' style='width:120px;height: 28px; '></select>
+	      </div>  -->
+         <div id='autoNum' style='float: left;height: 28px;'>
+           	
+         </div>
+  	     <div id='buttonDiv' style='float:left;height: 28px;'></div>
+	 </div>
+	</div>
+<div id="trade" style="position: relative;overflow: auto;height:550px;">
+
+	<div id="tradeFooter" class="static_div_height">
+	   <div class='pie-content' id='pie-content' style='float: left;margin-left:-10px'></div>
+       <div class='top-content' id='top-content'   style='float: left;'></div>
+	</div>
+	
+	<div id="tradeContent" style="margin-top:-100px; height:130px;"></div>
+
+
+</div>
+</div>

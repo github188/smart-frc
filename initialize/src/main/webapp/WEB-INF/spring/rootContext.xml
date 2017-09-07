@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+
+	<!-- Scans the classpath of this application for @Components to deploy as 
+		beans -->
+	<context:component-scan base-package="cn.com.inhand" />
+
+	<!-- CUSTOMER OBJECTMAPPER -->
+	<bean id="objectMapperFactory" class="cn.com.inhand.common.jackson.ObjectMapperFactory" />
+	<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"
+		factory-bean="objectMapperFactory" factory-method="getMapper" />
+
+	<bean id="mappingJackson2HttpMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="objectMapper" ref="objectMapper" />
+	</bean>
+	<!-- MVC CONFIG -->
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<ref bean="mappingJackson2HttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<mvc:default-servlet-handler />
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+			</map>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+			</list>
+		</property>
+		<property name="defaultContentType" value="application/json" />
+	</bean>
+
+
+	<!-- EXCEPTION HANDLER -->
+	<bean class="cn.com.inhand.common.exception.DefaultExceptionHandler">
+		<constructor-arg ref="objectMapper" />
+	</bean>
+
+   <!-- CONFIG PROPERTIES -->
+	<context:property-placeholder location="classpath:mongo.properties" />
+	<!-- CONFIG INITIALIZE -->
+    <mongo:mongo id="configMongo" host="${config.mongo.host}" port="${config.mongo.port}">
+          <mongo:options slave-ok="true"/>
+	</mongo:mongo>
+
+	<mongo:db-factory id="configDbFactory" dbname="${config.mongo.db}"
+		mongo-ref="configMongo" username="${config.mongo.username}" password="${config.mongo.password}" />
+
+	<bean id="configDbTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="configDbFactory" />
+	</bean>
+
+
+	<bean id="config" class="cn.com.inhand.common.config.Config">
+		<constructor-arg name="mongoTemplate" ref="configDbTemplate" />
+		<constructor-arg name="collectionName" value="${config.mongo.table}" />
+		<constructor-arg name="projectName" value="${config.mongo.name}" />
+	</bean>
+
+	<!-- MONGO -->
+	<mongo:mongo id="mongo" replica-set="#{config.public.mongodbReplicaSet}">
+		<mongo:options connections-per-host="100" slave-ok="false"/>
+	</mongo:mongo>
+
+	<bean id="mongoFactory" class="cn.com.inhand.common.service.MongoFactory">
+		<constructor-arg name="publicConfig" value="#{config.public}" />
+		<constructor-arg name="mongo" ref="mongo" />
+	</bean>
+
+	<!-- RABBITMQ CONFIG -->
+	<rabbit:connection-factory id="rabbitConnectionFactory"
+		requested-heartbeat="20" host="#{config.public.mqLoadBalancerHost}"
+		port="#{config.public.mqLoadBalancerPort}" username="#{config.public.mqUsername}"
+		password="#{config.public.mqPassword}" />
+
+	<bean id="mqMessageConverter"
+		class="org.springframework.amqp.support.converter.Jackson2JsonMessageConverter">
+		<property name="jsonObjectMapper" ref="objectMapper" />
+	</bean>
+	<rabbit:admin connection-factory="rabbitConnectionFactory" />
+	<rabbit:template id="amqpTemplate" connection-factory="rabbitConnectionFactory"
+		message-converter="mqMessageConverter">
+	</rabbit:template>
+
+	<!-- Bussiness Log Publisher -->
+	<bean class="cn.com.inhand.common.log.BusinessLogger">
+		<constructor-arg name="template" ref="amqpTemplate" />
+	</bean>
+	<!-- Resource Message Publisher -->
+	<bean class="cn.com.inhand.common.resource.ResourceMessageSender">
+		<constructor-arg name="template" ref="amqpTemplate" />
+	</bean>
+
+	<bean class="org.springframework.web.client.RestTemplate">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJackson2HttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- TASK CLIENT -->
+	<bean class="cn.com.inhand.common.task.DefaultTaskClientImpl">
+		<constructor-arg name="config" ref="config" />
+		<constructor-arg name="messageConverter"
+			ref="mappingJackson2HttpMessageConverter" />
+	</bean>
+</beans>

@@ -1,0 +1,16 @@
+.background{
+	display: block;
+	width: 30px;
+	height: 20px;
+	margin: 1px;
+	padding: 2px 10px;
+    border: 1px solid #ddd;
+    float: left;
+}
+.optbackground{
+	background: #09c url(./optimization.png) no-repeat 50% 50%;
+}
+
+.merbackground{
+    background: #d8aa23 url(./merchandising.png) no-repeat 50% 50%;
+}

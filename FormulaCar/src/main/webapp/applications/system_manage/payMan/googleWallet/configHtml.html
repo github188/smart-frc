@@ -1,0 +1,111 @@
+
+<div class="cs-col-slie-main-bd">
+    <div class="menu-edit-area-wrapper">
+        <form id="sms-config">
+           <div class="config-row">
+                <label for="AppID" class="config-row-lable" lang="{text:wechat_appID}">AppID</label>
+                <input id="AppID" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <div class="config-row">
+                <label for="AppSecret" class="config-row-lable" lang="{text:wechat_appSecret}">AppSecret</label>
+                <input id="AppSecret" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <div class="config-row">
+                <label for="Mchid" class="config-row-lable" lang="{text:wechat_mchid}">…Ãªß∫≈</label>
+                <input id="Mchid" class="config-row-input " style="border-radius: 4px;">
+            </div>
+            <div class="config-row">
+                <label for="ClientSecret" class="config-row-lable" lang="{text:wechat_clientSecret}">ClientSecret</label>
+                <input id="ClientSecret" class="config-row-input " style="border-radius: 4px;">
+            </div> 
+        </form>
+        <div class="btn-wrp" style="margin:0px auto 0px auto">
+            <label id="ali_pay_desc"></label>
+        </div>
+        <div class="btn-wrp">
+            <div class="save-btn">
+                <a id="sms-config-save" class="btn btn-primary submit" lang="{text:save}">±£¥Ê</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<style type="text/css">
+    .menu-edit-area-wrapper{
+        padding: 0;
+    }
+    .config-row-input, #sms-config-passwd {
+        width: 300px;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row-select{
+        width: 314px;
+        height: 23px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row{
+        padding: 3px 0;
+    }
+    .config-row-lable{
+        width: 100px;
+    }
+    #sms-config{
+        /*max-width: 765px;*/
+        margin: 20px auto 0px auto;
+        text-align: center;
+    }
+    label.config-row-lable {
+        width: 230px;
+        display: inline-block;
+    }
+    .config-row-textarea{
+        border-color: rgb(152, 152, 152);
+        padding: 5px;
+        width: 302px;
+        max-height: 50px;
+        resize: none;
+        overflow: hidden;
+    }
+    .row-for-textarea{
+        position: relative;
+        top: -13px;
+    }
+    .btn-wrp{
+        max-width: 375px;
+        margin: 32px auto 0px auto;
+    }
+    #sms-config .config-row input:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    textarea:disabled{
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    select:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    #error-tip{
+        display: none;
+        color: #F00F0F;
+        line-height: 20px;
+    }
+    .config-row-input.config-createTime{
+        width: 160px;
+        margin: 0 140px 0 0;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+</style>

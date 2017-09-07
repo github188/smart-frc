@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd">
+
+    <import resource="spring/rootContext.xml"/>
+    <task:annotation-driven />
+    <task:executor id="executor" pool-size="5-100" queue-capacity="10000"/>
+
+    <!-- RABBITMQ CONFIG -->
+  <!--   <rabbit:topic-exchange durable="true" name="dn.exchange.wifi.access">
+        <rabbit:bindings>
+            <rabbit:binding pattern="dn.key.wifi.terminal.*.1" queue="dn.statistic.wifi.terminal.start"/>
+            <rabbit:binding pattern="dn.key.wifi.terminal.*.all" queue="dn.statistic.wifi.terminal.status"/>
+            <rabbit:binding pattern="dn.key.wifi.user.*.all" queue="dn.statistic.wifi.user.status"/>
+
+            <rabbit:binding pattern="dn.key.wifi.user.*.2" queue="dn.statistic.wifi.user.traffic"/>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+    <rabbit:topic-exchange durable="true" name="dn.exchange.wifi.user">
+        <rabbit:bindings>
+            <rabbit:binding pattern="dn.key.wifi.user.access" queue="dn.statistic.wifi.user.login"/>
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+
+    <rabbit:queue-arguments id="queueArguments">
+        <entry key="x-ha-policy" value="all" />
+    </rabbit:queue-arguments>
+
+    <rabbit:queue auto-delete="false" durable="false"
+                  id="wifiTerminalLoginQueue" name="dn.statistic.wifi.terminal.start" queue-arguments="queueArguments"/>
+
+    <rabbit:queue auto-delete="false" durable="false"
+                  id="wifiTerminalStatusQueue" name="dn.statistic.wifi.terminal.status" queue-arguments="queueArguments"/>
+
+    <rabbit:queue auto-delete="false" durable="false"
+                  id="wifiUserStatusQueue" name="dn.statistic.wifi.user.status" queue-arguments="queueArguments"/>
+
+    <rabbit:queue auto-delete="false" durable="false"
+                  id="wifiUserTrafficQueue" name="dn.statistic.wifi.user.traffic" queue-arguments="queueArguments"/>
+
+    <rabbit:queue auto-delete="false" durable="false"
+                  id="wifiUserAccessQueue" name="dn.statistic.wifi.user.login" queue-arguments="queueArguments"/>
+
+
+    <rabbit:listener-container concurrency="10"
+                               connection-factory="rabbitConnectionFactory"
+                               acknowledge="auto" requeue-rejected="false"
+                               message-converter="mqMessageConverter">
+        <rabbit:listener ref="wifiNewTerminalConsumer" queues="wifiTerminalLoginQueue" />
+        <rabbit:listener ref="wifiActiveUserMessageConsumer" queues="wifiUserAccessQueue" />
+        <rabbit:listener ref="wifiTerminalStatusMessageConsumer" queues="wifiTerminalStatusQueue" />
+        <rabbit:listener ref="wifiUserStatusMessageConsumer" queues="wifiUserStatusQueue" />
+        <rabbit:listener ref="wifiUserTrafficMessageConsumer" queues="wifiUserTrafficQueue" />
+    </rabbit:listener-container> -->
+
+</beans>

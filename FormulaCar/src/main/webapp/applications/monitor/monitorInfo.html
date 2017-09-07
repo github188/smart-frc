@@ -1,0 +1,49 @@
+<div class="monitor-info ui-helper-clearfix">
+    <div class="detail-head-tab">
+    <ul class="detail-head-ul">
+    <li id="shelfinfo"><span>货道信息</span></li>
+    <li id="detailinfo"><span>详情信息</span></li>
+    <li id="tradeinfo"><span>交易信息</span></li>
+    <li id="faultinfo"><span>故障信息</span><span class="faults"></span></li>
+    
+    </ul>
+    </div>
+    
+    <div class="detail-content"></div>
+</div>
+<style type="text/css">
+.faults{
+
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 15px;
+    font-size: 12px;
+    background: #FF0000;
+    color: white;
+    display: none;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 5px;
+    position: absolute;
+}
+.monitor-info{
+  width:500px;
+}
+.detail-head-ul{
+border-bottom: 2px solid #EEEEE0;
+}
+.detail-head-ul li{
+	display: inline-block;
+    width: 23%;
+    line-height: 35px;
+    cursor: pointer;
+    text-align: center;
+}
+.detail-content{
+    height: 450px;
+    /*overflow: auto;*/
+}
+</style>

@@ -1,0 +1,131 @@
+<style>
+    #deviceForm {border:1px solid #CFD8CE;font-size:12px;height:300px;margin:20px auto;width:950px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+    #deviceForm .items{width:100%; clear:both; position:absolute;}
+    #deviceForm .right{float:right;}
+    #deviceForm #status{height:35px;background:#28b5d6;}
+    #status li{float:left;color:#fff;padding:8px 70px;font-size: 14px;}
+    #status li.active{background-color:#09c;font-weight:normal;}
+    .input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;}
+    .page{padding:20px 30px;width:100%;float:left;}
+    .page h3
+    {
+      font-size: 14px;
+      border-bottom: 1px dotted #ccc;
+      margin-bottom: 20px;
+      padding: 5px;
+      text-align: left;
+    }
+    .selfTable{
+       background: black;
+       margin: 3px;
+       color: white;
+       width: 20px;
+       height: 20px;
+       text-align: center;
+       border-radius: 4px;
+       font-size: 10px;
+       line-height: 20px;
+       cursor: pointer;
+    }
+      .selfTable_grey{
+          background: #C3B8B8;
+          margin: 3px;
+          color: white;
+          width: 15px;
+          height: 15px;
+          text-align: center;
+          font-size: 10px;
+          line-height: 15px;
+    }
+      .selfTable_red{
+          background: #BD2F34;
+          margin: 3px;
+          color: white;
+          width: 15px;
+          height: 15px;
+          text-align: center;
+          border-radius: 10px;
+          font-size: 14px;
+          line-height: 15px;
+          cursor: pointer;
+    }
+    .selfTableOther{
+       background: #5694D9;
+       margin: 3px;
+       color: white;
+       width: 40px;
+       height: 15px;
+       text-align: center;
+       font-size: 10px;
+       line-height: 15px;
+       cursor: pointer;
+    }
+    .page h3 em{font-size:12px; font-weight:500; font-style:normal}
+    .page p{line-height:24px;}
+    .page p label{font-size:14px; display:block;}
+    .btn_nav{height:36px; line-height:36px; margin-right: 4.6%;text-align: right;}
+    .prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+    .page h1{ border-bottom:1px dotted #ccc;}
+    .configtable {border: 1px solid rgba(115, 120, 126, 0.32);text-align: center;height:40px;}
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+        <li class="active" id="tab1" style="height: 19px;"><span>账单基本信息</span></li>
+    </ul>
+    <div class="items">
+        
+        <div class="page" id="baseInfo" style="padding: 0px 0px;">
+            <div style="float:left;margin: 5px;">
+                <div style="height: 190px;margin-left: 20px;">
+                    <table width="100%">
+                        <tr>
+                            <td width="30%"><label style='color:red;'>*</label><label><span>公司简称:</span></label></td>
+                            <td>
+                              <input type="text" class="input" id="orageName" name="orageName" readonly="readOnly" style="width:200px;height:30px;"/>
+                              <span id='orange_select_button'></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%"><label style='color:red;'>*</label><label><span>账单类型:</span></label></td>
+                            <td>
+                              <select id='bill_type'  name='bill_type'  style='width:130px;height: 36px;'>
+		                        <option value='1'>续费</option>
+		                        <option value='2'>增点</option>
+		                      </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="30%"><label style='color:red;'>*</label><label><span>点数:</span></label></td>
+                            <td>
+                              <input type="text" class="input" id="siteSum" name="siteSum" style="width:200px;height:30px;"/>
+                            </td>
+                        </tr>
+                         <tr style="height:56px;">
+                            <td width="30%"><label style='color:red;'>&nbsp;</label><label><span>账单金额&使用期限:</span></label></td>
+                             <td>
+                              <span id='getPrice_button' style='display:none;'></span>
+                              <input type="text" class="input" placeholder="账单金额" id="money" readonly="readOnly" style="width:200px;height:30px;" />
+                              <input type="text" class="input" placeholder="使用期限" id="useTime" readonly="readOnly" style="width:200px;height:30px;" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <h1 style="margin-top: 210px;"></h1>
+            <div class="btn_nav" style='margin-top: 8px;'>
+               <table style="width:100%;">
+                 <tr>
+                  <td id="saveBtn" style="width:89%;">
+                    <input type="button" class='btn btn-primary submit' id="saveBase" value="保存" style="margin-left:10px;width: 105px;height: 30px;"/>
+                 </td>
+                 <td>
+                    <input type="button" class='btn btn-primary submit' id="submitBase" value="保存并邮件通知客户" style="margin-left:10px;width: 145px;height: 30px;"/>
+                 </td>
+                 </tr>
+               </table>
+            </div>
+        </div>
+        
+    </div>
+</div> 

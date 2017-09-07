@@ -1,0 +1,61 @@
+<div id='winContent'><!--  -->
+    <div id="top-editor">
+        <form id="material-form">
+
+            <div class="material-container">
+                <p class="material-title"></p>
+                <div class="material-content">
+                    <img class="material-pic" src="./advertisement/advertising/default-pic.png"/>
+
+
+                    <div class="material-row">
+                        <label for="material-name" class="material-row-label" lang="{text:}">素材名称:</label>
+                        <input id="material-name" class="material-row-input validate[required]" placeholder="">
+                    </div>
+                    <div class="material-row">
+                        <label  class="material-row-label" lang="{text:sms_account}">素材类型:</label>
+                        <div class="material-row-container">
+                            <input name="material-type" class="material-row-radio " type="radio" value="1" placeholder="" >图片
+                            <input name="material-type" class="material-row-radio " type="radio" value="2" placeholder="" disabled="disabled">视频
+                            <input name="material-type" class="material-row-radio " type="radio" value="3" placeholder="" disabled="disabled">文字
+                        </div>
+                    </div>
+                    <div class="material-row" style="display: none">
+                        <label for="material-business" class="material-row-label" lang="{text:type}">素材行业:</label>
+                        <div class="material-row-container">
+                            <select id="material-business" class="material-row-select " >
+                                <option value="1" lang="{text:guodu}">电子商城</option>
+                                <option value="2" lang="{text:user_defined}">自定义</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="material-row">
+                        <label for="material-url" class="material-row-label" lang="{text:}">跳转地址:</label>
+                        <input id="material-url" class="material-row-input validate[required,custom[url]]" placeholder="请以http://或https://开头">
+                    </div>
+                    <div class="material-row">
+                        <label for="material-src" class="material-row-label" lang="{text:}">上传图片:</label>
+                        <div class="material-row-container">
+                            <input id="material-src" class="material-row-input-short " placeholder="" disabled="disabled">
+                            <div class="upload-button">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="material-row">
+                        <label for="" class="material-row-label" lang="{text:}">图片尺寸:</label>
+                        <div class="material-row-container">
+                            <span>宽:</span><input id="material-width" class="material-row-size " placeholder="" disabled="disabled">
+                            <span>高:</span><input id="material-height" class="material-row-size " placeholder="" disabled="disabled">
+                            <div class="save-button"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="center-ad">
+        <p class="advert-title">关联广告位</p>
+        <div id="ad-table-container"></div>
+    </div>
+</div>

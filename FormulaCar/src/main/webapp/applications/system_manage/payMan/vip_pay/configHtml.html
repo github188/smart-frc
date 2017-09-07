@@ -1,0 +1,183 @@
+
+<div class="cs-col-slie-main-bd" >
+    <div class="static_div_height" style="overflow: auto;">
+        <form id="sms-config">
+            <div class="config-row">
+                <label for="accept" class="config-row-lable" lang="{text:payAccept}">PayAccept</label>
+                <input id="accept" type="checkbox" class="config-row-input "  value="1" style="width: 23px; margin-right: 293px;height: 20px;line-height: 20px;">
+            </div>
+            <div class="config-row">
+                <label for="version" class="config-row-lable" style="margin-left: -215px;" lang="{text:vippay_version}"></label>
+                <select id='version'  name='version' style='display:inline-block;width:100px;height: 33px;-webkit-border-radius: 5px;'>
+                            <option value='0' lang="text:please_select"></option>
+			                <option value='1'>青创</option>
+			                <option value='2'>京环</option>
+			                <option value='3'>积分银行</option>
+			    </select>
+            </div>
+            <div id="jinghuan" style="display:none;">
+	            <div class="config-row">
+	                <label for="appId" class="config-row-lable" lang="{text:vip_appid}"></label>
+	                <input id="appId" class="config-row-input " style="border-radius: 4px;">
+	            </div>
+	            <div class="config-row">
+	                <label for="appSecret" class="config-row-lable" lang="{text:vip_appsecret}"></label>
+	                <input id="appSecret" class="config-row-input " style="border-radius: 4px;">
+	            </div>
+	            <div class="config-row" style="display:none;"><!-- 商户号 -->
+	                <label for="Mchid" class="config-row-lable" lang="{text:wechat_mchid}"></label>
+	                <input id="Mchid" class="config-row-input ">
+	            </div>
+	             <div class="config-row" style="display:none;"><!-- API秘钥 -->
+	                <label for="ClientSecret"  style="margin-left: 80px;" class="config-row-lable" lang="{text:wechat_clientsecret}">API key</label>
+	                <input id="ClientSecret" class="config-row-input ">
+	                <a id="createCS" class="btn submit" style="border-color: #28b5d6;color: #333;border: 1px solid #ddd;background-color: #f7f7f7;" lang="{text:generate}"></a>
+	            </div>
+	            <div class="config-row"><!-- 授权回调页面域名 -->
+	                <label for="BackDomain" class="config-row-lable" lang="{text:wechat_backdomain}"></label>
+	                <input id="BackDomain" class="config-row-input ">
+	            </div>
+	            
+	            <div class="config-row">
+	                <label for="vipInfoUrl" class="config-row-lable" lang="{text:vipinfo_url}"></label>
+	                <!-- <input id="vipInfoUrl" class="config-row-input " style="border-radius: 4px;"> -->
+	                <textarea rows="5" cols="25" id="vipInfoUrl" class="config-row-input " style="height: 50px;"></textarea>
+	            </div>
+	            <div class="config-row" id="div_codepayKey" >
+	                <label for="tradeNoticeUrl" class="config-row-lable" lang="{text:trade_notice_url}"></label>
+	                <!--<input id="tradeNoticeUrl" class="config-row-input " style="border-radius: 4px;"> -->
+	                <textarea rows="5" cols="25" id="tradeNoticeUrl" class="config-row-input " style="height: 50px;"></textarea>
+	            </div>
+	            <div class="config-row" id="div_privateKey" >
+	                <label for="shipmentNoticeUrl" class="config-row-lable" lang="{text:shipment_notice_url}"></label>
+	                <!-- <input id="shipmentNoticeUrl" class="config-row-input " style="border-radius: 4px;">-->
+	                <textarea rows="5" cols="25" id="shipmentNoticeUrl" class="config-row-input " style="height: 50px;"></textarea>
+	            </div>
+	            <div class="config-row" id="div_privateKey" >
+	                <label for="registerUrl" class="config-row-lable" lang="{text:vip_register_url}"></label>
+	                 <!--<input id="registerUrl" class="config-row-input " style="border-radius: 4px;">-->
+	                <textarea rows="5" cols="25" id="registerUrl" class="config-row-input " style="height: 50px;"></textarea>
+	            </div>
+	             <div class="config-row" style="display:none;">
+	                 <label for=certificate1 class="config-row-lable" lang="{text:pkcs_12}" style='margin-left: -210px;'></label>
+	                 <a id="certificate1" class="btn submit" style="border-color: #28b5d6;color: #333;border: 1px solid #ddd;background-color: #f7f7f7;" lang="{text:upload_files}"></a>
+	                 <label id="certificate1_filename" style="display:none;width: 100px;margin-left: 60%;margin-top: -26px;"></label>
+	            </div>
+	            <div class="config-row" style="margin-top:5px;display:none;">
+	                 <label for=certificate2 class="config-row-lable" lang="{text:certificate_pem}" style='margin-left: -210px;'></label>
+	                 <a id="certificate2" class="btn submit" style="border-color: #28b5d6;color: #333;border: 1px solid #ddd;background-color: #f7f7f7;" lang="{text:upload_files}"></a>
+	                 <label id="certificate2_filename" style="display:none;width: 100px;margin-left: 60%;margin-top: -26px;"></label>
+	            </div>
+	            <div class="config-row" style="margin-top:5px;display:none;">
+	                 <label for=certificate3 class="config-row-lable" lang="{text:certificate_pem_key}" style='margin-left: -210px;'></label>
+	                 <a id="certificate3" class="btn submit" style="border-color: #28b5d6;color: #333;border: 1px solid #ddd;background-color: #f7f7f7;" lang="{text:upload_files}"></a>
+	                 <label id="certificate3_filename" style="display:none;width: 100px;margin-left: 60%;margin-top: -26px;"></label>
+	            </div>
+	            <div class="config-row" style="margin-top:5px;display:none;">
+	                 <label for=certificate4 class="config-row-lable" lang="{text:certificate_ca}" style='margin-left: -210px;'></label>
+	                 <a id="certificate4" class="btn submit" style="border-color: #28b5d6;color: #333;border: 1px solid #ddd;background-color: #f7f7f7;" lang="{text:upload_files}"></a>
+	                 <label id="certificate4_filename" style="display:none;width: 100px;margin-left: 60%;margin-top: -26px;"></label>
+	            </div>
+           </div>
+           <div id="jifen" style="display:none;">
+                <div class="config-row">
+	                <label for="partner" class="config-row-lable">开户账号</label>
+	                <input id="partner" class="config-row-input " style="border-radius: 4px;">
+	            </div>
+	            <div class="config-row">
+	                <label for="password" class="config-row-lable">登录密码</label>
+	                <input id="password" class="config-row-input " style="border-radius: 4px;">
+	            </div>
+           
+           </div>
+        </form>
+    </div>
+</div>
+<div style="height: 50px;line-height: 40px;position: fixed;width: 98%;bottom:0;">
+	 <div class="save-btn" style="border-top: 1px solid #e7e7eb;text-align: right;">
+	     <a id="sms-config-save" class="btn btn-primary submit" lang="{text:save}" style="margin-right: 20px;">保存</a>
+	 </div>
+</div>
+<style type="text/css">
+    .menu-edit-area-wrapper{
+        padding: 0;
+    }
+    .config-row-input, #sms-config-passwd {
+        width: 300px;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row-select{
+        width: 314px;
+        height: 23px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+    .config-row{
+        padding: 3px 0;
+    }
+    .config-row-lable{
+        width: 100px;
+    }
+    #sms-config{
+        margin: 10px auto 0px auto;
+        text-align: center;
+    }
+    label.config-row-lable {
+        width: 230px;
+        display: inline-block;
+    }
+    .config-row-textarea{
+        border-color: rgb(152, 152, 152);
+        padding: 5px;
+        width: 302px;
+        max-height: 50px;
+        resize: none;
+        overflow: hidden;
+    }
+    .row-for-textarea{
+        position: relative;
+        top: -13px;
+    }
+    .btn-wrp{
+        max-width: 375px;
+        margin: 32px auto 0px auto;
+    }
+    #sms-config .config-row input:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    textarea:disabled{
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    select:disabled {
+        color: rgb(154, 154, 154);
+        background-color: rgb(247, 247, 247);
+        border: solid 1px lightgrey;
+    }
+    #error-tip{
+        display: none;
+        color: #F00F0F;
+        line-height: 20px;
+    }
+    .config-row-input.config-createTime{
+        width: 160px;
+        margin: 0 140px 0 0;
+        height: 32px;
+        line-height: 23px;
+        padding: 0 5px;
+        border: solid 1px rgb(152, 152, 152);
+    }
+
+
+
+
+
+
+</style>

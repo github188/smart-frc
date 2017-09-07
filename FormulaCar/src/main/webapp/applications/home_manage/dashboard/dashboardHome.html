@@ -1,0 +1,93 @@
+<div id="homePage" style="overflow:auto;background-color: #FFF;">
+	<div id="forCount" style="height:90px;margin-top:10px;margin-bottom: 30px;">
+		<div class="infobox">
+			<div class="divimage">
+				<img src='/FormulaCar/applications/home_manage/dashboard/images/money.png' style="width: 90%;"/>
+			</div>
+			<div class="box-image">
+				<div class="boxText" lang="text:turnover_today">今日营业额</div>
+				<div>
+					<span id="amounts" class="box-image-text">0</span>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="infobox">
+			<div class="divimage">
+				<img src='/FormulaCar/applications/home_manage/dashboard/images/count.png' style='width: 90%;' />
+			</div>
+			<div class="box-image">
+				<div class="boxText" lang="text:sale_today">今日销量</div>
+				<div>
+					<span id="counts" class="box-image-text">0</span>
+				</div>
+			</div>
+		</div>
+		<div class="infobox">
+			<div class="divimage">
+				<img src='/FormulaCar/applications/home_manage/dashboard/images/online.png' style='width: 90%;' />
+			</div>
+			<div class="box-image">
+				<div class="boxText" lang="text:car_opetaetion">赛车运营量</div>
+				<div>
+					<span id="online" class="box-image-text">0</span>
+				</div>
+			</div>
+		</div>
+		<div class="infobox">
+			<div class="divimage">
+				<img src='/FormulaCar/applications/home_manage/dashboard/images/offline.png' style='width: 90%;' />
+			</div>
+			<div class="box-image">
+				<div>
+					<div class="boxText">
+						<span lang="text:online_race_stage">在线赛台数</span>/<span lang="text:offline_race_stage">离线赛台数</span>
+					</div>
+				</div>
+				<div>
+					<span id="offline" class="box-image-text">0</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="chart" style="margin-top:10px;height:375px;margin-left:15px;margin-right:15px;">
+		<div  style="width:100%;height:100%;">
+			<table style="width:100%;height:100%;">
+				<tr>
+					<td style="width:55%;">
+						<div id="time-content" style="border: 1px solid #e7e7eb;height:100%;"></div>
+					</td>
+					<td style="width:45%;">
+						<div id="lines-content" style="border: 1px solid #e7e7eb;margin-left:10px;height:182px"></div>
+						<div id="column-content" style="border: 1px solid #e7e7eb;margin-left:10px;margin-top:10px;height:180px;"></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div style="height:450px;margin-left:15px;margin-right:15px;">
+		<div id="payStyle" style="width:100%;height:100%;">
+			<table style="width:100%;height:100%;">
+				<tr>
+					<td style="width:30%;">
+						<div>
+							<div id="todayTitle" style="height: 10%;text-align: center;color: #333333;font-size: 18px;fill: #333333;padding-top: 15px;"></div>
+							<div id="pay" style="height: 90%;text-align: center;">
+								<div style="margin-top: 5px;font-size: 18px;">
+									<span id="payTitle"></span>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td style="width:30%;">
+						<div id="deviceTop10" style="border: 1px solid #e7e7eb;margin-left:10px;height: 95%;"></div>
+					</td>
+					<td style="width:40%;">
+						<div id="goodsTop10" style="border: 1px solid #e7e7eb;margin-left:10px;height: 95%;"></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

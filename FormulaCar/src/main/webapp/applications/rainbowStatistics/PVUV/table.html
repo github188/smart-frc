@@ -1,0 +1,82 @@
+<!--"<div class='leftNav'></div>" +
+"<div class='right-content'>" +
+    "<div class='content-animate-container'>" +
+        "<div class='animate-left'></div>" +
+        "<div class='animate-right'></div>" +
+        "</div>" +
+    "</div>"-->
+<div class="leftNav"></div>
+<div class="rightContent">
+    <div class="rightCotent-animate-container">
+        <div id="animate-left" class="animate-module">
+            <div id="animate-left-toolbar">
+                <div class="toolbar-left "></div>
+                <div class="toolbar-right "></div>
+            </div>
+            <div id="animate-left-content"></div>
+        </div>
+        <div id="animate-right" class="animate-module">
+            <div id="animate-right-toolbar">
+                <div class="toolbar-left "></div>
+                <div class="toolbar-right animate-toolbar"></div>
+            </div>
+            <div id="animate-right-content"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .rightContent{
+        overflow: hidden;
+    }
+    .rightCotent-animate-container{
+        width:200%;
+        display: inline-block;
+        height: 100%;
+    }
+    .animate-module{
+        display: inline-block;
+        width: 50%;
+        height: 100%;
+        float: left;
+    }
+    #animate-right-content ,#animate-left-content{
+        padding: 0 10px;
+    }
+    .toolbar-left{
+        margin-left: 16px;
+        display: inline-block;
+        float: left;
+    }
+    .toolbar-right{
+        margin-right: 300px;
+        display: inline-block;
+        float: right;
+    }
+    .animate-toolbar{
+        line-height: 30px;
+    }
+    .toolbar-back-btn{
+        height: 20px;
+    }
+    .righttab-search-container{
+        display: inline-block;
+        line-height: 0px;
+        margin-right: 55px;
+    }
+    #righttab-search-input{
+        margin: 0 7px;
+    }
+    .righttab-search-searchbtn{
+        margin-top: -5px;
+    }
+    .win-tab-ctn{
+        height: 160px;
+        margin: 10px 10px 0 10px;
+    }
+    .win-char-ctn{
+        width:1150px;
+        height: 360px;
+    }
+
+</style>

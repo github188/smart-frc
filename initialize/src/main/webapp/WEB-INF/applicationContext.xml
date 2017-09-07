@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit" 
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+       http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.2.xsd">
+
+    <import resource="spring/rootContext.xml"/>
+    
+    <task:annotation-driven />
+    <task:executor id="executor" pool-size="5-100" queue-capacity="10000"/>
+    
+    <rabbit:queue-arguments id="haArgs">
+        <entry key="x-ha-policy" value="all" />
+    </rabbit:queue-arguments>
+    
+    <!-- RABBITMQ Organziation Initialize Handler CONFIG -->
+    <rabbit:queue id="newOrganization"
+                  name="dn.smart.vending.organization.initial" queue-arguments="haArgs"/>  	
+    <rabbit:topic-exchange name="dn.exchange.resource">
+        <rabbit:bindings>
+            <rabbit:binding pattern="dn.key.resource.add.*.1"
+                                        queue="dn.smart.vending.organization.initial" />
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+	
+	 
+    <rabbit:listener-container concurrency="5"
+                                   connection-factory="rabbitConnectionFactory" acknowledge="none"
+                                   message-converter="mqMessageConverter">
+        <rabbit:listener ref="organizationInitMessageHandler"
+                                 queues="dn.smart.vending.organization.initial" />
+    </rabbit:listener-container>
+    
+    <!-- Organziation Initialize handler END -->
+    
+    <rabbit:queue id="apStatusUpload"
+                  name="dn.smart.frc.ap.status.upload" queue-arguments="haArgs"/>  	
+    <rabbit:topic-exchange name="smartvm.exchange.frc.status.upload">
+        <rabbit:bindings>
+            <rabbit:binding pattern="smartvm.key.frc.status.upload"
+                                        queue="dn.smart.frc.ap.status.upload" />
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+	 
+    <rabbit:listener-container concurrency="10"
+                               connection-factory="rabbitConnectionFactory"
+                               acknowledge="auto" requeue-rejected="false"
+                               message-converter="mqMessageConverter">
+        <rabbit:listener ref="apConnectionMessageConsumer"
+                                 queues="dn.smart.frc.ap.status.upload" />
+    </rabbit:listener-container>
+    
+     <!-- AP Initialize handler START -->
+     <rabbit:queue id="APInitialize"
+                  name="dn.smart.frc.ap.initialize" queue-arguments="haArgs"/>  	
+    <rabbit:topic-exchange name="smartvm.exchange.frc.ap.initial">
+        <rabbit:bindings>
+            <rabbit:binding pattern="smartvm.key.frc.ap.initial"
+                                        queue="dn.smart.frc.ap.initialize" />
+        </rabbit:bindings>
+    </rabbit:topic-exchange>
+	 
+    <rabbit:listener-container concurrency="10"
+                               connection-factory="rabbitConnectionFactory"
+                               acknowledge="auto" requeue-rejected="false"
+                               message-converter="mqMessageConverter">
+        <rabbit:listener ref="apInitializeMessageConsumer"
+                                 queues="dn.smart.frc.ap.initialize" />
+    </rabbit:listener-container>
+      
+     <!-- AP Initialize handler END -->  
+    
+    <rabbit:admin id="amqpAdmin" connection-factory="rabbitConnectionFactory"/>
+    
+</beans>

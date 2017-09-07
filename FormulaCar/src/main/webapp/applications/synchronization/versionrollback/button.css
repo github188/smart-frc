@@ -1,0 +1,10 @@
+#yes_continue a,#no_continue a{
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+}
+#yes_continue.i_know_it a{
+    display: inline-block;
+    width: 55px;
+    text-align: center;
+}

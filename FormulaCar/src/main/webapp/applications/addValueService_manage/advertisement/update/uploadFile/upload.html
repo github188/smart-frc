@@ -1,0 +1,44 @@
+  	<div class="login">
+  		<div class="login-common">
+  		<form id="windowFormID" name="formen" class="formular" action=""  enctype="multipart/form-data" method="post" >
+  		<table style='margin-left:5%;margin-top:5%;' border='1' width='90%'>
+		  <tr style='height:40px;'>
+			 <td width='25%' height='20px' style='font-size: 14px;font-weight: bold;'><label style='color:red;'>*</label><label><span lang="text:material_name"></span></td>
+			 <td  height='20px'>
+			   <input style='border-radius: 4px;width: 270px;height: 22px;' type='text' id='mediaName' name='mediaName' />
+			   <input type='hidden' id='mediaId' name='mediaId' />
+			   <input type='hidden' id='md5' name='md5' />
+			   <input type='hidden' id='filename' name='filename' />
+			 </td>
+		  </tr>
+		  <tr>
+		     <td width='25%' height='20px' style='font-size: 14px;font-weight: bold;'><span lang="text:type"></span></td>
+			 <td id='form_packing' height='20px'>
+				<select id='mediaType'  name='mediaType' style='border-radius: 4px;width: 272px;height: 29px;'>
+	              <option value='1' lang="text:product_image"></option>
+	              <option value='2' lang="text:material_video"></option>
+	              <option value='3' lang="text:ad_txt"></option>
+	            </select>
+			 </td>
+		  </tr>
+		  <tr style='height:30px;'>
+			 <td width='25%' height='20px' style='font-size: 14px;font-weight: bold;'><label style='color:red;'>*</label><label><span lang="text:upload_files"></span></td>
+			 <td  height='20px'><span id='select_file_button'></span><span id='fileName'></span></td>
+		  </tr>
+		  <tr style='height:30px;'>
+			 <td width='25%' height='20px' style='font-size: 14px;font-weight: bold;'></td>
+			 <td  height='20px'><span>(文件大小不能超过500M)</span></td>
+		  </tr>
+		 <tr style='height:40px;'>
+			<td style="text-align:center;" colspan=2>
+			   <div style='text-align: right;width: 100%;margin-top: 10px;border-top: 1px solid #f2f2f2;'>
+			     <a id='input-submit' class='btn btn-primary submit' style='margin-top: 8px;' lang="text:save"></a>
+			     <a id='cancel' style='margin-left: 10px;margin-top: 8px;' class='btn btn-primary submit' lang="text:cancell_text"></a></div>
+			   </div>
+			</td>
+		 </tr>
+		</table>
+  		</form>
+  		</div>
+  	</div>
+  	

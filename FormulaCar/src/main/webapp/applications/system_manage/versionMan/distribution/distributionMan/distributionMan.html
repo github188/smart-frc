@@ -1,0 +1,112 @@
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:545px;margin:20px auto;width:950px;overflow:auto;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;margin-top: 10px;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#44b549;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:7px 90px;font-size: 14px;}
+#status li.active{background-color:#587950;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;}
+.page{padding:20px 30px;width:93%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px;   margin-top: 50px;text-align: right;}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+.page h1{ margin-top: 10px; }
+.page h4{height:22px; font-size:16px; border-bottom:1px dotted #ccc; padding-bottom:5px}
+.configtable {border: 1px solid rgba(115, 120, 126, 0.32);text-align: center;height:40px;}
+</style>
+
+<div id="deviceForm" >
+    <ul id="status">
+		<li class="active" id="tab1"><strong></strong><span lang="text:version_distribution"></span></li>
+	</ul>
+	<div class="items">
+	    <div class="page" id="baseInfo">
+	         <div style="height:425px;width:80%;">
+	           <div style="height: 190px;">
+	            <table width="100%">
+	            <tr>
+	               <td width="20%"><label style='color:red;'>*</label><label><span lang="text:version_description"></span></label></td>
+	               <td>
+	                 <input type="text" class="input"  id="desc" name="desc" style="width:200px;height:25px;"/>
+	               </td>
+	             </tr>
+	            <tr>
+	               <td width="20%"><label style='color:red;'>*</label><label><span lang="text:version_model"></span></label></td>
+	               <td>
+	                 <select id='versionModel'  name='versionModel' style='border-radius: 4px;width: 200px;height: 32px;'>
+	                 <option value='0' lang="text:please_select"></option>
+	                 <option value='aucma' lang="text:vender_name_aucma"></option>
+	                 <option value='fuji' lang="text:vender_name_fuji"></option>
+	                 <option value='easy_touch' lang="text:vender_name_easy_touch"></option>
+	                 <option value='junpeng' lang="text:vender_name_junpeng"></option>
+	                 <option value='baixue' lang="text:vender_name_baixue"></option>
+	                 </select>
+	                 </td>
+	             </tr>
+	             <tr>
+	               <td width="20%"><label style='color:red;'>*</label><label><span lang="text:version_allot_name"></span></label></td>
+	               <td>
+	                 <select id='modelName'  name='modelName' style='border-radius: 4px;width: 200px;height: 32px;  margin-top: 8px;'></select>
+	                 <input type="text" class="input"  id="model" name="model" disabled="disabled" style="width:200px;height:25px;display:none;margin-left: 0px;"/>
+	                 <input type="hidden" class="input"  id="modelHidden" name="modelHidden" />
+	                 </td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"><label style='color:red;'>*</label><label><span lang="text:version_number"></span></label></td>
+	                 <td>
+	                 <select id='version'  name='version' style='border-radius: 4px;width: 200px;height: 32px;margin-top: 8px;'></select>
+	                 <input type="text" class="input"  id="versions" name="versions" disabled="disabled" style="width:200px;height:25px;display:none;margin-left: 0px;"/>
+	                 <input type="hidden" class="input"  id="versionHidden" name="versionHidden" />
+	                 </td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"><label style='color:red;'>*</label><label><span lang="text:version_config"></span></label></td>
+	                 <td>
+	                 <select id='version_config'  name='version_config' style='border-radius: 4px;width: 200px;height: 32px;margin-top: 8px;'>
+	                 <option value='0' lang="text:please_select"></option>
+	                 </select>
+	                 </td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"><label style='color:red;'>*</label><label><span lang="text:versions_set"></span></label></td>
+	                 <td></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"></td>
+	                 <td><div id="versionlist" style="height: 185px;overflow: auto;border: 1px #D7C9C9 solid;"></div></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"><label style='color:red;'>*</label><label><span lang="text:wechat_url"></span></label></td>
+	                 <td><input type="text" class="input"  id="server" name="server" style="width:200px;height:25px;"/></td>
+	             </tr>
+	             <tr>
+	                 <td width="20%"><label style='color:red;'>*</label><label><span lang="text:organization_name"></span></label></td>
+	                 <td>
+	                  <table>
+	                     <tr>
+	                       <td>
+	                          <input type="text" class="input"  id="oName" name="oName" style="width:200px;height:25px;"/>
+	                          <input type="hidden" class="input"  id="oidVer" name="oidVer" />
+	                       </td>
+	                       <td>
+	                          <label id="right" style='color:green;display:none;margin-left: 10px;font-size: 25px;'>√</label>
+	                          <label id="error" style='color:red;display:none;margin-left: 10px;font-size: 25px;'>×</label>
+	                       </td>
+	                       <td><input type="button" class='btn btn-primary submit' id="verificationBase" style="margin-left:10px;"/></td>
+	                     </tr>
+	                  </table>
+	                  </td>
+	             </tr>
+	            </table>
+	           </div>
+	         </div>
+	         <h1></h1>
+	         <div class="btn_nav">
+                  <input type="button" class='btn btn-primary submit' id="saveBase" style="margin-left:10px;"/>
+             </div>
+	    </div>
+	</div>
+</div>

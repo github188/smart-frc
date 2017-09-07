@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" charset="utf-8">
+    <title></title>
+</head>
+<body>
+<p style="text-align: center;font-size: 20px;font-weight: bold">
+    Success!
+</p>
+<p id="redirect_home" style="text-align: center;font-weight: bold;font-size: 20px"></p>
+<script>
+    function callback(data){
+        var scriptELe=document.createElement("script");
+        scriptELe.type="text/javascript";
+        scriptELe.src="https://graph.qq.com/user/get_user_info?access_token="+access_token+"&oauth_consumer_key=101149405&openid="+data.openid;
+        document.body.appendChild(scriptELe);
+        scriptELe.onload=function(e){
+            console.log(this.innerHTML);
+        };
+    }
+</script>
+<script>
+//    var pDom=document.getElementById("redirect_home");
+//    var tencount=10;
+    <!--var loop=setInterval(function(){-->
+//        <!--tencount-=1;-->
+//        <!--pDom.innerHTML=tencount+"秒后跳转至<a href='http://www.inhand.com.cn'>映翰通</a>";-->
+//        <!--if(tencount==0){-->
+//            <!--window.location.href="http://www.inhand.com.cn";-->
+//            <!--clearInterval(loop);-->
+//        <!--}-->
+//    <!--},1000);-->
+function formatData(uri,jsonObj){
+    var urlParams="";
+    for(i in jsonObj){
+        urlParams=urlParams+i+"="+encodeURIComponent(jsonObj[i])+"&";
+    }
+    urlParams=urlParams;
+    return uri+"?"+urlParams;
+};
+var uri=window.location.href;
+var prenum=uri.indexOf("=");
+var aftnum=uri.indexOf("&");
+var access_token=uri.substring(prenum+1,aftnum);
+//console.log(authorization_code);
+var scriptELe=document.createElement("script");
+scriptELe.type="text/javascript";
+var uri="https://graph.qq.com/oauth2.0/me";
+var jsonObj={
+//    "grant_type":"authorization_code",
+//    "as_type":1,
+    "access_token":access_token
+//    "redirect_url":cloud.qqCallBackPage
+};
+var url=formatData(uri,jsonObj);
+scriptELe.src=url;
+document.body.appendChild(scriptELe);
+</script>
+</body>
+</html>

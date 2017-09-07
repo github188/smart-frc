@@ -1,0 +1,354 @@
+define(function(require){
+	require("cloud/base/cloud");
+            var home = {
+                    name : "Home",
+                    title : locale.get("home"),
+                    order:0,
+                    id : "nav-main-left-app-home",
+                    cls : "nav-main-left-app-home",
+                    subNavs : [{
+                        name : "home",
+                        defaultOpen:true,
+                        order:0,
+                        text : locale.get("home"),
+                        id : "nav-subnav-home-home",
+                        cls : "nav-subnav-home-home",
+                        app : "homePage",
+                        url :'./homepage/homepage'
+                    }]
+            };
+            var system = {
+                name : "System",
+                title : locale.get("system"),
+                order:2,
+                id : "nav-main-left-app-system",
+                cls : "nav-main-left-app-system",
+                subNavs : [{
+                    name : "user",
+                    text : locale.get("user"),
+                    order:2,
+                    defaultOpen:true,
+                    id : "nav-subnav-system-user",
+                    cls : "nav-subnav-system-user",
+                    subViews : [{
+                        name : "List",
+                        title : locale.get("userList"),
+                        order:0,
+                        defaultOpen:true,
+                        id : "nav-sub-view-user-list",
+                        cls : "nav-sub-view-list",
+                        app : "userList",
+                        url : "./system/user/table"
+                    }]
+                },{
+                    name : "role",
+                    text : locale.get("role"),
+                    order:4,
+                    defaultOpen:false,
+                    id : "nav-subnav-system-role",
+                    cls : "nav-subnav-system-role",
+                    subViews : [{
+                        name : "List",
+                        title: locale.get("roleList"),
+                        order:0,
+                        defaultOpen:true,
+                        id : "nav-sub-view-role-list",
+                        cls : "nav-sub-view-list",
+                        app : "roleList",
+                        url : "./system/role/table"
+                    }]
+                },{
+                    name : "tag",
+                    text : locale.get("tag"),
+                    order:0,
+                    defaultOpen:false,
+                    id : "nav-subnav-system-tag",
+                    cls : "nav-subnav-system-tag",
+                    subViews : [{
+                        name : "List",
+                        title:locale.get("tagList"),
+                        order:0,
+                        defaultOpen:true,
+                        id : "nav-sub-view-tag-list",
+                        cls : "nav-sub-view-list",
+                        app : "tagList",
+                        url : "./system/tag/table"
+                    }]
+                },
+                {
+                    name : "organ",
+                    text : locale.get("organ_infomation"),
+                    order:3,
+                    defaultOpen:false,
+                    id : "nav-subnav-system-organ",
+                    cls : "nav-subnav-system-organ",
+                    app : "tokenList",
+                    url : "./system/organ/org-info-token"
+                },
+                {
+                	name : "group",
+                	text : locale.get("permissions_group_management"),
+                	order:1,
+                	defaultOpen:false,
+                	id : "nav-subnav-system-group",
+                	cls : "nav-subnav-system-group",
+                	app : "groupList",
+                	url : "./system/group/group"
+                }
+                ]    
+            };
+            var report = {
+                    name : "Report",
+                    title : locale.get("reports"),
+                    order:1,
+                    id : "nav-main-left-app-report",
+                    cls : "nav-main-left-app-report",
+                    subNavs : [{
+                        name : "summary",
+                        text : locale.get("summary"),
+                        order:0,
+                        defaultOpen:false,
+                        id : "nav-subnav-report-summary",
+                        cls : "nav-subnav-report-summary",
+                        app : "summaryList",
+                        url : "./reports/summary/summary"
+                    },{
+                        name : "online",
+                        text : locale.get("online_statistics"),
+                        order:1,
+                        defaultOpen:false,
+                        id : "nav-subnav-system-online",
+                        cls : "nav-subnav-system-online",
+                        app : "onlineList",
+                        url : "./reports/online/report/report" 
+                    },{
+                        name : "flow",
+                        text : locale.get("traffic_statistics"),
+                        order:2,
+                        defaultOpen:true,
+                        id : "nav-subnav-system-flow",
+                        cls : "nav-subnav-system-flow",
+                        app : "trafficList",
+                        url : "./reports/flow/flowIndex"
+                    }]    
+                };
+            
+            var device = {
+                    name : "Device",
+                    title : locale.get("device"),
+                    order:3,
+                    id : "nav-main-left-app-device",
+                    cls : "nav-main-left-app-device",
+                    subNavs : [{
+                        name : "gateway",
+                        text : locale.get("gateway"),
+                        order:0,
+                        defaultOpen:false,
+                        id : "nav-subnav-device-device",
+                        cls : "nav-subnav-device-device",
+                        subViews : [{
+                            name : "List",
+                            title: locale.get("deviceList"),
+                            order:0,
+                            defaultOpen:false,
+                            id : "nav-sub-view-gateway-list",
+                            cls : "nav-sub-view-list",
+                            app : "deviceList",
+                            url : "./device/mydevice/table"
+                        },{
+                            name : "Overview",
+                            title:locale.get("deviceOverview"),
+                            order:1,
+                            defaultOpen:true,
+                            id : "nav-sub-view-gateway-overview",
+                            cls : "nav-sub-view-overview",
+                            app : "deviceOverview",
+                            url : "./device/mydevice/overview"
+                        }]
+                    },{
+                        name : "controller",
+                        text : locale.get("controller"),
+                        order:1,
+                        defaultOpen:false,
+                        id : "nav-subnav-device-controller",
+                        cls : "nav-subnav-device-controller",
+                        subViews : [{
+                            name : "List",
+                            title: locale.get("plcList"),
+                            order:0,
+                            defaultOpen:false,
+                            id : "nav-sub-view-controller-list",
+                            cls : "nav-sub-view-list",
+                            app : "plcList",
+                            url : "./device/mycontroller/table"
+                        },{
+                            name : "Overview",
+                            title: locale.get("plcOverview"),
+                            order:1,
+                            defaultOpen:true,
+                            id : "nav-sub-view-gateway-overview",
+                            cls : "nav-sub-view-overview",
+                            app : "plcOverview",
+                            url : "./device/mycontroller/overview"
+                        }]
+                    },{
+                        name : "model",
+                        text : locale.get("model"),
+                        order:2,
+                        defaultOpen:true,
+                        id : "nav-subnav-device-model",
+                        cls : "nav-subnav-device-model",
+                        subViews : [{
+                            name : "Overview",
+                            title: locale.get("modelOverview"),
+                            order:0,
+                            defaultOpen:true,
+                            id : "nav-sub-view-model-overview",
+                            cls : "nav-sub-view-overview",
+                            app : "modelOverview",
+                            url : "./device/mymodel/overview",                    
+                        }
+                       ]
+                    }]
+                };
+            
+            var site = {
+                name : "Site",
+                title : locale.get("site"),
+                order:4,
+                id : "nav-main-left-app-site",
+                cls : "nav-main-left-app-site",
+                subNavs : [{
+                    name : "site",
+                    text : locale.get("site"),
+                    order:0,
+                    defaultOpen:false,
+                    id : "nav-subnav-site-site",
+                    cls : "nav-subnav-site-site",
+                    subViews : [{
+                        name : "List",
+                        title: locale.get("siteList"),
+                        order:3,
+                        defaultOpen:false,
+                        id : "nav-sub-view-site-list",
+                        cls : "nav-sub-view-list",
+                        app : "siteList",
+                        url : "./site/mysite/table"
+                    },{
+                        name : "Overview",
+                        title:locale.get("siteOverview"),
+                        order:1,
+                        defaultOpen:false,
+                        id : "nav-sub-view-site-overview",
+                        cls : "nav-sub-view-overview",
+                        app : "siteOverview",
+                        url : "./site/mysite/overview"
+                    },{
+                        name : "Gis",
+                        title: locale.get("siteGis"),
+                        order:0,
+                        defaultOpen:false,
+                        id : "nav-sub-view-site-gis",
+                        cls : "nav-sub-view-gis",
+                        app : "siteGis",
+                        url : "./site/mysite/gis"
+                    },{
+                        name : "Scada",
+                        title: locale.get("siteScada"),
+                        order:2,
+                        defaultOpen:true,
+                        id : "nav-sub-view-site-scada",
+                        cls : "nav-sub-view-scada",
+                        app : "siteScada",
+                        url : "./site/mysite/scada/scadaview"
+                    }]
+                },{
+                	name : "globalScada",
+                    text : locale.get("global"),
+                    order:1,
+                    defaultOpen:false,
+                    id : "nav-subnav-site-global",
+                    cls : "nav-subnav-site-global",
+                    app : "globalScada",
+                    url : "./site/globalScada/globalview"
+                },
+                {
+                	name:"devicetouch",
+                	text: locale.get("device_express"),
+                	order:2,
+                	defaultOpen:true,
+                	id : "nav-subnav-site-devicetouch",
+                	cls : "nav-subnav-site-devicetouch",
+                	app : "deviceTouch",
+                	url : "./site/maintain/maintain"
+                }],
+                renderer : function(){
+                }
+            };
+            var notice = {
+                name : "Notice",
+                title : locale.get("notice"),
+                order:5,
+                id : "nav-main-left-app-notice",
+                cls : "nav-main-left-app-notice",
+                subNavs : [{
+                    name : "alarm",
+                    text : locale.get("alarm"),
+                    order:0,
+                    defaultOpen:false,
+                    id : "user-nav-notice-alarm",
+                    cls : "user-nav-notice-alarm",
+                    app : "alarmList",
+                    url : "./notice/alarm/table/all"
+                },{
+                    name : "log",
+                    text : locale.get("log"),
+                    order:1,
+                    defaultOpen:true,
+                    id : "nav-subnav-notice-log",
+                    cls : "nav-subnav-notice-log",
+                    app : "logList",
+                    url : "./notice/log/behav/behav"
+                }]
+            };
+            
+            var task = {
+                    name : "Task",
+                    title : locale.get("task"),
+                    order:6,
+                    id : "nav-main-left-app-task",
+                    cls : "nav-main-left-app-task",
+                    subNavs : [{
+                        name : "task",
+                        text : locale.get("task"),
+                        order:0,
+                        defaultOpen:true,
+                        id : "nav-subnav-task-tasks",
+                        cls : "nav-subnav-task-tasks",
+                        app : "taskList",
+                        url : "./task/tasking/tasks"
+                    }]
+            };
+            var organ = {
+                    name : "Organization",
+                    title : locale.get("organization"),
+                    order:7,
+                    id : "nav-main-left-app-organ",
+                    cls : "nav-main-left-app-organ",
+                    subNavs : [{
+                        name : "organ",
+                        text : locale.get("organization"),
+                        order:0,
+                        defaultOpen:true,
+                        id : "nav-subnav-organ-organ",
+                        cls : "nav-subnav-organ-organ",
+                        app : "organizationList",
+                        url : "./organization/table"
+                    }]
+            };
+            var appConfig = {
+            		navArr:[home,system,report,device,site,notice,task,organ],
+            		defaultApp:	"homePage"	
+            };
+	return appConfig;
+})

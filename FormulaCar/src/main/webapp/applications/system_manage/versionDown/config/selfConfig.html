@@ -1,0 +1,47 @@
+<div id="automat_cargo_road_config">
+   <div style="height: 300px;overflow: auto;">
+       <table width="100%">
+	       <tr>
+	           <td width="10%"><label><span lang="text:product_manufacturer+:"></span></label></td>
+	           <td>
+	                <input type="text" class="input"  id="vendor" name="vendor" disabled="disabled" style="width:200px;height:25px;margin-left: 0px;"/>
+	          </td>
+	       </tr>
+	       <tr>
+	           <td width="10%"><label><span lang="text:organization_name+:"></span></label></td>
+	           <td>
+	                <input type="text" class="input"  id="orgName" name="orgName" disabled="disabled" style="width:200px;height:25px;margin-left: 0px;"/>
+	          </td>
+	      </tr>
+	      <tr>
+	           <td width="8%"><label><span lang="text:shelf_config_app+:"></span></label></td>
+	           <td>
+	              <table style="width:100%;border: 1px solid rgba(115, 120, 126, 0.32);" id="configTable">
+	                  <thead class="configtable">
+                          <tr class="configtable">
+                              <th width="10%" class="configtable" lang="text:category"></th>
+                              <th width="10%" class="configtable" lang="text:device_shelf_number"></th>
+                              <th width="10%" class="configtable" lang="text:vender"></th>
+                               <th width="10%" class="configtable" lang="text:automat_list_type"></th>
+                              <th width="10%" class="configtable" lang="text:vmc_cabinat_num"></th>
+                              <th width="12%" class="configtable" lang="text:modelname"></th>
+                              <th width="12%" class="configtable" lang="text:channel_template"></th>
+                              <th width="8%" class="configtable" lang="text:plug_in"></th>                            
+                              <th width="10%" class="configtable" lang="text:serial"></th>  
+                              <th width="8%"    class="configtable" lang="text:operate"></th>
+                          </tr>
+                       </thead>
+                       <tbody id="editConfig">
+                       </tbody>
+	              </table>
+	           </td>
+	      </tr>
+	   </table>
+   </div>
+   <div style='height:40px;'>
+	     	<div style='text-align: right;width: 100%;margin-top: 15px;border-top: 1px dotted #ccc;'>
+	   		   <a id='model_last_step' style='margin-top: 8px;' class='btn btn-primary submit' lang="text:price_step"></a>
+	   		   <a id='model_submit' class='btn btn-primary submit' style='margin-left: 10px;margin-top: 8px;' lang="text:complete"></a>
+	     	</div>
+   </div>
+</div>

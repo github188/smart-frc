@@ -1,0 +1,71 @@
+<div>
+  <div>
+    <table style="width:80%;">
+      <tr>
+        <td style="width:30%;"><span id="lineName" style="color:#09c;font-size:14px;"></span></td>
+        <td><span id="allAmount" style="color:rgb(132, 196, 74);font-size:14px;"></span></td>
+        <td><span id="allSum" style="color:rgb(132, 196, 74);font-size:14px;"></span></td>
+      </tr>
+      <tr>
+        <td colspan="3"><span id="location" style="color:#09c;font-size:14px;"></span></td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <div style="background-color: #ddd;height:25px;line-height:25px;"><span>此处共有</span><span id="sum"></span><span>台售货机</span></div>
+    <div id="deviceMain"  style="position: relative;margin-top:2px;">
+	   <div id="device_left" style="float:left;width:20%;height:370px;overflow:auto;">
+	      <table id="deviceTable" style="width:100%;"></table>
+	   </div>
+	   <div id="device_right" style="width:80%;margin-left:20%;border-left: 1px solid #97999C;">
+	     <div class="monitor-info ui-helper-clearfix">
+           <div class="detail-head-tab">
+             <ul class="detail-head-ul">
+               <li id="shelfinfo"><span>货道信息</span></li>
+               <li id="detailinfo"><span>详情信息</span></li>
+               <li id="tradeinfo"><span>交易信息</span></li>
+               <li id="faultinfo"><span>故障信息</span><span class="faults"></span></li>
+             </ul>
+           </div>
+          <div class="detail-content" style="margin:2px;width:96%;"></div>
+        </div>
+	   </div>
+   </div>
+  </div>
+</div>
+<style type="text/css">
+.faults{
+
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    border-radius: 15px;
+    font-size: 12px;
+    background: #FF0000;
+    color: white;
+    display: none;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 5px;
+    position: absolute;
+}
+.monitor-info{
+  width:500px;
+}
+.detail-head-ul{
+border-bottom: 2px solid #EEEEE0;
+}
+.detail-head-ul li{
+	display: inline-block;
+    width: 23%;
+    line-height: 35px;
+    cursor: pointer;
+    text-align: center;
+}
+.detail-content{
+    height: 365px;
+    overflow: auto;
+}
+</style>

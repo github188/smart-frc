@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="/cloud/base/loader.js"></script>
+</head>
+<body>
+<div id="container" style=""></div>
+
+<script type="text/javascript">
+    require(["cloud/base/cloud"],function(){
+        require(["cloud/components/window","cloud/lib/plugin/highstock.src"],function(Window){
+
+            var chartwindow =  new Window({
+                container : "body",
+                title : "charwin",
+                top: "center",
+                left: "center",
+                height: 500,
+                width: 900,
+                mask: true,
+                content : $("<div class='chart-container'></div>"),
+                events : {
+                    "onClose": function() {
+                        chartwindow = null;
+                    },
+
+                    scope : this
+                }
+            })
+            chartwindow.show();
+
+            $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
+                // Create the chart
+                $('.chart-container').highcharts('StockChart', {
+                    chart:{
+                        type:"column"
+                    },
+                    xAxis:[{
+                        type: 'datetime',
+                        plotBands: [{
+                            from: Date.UTC(2010, 9, 6),
+                            to: Date.UTC(2010, 10,6),
+                            color: 'rgba(68, 170, 213, .1)'
+                        }]
+                    },{
+                        linkedTo: 0,
+                        opposite: true,
+                        dateTimeLabelFormats: {
+                            second: '%Y-%m-%d<br/>%H:%M:%S',
+                            minute: '%Y-%m-%d<br/>%H:%M',
+                            hour: '%Y-%m-%d<br/>%H:%M',
+                            day: '%Y<br/>%m-%d',
+                            week: '%A, %b %e, %Y',
+                            month: '%A, %b %e, %Y',
+                            year: '%A, %b %e, %Y'
+                        }
+                    }],
+
+                    rangeSelector : {
+                        selected : 1,
+                        inputEnabled: $('#container').width() > 480
+                    },
+
+                    title : {
+                        text : 'AAPL Stock Price'
+                    },
+
+                    series : [{
+                        name : 'AAPL',
+                        data : data,
+                        tooltip: {
+                            valueDecimals: 2
+                        },
+                        dataGrouping:{
+                            groupPixelWidth:40,
+//                            smoothed:true,
+                            forced:true,
+
+                            units: [
+                                ["day",[1]],
+                                ['week',[1]],
+                                ["month",[1]]
+                            ]
+
+//                            approximation:function(){
+//                                console.log(arguments);
+//                            }
+                        }
+                    }]
+                });
+            });
+        });
+    });
+
+
+</script>
+</body>
+</html>

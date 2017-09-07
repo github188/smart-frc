@@ -1,0 +1,42 @@
+.transaction-toolbar-container{
+    display: inline-block;
+    line-height: 32px;
+    height: 32px;
+}
+#transaction-toolbar-total{
+    color: rgb(181, 63, 119);
+    font-weight: bolder;
+}
+
+.transaction-toolbar-total ,.transaction-toolbar-time ,.transaction-toolbar-package ,.transaction-toolbar-name {
+    margin-left: 15px;
+}
+
+#transaction-toolbar-time{
+    width: 65px;
+    margin-left: 5px;
+}
+
+.transaction-toolbar-package{
+    margin-right: 5px;
+}
+#transaction-toolbar-name{
+    margin-left: 5px;
+    height: 20px;
+}
+.transaction-toolbar-searchbtn,.transaction-toolbar-changebtn{
+    margin-left: 15px;
+    line-height: 20px;
+    display: inline-block;
+}
+#transaction-toolbar-onlyover{
+    margin-left: 15px;
+    position: relative;
+    top: 3px;
+}
+#transaction-toolbar-selectall{
+    margin-left: 15px;
+}
+.transaction-toolbar-selectall-text{
+    margin-left: 5px;
+}

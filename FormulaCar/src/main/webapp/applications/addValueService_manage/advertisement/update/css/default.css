@@ -1,0 +1,33 @@
+.blue {
+        background:#bcd4ec;  
+}
+.channelTable{
+	border: 1px solid rgba(115, 120, 126, 0.32);
+	text-align: center;
+	height:40px;
+}
+.delete_ad{
+	
+	background: transparent url(../images/error.png) no-repeat 50% 0px;
+    background-size: 25px;
+    height: 25px;
+    width: 25px;
+    position: relative;
+   /*  top: 64px; */
+    left: 828px;
+    display: inline-block;
+	
+}
+.delete_ad_tp{
+	
+	background: transparent url(../images/error_tp.png) no-repeat 50% 0px;
+    background-size: 25px;
+    height: 25px;
+    width: 25px;
+    position: relative;
+    /* top: 64px; */
+    left: 828px;
+    display: inline-block;
+    cursor: pointer;
+	
+}

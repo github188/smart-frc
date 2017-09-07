@@ -1,0 +1,18 @@
+{
+    "result":[{
+        "id":"1",
+        "title":"标题1",
+        "author":"作者1",
+        "summary":"摘要1",
+        "showInContent":false,
+        "content":"正文1",
+        "originalLink":"http://www.baidu.com",
+        "mediaUri":"53BCAD0D0CF2028D1EF1FE93",
+        "mediaType":"news",
+        "groupId":"undefined",
+        "state":1,
+        "isCover":true,
+        "createTime":1413020118150,
+        "updateTime":1413020118150
+    }]
+}

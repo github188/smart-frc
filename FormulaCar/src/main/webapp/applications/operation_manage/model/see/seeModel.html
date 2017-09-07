@@ -1,0 +1,121 @@
+<style>
+    #deviceForm {border:1px solid #CFD8CE;font-size:12px;height:520px;margin:20px auto;width:950px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+    #deviceForm .items{width:100%; clear:both; position:absolute;}
+    #deviceForm .right{float:right;}
+    #deviceForm #status{height:35px;background:#28b5d6;}
+    #status li{float:left;color:#fff;padding:8px 70px;font-size: 14px;}
+    #status li.active{background-color:#09c;font-weight:normal;}
+    .input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;}
+    .page{padding:10px 15px;width:100%;float:left;}
+    .page h3
+    {
+      font-size: 14px;
+      border-bottom: 1px dotted #ccc;
+      margin-bottom: 20px;
+      padding: 5px;
+      text-align: left;
+    }
+    .selfTable{
+       background: black;
+       margin: 3px;
+       color: white;
+       width: 20px;
+       height: 20px;
+       text-align: center;
+       border-radius: 4px;
+       font-size: 10px;
+       line-height: 20px;
+       cursor: pointer;
+    }
+      .selfTable_grey{
+          background: #C3B8B8;
+          margin: 3px;
+          color: white;
+          width: 15px;
+          height: 15px;
+          text-align: center;
+          font-size: 10px;
+          line-height: 15px;
+    }
+      .selfTable_red{
+          background: #BD2F34;
+          margin: 3px;
+          color: white;
+          width: 15px;
+          height: 15px;
+          text-align: center;
+          border-radius: 10px;
+          font-size: 14px;
+          line-height: 15px;
+          cursor: pointer;
+    }
+    .selfTableOther{
+       background: #5694D9;
+       margin: 3px;
+       color: white;
+       width: 40px;
+       height: 15px;
+       text-align: center;
+       font-size: 10px;
+       line-height: 15px;
+       cursor: pointer;
+    }
+    .page h3 em{font-size:12px; font-weight:500; font-style:normal}
+    .page p{line-height:24px;}
+    .page p label{font-size:14px; display:block;}
+    .btn_nav{height:36px; line-height:36px; margin-right: 4.6%;margin-top: 3%;text-align: right;}
+    .prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+    .page h1{ border-bottom:1px dotted #ccc;margin-top: 55%; }
+    .configtable {border: 1px solid rgba(115, 120, 126, 0.32);text-align: center;height:40px;}
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+        <li class="active" id="tab1" style="height: 19px;"><span>机型信息</span></li>
+    </ul>
+    <div class="items">
+        <div class="page" id="baseInfo">
+            <div style="height:400px;overflow: auto;float:left;width:98%;">
+                <div style="height: 190px;">
+                    <table>
+                        <tr>
+                            <td width="15%"><label style='color:red;'></label><label><span lang="text:product_manufacturer"></span></label></td>
+                            <td>
+                              <select id="vender" name="vender" style="width:200px;height: 25px;" disabled="disabled"></select>
+                              <span id='vender_add_button' style="display:none;"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="15%"><label style='color:red;'></label><label><span lang="text:purchase_model"></span></label></td>
+                            <td><input type="text" class="input" id="modelName" name="modelName" disabled="disabled" style="width:200px;height:25px;"/></td>
+                        </tr>
+                        <tr>
+                            <td width="15%"><label style='color:red;'></label><label><span lang="text:device_shelf_type"></span></label></td>
+                            <td>
+                               <select id="machineType" name="machineType" style="width:200px;height: 25px;" disabled="disabled">
+                               </select>
+                            </td>
+                        </tr>
+                        <tr style="height:51px;">
+                            <td width="15%"><label><span>货道信息</span></label></td>
+                            <td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="15%"></td>
+                            <td>
+                                <div id='editSelf' style='width:100%;text-align: left;margin-top: -20px;overflow: auto;border: 1px solid #e7e7eb;'>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div style='height:40px;margin-top: 420px;width: 900px;'>
+	   	       <div style='text-align: right;width: 100%;border-top: 1px dotted #ccc;'>
+	   		     <a id='closeBase' class='btn btn-primary submit' style='margin-left: 10px;margin-top: 8px;'>关闭</a>
+	   	      </div>
+        </div>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,6 @@
+{
+    "version":"优途云1.0",
+    "description":"后端连接42.96.188.34",
+//    "organId":"53DEEEA7E826667304000716",
+	"feature":"无smscodeId；不兼容截取oid;石天博oid"
+}

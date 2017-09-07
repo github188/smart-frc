@@ -1,0 +1,115 @@
+.mask-wrapper,  .img-mask,   .mask-bg, .mask-img {
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 80px; 
+}
+
+.mask-wrapper {
+    top: 0px;
+    left: 5px;
+    overflow: hidden;
+    display:none;
+}
+
+.mask-img {
+    background: transparent url(../images/saledonw.png) no-repeat 50% 10px;
+    background-size: 85px;
+}
+
+.cash{
+    background: transparent url(../images/money.png) no-repeat 50%;
+    background-size: 25px;
+    height: 15px;
+    width: 25px;
+    display: none;
+    margin-left: 5px;
+}
+.card{
+    background: transparent url(../images/cardg.png) no-repeat 50%;
+    background-size: 25px;
+    height: 15px;
+    width: 25px;
+    display: none;
+    margin-left: 5px;
+}
+.sales{
+    background: transparent url(../images/trend.png) no-repeat 50%;
+    background-size: 25px;
+    height: 15px;
+    width: 25px;
+    display: none;
+    margin-left: 5px;
+}
+.site{
+    background: transparent url(../images/location.png) no-repeat 50%;
+    background-size: 25px;
+    height: 15px;
+    width: 25px;
+    display: none;
+}
+.vending{
+    background: transparent url(../images/number.png) no-repeat 50%;
+    background-size: 25px;
+    height: 15px;
+    width: 25px;
+    display: none;
+    margin-left: 5px;
+
+}
+.correct{
+    background: transparent url(../images/correct.png) no-repeat 50%;
+    background-size: 35px;
+    height: 15px;
+    width: 25px;
+    display: inline-block;
+    margin-left: 15px;
+}
+.refresh{
+	background: transparent url(../images/refresh.png) no-repeat 50%;
+    background-size: 25px;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    position: absolute;
+    right: 40px;
+    top: 4px;
+    cursor: pointer;
+    opacity: 0.7;
+	
+}
+
+.rmb{
+	background: transparent url(../images/rmb.png) no-repeat 50%;
+    background-size: 22px;
+    height: 10px;
+    width: 12px;
+    display: inline-block;
+    margin-left: 0px;
+}
+.printer{
+	background: transparent url(../images/printer.png) no-repeat 50%;
+    background-size: 25px;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    position: absolute;
+    right: 40px;
+    top: 4px;
+    cursor: pointer;
+    opacity: 0.7;
+	
+}
+.abnormal{
+    background: transparent url(../images/tips.png) no-repeat 50%;
+    background-size: 17px;
+    height: 17px;
+    width: 17px;
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    position: absolute;
+    right: 80px;
+    top: 8px;
+
+}

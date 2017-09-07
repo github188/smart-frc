@@ -1,0 +1,21 @@
+.infobox_device {
+display: inline-block;
+width: 260px;
+height: 60px;
+color: #555;
+background-color: #FFF;
+box-shadow: none;
+border-radius: 0;
+margin: 25px;
+padding: 0px;
+border: 1px dotted;
+border-color: #d8d8d8!important;
+vertical-align: middle;
+text-align: left;
+position: relative;
+}
+.infobox-icon {
+display: inline-block;
+vertical-align: top;
+width: 44px;
+}

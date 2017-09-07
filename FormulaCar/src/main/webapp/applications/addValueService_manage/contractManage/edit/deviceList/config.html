@@ -1,0 +1,39 @@
+<div id="automat_cargo_road_config"  align='center' style="width:100%;margin-top: 5px;">
+     <div id='cargo_road_info' style='height:420px;width:98%;overflow: auto;'>
+           <div style="height: 190px;">
+	            <table width="100%" style="border-collapse: separate;border-spacing: 20px;">
+	              <tr>
+	                 <td width="20%"><label style='color:red;'>*</label><label><span lang="text:all_vending_list"></span></label></td>
+	                 <td><input type="button" class='btn btn-primary submit' id="upload" /></td>
+	             </tr>
+	              <tr>
+	                 <td width="20%"></td>
+	                 <td>
+	                     <table style="width:80%;border: 1px solid rgba(115, 120, 126, 0.32);margin-top: 5px;table-layout:fixed;word-wrap:break-word;" id="configTable">
+	                         <thead class="configtable">
+                                <tr class="configtable">
+                                  <th width="200" class="configtable"><span lang="text:trade_automat_number"></span></th>
+                                  <th width="150" class="configtable"><span lang="text:rent_amount"></span></th>
+                                  <th width="150" class="configtable"><span lang="text:background_service_charge"></span></th>
+                                  <th width="100" class="configtable"><span lang="text:operate"></span></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                  <th width="100" class="configtable" style="display: none;"></th>
+                                </tr>
+                             </thead>
+                             <tbody id="editConfig">
+                             </tbody>
+	                     </table>
+	                   
+	                 </td>
+	             </tr>
+	            </table>
+	           </div>
+         
+     </div>
+     <div style='height:40px;'>
+	   	<div style='text-align: right;width: 100%;margin-top: 15px;border-top: 1px dotted #ccc;'>
+	   		<a id='model_last_step' style='margin-top: 8px;' class='btn btn-primary submit' lang="text:price_step"></a>
+	   		<a id='model_finish' style='margin-top: 8px;margin-right:5px;' class='btn btn-primary submit' lang="text:save"></a>
+	   	</div>
+     </div>
+</div>

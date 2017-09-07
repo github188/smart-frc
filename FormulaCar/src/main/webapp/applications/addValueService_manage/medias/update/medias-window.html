@@ -1,0 +1,57 @@
+  	<div class="login">
+  		<div class="login-common">
+  		<form id="windowFormId" name="formen" class="formular" action=""  enctype="multipart/form-data" method="post" >
+  		<table style='margin-left:5%;margin-top:10px;' border='1' width='90%'>
+		  <tr style='height:40px;'>
+			 <td width='25%' height='20px' style='font-size: 12px;'><label style='color:red;'>*</label><label><span lang="text:material_name"></span></td>
+			 <td  height='20px'>
+			   <input style='width: 270px;height: 22px;' type='text' id='mediaName' name='mediaName' />
+			   <input type='hidden' id='fileId' name='fileId' />
+			   <input type='hidden' id='md5' name='md5' />
+			    <input type='hidden' id='filelength' name='filelength' />
+			 </td>
+		  </tr>
+		  <tr style='height:40px;'>
+		     <td width='25%' height='20px' style='font-size: 12px;'><span lang="text:type"></span></td>
+			 <td id='form_packing' height='20px'>
+				<select id='mediaType'  name='mediaType' style='width: 272px;height: 29px;'>
+	              <option value='1' lang="text:product_image"></option>
+	              <option value='2' lang="text:material_video"></option>
+	              <option value='3' lang="text:ad_txt"></option>
+	            </select>
+			 </td>
+		  </tr>
+		  <tr style='height:40px;'>
+		     <td width='25%' height='20px' style='font-size: 12px;'><span lang="text:file_source"></span></td>
+			 <td id='files_source' height='20px'>
+				<select id='fileSource'  name='fileSource' style='width: 272px;height: 29px;'>
+	              <option value='1'  lang="text:local_file"></option>
+	              <option value='2'  lang="text:remote_file"></option>
+	            </select>
+			 </td>
+		  </tr>
+		  <tr id='localFile' style='height:40px;'>
+			 <td width='25%' height='20px' style='font-size: 12px;'><span lang="text:ad_filename"></span></td>
+			 <td  height='20px' id="fileInput"></td>
+		  </tr>
+		  <tr id='remoteFile' style='height:40px;'>
+			 <td width='25%' height='20px' style='font-size: 12px;'><label><span lang="text:upload_files"></span></td>
+			 <td  height='20px'><span id='select_file_button'></span><span id='fileName'></span></td>
+		  </tr>
+		  <tr id='remoteTip' style='height:40px;'>
+			 <td width='25%' height='20px' style='font-size: 12px;'></td>
+			 <td  height='20px'><span id="fileSize"></span></td>
+		  </tr>
+		 <tr style='height:40px;'>
+			<td style="text-align:center;" colspan=2>
+			   <div style='text-align: right;width: 100%;margin-top: 10px;border-top: 1px solid #f2f2f2;'>
+			     <a id='input-submit' class='btn btn-primary submit' style='margin-top: 8px;' lang="text:save"></a>
+			     <a id='cancel' style='margin-left: 10px;margin-top: 8px;' class='btn btn-primary submit' lang="text:cancell_text"></a></div>
+			   </div>
+			</td>
+		 </tr>
+		</table>
+  		</form>
+  		</div>
+  	</div>
+  	

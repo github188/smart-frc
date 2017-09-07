@@ -1,0 +1,68 @@
+<style>
+#deviceForm {border:1px solid #CFD8CE;font-size:12px;height:570px;margin:20px auto;width:950px;overflow:hidden;position:relative;-moz-border-radius:5px;-webkit-border-radius:5px;}
+#deviceForm .items{width:100%; clear:both; position:absolute;}
+#deviceForm .right{float:right;}
+#deviceForm #status{height:35px;background:#28b5d6;padding-left:25px !important;}
+#status li{float:left;color:#fff;padding:8px 70px;font-size: 14px;}
+#status li.active{background-color:#09c;font-weight:normal;}
+.input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;-webkit-border-radius: 5px;}
+.page{padding:5px 20px;width:98%;float:left;}
+.page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
+.page h3 em{font-size:12px; font-weight:500; font-style:normal}
+.page p{line-height:24px;}
+.page p label{font-size:14px; display:block;}
+.btn_nav{height:36px; line-height:36px; margin:8px auto;text-align: right;margin-top: 451px}
+.prev,.next{width:100px; height:32px; line-height:32px;  border:1px solid #d3d3d3; cursor:pointer}
+
+</style>
+
+<div id="deviceForm">
+    <ul id="status">
+		<li class="active" id="tab1" style="height: 19px;"><strong></strong><span>抽奖配置信息</span></li>
+	</ul>
+	<div class="items">
+	    <div class="page" id="baseInfo">
+	         <div style="height:520px;overflow: auto;">
+	            <table width="98%">
+	             <tr>
+	                <td width="10%"><label><span lang="text:lottery_name+:"></span></label></td>
+	                <td><label><span id="lotteryName" name="lotteryName"></span></label></td>
+	                <td><label><span lang="text:lottery_probalility+:"></span></label></td>
+	                <td><label><span id="probalility" name="probalility"></span></label></td>
+	             </tr>
+	             <tr>
+	                <td><label for="accept" class="config-row-lable"><span lang="text:automat_autorun+:"></span></label></td>
+	             	<td><input id="autoRun" type="checkbox" disabled="true" class="config-row-input " value="1" style="width: 30px; margin-right: 280px;height: 45px;"></td>
+	                <td><label for="accept" class="config-row-lable"><span lang="text:award_goods_not_sale+:"></span></label></td>
+	             	<td><input id="canBuy" type="checkbox" disabled="true" class="config-row-input " value="1" style="width: 30px; margin-right: 280px;height: 45px;"></td>
+	             </tr>
+	             <tr>
+	                <td><label><span lang="text:area_man_desc+:"></span></label></td>
+	                <td colspan="3"><label><span id="desc"></span></label></td>
+	             </tr>
+	             <tr>
+	               
+	             </tr>
+	              <tr>
+	                <td><label><span>售货机信息:</span></label></td>
+	                <td colspan="3">
+	                  <div id="deviceList" style="border: 1px #D7C9C9 solid;margin:5px;"></div>
+	                </td>
+	             </tr>
+	             <tr>
+	                <td><label><span>抽奖配置:</span></label></td>
+	                <td colspan="3">
+	                  <div id="putLotteryList" style="border: 1px #D7C9C9 solid;margin:5px;"></div>
+	                </td>
+	             </tr>
+	             <tr>
+	                <td><label><span>兑奖配置:</span></label></td>
+	                <td colspan="3">
+	                 <div id="getLotteryList" style="border: 1px #D7C9C9 solid;margin:5px;"></div>
+	                </td>
+	             </tr>
+	            </table>
+	         </div>
+	    </div>
+     </div>
+ </div> 

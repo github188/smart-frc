@@ -1,0 +1,239 @@
+@import "global.css";
+@import "user-header.css";
+@import "user-footer.css";
+
+/*
+ * css reset
+*/
+body,html,table,tr,th,td {
+	 -webkit-font-smoothing: antialiased;
+	font-family: "12px/1.5 Microsoft YaHei,tahoma,arial,Hiragino Sans GB,\\5b8b\4f53,sans-serif;";
+	font-size: 12px;
+	
+}
+
+body,html,table,tr,th,td,div,form,img,ul,ol,li,dl,dt,dd,p,fieldset,h1,h2,h3,h4,h5,h6,p{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+input,select {
+	margin: 0;
+	padding: 0;
+}
+
+ul,ol,li,dl,dt,dd {
+	list-style: none;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size: 1em;
+}
+
+select {
+	margin-right: 2px;
+}
+
+textarea {
+	border: 1px solid #cad9ea;
+	line-height: 16px;
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+}
+
+a:hover,a:active {
+	color: #4cae29;
+	text-decoration: none;
+}
+
+#user-header-resizer{
+	border: none;
+	background-color: #2a2b2e;
+}
+
+.unselectable ::selection{
+    background-color: rgba(255, 255, 255, 0);
+}
+
+::selection {
+    background-color: rgb(206, 236, 151);
+}
+
+/*platform css styles*/
+.cloud-application{
+	height: 100%;
+}
+
+.overview{
+	height: 100%;
+}
+
+/* menu::base */
+div#menu {
+    height:41px;
+    background:url(../images/main-bg.png) repeat-x;
+}
+
+div#menu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    float: left;
+}
+div#menu ul.menu {
+    padding-left: 160px;
+}
+
+div#menu li {
+    position: relative;
+    z-index: 9;
+    margin: 0;
+    /*padding: 0 5px 0 0;*/
+    display: block;
+    float: left;
+}
+div#menu li:hover>ul {
+    left: -2px;
+}
+
+div#menu a {
+    position: relative;
+    z-index: 10;
+    height: 38px;
+    display: block;
+    float: left;
+    line-height: 41px;
+    text-decoration: none;
+    font: normal 12px Trebuchet MS;
+}
+div#menu a:hover, div#menu a:hover span { color: #fff; }
+div#menu li.current a {}
+
+div#menu span {
+    display: block;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: 95% 0;
+}
+div#menu ul ul a.parent span {
+    background-position:95% 8px;
+    background-image: url(../images/item-pointer.gif);
+}
+div#menu ul ul a.parent:hover span {
+    background-image: url(../images/item-pointer-mover.gif);
+}
+
+/* menu::level1 */
+div#menu a {
+    padding: 0 10px 0 10px;
+    line-height: 30px;
+    color: #fff;
+}
+div#menu span {
+    margin-top: 5px;
+    font-family: ΢���ź�, 'Microsoft Yahei', 'Hiragino Sans GB', tahoma, arial, ����;';
+     color: #fff;
+}/**@replace#1*/
+div#menu li { background: url(../images/main-delimiter.png) 98% 4px no-repeat; }
+div#menu li.last { background: none; }
+
+/* menu::level2 */
+div#menu ul ul li { background: none; }
+div#menu ul ul {
+    position: absolute;
+    top: 38px;
+    left: -999em;
+    width: 163px;
+    padding: 5px 0 0 0;
+    background: rgb(45,45,45);
+    margin-top:1px;
+}
+div#menu ul ul a {
+    padding: 0 0 0 15px;
+    height: auto;
+    float: none;
+    display: block;
+    line-height: 24px;
+    color: #fff;
+}
+div#menu ul ul span {
+    margin-top: 0;
+    padding-right: 15px;
+    _padding-right: 20px;
+    color: #fff;
+}
+div#menu ul ul a:hover span {
+    color: #fff;
+}
+div#menu ul ul li.last { background: none; }
+div#menu ul ul li {
+    width: 100%;
+}
+
+/* menu::level3 */
+div#menu ul ul ul {
+    padding: 0;
+    margin: -38px 0 0 163px !important;
+    margin-left:172px;
+}
+
+/* colors */
+div#menu ul ul ul { background: rgb(41,41,41); }
+div#menu ul ul ul ul { background: rgb(38,38,38); }
+div#menu ul ul ul ul { background: rgb(35,35,35); }
+
+/* lava lamp */
+div#menu li.back {
+    background: url(../images/lava.png) no-repeat right -44px !important;
+    background-image: url(../images/lava.gif);
+    width: 13px;
+    height: 44px;
+    z-index: 8;
+    position: absolute;
+    margin: -1px 0 0 -5px;
+}
+div#menu li.back .left {
+    background: url(../images/lava.png) no-repeat top left !important;
+    background-image: url(../images/lava.gif);
+    height: 44px;
+    margin-right: 8px;
+}
+	
+ .pagClass{
+        /*  position: fixed; */
+         border-top: 4px solid #e7e7eb;
+         /*height: 4%;*/
+         background-color: #f4f5f9;
+         z-index: 9999;
+     } 
+     
+.plant1{
+
+    height: 50px;
+    border-bottom: 1px dashed #ddd;
+    border-top: 1px dashed #ddd;
+    margin-top: 2px;
+}
+.margin-left{
+      margin-left: 16px;
+}
+.plansp1{
+    width: 33%;
+    display: inline-block;
+    line-height: 40px;
+}
+
+.special-notice{
+	background: transparent url(../images/notice.jpg) no-repeat 50% 0px;
+    background-size: 450px;
+    height: 300px;
+    width: 450px;
+    position: absolute;
+    right: 10px;
+    z-index: -9999;
+    border: 1px solid #e7e7eb;
+}

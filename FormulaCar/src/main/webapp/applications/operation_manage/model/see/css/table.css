@@ -1,0 +1,156 @@
+.automat-toolbar-container{
+    display: inline-block;
+    line-height: 32px;
+    height: 32px;
+}
+#automat-toolbar-total{
+    color: rgb(181, 63, 119);
+    font-weight: bolder;
+}
+
+.automat-toolbar-total ,.automat-toolbar-time ,.automat-toolbar-package ,.automat-toolbar-name {
+    margin-left: 15px;
+}
+
+#automat-toolbar-time{
+    width: 65px;
+    margin-left: 5px;
+}
+
+.automat-toolbar-package{
+    margin-right: 5px;
+}
+#automat-toolbar-name{
+    margin-left: 5px;
+    height: 20px;
+}
+.automat-toolbar-searchbtn,.automat-toolbar-changebtn{
+    margin-left: 15px;
+    line-height: 20px;
+    display: inline-block;
+}
+#automat-toolbar-onlyover{
+    margin-left: 15px;
+    position: relative;
+    top: 3px;
+}
+#automat-toolbar-selectall{
+    margin-left: 15px;
+}
+.automat-toolbar-selectall-text{
+    margin-left: 5px;
+}
+.shelfTable{
+	
+	background-color:black;
+    margin: 3px;
+    color: white;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 10px;
+    line-height: 20px;
+    cursor: pointer;
+}
+.modify{
+	background: transparent url(../images/update.png) no-repeat 50% 0px;
+    background-size: 15px;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    float: right;
+}
+.shelfNum{
+	display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    float: left;
+    width: 20px;
+    color: black;
+}
+.shelfconfig{
+	display: inline-block;
+    width: 70px;
+    height: 60px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+.shelft{
+	display: inline-block;
+    width: 80px;
+    height: 40px;
+    float: left;
+    text-align:center;
+    line-height:40px;
+    color: #5a5050;
+    font-size: 14px;
+}
+
+.shelfb{
+	display: inline-block;
+    width: 60px;
+    height: 20px;
+    float: left;
+    text-align:center;
+    line-height:15px;
+    color:#a9853c;
+}
+.confirm{
+	background: transparent url(../images/confirm.png) no-repeat 50% 0px;
+    background-size: 15px;
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    margin-left: 5px;
+}
+.shelfTable_red{
+	background: #BD2F34;
+    margin: 3px;
+    color: white;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 15px;
+    cursor: pointer;
+}
+.shelfTable_green{
+	background: #38bd20;
+    margin: 3px;
+    color: white;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 15px;
+    cursor: pointer;
+}
+.selfTableCoffee{
+	
+    
+    color: white;
+    width: 130px;
+    height: 100px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 60px;
+        border-right: 1px solid black;
+}
+.cinput{
+	width: 15px;
+    height: 15px;
+    margin: 6px auto;
+    line-height: 10px;
+    border: 1px solid #d3d3d3;
+}
+.label{
+	height: 24px;
+	line-height: 16px;
+	display: inline-block;
+	vertical-align: middle;
+}

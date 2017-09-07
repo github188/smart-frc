@@ -1,0 +1,25 @@
+.edit_form_ul li{
+    width:350px;
+    height:30px;
+    margin-top: 10px;
+}
+.edit_form_ul .need_more_height{
+    height:70px
+}
+/*.edit_form_ul .need_more_height p{*/
+    /*float: right;*/
+    /*margin-top: 5px;*/
+/*}*/
+.edit_form_ul .form-line-same-one input{
+    float: right;
+}
+.edit_form_ul .form-line-same-one input[type='radio']{
+    margin-right: 10px;
+}
+.edit_form_ul .li-span-different span{
+    float:right;
+    margin-right: 2px;
+}
+.edit_form_ul .saveBtn_container,.edit_form_ul .cancellBtn_container{
+    float: right;
+}

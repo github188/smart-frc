@@ -1,0 +1,133 @@
+<div class="cs-col-slide-main-hd">
+    <h2 lang="{text:custom_menu}"></h2>
+    <a class="btn btn-primary submit release" lang="{text:release}"></a>
+</div>
+<div class="cs-col-slie-main-bd">
+    <div class="">
+        <div class="menu-edit-area-wrapper">
+        <p class="menu-edit-tips" lang="{text:menu_limit}"></p>
+        <div class="cs-inner-edit-box">
+            <div class="cs-inner-edit-box-bd">
+                <div class="cs-inner-slide">
+                    <div class="cs-inner-slide-bd">
+                        <div class="menu-manage">
+                            <div class="menu-title-bar light" id="cs_title_bar">
+                                <h4 lang="{text:menu_manage}"></h4>
+                                <div class="cs-tool-wrapper">
+                                    <a class="icon16 add-gray" lang="{text:add_menu}"></a>
+                                    <!--<a href="javascript:void(0)" class="icon16 edit-gray">编辑</a>-->
+                                    <!--<a href="javascript:void(0)" class="icon16 delete-gray">删除</a>-->
+                                </div>
+                            </div>
+                            <div class="inner-menu-box" id="inner_menu_box">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cs-inner-main">
+                    <div class="cs-inner-main-bd">
+                        <div class="menu-action-settings">
+                            <div class="menu-title-bar light">
+                                <h4 lang="{text:set_action}"></h4>
+                            </div>
+                            <div class="action-content" id="empty_default" style="display: none">
+                                <p class="action-tips empty" lang="{text:empty_tips}"></p>
+                            </div>
+                            <div class="action-content default" id="both_default" style="display: none">
+                                <p class="action-tips" lang="{text:son_exsits}"></p>
+                            </div>
+                            <div class="action-content init" id="action_init" style="display: none">
+                                <p class="action-tips" lang="{text:select_action}"></p>
+                                <a id="send_message">
+                                    <i class="icon-menu-action send"></i>
+                                    <strong lang="{text:send_message}"></strong>
+                                </a>
+                                <a id="jump_to_url">
+                                    <i class="icon-menu-action url"></i>
+                                    <strong lang="{text:jump_to}"></strong>
+                                </a>
+                            </div>
+                            <div class="action-content sended" id="url_sended" style="display: none">
+                                <p class="action-tips" lang="{text:subscriber_jump}"></p>
+                                <div class="msg-wrp"></div>
+                                <div class="btn-wrp">
+                                    <a class="btn btn-default btn-editing" lang="{text:edit_url}"></a>
+                                </div>
+                            </div>
+                            <div class="action-content url" id="url_url" style="display:none">
+                                <form id="add_url">
+                                    <p class="action-tips" lang="{text:jump_to}"></p>
+                                    <div class="frm-control-group">
+                                        <span class="frm-input-box">
+                                            <input type="text" class="frm-input validate[required]" />
+                                        </span>
+                                        <p id="menu_url_error_tip"></p>
+                                    </div>
+                                    <div class="tool-bar">
+                                        <a class="btn btn-primary submit" lang="{text:save}"></a>
+                                        <a class="btn btn-default" lang="{text:fall_back}"></a>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="action-content sended" id="media_sended" style="display: none">
+                                <p class="action-tips" lang="{text:subscriber_message}"></p>
+                                <div class="msg-wrp"></div>
+                                <div class="btn-wrp">
+                                    <a class="btn btn-default btn-editing" lang="{text:edit_url}"></a>
+                                </div>
+                            </div>
+                            <div class="action-content media" id="multi_media" style="display:none">
+                                <p class="action-tips" lang="{text:subscriber_message}"></p>
+                                <div class="msg_sender small">
+                                    <div class="msg_tab">
+                                        <ul class="tab_navs">
+                                            <li class="tab_nav tab_text width5 selected">
+                                                <a>
+                                                    <i class="icon_msg_sender"></i>
+                                                </a>
+                                            </li>
+                                            <li class="tab_nav tab_appmsg width5 no_extra">
+                                                <a>
+                                                    <i class="icon_msg_sender"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab_panel">
+                                            <div class="tab_content text_content" style="display: none">
+                                                <div class="js_textArea inner no_extra">
+                                                    <div class="emotion_editor">
+                                                        <div class="edit_area js_editorArea" contenteditable="true" style="overflow-y: auto; overflow-x: hidden;"></div>
+                                                        <div class="editor_toolbar">
+                                                             <!--<a class="icon_emotion emotion_switch js_switch"></a>-->
+                                                            <p class="editor_tip js_editorTip">
+                                                                <span id="letter_limit_pre" lang="text:less_letter_limit">还可输入</span>
+                                                                <em>600</em>
+                                                                <span lang="text:word" id="letter_limit_aft">字</span>
+                                                            </p>
+                                                            <div class="emotion_wrp js_emotionArea">
+                                                            <span class="emotions_preview js_emotionPreviewArea"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab_content model_content" style="display: none;">
+                                                <div class="js_appmsgArea inner ">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tool_bar">
+                                    <a href="javascript:void(0);" class="btn btn-primary" lang="text:save" id="editSave"></a>
+                                    <a href="javascript:void(0);" class="btn btn-default" lang="text:fall_back" id="editBack"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

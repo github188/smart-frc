@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title></title>
+    <style>
+        .test{
+            display: inline-block;
+            width: 50%;
+            height: 400px;
+            float: left;
+        }
+        .left{
+            background-color: #ddaaf3;
+        }
+        .right{
+            background-color: #d8f3b0;
+        }
+        .container{
+            width: 200%;
+            display: inline-block;
+        }
+        .screen{
+            width: 100%;
+            overflow: hidden;
+        }
+
+    </style>
+    <script type="text/javascript" src="/cloud/lib/jquery.js"></script>
+</head>
+<body>
+<div class="screen">
+    <div class="container">
+        <div class="test left"></div>
+        <div class="test right"></div>
+    </div>
+</div>
+<input id="leftBtn" type="button" value="left">
+<input id="rightBtn" type="button" value="right">
+<script type="text/javascript">
+    var width = $('.screen').width()
+    $("#leftBtn").bind("click",function(){
+        $(".screen").animate({scrollLeft: width},1000);
+    })
+    $("#rightBtn").bind("click",function(){
+        $(".screen").animate({scrollLeft: -width},1000);
+    })
+
+</script>
+
+</body>
+</html>

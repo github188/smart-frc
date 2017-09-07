@@ -1,0 +1,65 @@
+	<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title id="title"></title>
+		<link rel="icon" id="icon-link" type="image/x-icon" />
+		<link rel="shortcut icon"  id="shortcut-link" type="image/x-icon" />
+        <link rel="bookmark" id="bookmark-link"/>
+           <link href="navigator/resources/css/nav.css" type="text/css" rel="stylesheet" />
+        <link href="resources/css/default.css" type="text/css" rel="stylesheet" />
+        <script type="text/javascript">
+         function GetRequest() {
+        	   var url = location.search; //获取url中"?"符后的字串
+        	   var theRequest = new Object();
+        	   if (url.indexOf("?") != -1) {
+        	      var str = url.substr(1);
+        	      strs = str.split("&");
+        	      for(var i = 0; i < strs.length; i ++) {
+        	         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+        	      }
+        	   }
+        	   return theRequest;
+         }
+          function go(){
+        	  var pop=new Pop();
+      		  var height = $(window).height(); //浏览器当前窗口可视区域高度 
+      		  $("#user-content").height(height - $("#user-header").height());
+        	
+      		  var paramObj = GetRequest();
+        	  window.sessionStorage.setItem("accessToken",paramObj.access_token);
+        	  window.sessionStorage.setItem("refreshToken",paramObj.refresh_token);
+          }
+          
+        </script>
+    </head>
+    <body onload='go();'>
+         <div id="user-header">
+           <div id="nav-main-corp" class="nav-main-corp">
+				<div class="nav-main-corp-content">
+					<!--  <p style='color: white;line-height: 41px;font-size: 16x;margin-left: 5px;' id='titles'></p> -->
+					 <img src="./images/logo.png" style="margin: 10px;">
+				</div>
+			</div> 
+			<div id="nav-main-right" class="nav-main-right" >
+				<div id="nav-main-right-account" class="nav-main-right-account">
+					<p id="nav-main-right-account-head" class="nav-main-right-account-head"></p>
+					<p id="nav-main-right-account-text" class="nav-main-right-account-text"><span id='welcome'></span><span id="nav-main-right-account-name" style='color: rgb(132, 196, 74);cursor: pointer;text-decoration: underline;'></span> !</p>
+				</div>
+			</div>
+            <div id="menu">
+				<ul class="menu">
+				</ul>
+			</div>
+			<div id="nav-account-panel" class="nav-account-panel"></div>
+        </div>
+        <div id="user-content" > </div>
+        <div id="user-footer">
+        </div>
+        <div id="copyright" style='display:none;'>Copyright &copy; 2015 <a href="http://apycom.com/">Apycom jQuery Menus</a></div>
+    </body>
+<script type="text/javascript" src="/cloud/base/loader.js"></script>
+<script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery.pop.js"></script>   
+</html>

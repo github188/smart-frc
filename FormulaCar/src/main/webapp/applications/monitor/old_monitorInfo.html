@@ -1,0 +1,117 @@
+<div class="monitor-info ui-helper-clearfix">
+    <div class="monitor-info-title">
+        <div class="monitor-info-name">
+            <label id="monitor-info-name" style="color: blue;cursor: pointer;"></label>
+        </div>
+
+        <div class="monitor-info-location">
+            <label id="monitor-info-location" lang="text:loading">location loading...</label>
+        </div>
+    </div>
+
+    <div class="monitor-info-content">
+        <div class="monitor-info-user monitor-info-item">
+            <label class="monitor-info-content-title" lang="text:amount_online">Online sum</label>
+            <label id="monitor-info-number_of_transactions" class="monitor-info-content-value" style="color: blue;"></label>
+        </div>
+        <div class="monitor-info-terminal monitor-info-item">
+            <label class="monitor-info-content-title" lang="text:amount_outline">Offline sum</label>
+            <label id="monitor-info-amount" class="monitor-info-content-value" style="color: blue;"></label>
+        </div>
+        <div class="monitor-info-user monitor-info-item" style="margin-top: 5px;">
+            <label class="monitor-info-content-title" lang="text:sum_online">Online transaction number</label>
+            <label id="monitor-info-alarm" class="monitor-info-content-value" style="color: blue;"></label>
+        </div>
+          <div class="monitor-info-terminal monitor-info-item" style="margin-top: 5px;">
+            <label class="monitor-info-content-title" lang="text:sum_outline">Offline transaction number</label>
+            <label id="monitor-info-online-rate" class="monitor-info-content-value" style="color: blue;"></label> 
+        </div> 
+        
+
+    </div>
+
+   <!-- <div class="monitor-info-bottom">
+        <div class="monitor-info-traffic">
+            <label class="monitor-info-traffic-title" lang="text:flow_month+:">本月流量:</label>
+            <label id="monitor-info-traffic">-</label>
+        </div>
+
+
+    </div> --> 
+</div>
+<style type="text/css">
+    .monitor-info{
+        width: 230px;
+    }
+    #monitor-info-name{
+        font-weight: bold;
+    }
+    .monitor-info-title .monitor-info-name{
+        margin: 10px 5px;
+    }
+    .monitor-info-content{
+        width: 100%;
+        margin: 15px auto;
+        /*border: solid 1px rgb(214, 214, 214);;*/
+    }
+    .monitor-info-content div{
+        /*line-height: 25px;*/
+
+    }
+    .monitor-info-terminal{
+        float: right;
+    }
+    .monitor-info-item{
+        background-color: #e0e0e0;
+        display: inline-block;
+        width: 110px;
+        height: 70px;
+        cursor: pointer;
+    }
+    
+    .monitor-info-item-back{
+        display: inline-block;
+        width: 110px;
+        height: 70px;
+        cursor: pointer;
+    }
+    .monitor-info-item label{
+        cursor: pointer;
+    }
+    .monitor-info-content-value{
+        text-align: center;
+        display: block;
+        font-size: 24px;
+        font-weight: 700;
+        max-width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .monitor-info-location ,.monitor-info-traffic{
+        margin: 5px;
+    }
+    .monitor-info-content-title{
+        line-height: 20px;
+        text-align: center;
+        display: block;
+    }
+    .site-gis-map .leaflet-popup-content-wrapper{
+        border-radius: 0px ;
+        border: 1px solid rgb(223, 217, 217);
+        border-bottom: none;
+    }
+    .monitor-info-optbar{
+        position: absolute;
+        top: 0px;
+        left: -29px;
+        width: 28px;
+        padding: 3px 0px;
+        background: white;
+        border: 1px solid rgb(223, 217, 217);
+        border-right: none;
+        box-shadow: -6px 5px 10px -6px rgba(0,0,0,0.4);
+    }
+    .monitor-user-content{
+        height: 430px;
+    }
+</style>

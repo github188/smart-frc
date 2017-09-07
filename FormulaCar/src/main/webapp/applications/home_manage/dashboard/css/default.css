@@ -1,0 +1,82 @@
+.bar{
+  text-align: center;
+  border-bottom: 0px solid #e7e7eb;
+  height: 35px;
+  line-height: 35px;
+  width: 230px;
+  margin-left: 80%;
+  background-color: #222222;
+  color: white;
+  z-index: 2;
+  position:absolute;
+}
+.dashEnable{
+  background: transparent url(../images/ybp.png) no-repeat;
+    background-size: 18px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+.dashUnable{
+  background: transparent url(../images/ybpu.png) no-repeat;
+    background-size: 18px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+.mapEnable{
+  background: transparent url(../images/map.png) no-repeat;
+    background-size: 18px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+.mapUnable{
+  background: transparent url(../images/map1.png) no-repeat;
+    background-size: 18px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+.infobox {
+  display: inline-block;
+  width: 18%;
+  color: #555;
+  background-color: #FFF;
+  box-shadow: none;
+  border-radius: 0;
+  margin: 5px;
+  /*border: 1px solid;
+  border-color: #d8d8d8!important;*/
+  vertical-align: middle;
+  text-align: left;
+  position: relative;
+  float: left;
+}
+.infobox-icon {
+  display: inline-block;
+  vertical-align: top;
+  width: 44px;
+}
+.icon_money{
+  background: transparent url(../images/money.jpg) no-repeat;
+    background-size: 18px;
+    width: 40%;
+    height: 20px;
+    display: inline-block;
+}
+.divimage{
+  margin: 5px;
+  float: left; 
+  text-align: right; 
+  width: 40%;
+}
+.box-image{
+  float: left; text-align: left; width: 50%;
+}
+.box-image-text{
+  font-size: 24px;cursor: pointer;font-weight: bold;
+}
+.boxText{
+ text-align: left;color: #979797;margin-top: 20%;
+}

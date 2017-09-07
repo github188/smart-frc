@@ -1,0 +1,88 @@
+ <div id="develpo" style="overflow:auto;height:550px;">
+ <div class="account_setting_area">      
+   <h3 class="sub_title"><span lang="text:developer_id"></span></h3>
+   <ul>
+    <li class="account_setting_item">
+         <div class="gray_desc_item">
+             <label class="frm_label" style="margin-top:2px;">client_id(应用ID)</label>
+             <div class="frm_controls frm_vertical_pt">
+               <label class="frm_label"><span id="client_id" style='color: black;'></span></label>
+               <a href="javascript:;" id="application_key" class="extra_link" style="display:none;">申请密钥</a>  
+             </div>  
+         </div>
+          <div class="gray_desc_item">
+             <label class="frm_label" style="margin-top:2px;">client_secret(应用秘钥)</label>
+             <div class="frm_controls frm_vertical_pt">
+               <label class="frm_label" ><span id="client_secret" style='color: black;'></span></label> 
+               <a href="javascript:;" id="reset" class="extra_link" style="margin-left: 25%;display: none;width: 30px;">重置</a>
+             </div>   
+         </div>
+     </li>  
+   </ul>
+ </div>     
+ <!-- <div class="account_setting_area">      
+   <h3 class="sub_title">运营者微信号</h3>
+   <div id="wechat_binding" style="height:310px;overflow-y:auto;"></div>
+ </div>  -->   
+ <div class="account_setting_area">      
+   <h3 class="sub_title"><span lang="text:developer_documentation"></h3>
+   <ul>
+    <li class="account_setting_item" style="font-size: 12px;">
+          <a href="javascript:;"  id="doc" class="extra_link"  title="点击下载"><span lang="text:developer_documentation"></a>
+          <a href="javascript:;" id="example" class="extra_link" title="点击下载" style="margin-left: 30px;"><span lang="text:reference_example"></a>
+     </li> 
+   </ul>
+ </div>  
+ <div class="account_setting_area">      
+   <h3 class="sub_title"><span lang="text:parameter_configuration"></h3>
+   <div id="config" style="overflow-y:auto;"></div>
+ </div>  
+ </div>                                                                                
+  <style>
+   .extra_link {
+    color: #459ae9;
+    text-decoration: none;
+   }
+   .account_setting_area {
+    border: 1px solid #e7e7eb;
+    margin: 10px;
+   }
+   .sub_title {
+    height: 25px;
+    line-height: 25px;
+    border-bottom: 1px solid #e7e7eb;
+    padding: 0 20px;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+    background-color: #f4f5f9;
+   }
+   .account_setting_item {
+    border-top: 1px solid #e7e7eb;
+    padding: 18px 20px;
+   }
+   .gray_desc_item {
+    padding-bottom: 2px;
+   }
+   .frm_controls {
+    display: table-cell;
+    vertical-align: top;
+    float: none;
+    width: auto;
+    padding-top: 0;
+    color: #222;
+    }
+    .frm_vertical_pt {
+    padding-top: .3em;
+    }
+    .frm_label {
+    float: left;
+    width: 5em;
+    margin-top: .3em;
+    margin-right: 1em;
+    font-size: 12px;
+    width: auto;
+    margin-top: 0px;
+    color: #8d8d8d;
+    }
+  </style>
