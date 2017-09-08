@@ -53,6 +53,9 @@ public class DealerController {
         
         long total = dealerDao.getCount(xOId, queryBean);
         List<Dealer> areaList = dealerDao.findDealerByParam(xOId, queryBean, cursor, limit);
+        for(Dealer dealer:areaList){
+            dealer.setSiteCount(0l);
+        }
         return new BasicResultDTO(total, cursor, limit, areaList);
     }
     
@@ -125,7 +128,7 @@ public class DealerController {
         result.setResult(dealer);
         return result;
     }
-    @RequestMapping(value = "/dealer/delaerDelBatch", method = RequestMethod.POST)
+    @RequestMapping(value = "/dealer/dealerDelBatch", method = RequestMethod.POST)
     public @ResponseBody
     Object deleteAutomat(@RequestParam(value = "access_token", required = true) String access_token,
             @RequestHeader(value = "X-API-OID", required = false) ObjectId xOId,

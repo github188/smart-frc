@@ -23,6 +23,8 @@ public class Dealer {
     private String desc;
     private Long createTime;
     private Long updateTime;
+    
+    private Long siteCount;
 
     public ObjectId getId() {
         return id;
@@ -86,6 +88,14 @@ public class Dealer {
 
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Long getSiteCount() {
+        return siteCount;
+    }
+
+    public void setSiteCount(Long siteCount) {
+        this.siteCount = siteCount;
     }
     
 }
