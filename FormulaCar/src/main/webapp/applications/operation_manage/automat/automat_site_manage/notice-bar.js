@@ -6,7 +6,6 @@ define(function(require) {
     require("cloud/resources/css/jquery.multiselect.css");
     var Button = require("cloud/components/button");
     var Service = require("./service");
-    // require("/");
     var NoticeBar = Class.create(cloud.Component, {
         initialize: function($super, options) {
             $super(options);
@@ -37,18 +36,10 @@ define(function(require) {
             var self = this;
             var $htmls = $(+"<div></div>" +
                             "<div id='search-bar' style='width:auto;margin-top:5px;margin-left:5px;'>" +
-                                "<div style='float:left;'>" +
-                                    "<select  id='lineIds'  multiple='multiple'  style='width:130px;height:28px;'></select>&nbsp;&nbsp;" + //线路
-                                "</div>" +
-                                "<div style='float:left;'>" +
-                                    "<select id='search'  name='search' style='width:129px;height: 28px;'>" +
-                                        "<option value='0'>" + locale.get({lang: "automat_site_no"}) + "</option>" +
-                                        "<option value='1'>" + locale.get({lang: "automat_site_name"}) + "</option>" +
-                                   "</select>&nbsp;&nbsp;" +
-                                "</div>" +
-                                "<div style='float:left;margin-left:5px;'>" +
-                                    "<input style='width:120px;margin-left:-7px;' type='text'  id='searchValue' />" +
-                                "</div>" +
+                                "<div style='float:left;'>"+
+                                "<label style='margin:auto 10px auto 10px ;margin-right: 6px;'>店面名称 </label>" +
+                                "<input style='width:200px;' type='text'  id='siteName' />"  +
+                                "</div>"+
                                 "<div id='buttonDiv' style='float:left;'></div>" +
                             "</div>");
 

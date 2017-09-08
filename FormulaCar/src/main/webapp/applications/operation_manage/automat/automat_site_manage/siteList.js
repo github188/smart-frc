@@ -22,7 +22,7 @@ define(function(require) {
             "title": locale.get({lang: "automat_list_point_name"}),
             "dataIndex": "name",
             "cls": null,
-            "width": "15%",
+            "width": "20%",
             render: function(data, type, row) {
                 var display = "";
                 display += new Template(
@@ -37,17 +37,17 @@ define(function(require) {
             "title": locale.get({lang: "geography_location"}),
             "dataIndex": "location.region",
             "cls": null,
-            "width": "16%"
+            "width": "20%"
         }, {
             "title": locale.get({lang: "price"}),
             "dataIndex": "price",
             "cls": null,
-            "width": "8%"
+            "width": "10%"
         }, {
             "title": locale.get({lang: "talk_time_success"}),
             "dataIndex": "startTime",
             "cls": null,
-            "width": "8%",
+            "width": "10%",
             render: function(data, type, row) {
                 var display = "";
                 if (data) {
@@ -59,12 +59,12 @@ define(function(require) {
             "title": locale.get({lang: "line_man_name" }),
             "dataIndex": "dealerName",
             "cls": null,
-            "width": "10%"
+            "width": "15%"
         }, {
             "title": "备注",
             "dataIndex": "desc",
             "cls": null,
-            "width": "12%"
+            "width": "15%"
         }
     ];
 
@@ -164,21 +164,8 @@ define(function(require) {
                 var lineIds = $("#lineIds").multiselect("getChecked").map(function() { //线路
                     return this.value;
                 }).get();
-                var search = $("#search").val();
-                var searchValue = $("#searchValue").val();
-                if (searchValue) {
-                    searchValue = self.stripscript(searchValue);
-                }
 
-                var siteName = null;
-                var siteId = null;
-                if (search) {
-                    if (search == 0) { //点位编号
-                        siteId = searchValue;
-                    } else if (search == 1) {
-                        siteName = searchValue; //点位名称
-                    }
-                }
+                var siteName = $("#siteName").val();
 
                 var userId = cloud.storage.sessionStorage("accountInfo").split(",")[1].split(":")[1];
                 var roleType = permission.getInfo().roleType;
@@ -201,8 +188,6 @@ define(function(require) {
                     }
                     self.searchData = {
                         "name": siteName,
-                        "siteId": siteId,
-                        "lineId": lineIds
                     };
                     Service.getAllSitesByPage(self.searchData, limit, cursor, function(data) {
                         var total = data.result.length;
@@ -387,7 +372,7 @@ define(function(require) {
                                         //cloud.util.mask("#site_list_table");
                                         self.listTable.mask();
                                         Service.deleteSiteByIds(ids, function(data) {
-                                            if (data.result) {
+                                            if (data.result.error_code) {
                                                 if (data.result.error_code && data.result.error_code == "70013") {
                                                     dialog.render({
                                                         lang: data.result.error_code
@@ -400,7 +385,7 @@ define(function(require) {
                                                     self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
                                                 }
                                             } else {
-                                                if (data.status == "OK") {
+                                                if (data.result == "OK") {
                                                     if (self.pageRecordTotal == 1) {
                                                         var cursor = ($(".paging-page-current").val() - 2) * $(".paging-limit-select").val();
                                                         if (cursor < 0) {
@@ -416,22 +401,6 @@ define(function(require) {
                                                     });
                                                 }
                                             }
-                                            /* if(data.result.error_code && data.result.error_code=="70013"){
-                                                 dialog.render({lang: data.result.error_code});
-                                                 self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
-                                             }else{
-                                                 if (self.pageRecordTotal == 1) {
-                                                     var cursor = ($(".paging-page-current").val() - 2) * $(".paging-limit-select").val();
-                                                     if (cursor < 0) {
-                                                         cursor = 0;
-                                                     }
-                                                     self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
-                                                 } else {
-                                                     self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
-                                                 }
-                                                 self.pageRecordTotal = self.pageRecordTotal - 1;
-                                                 dialog.render({lang: "deletesuccessful"});
-                                             }*/
 
                                         }, self);
                                         self.listTable.unmask();
@@ -440,7 +409,6 @@ define(function(require) {
                                 }, {
                                     lang: "cancel",
                                     click: function() {
-                                        //                                            cloud.util.unmask("#site_list_table");
                                         self.listTable.unmask();
                                         dialog.close();
                                     }

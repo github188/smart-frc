@@ -83,7 +83,7 @@ define(function(require) {
         getSiteById: function(id, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: self.siteUrl + "/" + id,
+                url: "api/basic/"+id+"/site",
                 type: "GET",
                 success: function(data) {
                     callback.call(context || self, data);
@@ -96,7 +96,7 @@ define(function(require) {
             searchData.limit = limit;
             searchData.cursor = cursor;
             cloud.Ajax.request({
-                url: self.siteUrl + "/list",
+                url: "api/basic/site/list",
                 type: "GET",
                 parameters: searchData,
                 success: function(data) {
@@ -107,7 +107,7 @@ define(function(require) {
         addSite: function(contentData, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: self.siteUrl,
+                url: "api/basic/site",
                 type: "POST",
                 data: contentData,
                 success: function(data) {
@@ -121,12 +121,13 @@ define(function(require) {
         updateSite: function(contentData, id, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: self.siteUrl + "/" + id,
+                url: "api/basic/" + id+"/site",
                 type: "PUT",
                 data: contentData,
                 success: function(data) {
                     callback.call(context || self, data);
-                }, error: function(data) {
+                },
+                error: function(data) {
                     callback.call(context || self, data);
                 }
             });
@@ -144,7 +145,7 @@ define(function(require) {
         deleteSiteByIds: function(ids, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: self.siteUrl + "/delBatch",
+                url: "api/basic/site/siteDelBatch",
                 type: "post",
                 parameters: {
                     "ids": ids

@@ -51,6 +51,27 @@ define(function(require) {
             this._renderMap();//加载点位地图
 
         },
+        loadModule:function(){
+        	var self = this;
+        	Service.getAllModel(-1,0,'',function(data) {
+         		if(data.result){
+         			require(["cloud/lib/plugin/jquery.multiselect"], function() {
+                        $("#modules").multiselect({
+                            header: true,
+                            checkAllText: locale.get({lang: "check_all"}),
+                            uncheckAllText: locale.get({lang: "uncheck_all"}),
+                            noneSelectedText: "机型",
+                            selectedText: "# " + locale.get({lang: "is_selected"}),
+                            minWidth: 170,
+                            height: 120
+                        });
+                    });
+ 					for(var i=0;i<data.result.length;i++){
+ 						$("#modules").append("<option value='" +data.result[i]._id + "'>" +data.result[i].moduleNum+"</option>");
+ 					}
+ 				}
+         	});
+        },
         getLine:function(map){
         	var searchData={
         		name:''	
@@ -90,15 +111,6 @@ define(function(require) {
                  	});
                  }
             });
-            
-            Service.getAllModel(-1,0,'',function(data) {
-         		if(data.result){
- 					for(var i=0;i<data.result.length;i++){
- 						$("#modules").append("<option value='" +data.result[i]._id + "'>" +data.result[i].moduleNum+"</option>");
- 					}
- 				}
-         	});
-        	
         },
         getUserRole: function() {
             Service.getUserMessage(function(data) {
@@ -130,24 +142,51 @@ define(function(require) {
                 cloud.util.mask("#siteForm");
                 Service.getSiteById(self.id, function(data) {
                     self.data = data;
-                    $("#line").find("option[value='"+data.result.lineId+"']").attr("selected",true);
-                    $("#siteName").attr("value", data.result.name == null ? "" : data.result.name);//点位名称
-                    $("#siteId").attr("value", data.result.siteId == null ? "" : data.result.siteId);//点位ID
-                    $("#cost").attr("value", data.result.cost == null ? "" : data.result.cost);//成本
-                    $("#talkTime").val(data.result.talkTime == null ? cloud.util.dateFormat(new Date(((new Date()).getTime()) / 1000), "yyyy/MM/dd") : cloud.util.dateFormat(new Date(data.result.talkTime), "yyyy-MM-dd"));//谈成时间
-                    $("#lineId_win").attr("value", data.result.lineId == null ? "" : data.result.lineId);//线路ID
-                    $("#type").attr("value", data.result.type == null ? "" : data.result.type);//线路
-                    $("#industry").attr("value", data.result.industry == null ? "" : data.result.industry);//行业
-                    $("#loc").attr("value", data.result.address == null ? "" : data.result.address);//地理位置
+                    $("#line").find("option[value='"+data.result.dealerId+"']").attr("selected",true);
+                    $("#name").attr("value", data.result.name == null ? "" : data.result.name);//点位名称
+                    $("#siteNum").attr("value", data.result.siteNum == null ? "" : data.result.siteNum);//点位ID
+                    $("#cost").attr("value", data.result.price == null ? "" : data.result.price);//成本
+                    $("#talkTime").val(data.result.startTime == null ? cloud.util.dateFormat(new Date(((new Date()).getTime()) / 1000), "yyyy/MM/dd") : cloud.util.dateFormat(new Date(data.result.startTime), "yyyy-MM-dd"));//谈成时间
+                    $("#industry").attr("value", data.result.siteType == null ? "" : data.result.siteType);//行业
+                    $("#loc").attr("value", data.result.location == null ? "" : data.result.location.region);//地理位置
                     $("#lng").val(data.result.location.longitude);
                     $("#lat").val(data.result.location.latitude);
-                    $("#desc").attr("value", data.result.description == null ? "" : data.result.description);
-                    var lineId = data.result.lineId;
-                    var lineName = data.result.lineName;
+                    $("#desc").attr("value", data.result.desc == null ? "" : data.result.desc);
+                    
+                    var modules = data.result.modules;
+                    
+                    Service.getAllModel(-1,0,'',function(datas) {
+                 		if(datas.result){
+                 			require(["cloud/lib/plugin/jquery.multiselect"], function() {
+                                $("#modules").multiselect({
+                                    header: true,
+                                    checkAllText: locale.get({lang: "check_all"}),
+                                    uncheckAllText: locale.get({lang: "uncheck_all"}),
+                                    noneSelectedText: "机型",
+                                    selectedText: "# " + locale.get({lang: "is_selected"}),
+                                    minWidth: 170,
+                                    height: 120
+                                });
+                            });
+         					for(var i=0;i<datas.result.length;i++){
+         						$("#modules").append("<option value='" +datas.result[i]._id + "'>" +datas.result[i].moduleNum+"</option>");
+         					}
+         					if (modules && modules.length > 0) {
+                                for (var i = 0; i < modules.length; i++) {
+                                    $('#modules option').each(function() {
+                                        if (modules[i].moduleId == this.value) {
+                                            this.selected = true;
+                                        }
+                                    });
+                                }
+                            }
+         				}
+                 	});
+                    
                     var lng = $("#lng").val();
                     var lat = $("#lat").val();
                     var location = data.result.location;
-                    var address = data.result.address;
+                    var address = data.result.location.region
                     if (lng != "" && lat != "") {
                         map.clearOverlays(); //清除
                         var new_point = new BMap.Point(location.longitude, location.latitude);
@@ -174,8 +213,7 @@ define(function(require) {
             	day = day<10?'0'+day:day;
             	
             	var time = myDate.getFullYear()+month+day+myDate.getHours()+myDate.getMinutes()+myDate.getSeconds();
-            	console.log(time);
-            	$("#siteId").attr("value",time);//点位ID
+            	$("#siteNum").attr("value",time);//点位ID
                 $("#talkTime").val(cloud.util.dateFormat(new Date(((new Date()).getTime()) / 1000), "yyyy/MM/dd"));//谈成时间
                 //定位到当前城市
                 var myCity = new BMap.LocalCity(); 
@@ -259,7 +297,11 @@ define(function(require) {
                     $("#resultDiv").css("display", "none");
                 });
             });
-
+            if(this.id){
+            }else{
+            	this.loadModule();
+            }
+            
             this._renderBtn(map);//各个按钮事件
             this.getLine(map);
         },
@@ -355,27 +397,38 @@ define(function(require) {
             var self = this;
 
             Service.getUserMessage(function(data) {
-                var siteId = $("#siteId").val();//点位编号
-                var siteName = $("#siteName").val();//点位名称
+                var siteNum = $("#siteNum").val();//点位编号
+                var name = $("#name").val();//点位名称
                 var loc = $("#loc").val();//地理位置 
-                var cost = $("#cost").val();//成本
-                var talkTime = $("#talkTime").val();//谈成时间  
-                var lineName = $("#line").find("option:selected").text();
-                var lineId = $("#line").find("option:selected").val();
-                var type = $("#type").val();//类型
-                var industry = $("#industry").val();//行业
+                var price = $("#cost").val();//成本
+                var startTime = $("#talkTime").val();//谈成时间  
+                
+                var dealerName = $("#line").find("option:selected").text();
+                var dealerId = $("#line").find("option:selected").val();
+                
+                var siteType = $("#industry").val();//行业
+                
                 var lng = $("#lng").val();//经度
                 var lat = $("#lat").val();//纬度
                 var desc = $("#desc").val();
-                if (siteId == null || siteId.replace(/(^\s*)|(\s*$)/g,"")=="") {
+                
+                var modules = $("#modules").multiselect("getChecked").map(function() {
+                    var pay = {
+                    		moduleId: this.value,
+                    		moduleName: this.title
+                    };
+                    return pay;
+                }).get();
+                
+                if (siteNum == null || siteNum.replace(/(^\s*)|(\s*$)/g,"")=="") {
                     dialog.render({lang: "automat_enter_the_point_number"});
                     return;
                 }
-                if (siteName == null || siteName.replace(/(^\s*)|(\s*$)/g,"")=="") {
+                if (name == null || name.replace(/(^\s*)|(\s*$)/g,"")=="") {
                     dialog.render({lang: "automat_enter_name"});
                     return;
                 }
-                if (lineName == null || lineName.replace(/(^\s*)|(\s*$)/g,"")=="" || lineName == locale.get({lang: "please_select"})) {
+                if (name == null || name.replace(/(^\s*)|(\s*$)/g,"")=="" || name == locale.get({lang: "please_select"})) {
                     dialog.render({lang: "automat_enter_lineName"});
                     return;
                 }
@@ -388,8 +441,8 @@ define(function(require) {
                     return;
                 } 
                 var strP=/^\d+(\.\d+)?$/; 
-                if(cost){
-                	if(!strP.test(cost)){
+                if(price){
+                	if(!strP.test(price)){
           	    	    dialog.render({text:"成本必须是数字"});
           	    	    return; 
           	        }
@@ -400,19 +453,19 @@ define(function(require) {
                 var location = {};
                 location.longitude = lng;
                 location.latitude = lat;
-                location.region = "";
+                location.region = loc;
+                
                 var data = {
-                    siteId: siteId, //点位编号
-                    name: siteName, //点位名称
+                	siteNum: siteNum, //点位编号
+                    name: name, //点位名称
                     location: location, //坐标
-                    lineId: lineId, //线路ID
-                    lineName: lineName, //线路名称
-                    cost: cost, //成本
-                    type: type, //类型
-                    industry: industry, //行业
-                    talkTime: new Date(talkTime).getTime() / 1000, //谈成时间
-                    address: loc,//地理位置
-                    description:desc
+                    dealerId: dealerId, //线路ID
+                    dealerName: dealerName, //线路名称
+                    price: price, //成本
+                    modules: modules, //类型
+                    siteType: siteType, //行业
+                    startTime: new Date(startTime).getTime() / 1000, //谈成时间
+                    desc:desc
                 };
 
                 //判断点位是否存在

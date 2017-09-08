@@ -125,24 +125,51 @@ define(function(require) {
                 cloud.util.mask("#siteForm");
                 Service.getSiteById(self.id, function(data) {
                     self.data = data;
-                    $("#line").find("option[value='"+data.result.lineId+"']").attr("selected",true);
-                    $("#siteName").attr("value", data.result.name == null ? "" : data.result.name);//点位名称
-                    $("#siteId").attr("value", data.result.siteId == null ? "" : data.result.siteId);//点位ID
-                    $("#cost").attr("value", data.result.cost == null ? "" : data.result.cost);//成本
-                    $("#talkTime").val(data.result.talkTime == null ? cloud.util.dateFormat(new Date(((new Date()).getTime()) / 1000), "yyyy/MM/dd") : cloud.util.dateFormat(new Date(data.result.talkTime), "yyyy-MM-dd"));//谈成时间
-                    $("#lineId_win").attr("value", data.result.lineId == null ? "" : data.result.lineId);//线路ID
-                    $("#type").attr("value", data.result.type == null ? "" : data.result.type);//线路
-                    $("#industry").attr("value", data.result.industry == null ? "" : data.result.industry);//行业
-                    $("#loc").attr("value", data.result.address == null ? "" : data.result.address);//地理位置
+                    $("#line").find("option[value='"+data.result.dealerId+"']").attr("selected",true);
+                    $("#name").attr("value", data.result.name == null ? "" : data.result.name);//点位名称
+                    $("#siteNum").attr("value", data.result.siteNum == null ? "" : data.result.siteNum);//点位ID
+                    $("#cost").attr("value", data.result.price == null ? "" : data.result.price);//成本
+                    $("#talkTime").val(data.result.startTime == null ? cloud.util.dateFormat(new Date(((new Date()).getTime()) / 1000), "yyyy/MM/dd") : cloud.util.dateFormat(new Date(data.result.startTime), "yyyy-MM-dd"));//谈成时间
+                    $("#industry").attr("value", data.result.siteType == null ? "" : data.result.siteType);//行业
+                    $("#loc").attr("value", data.result.location == null ? "" : data.result.location.region);//地理位置
                     $("#lng").val(data.result.location.longitude);
                     $("#lat").val(data.result.location.latitude);
-                    $("#desc").attr("value", data.result.description == null ? "" : data.result.description);
-                    var lineId = data.result.lineId;
-                    var lineName = data.result.lineName;
+                    $("#desc").attr("value", data.result.desc == null ? "" : data.result.desc);
+                    
+                    var modules = data.result.modules;
+                    
+                    Service.getAllModel(-1,0,'',function(datas) {
+                 		if(datas.result){
+                 			require(["cloud/lib/plugin/jquery.multiselect"], function() {
+                                $("#modules").multiselect({
+                                    header: true,
+                                    checkAllText: locale.get({lang: "check_all"}),
+                                    uncheckAllText: locale.get({lang: "uncheck_all"}),
+                                    noneSelectedText: "机型",
+                                    selectedText: "# " + locale.get({lang: "is_selected"}),
+                                    minWidth: 170,
+                                    height: 120
+                                });
+                            });
+         					for(var i=0;i<datas.result.length;i++){
+         						$("#modules").append("<option value='" +datas.result[i]._id + "'>" +datas.result[i].moduleNum+"</option>");
+         					}
+         					if (modules && modules.length > 0) {
+                                for (var i = 0; i < modules.length; i++) {
+                                    $('#modules option').each(function() {
+                                        if (modules[i].moduleId == this.value) {
+                                            this.selected = true;
+                                        }
+                                    });
+                                }
+                            }
+         				}
+                 	});
+                    
                     var lng = $("#lng").val();
                     var lat = $("#lat").val();
                     var location = data.result.location;
-                    var address = data.result.address;
+                    var address = data.result.location.region
                     if (lng != "" && lat != "") {
                         map.clearOverlays(); //清除
                         var new_point = new BMap.Point(location.longitude, location.latitude);
