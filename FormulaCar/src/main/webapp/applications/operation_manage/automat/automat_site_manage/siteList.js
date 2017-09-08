@@ -14,16 +14,12 @@ define(function(require) {
     var columns = [
 
         {
-            "title": locale.get({
-                lang: "automat_list_point_number"
-            }),
-            "dataIndex": "siteId",
+           "title": locale.get({lang: "automat_list_point_number"}),
+            "dataIndex": "siteNum",
             "cls": null,
             "width": "10%"
         }, {
-            "title": locale.get({
-                lang: "automat_list_point_name"
-            }),
+            "title": locale.get({lang: "automat_list_point_name"}),
             "dataIndex": "name",
             "cls": null,
             "width": "15%",
@@ -38,24 +34,18 @@ define(function(require) {
                 return display;
             }
         }, {
-            "title": locale.get({
-                lang: "geography_location"
-            }),
-            "dataIndex": "address",
+            "title": locale.get({lang: "geography_location"}),
+            "dataIndex": "location.region",
             "cls": null,
             "width": "16%"
         }, {
-            "title": locale.get({
-                lang: "price"
-            }),
-            "dataIndex": "cost",
+            "title": locale.get({lang: "price"}),
+            "dataIndex": "price",
             "cls": null,
             "width": "8%"
         }, {
-            "title": locale.get({
-                lang: "talk_time_success"
-            }),
-            "dataIndex": "talkTime",
+            "title": locale.get({lang: "talk_time_success"}),
+            "dataIndex": "startTime",
             "cls": null,
             "width": "8%",
             render: function(data, type, row) {
@@ -66,29 +56,13 @@ define(function(require) {
                 return display;
             }
         }, {
-            "title": locale.get({
-                lang: "line_man_name"
-            }),
-            "dataIndex": "lineName",
+            "title": locale.get({lang: "line_man_name" }),
+            "dataIndex": "dealerName",
             "cls": null,
             "width": "10%"
         }, {
-            "title": locale.get({
-                lang: "stage_type1"
-            }),
-            "dataIndex": "type",
-            "cls": null,
-            "width": "8%"
-        }, {
-            "title": locale.get({
-                lang: "stage_type2"
-            }),
-            "dataIndex": "industry",
-            "cls": null,
-            "width": "8%"
-        }, {
             "title": "备注",
-            "dataIndex": "description",
+            "dataIndex": "desc",
             "cls": null,
             "width": "12%"
         }

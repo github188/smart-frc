@@ -98,9 +98,6 @@ define(function(require) {
          						$("#line").append("<option value='" +data.result[i]._id + "'>" +data.result[i].name+"</option>");
          					}
          				}
-                 		
-                 	//self.loadSiteData(this.map);
-                 		
                  	});
                  }
             });

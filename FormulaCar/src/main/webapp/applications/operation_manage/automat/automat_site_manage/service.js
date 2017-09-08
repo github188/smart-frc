@@ -218,17 +218,34 @@ define(function(require) {
             });
         },
         getAllLine:function(searchData,callback, context) {
-        	cloud.Ajax.request({
-				url:"api/automatline/all",
-				type : "GET",
-				parameters:{
-					name:searchData.name
-				},
-				success:function(data){
-					callback.call(context || this,data);
-				}
-			});
-        }
+        	 searchData.limit = -1;
+             searchData.cursor = 0;
+             cloud.Ajax.request({
+                 url: "api/basic/dealer/list",
+                 type: "GET",
+                 parameters: searchData,
+                 success: function(data) {
+                     callback.call(context || self, data);
+                 }
+             });
+        },
+        getAllModel: function(limit, cursor,moduleNum, callback, context) {
+            var self = this;
+            var parameters = {
+                 cursor: cursor,
+                 limit: limit,
+                 name: moduleNum
+            };	
+           
+            cloud.Ajax.request({
+                url: "api/basic/module/list",
+                type: "GET",
+                parameters:parameters,
+                success: function(data) {
+                    callback.call(context || self, data);
+                }
+            });
+        },
     });
 
     return new Service();

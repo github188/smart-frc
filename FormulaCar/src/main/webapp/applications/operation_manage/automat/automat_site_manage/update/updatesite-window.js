@@ -90,6 +90,14 @@ define(function(require) {
                  	});
                  }
             });
+            
+            Service.getAllModel(-1,0,'',function(data) {
+         		if(data.result){
+ 					for(var i=0;i<data.result.length;i++){
+ 						$("#modules").append("<option value='" +data.result[i]._id + "'>" +data.result[i].moduleNum+"</option>");
+ 					}
+ 				}
+         	});
         	
         },
         getUserRole: function() {
@@ -118,14 +126,11 @@ define(function(require) {
         },
         loadSiteData: function(map) {
             var self = this;
-            //$("#siteId").attr("disabled","disabled");
             if (self.id && self.id != "") {
                 cloud.util.mask("#siteForm");
-                //self.getLine(map);
                 Service.getSiteById(self.id, function(data) {
                     self.data = data;
                     $("#line").find("option[value='"+data.result.lineId+"']").attr("selected",true);
-                    //$("#line option[value='"+data.result.lineId+"']").attr("selected","selected");
                     $("#siteName").attr("value", data.result.name == null ? "" : data.result.name);//点位名称
                     $("#siteId").attr("value", data.result.siteId == null ? "" : data.result.siteId);//点位ID
                     $("#cost").attr("value", data.result.cost == null ? "" : data.result.cost);//成本
@@ -137,32 +142,8 @@ define(function(require) {
                     $("#lng").val(data.result.location.longitude);
                     $("#lat").val(data.result.location.latitude);
                     $("#desc").attr("value", data.result.description == null ? "" : data.result.description);
-//                    $("#siteId").attr("disabled", true);
                     var lineId = data.result.lineId;
                     var lineName = data.result.lineName;
-                   /* Service.getUserMessage(function(data) {
-                        if (data.result) {
-                            var userId = data.result._id;
-                            var userName = data.result.roleName;
-                            if (userName == "DeviceSense") {//采购员身份
-                               // $("#line").hide();
-                              //  $("#userline").show();
-                                Service.getLineInfoByUserId(userId, function(data) {
-                                    var lineData = data;
-                                    if (lineData && lineData.result.length > 0) {
-                                        for (var i = 0; i < lineData.result.length; i++) {
-                                            $("#line").append("<option value='" + lineData.result[i].id + "'>" + lineData.result[i].lineName + "</option>");
-                                        }
-                                    }
-                                  //  $("#userline").val(lineId);
-                                });
-                            } else {
-                              //  $("#line").show();
-                               // $("#userline").hide(); 
-                                $("#line").val(lineName);
-                            } 
-                        }
-                    }); */
                     var lng = $("#lng").val();
                     var lat = $("#lat").val();
                     var location = data.result.location;
@@ -185,8 +166,6 @@ define(function(require) {
                     cloud.util.unmask("#siteForm");
                 }, self);
             } else {
-            	// self.getLine(map);
-                //self.getUserRole();
             	var myDate = new Date();
             	
             	var month = myDate.getMonth()+1;       //获取当前月份(0-11,0代表1月)
@@ -234,9 +213,7 @@ define(function(require) {
                 if (text) {
                     address = text;
                 }
-               // if (loc == null || loc == "") {
-                    $("#loc").val(address);
-               // }
+                $("#loc").val(address);
 
                 var opts = {
                     width: 200, // 信息窗口宽度
@@ -390,25 +367,6 @@ define(function(require) {
                 var lng = $("#lng").val();//经度
                 var lat = $("#lat").val();//纬度
                 var desc = $("#desc").val();
-
-               /* if (data.result) {
-                    var roleName = data.result.roleName;
-                    if (roleName == "DeviceSense") {//采购员身份
-                        lineId = $("#line").find("option:selected").val();
-                        lineName = $("#line").find("option:selected").text();
-                    } else { 
-                        lineName = $("#line").find("option:selected").text();
-                        //添加线路 
-                        var lineData = {};
-                        lineData.name = lineName;
-                        Service.addLine(lineData, function(data) {
-                            if (data && data.result && data.result._id) {
-                                $("#lineId_win").val(data.result._id);
-                            }
-                        });
-                        lineId = $("#lineId_win").val();
-                    }
-                }*/
                 if (siteId == null || siteId.replace(/(^\s*)|(\s*$)/g,"")=="") {
                     dialog.render({lang: "automat_enter_the_point_number"});
                     return;
@@ -467,9 +425,6 @@ define(function(require) {
                         } else if (retData.error_code && retData.error_code == 21322) {//点位名称已存在
                             dialog.render({lang: "automat_site_name_exists"});
                         } 
-                       /* else if (retData.error_code && retData.error_code == 21312) {//
-                            dialog.render({lang: "site_address_exists"});
-                        }*/
                         else if (!retData.error_code) {
                             self.automatWindow.destroy();
                             self.fire("getsiteList");
@@ -492,9 +447,6 @@ define(function(require) {
                     }else if (data.error_code && data.error_code == 20007) {//点位编号已存在
                         dialog.render({lang: "automat_point_number_exists"});
                     }  
-                   /* else if (data.error_code && data.error_code == 21312) {//
-                        dialog.render({lang: "site_address_exists"});
-                    } */
                     else if (data.error_code == "21322") {
                         dialog.render({lang: "automat_site_name_exists"});
                         return;
