@@ -4,6 +4,7 @@
  */
 package cn.com.inhand.site.service;
 
+import cn.com.inhand.common.dto.SiteBean;
 import cn.com.inhand.common.service.Collections;
 import cn.com.inhand.common.service.MongoService;
 import cn.com.inhand.common.util.UpdateUtils;
@@ -53,5 +54,40 @@ public class SiteService extends MongoService implements SiteDao{
         MongoTemplate template = factory.getMongoTemplateByOId(oid);
         template.remove(Query.query(Criteria.where("_id").in(Arrays.asList(idsArr))), Collections.SMART_FM_SITE);
     }
-    
+
+    public List<Site> findSiteByParam(ObjectId oid, SiteBean queryBean, int skip, int limit) {
+        MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        if (limit != -1) {
+            query.limit(limit);
+            query.skip(skip);
+        }
+        if(queryBean.getName()!=null && !queryBean.getName().equals("")){
+            query.addCriteria(Criteria.where("name").regex(queryBean.getName()));
+        }
+        return mongoTemplate.find(query, Site.class, Collections.SMART_FM_SITE);
+    }
+
+    public Site findSiteById(ObjectId oid, ObjectId id) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(id));
+        return template.findOne(query, Site.class, Collections.SMART_FM_SITE);
+    }
+
+    public Long getCount(ObjectId oid, SiteBean queryBean) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        if(queryBean.getName()!=null && !queryBean.getName().equals("")){
+            query.addCriteria(Criteria.where("name").regex(queryBean.getName()));
+        }
+        return template.count(query, Collections.SMART_FM_SITE);
+    }
+
+    public boolean isSiteNameExists(ObjectId xOId, String name) {
+        MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(xOId);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").is(name));
+        return mongoTemplate.exists(query, Collections.SMART_FM_SITE);
+    }
 }
