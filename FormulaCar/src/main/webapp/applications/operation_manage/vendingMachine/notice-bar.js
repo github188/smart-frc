@@ -148,7 +148,7 @@ define(function(require) {
                         		
                                     //获取选中区域的线路
                         			cloud.Ajax.request({
-          			   	    	      url:"api/automatline/list",
+          			   	    	      url:"api/basic/dealer/list",
           					    	  type : "GET",
           					    	  parameters : {
           					    		  areaId: areaid,
@@ -297,21 +297,6 @@ define(function(require) {
         _renderGetData: function() {
             var self = this;
             self._renderBtn(null);
-            /*Service.getAreaInfo(0, 0,function(data) {
-             var area={};
-             if(data.result){
-             for(var i=0;i<data.result.length;i++){
-             $("#devicecity").append("<option value='" +data.result[i].code + "'>" +data.result[i].city+"</option>");
-             area[data.result[i].code] = data.result[i].zone;
-             if(i == data.result.length-1){
-             self._renderBtn(area);
-             }
-             }
-             }else{
-             self._renderBtn(area);
-             }
-             
-             });*/
         },
         stripscript: function(s) {
             var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）&;—|{}【】‘；：”“'。，、？]")
@@ -329,128 +314,10 @@ define(function(require) {
                 container: $("#buttonDiv"),
                 events: {
                     click: function() {
-                    	var online = $("#online").val();
-        	            if (online) {
-        	                //0 在线 1离线
-        	                if (online == -1) {
-        	                    online = '';
-        	                }
-        	            } else {
-        	                //查所有
-        	            }
-        	            
-        	            var	areaId = $("#userarea").multiselect("getChecked").map(function() {//
-        		                return this.value;
-        		            }).get();
-        	            var	lineId = $("#userline").multiselect("getChecked").map(function() {//
-        	                      return this.value;
-        	                  }).get();
-
-        	                  var lineFlag = 1;
-        	                  if(areaId.length != 0){
-        	                  	if($("#userline").find("option").length <=0){
-        	                      	lineFlag = 0;
-        	                      }
-        	                  }
-        	                  var search = $("#search").val();
-        	                  var searchValue = $("#searchValue").val();
-        	                  if (searchValue) {
-        	                      searchValue = self.stripscript(searchValue);
-        	                  }
-
-        	                  var siteName = null;
-        	                  var assetId = null;
-        	                  var name = null;
-        	                  if (search) {
-        	                      if (search == 0) {
-        	                          assetId = $("#searchValue").val();
-        	                      } else if (search == 1) {
-        	                          siteName = searchValue;//点位名称
-        	                      }else if (search == 2) {
-        	                          name = searchValue;//售货机名称
-        	                      }
-        	                  }
-
-                        var userId = cloud.storage.sessionStorage("accountInfo").split(",")[1].split(":")[1];
-                        var roleType = permission.getInfo().roleType;
-                        Service.getAreaByUserId(userId,function(areadata){
-    	                  	
-    	                  	var areaIds=[];
-    	                      if(areadata && areadata.result && areadata.result.area && areadata.result.area.length>0){
-    	                      	areaIds = areadata.result.area;
-    	                      }
-    	                      if(roleType == 51){
-    	                      	areaIds = [];
-    	                      }
-    	                      if(areaId.length != 0){
-    	                      	areaIds = areaId;
-    	                      }
-    	                      
-    	                      if(roleType != 51 && areaIds.length == 0){
-    	                      	areaIds = ["000000000000000000000000"];
-    	                      }
-    	                      cloud.Ajax.request({
-    	      	   	    	      url:"api/automatline/list",
-    	      			    	  type : "GET",
-    	      			    	  parameters : {
-    	      			    		  areaId: areaIds,
-    	      			    		  cursor:0,
-    	      			    		  limit:-1
-    	      	                  },
-    	      			    	  success : function(linedata) {
-    	      			    		  var lineIds=[];
-    	      			    		  if(linedata && linedata.result && linedata.result.length>0){
-    	      			    			  for(var i=0;i<linedata.result.length;i++){
-    	      			    				  lineIds.push(linedata.result[i]._id);
-    	      			    			  }
-    	      		                   }
-    	      			    		  
-    	      			    		  if(roleType == 51 && areaId.length == 0){
-    	      			    			  lineIds = [];
-    	      			              }
-    	      			    		  if(lineId.length != 0){
-    	      			    			  lineIds = lineId;
-    	      			    		  }else{
-    	      			    			  if(lineFlag == 0){
-    	      			    				  lineIds = ["000000000000000000000000"];
-    	      			    			  }
-    	      			    		  }
-    	      			    		  
-    	      			    		  if(roleType != 51 && lineIds.length == 0){
-    	      			    			   lineIds = ["000000000000000000000000"];
-    	      			    		  }
-    	      			                self.lineIds = lineIds;
-    	      			                if(self.onlineType){
-    	      			                  	self.searchData = {
-    	      			                              "online": online,
-    	      			                              "siteName": siteName,
-    	      			                              "assetId": assetId,
-    	      			                              "lineId": lineIds,
-    	      			                              "name":name,
-    	      			                              "onlineType":self.onlineType
-    	      			                          };
-    	      			                  }else{
-    	      			                  	self.searchData = {
-    	      			                              "online": online,
-    	      			                              "siteName": siteName,
-    	      			                              "assetId": assetId,
-    	      			                              "name":name,
-    	      			                              "lineId": lineIds
-    	      			                      };
-    	      			                  }
-    	      			            	 
-    	      			                 self.fire("query",self.searchData);
-    	                      
-    	      			    	  }
-    	       			     });
-    	                  });
-                    
-                       
+                    	self.fire("query");
                     }
                 }
             });
-
-           
             $("#"+queryBtn.id).addClass("readClass");
 
             var catBtn = new Button({

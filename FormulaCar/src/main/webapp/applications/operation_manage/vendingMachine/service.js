@@ -16,6 +16,38 @@ define(function(require) {
  	   	        }
  	   	    });
         },
+        getAllSites: function(limit, cursor, callback, context) {
+            var self = this;
+            cloud.Ajax.request({
+                url: "api/basic/site/list",
+                type: "GET",
+                parameters: {
+                	limit:limit,
+                	cursor:cursor
+                },
+                success: function(data) {
+                    callback.call(context || self, data);
+                }
+            });
+        },
+        getAllModel: function(limit, cursor,moduleNum, callback, context) {
+            var self = this;
+            	
+            var parameters = {
+                 cursor: cursor,
+                 limit: limit,
+                 name: moduleNum
+            };	
+           
+            cloud.Ajax.request({
+                url: "api/basic/module/list",
+                type: "GET",
+                parameters:parameters,
+                success: function(data) {
+                    callback.call(context || self, data);
+                }
+            });
+        },
         findDeviceListExcel:function(time,report_name,callback,context){
 			cloud.Ajax.request({
                 url : "api/vmreports/findAutomatListExcel",
@@ -111,7 +143,7 @@ define(function(require) {
 	  		              searchData.limit = -1;
 	  		              searchData.cursor = 0;
 	  		              cloud.Ajax.request({
-	  		                  url: "api/areaMan/list",
+	  		                  url: "api/basic/area/list",
 	  		                  type: "GET",
 	  		                  parameters: searchData,
 	  		                  success: function(data) {
@@ -123,6 +155,24 @@ define(function(require) {
   		    		  }
   		    	  }
           });
+        },
+        getAllModel: function(limit, cursor,moduleNum, callback, context) {
+            var self = this;
+            	
+            var parameters = {
+                 cursor: cursor,
+                 limit: limit,
+                 name: moduleNum
+            };	
+           
+            cloud.Ajax.request({
+                url: "api/basic/module/list",
+                type: "GET",
+                parameters:parameters,
+                success: function(data) {
+                    callback.call(context || self, data);
+                }
+            });
         },
         getLinesByUserId: function(userId, callback, context) {
         	cloud.Ajax.request({
@@ -406,7 +456,7 @@ define(function(require) {
             searchData.verbose = 5;
             searchData.deleteState = 0;
             cloud.Ajax.request({
-                url: "api/automat/list_new",
+                url: "api/basic/device/list",
                 type: "GET",
                 parameters: searchData,
                 success: function(data) {

@@ -1,7 +1,7 @@
 define(function(require) {
     var cloud = require("cloud/base/cloud");
     var _Window = require("cloud/components/window");
-    var winHtml = require("text!./addDevice.html");
+    var winHtml = require("text!./deviceMan.html");
     var Table = require("cloud/components/table");
     var Button = require("cloud/components/button");
     var Uploader = require("cloud/components/uploader");
@@ -9,8 +9,6 @@ define(function(require) {
     require("cloud/lib/plugin/jquery.form");
     var Service = require("../service");
     require("http://api.map.baidu.com/api?v=1.4&key=5rCA4tslqZE5Ip5ew5pudaSb&callback=initialize");
-    require("../add/css/default.css");
-    require("../add/js/scrollable");
     var oid = cloud.storage.sessionStorage("accountInfo").split(",")[0].split(":")[1];
     var eurl;
 	if(oid == '0000000000000000000abcde'){
@@ -23,9 +21,6 @@ define(function(require) {
         initialize: function($super, options) {
             $super(options);
             this._renderWindow();
-            this.data = {};
-            this.modelListData = [];
-            this.cidCount = 0;
             locale.render({element: this.element});
         },
         _renderWindow: function() {
@@ -44,30 +39,6 @@ define(function(require) {
                 drag: true,
                 content: winHtml,
                 events: {
-                 	"beforeClose":function(){
-                		if(self.automatWindow.body){
-                			 dialog.render({lang: "sure_close_window",buttons: [{
-                    			 lang: "affirm",
-                    			 click:function(){
-                    				 dialog.close();
-                    				 self.automatWindow.destroy();
-                                     cloud.util.unmask();
-                    			 }
-                    		 	},
-                    		 	{
-                					
-               					 lang: "cancel",
-                                 click: function() {
-                                           dialog.close();
-                                           
-                                       }
-                    		 	}]}
-                    		 );
-                			 return false;
-                		}
-                	
-                		 return true;
-                	},
                     "onClose": function() {
                         this.automatWindow.destroy();
                         cloud.util.unmask();
@@ -77,312 +48,59 @@ define(function(require) {
             });
             this.modelChange = 1;
             this.automatWindow.show();
-            //
-            $("#nextBase").val(locale.get({lang: "next_step"}));
-            $("#lastBase").val(locale.get({lang: "price_step"}));
             
-            $("#modelImage").css("display","none");
-            $("#modelText").css("display","none");
-            
-            $("#saveBase2").val(locale.get({lang: "material_configuration"}));
-            
-            $("#addCid").val(locale.get({lang: "add_cid"}));
 
             $("#saveBase").val(locale.get({lang: "save"}));
             
             this._renderMap();//加载点位地图
-            this.uploadButton=new Button({
-                container:$("#select_file_button"),
-                text:locale.get("upload_files"),
-                lang : "{title:select_file,text:select_file}"
-            });
-           // this.initUploader();
-            this.renderCidBtn();
             this.init();
         },
         init:function(){
-        	var currentHost=window.location.hostname;
-        	/*if(currentHost == "longyuniot.com"){
-        		$("#automat_vender").append("<option value='0'>" +locale.get({lang: "please_select"})+"</option>");
-        		$("#automat_vender").append("<option value='aucma'>"+locale.get({lang: "vender_name_aucma"})+"</option>");
-            }else if(currentHost == "www.dfbs-vm.com"){
-            	$("#automat_vender").append("<option value='0'>" +locale.get({lang: "please_select"})+"</option>");
-            	$("#automat_vender").append("<option value='fuji'>"+locale.get({lang: "vender_name_fuji"})+"</option>");
-            }else {
-            	$("#automat_vender").append("<option value='0'>" +locale.get({lang: "please_select"})+"</option>");
-            	$("#automat_vender").append("<option value='aucma'>"+locale.get({lang: "vender_name_aucma"})+"</option>");
-            	$("#automat_vender").append("<option value='fuji'>"+locale.get({lang: "vender_name_fuji"})+"</option>");
-            	$("#automat_vender").append("<option value='easy_touch'>"+locale.get({lang: "vender_name_easy_touch"})+"</option>");
-            	$("#automat_vender").append("<option value='junpeng'>"+locale.get({lang: "vender_name_junpeng"})+"</option>");
-            	$("#automat_vender").append("<option value='baixue'>"+locale.get({lang: "vender_name_baixue"})+"</option>");
-            	$("#automat_vender").append("<option value='leiyunfeng'>雷云峰</option>");
-            }*/
-        	$("#automat_vender").append("<option value='0'>" +locale.get({lang: "please_select"})+"</option>");
-        	$("#automat_vender").append("<option value='aucma'>"+locale.get({lang: "vender_name_aucma"})+"</option>");
-        	$("#automat_vender").append("<option value='fuji'>"+locale.get({lang: "vender_name_fuji"})+"</option>");
-        	$("#automat_vender").append("<option value='easy_touch'>"+locale.get({lang: "vender_name_easy_touch"})+"</option>");
-        	$("#automat_vender").append("<option value='junpeng'>"+locale.get({lang: "vender_name_junpeng"})+"</option>");
-        	$("#automat_vender").append("<option value='baixue'>"+locale.get({lang: "vender_name_baixue"})+"</option>");
-        	$("#automat_vender").append("<option value='leiyunfeng'>雷云峰</option>");
+        	$("#vender").append("<option value='0'>" +locale.get({lang: "please_select"})+"</option>");
+        	$("#vender").append("<option value='vender1'>厂家1</option>");
+        	$("#vender").append("<option value='vender2'>厂家2</option>");
+        	$("#vender").append("<option value='vender3'>厂家3</option>");
         },
-        //添加挂载柜
-        renderCidBtn:function(){
-        	var self = this;       	
-        	cloud.Ajax.request({
-                url: "api/model/formatlist",
-                type: "GET",
-                parameters:{},
-                success: function(data) {
-                	
-                	if(data && data.result){
-                		self.modelListData = data.result;
-                		//增加货柜
-                    	$("#addCid").bind("click",function(){
-                    		self.cidCount ++;
-                    		
-                    		var count = self.cidCount;
-                    		
-                    		$("#cidConfigInfo").append("<div class='cidinfo' id='cid"+self.cidCount+"' class='cidinfo'>" +
-                    				"<table width='100%;'>" +
-                    				"<tr>"+
-                                        "<td width='30%'><label style='color:red;'>*</label><label><span lang='text:device_shelf_number'>"+locale.get({lang: "device_shelf_number"})+"</span></label></td>"+
-                                        "<td><input type='text' class='input' id='cid"+self.cidCount+"_assetId' name='cid"+self.cidCount+"_assetId' style='width:200px;height:30px;'/></td>"+
-                                    "</tr>"+
-                                    "<tr>"+
-                                    "<td width='30%'><label style='color:red;'></label><label><span lang='text:device_shelf_number'>"+locale.get({lang: "vmc_cabinat_num"})+"</span></label></td>"+
-                                    "<td><input type='text' class='input' id='cid"+self.cidCount+"_vmcNum' name='cid"+self.cidCount+"_vmcNum' style='width:200px;height:30px;'/></td>"+
-                                    "</tr>"+
-                                    "<tr height='45px'>"+
-                                    "<td width='30%'><label style='color:red;'></label><label><span lang='text:vender'>"+locale.get({lang: "plug_in"})+"</span></label></td>"+
-                                    "<td><select class='automat-info-select' id='cid"+self.cidCount+"_plugIn' style='width:200px;border-radius: 4px;height: 35px;'>" +
-                                    		"<option value='1'>"+locale.get({lang: "yesText"})+"</option>" +
-                                    		"<option value='0'>"+locale.get({lang: "noText"})+"</option>" +
-                                    		"</select></td>"+
-                                        
-                                    "</tr>"+
-                                    "<tr height='45px'>"+
-                                    "<td width='30%'><label style='color:red;'></label><label><span lang='text:vender'>"+locale.get({lang: "serial"})+"</span></label></td>"+
-                                    "<td><select class='automat-info-select' id='cid"+self.cidCount+"_serial' style='width:200px;border-radius: 4px;height: 35px;'>" +
-                                            "<option value='ttyO3'>ttyO3</option>" +
-                            		        "<option value='ttyO4'>ttyO4</option>" +
-                            		        "<option value='ttyO5'>ttyO5</option>" +
-                                    		"<option value='ttyO6'>ttyO6</option>" +
-                                    		"<option value='ttyO7'>ttyO7</option>" +
-                                    		"</select></td>"+
-                                        
-                                    "</tr>"+
-                                    "<tr height='45px'>"+
-                                    "<td width='30%'><label style='color:red;'>*</label><label><span lang='text:vender'>"+locale.get({lang: "vender"})+"</span></label></td>"+
-                                    "<td><select class='automat-info-select' id='cid"+self.cidCount+"_vender' style='width:200px;border-radius: 4px;height: 35px;'></select></td>"+
-                                    
-                                "</tr>"+
-                                "<tr height='45px'>"+
-                                    "<td width='30%'><label style='color:red;'>*</label><label><span lang='text:automat_vendor_type'>"+locale.get({lang: "automat_vendor_type"})+"</span></label></td>"+
-                                    "<td><select class='automat-info-select' id='cid"+self.cidCount+"_machineType' style='width:200px;border-radius: 4px;height: 35px;'></select></td>"+
-                                    
-                                "</tr>"+
-                                    "<tr height='45px'>"+
-                                        "<td width='30%'><label style='color:red;'>*</label><label><span lang='text:model'>"+locale.get({lang: "model"})+"</span></label></td>"+
-                                        "<td><select class='automat-info-select' id='cid"+self.cidCount+"_model' style='width:200px;border-radius: 4px;height: 35px;'></select></td>"+
-                                    "</tr>"+
-            	                    "<tr>"+
-            	                    "<span class='delspan"+self.cidCount+" delete_cid'></span>"+
-            	                    "</tr>"+
-                    				"</table>" +
-                    				"</div>");
-                    		
-                    		//机型                  		                   		
-                    		
-                    		self.venderMap = {};
-                    		self.modelMap = {};
-                    		for(var i=0;i<self.modelListData.length;i++){
-                    			var vender = self.modelListData[i].vender;
-                    			var venderNum = self.modelListData[i].venderNum;
-                    			var types = self.modelListData[i].typeInfos;
-                    			var typeA = [];
-                    			for(var m=0;m<types.length;m++){
-                    				var info = {};
-                    				info.type = types[m].type;
-                    				info.typeName = types[m].typeName;
-                    				typeA.push(info);
-                    				
-                    				var models = types[m].modelInfos;
-                    				self.modelMap[vender+"@"+types[m].type] = models;
-                    			}
-                    			self.venderMap[vender+"@"+venderNum] = typeA;
-                    		}
-                    		
-                    		
-                    		$("#cid"+self.cidCount+"_vender").empty();
-                    		$("#cid"+self.cidCount+"_vender").append("<option value='0'>-------"+locale.get({lang: "please_select_vender"})+"-------</option>");
-                    		$("#cid"+self.cidCount+"_machineType").empty();
-                    		$("#cid"+self.cidCount+"_machineType").append("<option value='0'>-------"+locale.get({lang: "please_select_machinetype"})+"-------</option>");
-                    		$("#cid"+self.cidCount+"_model").empty();
-                    		$("#cid"+self.cidCount+"_model").append("<option value='0'>-------"+locale.get({lang: "please_select_model"})+"-------</option>");
-                    		
-                    		
-                    		for(var key in self.venderMap){
-                    			var number = key.split('@')[1];
-                    			var ven = key.split('@')[0];
-                    		    $("#cid"+self.cidCount+"_vender").append("<option value='"+number+"'>"+ven+"</option>");
-                    			
-                    		}
-                    		$("#cid"+self.cidCount+"_vender").bind("change",{count:self.cidCount},function(e){
-                    			
-                    			$("#cid"+e.data.count+"_machineType").empty();
-                        		$("#cid"+e.data.count+"_machineType").append("<option value='0'>-------"+locale.get({lang: "please_select_machinetype"})+"-------</option>");
-                        		$("#cid"+e.data.count+"_model").empty();
-                        		$("#cid"+e.data.count+"_model").append("<option value='0'>-------"+locale.get({lang: "please_select_model"})+"-------</option>");
-                    			
-                    			var num = $(this).children('option:selected').val();
-                    			var vender = $(this).children('option:selected').text();
-                    			
-                    			var types = self.venderMap[vender+"@"+num];
-                    			
-                    			
-                    			for(var l=0;l<types.length;l++){
-                        			
-                        			$("#cid"+e.data.count+"_machineType").append("<option value='"+types[l].type+"'>"+types[l].typeName+"</option>");
-                        			
-                        		}
-                    			
-                    			$("#cid"+e.data.count+"_machineType").bind("change",{count:e.data.count},function(a){
-                    				
-                            		$("#cid"+a.data.count+"_model").empty();
-                            		$("#cid"+a.data.count+"_model").append("<option value='0'>-------"+locale.get({lang: "please_select_model"})+"-------</option>");
-            						var machineType = $(this).children('option:selected').val();
-            						
-            						var models = self.modelMap[vender+"@"+machineType];
-            						for(var n=0;n<models.length;n++){
-                            			
-                            			$("#cid"+a.data.count+"_model").append("<option value='"+models[n].modelId+"'>"+models[n].modelName+"</option>");
-                            			
-                            		}
-            						
-            						
-            					});
-                    			
-                    			
-                    			
-                    		});
-                    		
-                    		//删除货柜
-                    		$(".delspan"+self.cidCount).bind("click",{count:self.cidCount},function(e){
-                    			
-                        		$("#cid"+e.data.count).remove();
-                        		
-                        	});
-                    		//鼠标经过事件
-                            $(".delspan"+self.cidCount).bind("mouseover",{count:self.cidCount},function(e){
-                    			
-                            	$(".delspan"+e.data.count).removeClass("delete_cid");
-                		    	$(".delspan"+e.data.count).addClass("delete_cid_tp");
-                        		
-                        	});
-                            $(".delspan"+self.cidCount).bind("mouseout",{count:self.cidCount},function(e){
-                    			
-                            	$(".delspan"+e.data.count).removeClass("delete_cid_tp");
-                		    	$(".delspan"+e.data.count).addClass("delete_cid");
-                        		
-                        	});
-                    		
-                            $("#cid"+self.cidCount).find('table').css("margin-top","-30px");
-                            
-                            //self.initCidUploader(self.cidCount);
-                    	});
-                	}
-                }
-        	})
-        },
+        _renderMap: function() {
+            var self = this;
+            var map = new BMap.Map("container");          // 创建地图实例  
+            var point = new BMap.Point(116.404, 39.915);  // 创建点坐标  
+            map.centerAndZoom(point, 15);                 // 初始化地图，设置中心点坐标和地图级别  
+            map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+            map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+            var opts = {type: BMAP_NAVIGATION_CONTROL_LARGE}
+            map.addControl(new BMap.NavigationControl(opts));
 
-        initCidUploader:function(count){
-            var self=this;
-            var button = "uploadButton"+count;
-            var uploader = "uploader"+count;
-            this.button=new Button({
-                container:$("#cid"+count+"_select_file_button"),
-                text:locale.get("upload_files"),
-                lang : "{title:select_file,text:select_file}"
-            });
+            this.loadModel();//机型
+            this.loadSite();
+            this._renderBtn(map);//各个按钮事件
+            //this.loadDeviceData(map);//获取该售货机的基本信息
             
-            this.uploader = new Uploader({
-                browseElement: $("#cid"+count+"_select_file_button"),
-                url: "/mapi/file",
-                autoUpload: true,
-                filters: [{
-                    title: "Image files or compress package",
-                    extensions: "jpg,gif,png,zip,rar,7z,tar,gz"
-                }],
-                maxFileSize: "100mb",
-                events: {
-                	"onError": function(err){
-
-					},
-					"onFilesAdded" : function(file){
-
-						var name=file[0].name;
-						$("#cid"+count+"_fileName").text(name);
-						$("#cid"+count+"_fileName").attr("title",name);
-					},
-                    "onFileUploaded": function(response, file){
-                    	if ($.isPlainObject(response)){
-                    		if(response.error){
-                    			dialog.render({lang:"upload_files_failed"});
-							}else{
-								
-								var src= cloud.config.FILE_SERVER_URL + "/mapi/file/" +response.result._id + "?access_token=" + cloud.Ajax.getAccessToken();
-		                        $("#cid"+count+"_fileId").val(response.result._id);
-		                        
-							}
-                    	}
-
-                    },
-                    "beforeFileUpload":function(){
-
-					}
-                }
-            });
         },
-        initUploader:function(){
-            var self=this;
-            this.uploader = new Uploader({
-                browseElement: $("#select_file_button"),
-                url: "/mapi/file",
-                autoUpload: true,
-                filters: [{
-                    title: "Image files or compress package",
-                    extensions: "jpg,gif,png,zip,rar,7z,tar,gz"
-                }],
-                maxFileSize: "100mb",
-                events: {
-                	"onError": function(err){
-
-					},
-					"onFilesAdded" : function(file){
-
-						var name=file[0].name;
-						$("#fileName").text(name);
-						$("#fileName").attr("title",name);
-					},
-                    "onFileUploaded": function(response, file){
-                    	if ($.isPlainObject(response)){
-                    		if(response.error){
-                    			dialog.render({lang:"upload_files_failed"});
-							}else{
-								
-								var src= cloud.config.FILE_SERVER_URL + "/mapi/file/" +response.result._id + "?access_token=" + cloud.Ajax.getAccessToken();
-		                        $("#fileId").val(response.result._id);
-		                        
-							}
-                    	}
-
-                    },
-                    "beforeFileUpload":function(){
-
+        loadModel : function() {
+        	var self = this;
+        	var moduleNum = "";
+        	$("#models").append("<option value='0'>" +locale.get({lang: "please_select"})+"</option>");
+			Service.getAllModel(-1,0,moduleNum,function(data){
+				if(data.result && data.result.length>0){
+					for(var i=0;i<data.result.length;i++){
+						$("#models").append("<option value='" +data.result[i]._id + "'>" +data.result[i].moduleNum+"</option>");
 					}
-                }
-            });
-        },
+				}
+			 }, self);
+		},
+		loadSite: function() {
+        	var self = this;
+        	var name = "";
+        	$("#siteId").append("<option value='0'>" +locale.get({lang: "please_select"})+"</option>");
+			Service.getAllSites(-1,0,function(data){
+				if(data.result && data.result.length>0){
+					for(var i=0;i<data.result.length;i++){
+						$("#siteId").append("<option value='" +data.result[i]._id + "'>" +data.result[i].name+"</option>");
+					}
+				}
+			 }, self);
+		},
         getAllSite: function(siteId, map) {
             var self = this;
             if(siteId){
@@ -430,7 +148,6 @@ define(function(require) {
                              $("#siteId").append("<option value='" + siteData.result[i]._id + "'  lineId='" + siteData.result[i].lineId + "' lineName='" + siteData.result[i].lineName + "' loc='" + siteData.result[i].address + "' lat='" + siteData.result[i].location.latitude + "' lng='" + siteData.result[i].location.longitude + "' >" + siteData.result[i].name + "</option>");
                          }
                      }
-                     //$("#siteId").val(siteId);
                      var lng = $("#siteId").find("option:selected").attr("lng");
                      var lat = $("#siteId").find("option:selected").attr("lat");
                      var loc = $("#siteId").find("option:selected").attr("loc");
@@ -441,11 +158,6 @@ define(function(require) {
                          var marker = new BMap.Marker(new_point);       // 创建标注
                          map.addOverlay(marker);                        // 将标注添加到地图中
                          map.panTo(new_point);
-                        // marker.enableDragging();  //可拖拽
-                         //标注拖拽后的位置
-                        // marker.addEventListener("dragend", function(e) {
-                        //     self.getCenter(map, e.point, '');
-                        // });
                      }
                  }, self); 
 	                 
@@ -671,76 +383,30 @@ define(function(require) {
                 }.bind(this));
             }
         },
-        _renderMap: function() {
-            var self = this;
-            var map = new BMap.Map("container");          // 创建地图实例  
-            var point = new BMap.Point(116.404, 39.915);  // 创建点坐标  
-            map.centerAndZoom(point, 15);                 // 初始化地图，设置中心点坐标和地图级别  
-            map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
-            map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
-            var opts = {type: BMAP_NAVIGATION_CONTROL_LARGE}
-            map.addControl(new BMap.NavigationControl(opts));
-
-            this._renderBtn(map);//各个按钮事件
-            this.loadDeviceData(map);//获取该售货机的基本信息
-            
-        },
+        
         _renderBtn: function(map) {
             var self = this;
-            //获取点位输入框事件并定位
-            $("#siteId").bind('change', function() {
-            	$("#siteId").css("border-color", "");
-            	
-                var siteId = $("#siteId").find("option:selected").val();
-                var inpuValue = $("#siteId").find("option:selected").attr("loc");
-                var lng = $("#siteId").find("option:selected").attr("lng");
-                var lat = $("#siteId").find("option:selected").attr("lat");
-                if (lng && lat) {
-                    map.centerAndZoom(new BMap.Point(lng, lat), 16); //设置中心点
-                    map.clearOverlays(); //清除
-                    var new_point = new BMap.Point(lng, lat);
-                    self.getCenter(map, new_point, inpuValue);
-                    var marker = new BMap.Marker(new_point);       // 创建标注
-                    map.addOverlay(marker);                        // 将标注添加到地图中
-                    map.panTo(new_point);
-                }
-            });
-           
-            $("#lastBase").bind("click", function() {
-            	
-            	$("#cidConfig").css("display", "none");
-                $("#baseInfo").css("display", "block");
-                $("#tab1").addClass("active");
-                $("#tab2").removeClass("active");
-            	
-            });
-            
-            $("#nextBase").bind("click", function() {
-            	
-            	self.renderMasterInfo();
-            });
-            //货道配置
-            $("#saveBase2").bind("click", function() {
-            	var assetId = $("#assetId").val();
-            	self.renderUpdateMachine();
-                self.automatWindow.destroy();
-            	
-            	localStorage.setItem("shelf_manage_assetId",assetId);
-            	
-            	var obj={
-            			name: "channel_manage", 
-            			order: 0, 
-            			defaultOpen: true,
-            			defaultShow: true,
-            			url: "../../../operation_manage/channelManageV2/channelManageMain.js"
-            	};
-            	self.loadApplication(obj);
-            });
-
             //保存
             $("#saveBase").bind("click", function() {
-                var flag = true;
-                self.renderUpdateMachine();
+            	var assetId = $("#assetId").val();
+            	var name = $("#deviceName").val();
+            	var vender = $("#automat_vender").val();
+            	var moduleName = $("#models").find("option:selected").text();
+            	var moduleId = $("#models").find("option:selected").val();
+            	
+            	var siteName = = $("#siteId").find("option:selected").text();
+            	var siteId = $("#siteId").find("option:selected").val();
+            	
+            	var finalData={
+            			assetId:assetId,
+            			name:name,
+            			vender:vender,
+            			moduleName:moduleName,
+            			moduleId:moduleId,
+            			siteName:siteName,
+            			siteId:siteId
+            	};
+            	
             });
 
         },

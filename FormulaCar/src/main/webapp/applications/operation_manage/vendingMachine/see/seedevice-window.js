@@ -10,8 +10,6 @@ define(function(require) {
     require("cloud/lib/plugin/jquery.form");
     var Service = require("../service");
     require("http://api.map.baidu.com/api?v=1.4&key=5rCA4tslqZE5Ip5ew5pudaSb&callback=initialize");
-    require("../add/css/default.css");
-    require("../add/js/scrollable");
     var SelfConfigInfo = require("./selfConfig");
     var SelfDetailInfo = require("./DetailInfo/info");
     var SelfStatusInfo = require("./StatusInfo/info");
