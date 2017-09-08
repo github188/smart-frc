@@ -8,7 +8,6 @@ import cn.com.inhand.area.dao.AreaDao;
 import cn.com.inhand.common.dto.AreaBean;
 import cn.com.inhand.common.dto.BasicResultDTO;
 import cn.com.inhand.common.dto.OnlyResultDTO;
-import cn.com.inhand.common.smart.model.Goods;
 import cn.com.inhand.common.util.DateUtils;
 import cn.com.inhand.smart.formulacar.model.Area;
 import java.util.List;
@@ -74,7 +73,7 @@ public class AreaController {
         return result;
     }
 
-    @RequestMapping(value = "/area/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/area", method = RequestMethod.PUT)
     public @ResponseBody
     Object updateAutomat(@RequestParam(value = "access_token", required = true) String access_token,
             @RequestHeader(value = "X-API-OID", required = false) ObjectId xOId,
@@ -98,7 +97,7 @@ public class AreaController {
         return result;
     }
 
-    @RequestMapping(value = "/area/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "{id}/area", method = RequestMethod.GET)
     public @ResponseBody
     Object findArea(@RequestParam(value = "access_token", required = true) String access_token,
             @RequestHeader(value = "X-API-OID", required = false) ObjectId xOId,
