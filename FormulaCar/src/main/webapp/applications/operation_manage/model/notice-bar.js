@@ -18,12 +18,8 @@ define(function(require){
     		  var self = this;
     		  var $htmls = $(+"<div></div>" +
     	              "<div id='search-bar' style='width:auto;margin-top:5px;margin-left:5px;'>" +
-    	              "<select id='search'  name='search' style='width:130px;height: 28px; '>" +
-    	              "<option value='0'>" + locale.get({lang: "vender"}) + "</option>" +
-    	              "<option value='1'>" + locale.get({lang: "modelname"}) + "</option>" +
-    	              "<option value='2'>" + locale.get({lang: "automat_vendor_type"}) + "</option>" +
-    	              "</select>&nbsp;&nbsp;" +
-    	              "<input style='width:200px' type='text'  id='searchValue' />" +
+    	              "<label style='margin:auto 10px auto 10px ;margin-right: 6px;'>型号</label>" +
+    	              "<input style='width:200px;' type='text'  id='moduleNum' />"  +
     	              "</div>");
               this.element.append($htmls);
 		},
@@ -35,11 +31,7 @@ define(function(require){
                 container: $("#search-bar"),
                 events: {
                     click: function() {
-
-                        var search = $("#search").val();
-                        var searchValue = $("#searchValue").val();
-                        
-                        self.fire("query", search, searchValue);
+                        self.fire("query");
                     }
                 }
             });
@@ -92,39 +84,6 @@ define(function(require){
                     }
                 }
             });
-            //导出
-//            var exportBtn = new Button({
-//                text: locale.get({lang: "export"}),
-//                container: $("#search-bar"),
-//                events: {
-//                    click: function() {
-//                    	var domain = window.location.host;
-//                    	var vender = null;
-//                    	var machineType = 0;
-//                    	if(domain == "longyuniot.com"){
-//                    		vender = "aucma";
-//            			}else if(domain == "www.dfbs-vm.com"){
-//            				vender = "fuji";
-//            			}
-//                    	var selectedId = $("#search").find("option:selected").val();
-//                    	if(selectedId == 2){
-//                    		var machineT = $("#searchValue").val();
-//                    		if(machineT != null && machineT.replace(/(^\s*)|(\s*$)/g,"")==""){
-//                    			
-//                    			if(!isNaN(machineT)){
-//                    				machineType = machineT;
-//                    			}else{
-//                    				dialog.render({lang:"please_input_number"});
-//                    				return;
-//                    			}
-//                    			
-//                    		}
-//
-//                    	}
-//                        self.fire("exports", vender, machineType);
-//                    }
-//                }
-//            });
             if(permission.app("model_manage").read){
             	if(queryBtn) queryBtn.show();
             	if(catBtn) catBtn.show();

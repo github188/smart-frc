@@ -72,9 +72,6 @@
 <div id="deviceForm">
     <ul id="status">
         <li class="active" id="tab1" style="height: 19px;"><span lang="text:add_basic_information"></span></li>
-        <!-- <li id="tab2" style="height: 19px;"><strong>2.</strong><span lang="text:automat_cargo_road_information"></span></li> -->
-        <!--  <li id="tab3"><strong>3.</strong><span lang="text:keyboard_code_information"></span></li>
-        <li id="tab4"><strong>4.</strong><span lang="text:selectednumber_information"></span></li>-->
     </ul>
     <div class="items">
         
@@ -86,62 +83,26 @@
                             <td width="30%"><label style='color:red;'>*</label><label><span lang="text:product_manufacturer"></span></label></td>
                             <td>
                               <select id="vender" name="vender" style="width:200px;height: 35px;"></select>
-                              <span id='vender_add_button'></span>
                             </td>
                         </tr>
                         <tr>
                             <td width="30%"><label style='color:red;'>*</label><label><span lang="text:purchase_model"></span></label></td>
-                            <td><input type="text" class="input" id="modelName" name="modelName" style="width:200px;height:30px;"/></td>
+                            <td><input type="text" class="input" id="moduleNum" name="moduleNum" style="width:200px;height:30px;"/></td>
                         </tr>
                         <tr>
                             <td width="30%"><label style='color:red;'>*</label><label><span lang="text:device_shelf_type"></span></label></td>
                             <td>
-                               <select id="machineType" name="machineType" style="width:200px;height: 35px;">
+                               <select id="deviceType" name="deviceType" style="width:200px;height: 35px;">
                                </select>
                             </td>
                         </tr>
                         <tr>
-                            <td width="30%"></td>
-                            <td>
-                            <div id="zhugui" style="display:none; border: 1px dashed rgba(115, 120, 126, 0.317647);margin-top: 5px;">
-		                         <table style="margin: 8px;width:100%;">
-		                           <tr>
-		                              <td><label><span lang="text:road_starting_number"></span></td>
-		                              <td><input type="text" class="input" id="startNumber" name="startNumber" style="width:100px;height:25px;"/></td>
-		                           </tr>
-		                           <tr>
-		                              <td><label><span lang="text:button_number"></span></td>
-		                              <td><input type="text" class="input" id="allNumber" name="allNumber" style="width:100px;height:25px;"/></td>
-		                           </tr>
-		                         </table>
-                             </div>
-                            </td>
-                            <div id="zhugui2" style="display:none; border: 1px dashed rgba(115, 120, 126, 0.317647);margin-top: 5px;">
-                             <table style="margin: 8px;width:100%;">
-                               <tr>
-                                  <td><label><span lang="text:road_starting_number"></span></td>
-                                  <td><input type="text" class="input" id="startNumber" name="startNumber" style="width:100px;height:25px;"/></td>
-                               </tr>
-                               <tr>
-                                  <td><label><span lang="text:button_number"></span></td>
-                                  <td><input type="text" class="input" id="allNumber" name="allNumber" style="width:100px;height:25px;"/></td>
-                               </tr>
-                             </table>
-                             </div>
-                            </td>
-                            <div id="zhugui3" style="display:none; border: 1px dashed rgba(115, 120, 126, 0.317647);margin-top: 5px;">
-                             <table style="margin: 8px;width:100%;">
-                               <tr>
-                                  <td><label><span lang="text:road_starting_number"></span></td>
-                                  <td><input type="text" class="input" id="startNumber" name="startNumber" style="width:100px;height:25px;"/></td>
-                               </tr>
-                               <tr>
-                                  <td><label><span lang="text:button_number"></span></td>
-                                  <td><input type="text" class="input" id="allNumber" name="allNumber" style="width:100px;height:25px;"/></td>
-                               </tr>
-                             </table>
-                             </div>
-                            </td>
+                            <td width="30%"><label style='color:red;'>*</label><label><span>赛道起始编号</span></label></td>
+                            <td><input type="text" class="input" id="runwayStartNum" name="runwayStartNum" style="width:200px;height:30px;"/></td>
+                        </tr>
+                        <tr>
+                            <td width="30%"><label style='color:red;'>*</label><label><span>赛道个数</span></label></td>
+                            <td><input type="text" class="input" id="runwayCount" name="runwayCount" style="width:200px;height:30px;"/></td>
                         </tr>
                     </table>
                 </div>
@@ -151,20 +112,11 @@
                <table style="width:100%;">
                  <tr>
                   <td>
-                    <input type="button" class='btn btn-primary submit' id="nextBase" style="margin-left:10px;width: 105px;margin-top: -252px;height: 30px;"/>
+                    <input type="button" class='btn btn-primary submit' id="saveBase" style="margin-left:10px;width: 105px;margin-top: -252px;height: 30px;"/>
                  </td>
                  </tr>
                </table>
             </div>
-        </div>
-        <div class="page" id="selfConfig" style="padding: 0px 0px;">
-            <div id="selfConfigInfo"></div>
-        </div>
-        <div class="page" id="keyConfig" style="padding: 0px 0px;">
-            <div id="keyConfigInfo"></div>
-        </div>
-        <div class="page" id="itemNumberConfig" style="padding: 0px 0px;">
-            <div id="itemNumberInfo"></div>
         </div>
     </div>
 </div> 

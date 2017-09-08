@@ -4,7 +4,7 @@ define(function(require){
 	var Common = require("../../../common/js/common");
 	var layout = require("cloud/lib/plugin/jquery.layout");
 	var html = require("text!./list.html");
-	var Service = require("../service");
+	var Service = require("./service");
 	var NoticeBar = require("./notice-bar");
 	var Table = require("cloud/components/table");
 	var Button = require("cloud/components/button");
@@ -14,7 +14,7 @@ define(function(require){
 	var SeeModelWin = require("./see/seeModel-window");
 	var columns = [ {
 		"title":locale.get({lang:"purchase_model"}),//型号
-		"dataIndex" : "name",
+		"dataIndex" : "moduleNum",
 		"cls" : null,
 		"width" : "20%",
 		render: function(data, type, row) {
@@ -28,26 +28,31 @@ define(function(require){
 	       }
 	},{
 		"title":locale.get({lang:"stage_type"}),//类型
-		"dataIndex" : "stage_type",
+		"dataIndex" : "deviceType",
 		"cls" : null,
 		"width" : "20%",
 		 render: machineType
 	},{
-		"title":locale.get({lang:"track_number"}),//赛道数
-		"dataIndex" : "track_number",
+		"title":"赛道个数",
+		"dataIndex" : "runwayCount",
 		"cls" : null,
-		"width" : "20%",
-		 render: machineType
+		"width" : "15%"
+	},{
+		"title":"赛道起始编号",
+		"dataIndex" : "runwayStartNum",
+		"cls" : null,
+		"width" : "15%"
 	},{
 		"title":locale.get({lang:"product_manufacturer"}),//厂家
 		"dataIndex" : "vender",
 		"cls" : null,
-		"width" : "20%"
+		"width" : "15%",
+		render:venderName
 	},{                                             //创建时间
 		"title":locale.get({lang:"create_time"}),
 		"dataIndex" : "createTime",
 		"cls" : null,
-		"width" : "20%",
+		"width" : "15%",
 		render:function(data, type, row){
 			return cloud.util.dateFormat(new Date(data), "yyyy-MM-dd hh:mm:ss");
 		}
@@ -55,8 +60,20 @@ define(function(require){
 	 function venderName(value, type) {
 	        var display = "";
 	        if ("display" == type) {
-	        	display = Common.getLangVender(value);
-	            return display;
+	        	switch (value) {
+	                case "vender1":
+	                    display = "厂家1";
+	                    break;
+	                case "vender2":
+	                    display = "厂家2";
+	                    break;
+	                case "vender3":
+	                    display = "厂家3";
+	                    break;
+	                default:
+	                    break;
+               }
+               return display;
 	        } else {
 	            return value;
 	        }
@@ -66,29 +83,11 @@ define(function(require){
 	        if ("display" == type) {
 	            switch (value) {
 	                case 1:
-	                    display = locale.get({lang: "drink_machine"});
+	                    display = "2赛道";
 	                    break;
 	                case 2:
-	                    display = locale.get({lang: "spring_machine"});
+	                    display = "3赛道";
 	                    break;
-	                case 3:
-	                    display = locale.get({lang: "grid_machine"});
-	                    break;
-	                case 4:
-	                	display = locale.get({lang: "coffee_machine"});
-	                	 break;
-	                case 5:
-	                	display = locale.get({lang: "wine_machine"});
-	                	 break;
-	    /*            case 4:
-	                	display = "Beverage machine";
-	                	break;
-	                case 5:
-	                	display = "Snack machine";
-	                	break;
-	                case 6:
-	                	display = "Combo Vending Machine";
-	                	break;*/
 	                default:
 	                    break;
 	            }
@@ -195,18 +194,9 @@ define(function(require){
 		loadTableData : function(limit,cursor) {
 			cloud.util.mask("#models_list_table");
         	var self = this;
-        	var search = $("#search").val();
-            var searchValue = $("#searchValue").val();
+        	var moduleNum = $("#moduleNum").val();
 
-            if (search) {
-
-            } else {
-                search = 0;
-            }
-            if (searchValue) {
-                searchValue = self.stripscript(searchValue);
-            }
-			Service.getAllModel(eurl,limit,cursor,search,searchValue,function(data){
+			Service.getAllModel(limit,cursor,moduleNum,function(data){
 				 var total = data.result.length;
 				 self.pageRecordTotal = total;
 	        	 self.totalCount = data.result.length;
@@ -229,18 +219,8 @@ define(function(require){
     				limit:this.pageDisplay,
         			requestData:function(options,callback){
         				cloud.util.mask("#models_list_table");
-        				var search = $("#search").val();
-                        var searchValue = $("#searchValue").val();
-                        if (search) {
-
-                        } else {
-                            search = 0;
-                        }
-                        if (searchValue) {
-                            searchValue = self.stripscript(searchValue);
-                        }
-        				
-        				Service.getAllModel(eurl,options.limit,options.cursor,search,searchValue,function(data){
+        				var moduleNum = $("#moduleNum").val();
+                        Service.getAllModel(options.limit,options.cursor,moduleNum,function(data){
         				   self.pageRecordTotal = data.total - data.cursor;
 						   callback(data);
 						   self._renderBtn();
@@ -268,20 +248,7 @@ define(function(require){
 				selector : "#models_list_bar",
 				events : {
 					query: function(search, searchValue) {//查询
-                        cloud.util.mask("#template_list_table");
-                        var pageDisplay = self.display;
-                        if (searchValue) {
-                            searchValue = self.stripscript(searchValue);
-                        }     
-                        Service.getAllModel(eurl,30, 0, search, searchValue, function(data) {
-                        	 var total = data.result.length;
-	           				 self.pageRecordTotal = total;
-	           	        	 self.totalCount = data.result.length;
-	                   		 self.listTable.render(data.result);
-	           	        	 self._renderpage(data, 1);
-	           	        	 self._renderBtn();
-	           	        	 cloud.util.unmask("#models_list_table");
-                        });
+						self.loadTableData($(".paging-limit-select  option:selected").val(), ($(".paging-page-current").val() - 1) * $(".paging-limit-select").val());
                     },
                     see:function(){
                     	 var selectedResouces = self.getSelectedResources();
@@ -316,7 +283,7 @@ define(function(require){
                               }
                           });
                     },
-					  add:function(){
+					add:function(){
 						   if (this.addModel) {
 	                            this.addModel.destroy();
 	                       }

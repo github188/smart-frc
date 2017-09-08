@@ -17,7 +17,25 @@ define(function(require) {
                     callback.call(context || this, data);
                 }
             });
-        }
+        },
+        getAllModel: function(limit, cursor,moduleNum, callback, context) {
+            var self = this;
+            	
+            var parameters = {
+                 cursor: cursor,
+                 limit: limit,
+                 moduleNum: moduleNum
+            };	
+           
+            cloud.Ajax.request({
+                url: "api/model/list",
+                type: "GET",
+                parameters:parameters,
+                success: function(data) {
+                    callback.call(context || self, data);
+                }
+            });
+        },
     });
 
     return new Service();
