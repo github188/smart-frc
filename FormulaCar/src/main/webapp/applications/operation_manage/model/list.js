@@ -10,7 +10,6 @@ define(function(require){
 	var Button = require("cloud/components/button");
 	var Paging = require("cloud/components/paging");
 	var ManModel = require("./modelEdit/updateModel-window");
-	var IntroducedModel = require("./modelEdit/introduced/introducedModel-window");
 	var SeeModelWin = require("./see/seeModel-window");
 	var columns = [ {
 		"title":locale.get({lang:"purchase_model"}),//型号
@@ -82,10 +81,10 @@ define(function(require){
 	        var display = "";
 	        if ("display" == type) {
 	            switch (value) {
-	                case 1:
+	                case "1":
 	                    display = "2赛道";
 	                    break;
-	                case 2:
+	                case "2":
 	                    display = "3赛道";
 	                    break;
 	                default:
@@ -270,19 +269,6 @@ define(function(require){
 	                     }
 	                        	
                     },
-                    introduced:function(){
-                    	  if (this.introModel) {
-                              this.introModel.destroy();
-                          }
-                          this.introModel = new IntroducedModel({
-                              selector: "body",
-                              events: {
-                                  "getModelList": function() { 
-                                	  self.loadTableData($(".paging-limit-select  option:selected").val(), ($(".paging-page-current").val() - 1) * $(".paging-limit-select").val());
-                                  }
-                              }
-                          });
-                    },
 					add:function(){
 						   if (this.addModel) {
 	                            this.addModel.destroy();
@@ -320,50 +306,36 @@ define(function(require){
 	                     
 	                        }
 					  },
-//					  exports: function(vender,machineType) {//导出
-//	                        var language = locale._getStorageLang() === "en" ? 1 : 2;
-//	                        var host = cloud.config.FILE_SERVER_URL;
-//	                        var reportName = "ModelReport.xls";
-//	                        var oid = cloud.storage.sessionStorage("accountInfo").split(",")[0].split(":")[1];
-//	                        var url = host + "/api/vmreports/model?report_name=" + reportName;
-//	                        
-//	                        var parameters = "&access_token=" + cloud.Ajax.getAccessToken() + "&oid=" + oid;
-//	                        if(vender != null){
-//	                        	parameters += "&vender="+vender;
-//	                        }
-//	                        if(machineType != null){
-//	                        	parameters += "&machineType="+machineType;
-//	                        }
-//	                        
-//	                        cloud.util.ensureToken(function() {
-//	                            window.open(url+parameters, "_self");
-//	                        });
-//	                    },
 					  drop:function(){
-	                        var selectedResouces = self.getSelectedResources();
-	                        if (selectedResouces.length === 0) {
+	                        var idsArr = self.getSelectedResources();
+	                        if (idsArr.length == 0) {
 	                            dialog.render({lang: "please_select_at_least_one_config_item"});
 	                        } else {
+	                        	 var ids = "";
+		                         for (var i = 0; i < idsArr.length; i++) {
+		                                if (i == idsArr.length - 1) {
+		                                    ids = ids + idsArr[i]._id;
+		                                } else {
+		                                    ids = ids + idsArr[i]._id + ",";
+		                                }
+		                         }
 	                            dialog.render({
 	                                lang: "affirm_delete",
 	                                buttons: [{
 	                                        lang: "affirm",
 	                                        click: function() {
-	                                        	  for (var i = 0; i < selectedResouces.length; i++) {
-		                                                var _id = selectedResouces[i]._id;
-		                                                Service.deleteModel(eurl,_id, function(data) {
-
-		                                                	if(data){
-		                                                		if(data.error && data.error_code==70028){
-		                                                			
-		                                                			dialog.render({lang: "this_model_has_template"});
-		                                                			self.loadTableData($(".paging-limit-select  option:selected").val(), ($(".paging-page-current").val() - 1) * $(".paging-limit-select").val());
-		                                                        }
-		                                                	  }
-		                                                });
-		                                          }
-	                                        	  self.loadTableData($(".paging-limit-select  option:selected").val(), ($(".paging-page-current").val() - 1) * $(".paging-limit-select").val());
-		                                          dialog.render({lang: "deletesuccessful"});
+		                                         Service.deleteModel(ids, function(data) {
+		                                            if(data){
+		                                                if(data.error && data.error_code==70028){
+		                                                   dialog.render({lang: "this_model_has_template"});
+		                                                   self.loadTableData($(".paging-limit-select  option:selected").val(), ($(".paging-page-current").val() - 1) * $(".paging-limit-select").val());
+		                                                }else{
+		                                                  self.loadTableData($(".paging-limit-select  option:selected").val(), ($(".paging-page-current").val() - 1) * $(".paging-limit-select").val());
+		   		                                          dialog.render({lang: "deletesuccessful"});
+		                                                }
+		                                             }
+		                                         });
+	                                        	 
 		                                          dialog.close();
 	                                        }
 	                                    },

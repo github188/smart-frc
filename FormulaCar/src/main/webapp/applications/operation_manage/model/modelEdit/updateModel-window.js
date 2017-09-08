@@ -8,7 +8,7 @@ define(function(require) {
     var Uploader = require("cloud/components/uploader");
     require("cloud/lib/plugin/jquery.uploadify");
     require("cloud/lib/plugin/jquery.form");
-    var Service = require("../../service");
+    var Service = require("../service");
     var oid = cloud.storage.sessionStorage("accountInfo").split(",")[0].split(":")[1];
 	var eurl;
 	if(oid == '0000000000000000000abcde'){
@@ -74,10 +74,9 @@ define(function(require) {
         },
         getData:function(){
         	var self = this;
-        	var language = locale._getStorageLang();
-        	Service.getModelById(eurl,self.id, function(data) {
+        	Service.getModelById(self.id, function(data) {
         		console.log(data.result);
-       		    $("#moduleNum").val(data.result.moduleNum==null?"":data.result.moduleNum);
+       		    $("#moduleNums").val(data.result.moduleNum==null?"":data.result.moduleNum);
        		    $("#vender option[value='"+data.result.vender+"']").attr("selected","selected");
        		    $("#deviceType option[value='"+data.result.deviceType+"']").attr("selected","selected");
        		    $("#runwayStartNum").val(data.result.runwayStartNum==null?"":data.result.runwayStartNum);
@@ -88,41 +87,41 @@ define(function(require) {
         	 var self =this;
         	 $("#saveBase").unbind("click");
         	 $("#saveBase").bind("click", function() {
-        		 var vender = $("#vender").find("option:selected").text();//厂家
-        		 var vender_val = $("#vender").find("option:selected").val();
+        		 var vender = $("#vender").find("option:selected").val();//厂家
         		 
          		 var deviceType = $("#deviceType").find("option:selected").val();
                  var deviceTypeText=$("#deviceType").find("option:selected").text();
                  
-         		 var moduleNum = $("#moduleNum").val();//型号
+         		 var moduleNums = $("#moduleNums").val();//型号
          		 
          		 var runwayStartNum = $("#runwayStartNum").val();//货道起始 编号
          		 
          		 var runwayCount = $("#runwayCount").val();//货道总数
+         		 console.log("moduleNums====="+moduleNums);
          		 
-         		 if(vender_val == null || vender_val == 0){
+         		 if(vender == null || vender == 0){
          			 dialog.render({lang: "please_select_vender"});
                      return;
          		 }
-         		 if(machineType == null || machineType == 0){
+         		 if(deviceType == null || deviceType == 0){
         			 dialog.render({lang: "please_select_machineType"});
                      return;
         		 }
-         		 if(moduleNum == null  || moduleNum.replace(/(^\s*)|(\s*$)/g,"")==""){
+         		 if(moduleNums == null  || moduleNums == ""){
         			 dialog.render({lang: "please_enter_modelName"});
                      return;
         		 }
-         		 if(runwayStartNum == null  || runwayStartNum.replace(/(^\s*)|(\s*$)/g,"")==""){
+         		 if(runwayStartNum == null  || runwayStartNum == ""){
        			     dialog.render({text: "请输入赛道起始编号"});
                      return;
        		     }
-         		 if(runwayCount == null  || runwayCount.replace(/(^\s*)|(\s*$)/g,"")==""){
+         		 if(runwayCount == null  || runwayCount == ""){
       			     dialog.render({text: "请输入赛道个数"});
                      return;
       		     }
          		 var finalData={
          				vender:vender,
-         				moduleNum:moduleNum,
+         				moduleNum:moduleNums,
          				deviceType:deviceType,
          				runwayStartNum:runwayStartNum,
          				runwayCount:runwayCount
@@ -138,24 +137,11 @@ define(function(require) {
                 		console.log(data);
                 		self.automatWindow.destroy();
                 		self.fire("getModelList");
-                		});
-            		}
+                	});
          		 }
          		
         	 });
         },
-        _renderGetVender:function(){
-        	var self = this;
-        	$("#vender").html("");
-			$("#vender").append("<option value='0'>" +locale.get({lang: "please_select"})+"</option>");
-			Service.getVenderList(eurl,0,0,'',function(data) {
-				if(data.result){
-					for(var i=0;i<data.result.length;i++){
-						$("#vender").append("<option value='" +data.result[i].number + "'>" +data.result[i].name+"</option>");
-					}
-				}
-			});
-		},
         destroy: function() {
             if (this.window) {
                 this.window.destroy();

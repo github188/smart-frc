@@ -5,7 +5,6 @@ define(function(require) {
     var html = require("text!./modelMain.html");
     var statusMg = require("../../template/menu");
     var model_Mg = require("./list");
-    var undo_model = require("./untreated/list");
     var loadSubNav = require("../../loadSubNav");
     var operationMenu = Class.create(cloud.Component, {
         initialize: function($super, options) {
@@ -56,15 +55,7 @@ define(function(require) {
                              this.area_listPage = new model_Mg({
                                 "container": ".main_bd"
                              });
-                         }else if(id == "undo_model_list"){
-                        	 $("li").css("margin-top", "0px");
-                             if (this.model_set) {
-                                 this.model_set.destroy();
-                             }
-                             this.model_set = new undo_model({
-                                 "container": ".main_bd"
-                             });
-                        }
+                         }
                     }
                }
             });

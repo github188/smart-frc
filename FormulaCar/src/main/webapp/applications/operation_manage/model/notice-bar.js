@@ -75,15 +75,6 @@ define(function(require){
                     }
                 }
             });
-            var IntroduceBtn = new Button({
-                text: locale.get({lang:"introduced"}),
-                container: $("#search-bar"),
-                events: {
-                    click: function(){
-                    	self.fire("introduced");
-                    }
-                }
-            });
             if(permission.app("model_manage").read){
             	if(queryBtn) queryBtn.show();
             	if(catBtn) catBtn.show();
@@ -91,22 +82,15 @@ define(function(require){
             	if(queryBtn) queryBtn.hide();
             	if(catBtn) catBtn.hide();
             }
-            var oid = cloud.storage.sessionStorage("accountInfo").split(",")[0].split(":")[1];
         	
             if(permission.app("model_manage").write){
             	if(addBtn) addBtn.show();
             	if(editBtn) editBtn.show();
             	if(deleteBtn) deleteBtn.show();
-            	if(oid == '0000000000000000000abcde'){
-            		if(IntroduceBtn) IntroduceBtn.hide();
-            	}else{
-                    if(IntroduceBtn) IntroduceBtn.show();
-            	}
             }else{
             	if(addBtn) addBtn.hide();
             	if(editBtn) editBtn.hide();
             	if(deleteBtn) deleteBtn.hide();
-            	if(IntroduceBtn) IntroduceBtn.hide();
             }
             $("#search-bar a").css({
                 margin: "-3px 0px 0px 6px"

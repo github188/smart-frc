@@ -79,34 +79,29 @@
                 <div style="height: 190px;">
                     <table>
                         <tr>
-                            <td width="15%"><label style='color:red;'></label><label><span lang="text:product_manufacturer"></span></label></td>
+                            <td width="15%"><label style='color:red;'></label><label><span lang="text:product_manufacturer+:"></span></label></td>
                             <td>
-                              <select id="vender" name="vender" style="width:200px;height: 25px;" disabled="disabled"></select>
-                              <span id='vender_add_button' style="display:none;"></span>
+                              <select id="vender" name="vender" style="width:200px;height: 35px;" disabled="disabled"></select>
                             </td>
                         </tr>
                         <tr>
-                            <td width="15%"><label style='color:red;'></label><label><span lang="text:purchase_model"></span></label></td>
-                            <td><input type="text" class="input" id="modelName" name="modelName" disabled="disabled" style="width:200px;height:25px;"/></td>
+                            <td width="15%"><label style='color:red;'></label><label><span lang="text:purchase_model+:"></span></label></td>
+                            <td><input type="text" class="input" id="moduleNums" name="moduleNums" disabled="disabled" style="width:200px;height:35px;"/></td>
                         </tr>
                         <tr>
-                            <td width="15%"><label style='color:red;'></label><label><span lang="text:device_shelf_type"></span></label></td>
+                            <td width="15%"><label style='color:red;'></label><label><span lang="text:device_shelf_type+:"></span></label></td>
                             <td>
-                               <select id="machineType" name="machineType" style="width:200px;height: 25px;" disabled="disabled">
+                               <select id="deviceType" name="deviceType" style="width:200px;height: 35px;" disabled="disabled">
                                </select>
                             </td>
                         </tr>
-                        <tr style="height:51px;">
-                            <td width="15%"><label><span>货道信息</span></label></td>
-                            <td>
-                            </td>
+                         <tr>
+                            <td width="30%"><label><span>赛道起始编号:</span></label></td>
+                            <td><input type="text" class="input" id="runwayStartNum" name="runwayStartNum" disabled="disabled" style="width:200px;height:35px;"/></td>
                         </tr>
                         <tr>
-                            <td width="15%"></td>
-                            <td>
-                                <div id='editSelf' style='width:100%;text-align: left;margin-top: -20px;overflow: auto;border: 1px solid #e7e7eb;'>
-                                </div>
-                            </td>
+                            <td width="30%"><label><span>赛道个数:</span></label></td>
+                            <td><input type="text" class="input" id="runwayCount" name="runwayCount" disabled="disabled" style="width:200px;height:35px;"/></td>
                         </tr>
                     </table>
                 </div>
