@@ -90,7 +90,7 @@ define(function(require){
 	     			   if(self._id){
 	     				  Service.updateArea(self._id,areadata,function(data){
 	                    	  if(data.error!=null){
-	    	                	   if(data.error_code == "20007"){
+	    	                	   if(data.error_code == "70002"){
 	    							   dialog.render({lang:"area_name_exists"});
 	    							   return;
 	    						   }
@@ -102,7 +102,7 @@ define(function(require){
 	     			   }else{
 	     				  Service.addArea(areadata,function(data){
 		 	                	if(data.error!=null){
-		 	                	   if(data.error_code == "20007"){
+		 	                	   if(data.error_code == "70002"){
 									   dialog.render({lang:"area_name_exists"});
 									   return;
 								   }
