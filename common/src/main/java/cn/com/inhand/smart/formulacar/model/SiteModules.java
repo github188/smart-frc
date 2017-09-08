@@ -5,21 +5,14 @@
 package cn.com.inhand.smart.formulacar.model;
 
 import cn.com.inhand.common.smart.model.Location;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 
 /**
  *
  * @author lenovo
  */
-public class Site {
-    
-    @Id
-    @JsonProperty("_id")
-    private ObjectId id;	         //唯一标识
-    private ObjectId oid;	         //机构ID
+public class SiteModules {
     private String siteNum;
     private String name;
     private ObjectId dealerId;
@@ -30,24 +23,6 @@ public class Site {
     private List<SiteModules> modules;
     private String siteType;  //行业
     private String desc;  //备注
-    private Long createTime;
-    private Long updateTime;
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
-    }
-
-    public ObjectId getOid() {
-        return oid;
-    }
-
-    public void setOid(ObjectId oid) {
-        this.oid = oid;
-    }
 
     public String getSiteNum() {
         return siteNum;
@@ -97,38 +72,6 @@ public class Site {
         this.price = price;
     }
 
-    public String getSiteType() {
-        return siteType;
-    }
-
-    public void setSiteType(String siteType) {
-        this.siteType = siteType;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public Long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public Long getStartTime() {
         return startTime;
     }
@@ -144,5 +87,20 @@ public class Site {
     public void setModules(List<SiteModules> modules) {
         this.modules = modules;
     }
-    
+
+    public String getSiteType() {
+        return siteType;
+    }
+
+    public void setSiteType(String siteType) {
+        this.siteType = siteType;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 }
