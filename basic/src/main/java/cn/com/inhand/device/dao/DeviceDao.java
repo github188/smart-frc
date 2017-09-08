@@ -27,4 +27,6 @@ public interface DeviceDao {
     
     public Device findDeviceById(ObjectId oid,ObjectId id);
     
+    public boolean isAssetIdExists(ObjectId xOId, String assetId);
+    
 }

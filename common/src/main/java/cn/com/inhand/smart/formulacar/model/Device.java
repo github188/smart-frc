@@ -4,6 +4,7 @@
  */
 package cn.com.inhand.smart.formulacar.model;
 
+import cn.com.inhand.common.smart.model.Location;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -24,6 +25,7 @@ public class Device {
     private String areaName;
     private ObjectId siteId;
     private String siteName;
+    private Location location;
     private ObjectId dealerId;
     private String dealerName;
     private ObjectId moduleId;
@@ -232,4 +234,13 @@ public class Device {
     public void setAreaName(String areaName) {
         this.areaName = areaName;
     }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    
 }
