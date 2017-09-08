@@ -9,16 +9,11 @@ define(function(require) {
 			read: [1010, 1011, 555, 563, 544, 520, 660, 661],
 			write: []
 		},
-		//组织机构
-		/*		organization_structure_manage: {
-					show : [ 1201 ],
-					read : [ 1200, 1201, 551 ],
-					write : [ 550, 552, 553 ]
-				},*/
+		
 		area_manage: {
 			show: [1201],
-			read: [1200, 1201, 551],
-			write: [550, 552, 553]
+			read: [1200, 1201, 3000],
+			write: [3001]
 		},
 		storefront_management: {
 			show: [1202],

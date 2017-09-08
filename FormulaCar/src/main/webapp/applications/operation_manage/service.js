@@ -441,7 +441,7 @@ define(function(require) {
         },
         updateArea:function(id,areaData,callback,context){
 			cloud.Ajax.request({
-                url : "api/areaMan/"+id,
+                url : "api/basic/"+id+"/area",
                 type : "PUT",
                 data:areaData,
                 success : function(data) {
@@ -454,7 +454,7 @@ define(function(require) {
 		},
         getAreaById:function(id,callback,context){
         	cloud.Ajax.request({
-				url:"api/areaMan/"+id,
+				url:"api/basic/"+id+"/area",
 				type : "GET",
 				success:function(data){
 					callback.call(context || this,data);
@@ -472,7 +472,7 @@ define(function(require) {
         },
         addArea:function(areaData,callback,context){
 			cloud.Ajax.request({
-                url : "api/areaMan/add",
+                url : "api/basic/area",
                 type : "POST",
                 data:areaData,
                 success : function(data) {
@@ -556,7 +556,7 @@ define(function(require) {
              searchData.limit = limit;
              searchData.cursor = cursor;
              cloud.Ajax.request({
-                 url: "api/areaMan/list",
+                 url: "api/basic/area/list",
                  type: "GET",
                  parameters: searchData,
                  success: function(data) {
@@ -594,7 +594,7 @@ define(function(require) {
         deleteAreaByIds: function(ids, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: "api/areaMan/delBatch",
+                url: "api/basic/areaDelBatch",
                 type: "post",
                 parameters: {
                     "ids": ids

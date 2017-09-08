@@ -5,7 +5,7 @@ define(function(require) {
 			apGis: [1010]
 		},
 		storefront: {
-			point_manage: [1200]
+			point_manage: [1200]  //区域管理
 		},
 		the_stage: {
 			smartVm_manage: [1300]
