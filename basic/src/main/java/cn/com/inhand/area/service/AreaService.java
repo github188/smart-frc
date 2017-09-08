@@ -41,12 +41,15 @@ public class AreaService extends MongoService implements AreaDao{
         template.updateFirst(query, update, Collections.SMART_FM_AREA);
     }
 
-    public List<Area> findAreaByParam(ObjectId oid, Map<String, Object> params, int skip, int limit) {
+    public List<Area> findAreaByParam(ObjectId oid, AreaBean queryBean, int skip, int limit) {
         MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(oid);
         Query query = new Query();
         if (limit != -1) {
             query.limit(limit);
             query.skip(skip);
+        }
+        if(queryBean!=null && queryBean.equals("")){
+            query.addCriteria(Criteria.where("name").is(queryBean.getName()));
         }
         return mongoTemplate.find(query, Area.class, Collections.SMART_FM_AREA);
     }
@@ -66,6 +69,9 @@ public class AreaService extends MongoService implements AreaDao{
     public Long getCount(ObjectId oid, AreaBean queryBean) {
         MongoTemplate template = factory.getMongoTemplateByOId(oid);
         Query query = new Query();
+        if(queryBean!=null && queryBean.equals("")){
+            query.addCriteria(Criteria.where("name").is(queryBean.getName()));
+        }
         return template.count(query, Collections.SMART_FM_AREA);
     }
     
@@ -73,5 +79,18 @@ public class AreaService extends MongoService implements AreaDao{
         Assert.notNull(idsArr);
         MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(oId);
         mongoTemplate.remove(Query.query(Criteria.where("_id").in(Arrays.asList(idsArr))), Collections.SMART_FM_AREA);
+    }
+
+    public boolean isAreaNameExists(ObjectId xOId, String name) {
+        MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(xOId);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").is(name));
+        query.fields();
+        long count = mongoTemplate.count(query, Collections.SMART_FM_AREA);
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

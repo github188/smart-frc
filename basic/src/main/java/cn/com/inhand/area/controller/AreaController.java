@@ -8,6 +8,8 @@ import cn.com.inhand.area.dao.AreaDao;
 import cn.com.inhand.common.dto.AreaBean;
 import cn.com.inhand.common.dto.BasicResultDTO;
 import cn.com.inhand.common.dto.OnlyResultDTO;
+import cn.com.inhand.common.exception.ErrorCode;
+import cn.com.inhand.common.exception.ErrorCodeException;
 import cn.com.inhand.common.util.DateUtils;
 import cn.com.inhand.smart.formulacar.model.Area;
 import java.util.List;
@@ -43,10 +45,14 @@ public class AreaController {
             @RequestHeader(value = "X-API-USERNAME", required = false) String xUsername,
             @RequestHeader(value = "X-API-IP", required = false) String xIp,
             @RequestHeader(value = "X-API-UID", required = false) ObjectId xUId,
-            @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls) {
-
-        long total = areaDao.getCount(xOId, null);
-        List<Area> areaList = areaDao.findAreaByParam(xOId, null, cursor, limit);
+            @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
+             @RequestParam(value = "name", required = false) String name) {
+        AreaBean bean = new AreaBean();
+        if(name!=null&&!name.equals("")){
+           bean.setName(name);
+        }
+        long total = areaDao.getCount(xOId, bean);
+        List<Area> areaList = areaDao.findAreaByParam(xOId, bean, cursor, limit);
         return new BasicResultDTO(total, cursor, limit, areaList);
     }
 
@@ -59,6 +65,9 @@ public class AreaController {
             @RequestHeader(value = "X-API-UID", required = false) ObjectId xUId,
             @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
             @Valid @RequestBody AreaBean areaBean) {
+        if(areaDao.isAreaNameExists(xOId, areaBean.getName())){
+           throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, areaBean.getName());
+        }
         Area area = new Area();
         area.setAreaNum(areaBean.getAreaNum());
         area.setCreateTime(DateUtils.getUTC());
@@ -85,6 +94,11 @@ public class AreaController {
             @Valid @RequestBody AreaBean areaBean) {
         Area area = areaDao.findAreaById(xOId, id);
         if (area != null) {
+            if(!areaBean.getName().equals(area.getName())){
+               if(areaDao.isAreaNameExists(xOId, areaBean.getName())){
+                   throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, areaBean.getName());
+               }
+            }
             area.setAreaNum(areaBean.getAreaNum());
             area.setDesc(areaBean.getDesc());
             area.setName(areaBean.getName());

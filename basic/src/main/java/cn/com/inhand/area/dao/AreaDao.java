@@ -22,7 +22,7 @@ public interface AreaDao {
     
     public Area findAreaById(ObjectId oid,ObjectId id);
     
-    public List<Area> findAreaByParam(ObjectId oid,Map<String,Object> params,int skip, int limit);
+    public List<Area> findAreaByParam(ObjectId oid,AreaBean queryBean,int skip, int limit);
     
     public void deleteArea(ObjectId oid,String[] idsArr);
     
