@@ -4,7 +4,8 @@
  */
 package cn.com.inhand.centra.device.dao;
 
-import cn.com.inhand.common.smart.model.Site;
+import cn.com.inhand.smart.formulacar.model.Device;
+import cn.com.inhand.smart.formulacar.model.Site;
 import org.bson.types.ObjectId;
 
 /**
@@ -13,8 +14,7 @@ import org.bson.types.ObjectId;
  */
 public interface SiteDAO {
     
-    public void updateSite(ObjectId oId, Site site);
-    
-    public Site getSiteById(ObjectId oId,String siteId);
+    public Device getDeviceByAssetId(ObjectId oid,String assetId);
+    public Site getSiteById(ObjectId oid,ObjectId id);
     
 }

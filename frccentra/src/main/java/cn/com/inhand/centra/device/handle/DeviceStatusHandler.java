@@ -57,16 +57,6 @@ public class DeviceStatusHandler {
         return site;
     }
 
-    public void updateSiteInfo(Automat entity) {
-        if (entity.getSiteId() != null && !entity.getSiteId().equals("")) {
-            Site site = new Site();
-            site.setId(new ObjectId(entity.getSiteId()));
-            site.setOnline(entity.getOnline());
-            site.setOid(entity.getOid());
-            siteDAO.updateSite(entity.getOid(), site);
-        }
-    }
-
     public void updateInboxInfo(Device entity, List<AssetAppConfig> apps) {
         SmartInbox inbox = new SmartInbox();
         inbox.setoId(entity.getOid());
@@ -74,7 +64,6 @@ public class DeviceStatusHandler {
         inbox.setOnline(entity.getOnline());
         inbox.setAssetId(entity.getAssetId());
         inboxDAO.updateInbox(inbox);
-//        deviceService.updateSmartInbox(entity.getOid(), inbox);
     }
 
     public void updateOvdpDevice(Automat entity) {
