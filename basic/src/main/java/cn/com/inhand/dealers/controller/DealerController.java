@@ -114,7 +114,7 @@ public class DealerController {
         return result;
     }
     
-    @RequestMapping(value = "{id}/dealer", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/dealer", method = RequestMethod.GET)
     public @ResponseBody
     Object findArea(@RequestParam(value = "access_token", required = true) String access_token,
             @RequestHeader(value = "X-API-OID", required = false) ObjectId xOId,

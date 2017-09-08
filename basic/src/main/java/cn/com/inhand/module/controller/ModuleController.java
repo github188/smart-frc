@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("api/basic")
 public class ModuleController {
-    
+
     @Autowired
     private ModuleDao moduleDao;
 
@@ -46,16 +46,16 @@ public class ModuleController {
             @RequestHeader(value = "X-API-IP", required = false) String xIp,
             @RequestHeader(value = "X-API-UID", required = false) ObjectId xUId,
             @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
-             @RequestParam(value = "name", required = false) String moduleNum) {
+            @RequestParam(value = "name", required = false) String moduleNum) {
         ModuleBean bean = new ModuleBean();
-        if(moduleNum!=null&&!moduleNum.equals("")){
-           bean.setModuleNum(moduleNum);
+        if (moduleNum != null && !moduleNum.equals("")) {
+            bean.setModuleNum(moduleNum);
         }
         long total = moduleDao.getCount(xOId, bean);
         List<Module> areaList = moduleDao.findModuleByParam(xOId, bean, cursor, limit);
         return new BasicResultDTO(total, cursor, limit, areaList);
     }
-    
+
     @RequestMapping(value = "/module", method = RequestMethod.POST)
     public @ResponseBody
     Object saveAutomat(@RequestParam(value = "access_token", required = true) String access_token,
@@ -65,8 +65,8 @@ public class ModuleController {
             @RequestHeader(value = "X-API-UID", required = false) ObjectId xUId,
             @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
             @Valid @RequestBody ModuleBean moduleBean) {
-        if(moduleDao.isModuleNameExists(xOId, moduleBean.getModuleNum())){
-           throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, moduleBean.getModuleNum());
+        if (moduleDao.isModuleNameExists(xOId, moduleBean.getModuleNum())) {
+            throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, moduleBean.getModuleNum());
         }
         Module module = new Module();
         module.setCreateTime(DateUtils.getUTC());
@@ -82,7 +82,7 @@ public class ModuleController {
         result.setResult("OK");
         return result;
     }
-    
+
     @RequestMapping(value = "/{id}/module", method = RequestMethod.PUT)
     public @ResponseBody
     Object updateAutomat(@RequestParam(value = "access_token", required = true) String access_token,
@@ -95,8 +95,10 @@ public class ModuleController {
             @Valid @RequestBody ModuleBean moduleBean) {
         Module module = moduleDao.findModuleById(xOId, id);
         if (module != null) {
-            if(moduleDao.isModuleNameExists(xOId, moduleBean.getModuleNum())){
-                throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, moduleBean.getModuleNum());
+            if (!module.getModuleNum().equals(moduleBean.getModuleNum())) {
+                if (moduleDao.isModuleNameExists(xOId, moduleBean.getModuleNum())) {
+                    throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, moduleBean.getModuleNum());
+                }
             }
             module.setDeviceType(moduleBean.getDeviceType());
             module.setModuleNum(moduleBean.getModuleNum());
@@ -110,8 +112,8 @@ public class ModuleController {
         result.setResult("OK");
         return result;
     }
-    
-    @RequestMapping(value = "{id}/module", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/{id}/module", method = RequestMethod.GET)
     public @ResponseBody
     Object findArea(@RequestParam(value = "access_token", required = true) String access_token,
             @RequestHeader(value = "X-API-OID", required = false) ObjectId xOId,
@@ -120,12 +122,12 @@ public class ModuleController {
             @RequestHeader(value = "X-API-UID", required = false) ObjectId xUId,
             @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
             @PathVariable ObjectId id) {
-        Module module = moduleDao.findModuleById(id, id);
+        Module module = moduleDao.findModuleById(xOId, id);
         OnlyResultDTO result = new OnlyResultDTO();
         result.setResult(module);
         return result;
     }
-    
+
     @RequestMapping(value = "/module/moduleDelBatch", method = RequestMethod.POST)
     public @ResponseBody
     Object deleteAutomat(@RequestParam(value = "access_token", required = true) String access_token,
@@ -141,5 +143,4 @@ public class ModuleController {
         result.setResult("OK");
         return result;
     }
-    
 }
