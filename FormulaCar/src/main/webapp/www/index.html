@@ -71,7 +71,7 @@
                     <div class="container-fluid form-wrapper" id="domestic">
                         <div id="tab" style="margin-bottom: 15px;border-bottom: 1px solid #d3d3d3;padding: px;width: 288px;margin-left: -15px;height: 30px;margin-top: 10px;">
                             <ul>
-                                <li onclick="changeTab('0')" id="style0" style='list-style: none;cursor: pointer;float:left;width: 144px;height: 30px;border-bottom: 3px solid #09c;'>扫码登录</li>
+                                <li onclick="changeTab('0')" id="style0" style='list-style: none;cursor: pointer;float:left;width: 144px;height: 30px;border-bottom: 3px solid #09c;display:none;'>扫码登录</li>
                                 <li onclick="changeTab('1')" id="style1" style='list-style: none;cursor: pointer;height: 30px;width:144px;float: left;'><span lang="text:account_login"></span></li>
                             </ul>
                         </div>
@@ -282,8 +282,9 @@
                 $("#style1").click();
                 changeTab("1");
             }else{
-                $("#style0").click();
-                changeTab("0");
+            	$("#style0").css("display","none");
+                $("#style1").click();
+                changeTab("1");
                 var key = randomWord(false, 20);
                 var currentHost=window.location.hostname;
                 var pay_url = "http://"+currentHost+"/vapi/oper/"+key;
