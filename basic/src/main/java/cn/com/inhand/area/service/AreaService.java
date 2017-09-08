@@ -5,9 +5,9 @@
 package cn.com.inhand.area.service;
 
 import cn.com.inhand.area.dao.AreaDao;
+import cn.com.inhand.common.dto.AreaBean;
 import cn.com.inhand.common.service.Collections;
 import cn.com.inhand.common.service.MongoService;
-import cn.com.inhand.common.smart.model.Automat;
 import cn.com.inhand.common.util.UpdateUtils;
 import cn.com.inhand.smart.formulacar.model.Area;
 import java.util.Arrays;
@@ -19,6 +19,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 /**
  *
@@ -54,5 +55,23 @@ public class AreaService extends MongoService implements AreaDao{
         MongoTemplate template = factory.getMongoTemplateByOId(oid);
         template.remove(Query.query(Criteria.where("_id").in(Arrays.asList(idsArr))), Collections.SMART_FM_AREA);
     }
+
+    public Area findAreaById(ObjectId oid, ObjectId id) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(id));
+        return template.findOne(query, Area.class, Collections.SMART_FM_AREA);
+    }
+
+    public Long getCount(ObjectId oid, AreaBean queryBean) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        return template.count(query, Collections.SMART_FM_AREA);
+    }
     
+    public void deleteByIds(ObjectId oId, String[] idsArr) {
+        Assert.notNull(idsArr);
+        MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(oId);
+        mongoTemplate.remove(Query.query(Criteria.where("_id").in(Arrays.asList(idsArr))), Collections.SMART_FM_AREA);
+    }
 }
