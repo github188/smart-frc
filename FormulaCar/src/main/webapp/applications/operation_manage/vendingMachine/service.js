@@ -16,6 +16,17 @@ define(function(require) {
  	   	        }
  	   	    });
         },
+        addDeviceFm: function(data, callback, context) {
+            var self = this;
+            cloud.Ajax.request({
+                url: "api/basic/device",
+                type: "POST",
+                data: data,
+                success: function(data) {
+                    callback.call(context || self, data);
+                }
+            });
+        },
         getAllSites: function(limit, cursor, callback, context) {
             var self = this;
             cloud.Ajax.request({

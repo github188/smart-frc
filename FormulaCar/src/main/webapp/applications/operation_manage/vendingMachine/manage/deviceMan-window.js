@@ -56,10 +56,10 @@ define(function(require) {
             this.init();
         },
         init:function(){
-        	$("#vender").append("<option value='0'>" +locale.get({lang: "please_select"})+"</option>");
-        	$("#vender").append("<option value='vender1'>厂家1</option>");
-        	$("#vender").append("<option value='vender2'>厂家2</option>");
-        	$("#vender").append("<option value='vender3'>厂家3</option>");
+        	$("#automat_vender").append("<option value='0'>" +locale.get({lang: "please_select"})+"</option>");
+        	$("#automat_vender").append("<option value='vender1'>厂家1</option>");
+        	$("#automat_vender").append("<option value='vender2'>厂家2</option>");
+        	$("#automat_vender").append("<option value='vender3'>厂家3</option>");
         },
         _renderMap: function() {
             var self = this;
@@ -394,7 +394,7 @@ define(function(require) {
             	var moduleName = $("#models").find("option:selected").text();
             	var moduleId = $("#models").find("option:selected").val();
             	
-            	var siteName = = $("#siteId").find("option:selected").text();
+            	var siteName = $("#siteId").find("option:selected").text();
             	var siteId = $("#siteId").find("option:selected").val();
             	
             	var finalData={
@@ -406,7 +406,9 @@ define(function(require) {
             			siteName:siteName,
             			siteId:siteId
             	};
-            	
+            	Service.addDeviceFm(finalData,function(data){
+            		console.log(data);
+            	});
             });
 
         },
