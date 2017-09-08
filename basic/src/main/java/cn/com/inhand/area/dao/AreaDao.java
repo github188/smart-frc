@@ -7,7 +7,6 @@ package cn.com.inhand.area.dao;
 import cn.com.inhand.common.dto.AreaBean;
 import cn.com.inhand.smart.formulacar.model.Area;
 import java.util.List;
-import java.util.Map;
 import org.bson.types.ObjectId;
 
 /**
