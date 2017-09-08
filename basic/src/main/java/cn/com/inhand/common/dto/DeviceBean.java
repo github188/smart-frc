@@ -2,22 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package cn.com.inhand.smart.formulacar.model;
+package cn.com.inhand.common.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 
 /**
  *
  * @author lenovo
  */
-public class Device {
-    
-    @Id
-    @JsonProperty("_id")
-    private ObjectId id;	         //唯一标识
-    private ObjectId oid;	         //机构ID
+public class DeviceBean {
     private String assetId;
     private String name;
     private ObjectId areaId;
@@ -28,34 +22,11 @@ public class Device {
     private String dealerName;
     private ObjectId moduleId;
     private String moduleName;
-    private String sn;
-    private ObjectId gwId;
-    private Integer online;     //0 在线  1离线
     private String vender;
-    private Long createTime;
-    private Long updateTime;
-    private Long affirmTime;
+    private Integer online;     //0 在线  1离线
     private Integer deviceType;    //  0 未认证   1 已认证
-    private Long lastAlveTime;  //最后状态时间
-    private Long activationTime;
-    private String sessionId;
-    private String host;
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
-    }
-
-    public ObjectId getOid() {
-        return oid;
-    }
-
-    public void setOid(ObjectId oid) {
-        this.oid = oid;
-    }
+    private List<ObjectId> dealerIds;
+    private List<ObjectId> areaIds;
 
     public String getAssetId() {
         return assetId;
@@ -121,14 +92,6 @@ public class Device {
         this.moduleName = moduleName;
     }
 
-    public Integer getOnline() {
-        return online;
-    }
-
-    public void setOnline(Integer online) {
-        this.online = online;
-    }
-
     public String getVender() {
         return vender;
     }
@@ -137,28 +100,12 @@ public class Device {
         this.vender = vender;
     }
 
-    public Long getCreateTime() {
-        return createTime;
+    public Integer getOnline() {
+        return online;
     }
 
-    public void setCreateTime(Long createTime) {
-        this.createTime = createTime;
-    }
-
-    public Long getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Long updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Long getAffirmTime() {
-        return affirmTime;
-    }
-
-    public void setAffirmTime(Long affirmTime) {
-        this.affirmTime = affirmTime;
+    public void setOnline(Integer online) {
+        this.online = online;
     }
 
     public Integer getDeviceType() {
@@ -169,52 +116,20 @@ public class Device {
         this.deviceType = deviceType;
     }
 
-    public Long getLastAlveTime() {
-        return lastAlveTime;
+    public List<ObjectId> getDealerIds() {
+        return dealerIds;
     }
 
-    public void setLastAlveTime(Long lastAlveTime) {
-        this.lastAlveTime = lastAlveTime;
+    public void setDealerIds(List<ObjectId> dealerIds) {
+        this.dealerIds = dealerIds;
     }
 
-    public String getSn() {
-        return sn;
+    public List<ObjectId> getAreaIds() {
+        return areaIds;
     }
 
-    public void setSn(String sn) {
-        this.sn = sn;
-    }
-
-    public ObjectId getGwId() {
-        return gwId;
-    }
-
-    public void setGwId(ObjectId gwId) {
-        this.gwId = gwId;
-    }
-
-    public Long getActivationTime() {
-        return activationTime;
-    }
-
-    public void setActivationTime(Long activationTime) {
-        this.activationTime = activationTime;
-    }
-
-    public String getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(String sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
+    public void setAreaIds(List<ObjectId> areaIds) {
+        this.areaIds = areaIds;
     }
 
     public ObjectId getAreaId() {

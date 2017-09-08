@@ -4,9 +4,9 @@
  */
 package cn.com.inhand.device.dao;
 
+import cn.com.inhand.common.dto.DeviceBean;
 import cn.com.inhand.smart.formulacar.model.Device;
 import java.util.List;
-import java.util.Map;
 import org.bson.types.ObjectId;
 
 /**
@@ -19,8 +19,12 @@ public interface DeviceDao {
     
     public void updateDevice(ObjectId oid,Device device);
     
-    public List<Device> findSiteByParam(ObjectId oid,Map<String,Object> params,int skip, int limit);
+    public List<Device> findSiteByParam(ObjectId oid,DeviceBean queryBean,int skip, int limit);
     
     public void deleteDevice(ObjectId oid,String[] idsArr);
+    
+    public Long getCount(ObjectId oid,DeviceBean queryBean);
+    
+    public Device findDeviceById(ObjectId oid,ObjectId id);
     
 }
