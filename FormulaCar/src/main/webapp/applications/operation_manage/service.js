@@ -146,7 +146,7 @@ define(function(require) {
            searchData.limit = limit;
            searchData.cursor = cursor;
            cloud.Ajax.request({
-               url: "api/replenishv2/linelist",
+               url: "api/basic/dealer/list",
                type: "GET",
                parameters: searchData,
                success: function(data) {
@@ -463,7 +463,7 @@ define(function(require) {
         },
         getLineById:function(id,callback,context){
         	cloud.Ajax.request({
-				url:"api/automatline/"+id,
+				url:"api/basic/"+id+"/dealer",
 				type : "GET",
 				success:function(data){
 					callback.call(context || this,data);
@@ -485,7 +485,7 @@ define(function(require) {
 		},
 		updateLine:function(id,areaData,callback,context){
 			cloud.Ajax.request({
-                url : "api/automatline/"+id,
+                url : "api/basic/"+id+"/dealer",
                 type : "PUT",
                 data:areaData,
                 success : function(data) {
@@ -499,7 +499,7 @@ define(function(require) {
 		addLine:function(contentData,callback,context){
 	        	var self = this;
 	            cloud.Ajax.request({
-	                url: "api/automatline",
+	                url: "api/basic/dealer",
 	                type: "POST",
 	                data:contentData,
 	                success: function(data) {
@@ -570,7 +570,7 @@ define(function(require) {
              searchData.limit = limit;
              searchData.cursor = cursor;
              cloud.Ajax.request({
-                 url: "api/automatline/list",
+                 url: "api/basic/dealer/list",
                  type: "GET",
                  parameters: searchData,
                  success: function(data) {
@@ -581,7 +581,7 @@ define(function(require) {
         deleteLineByIds: function(ids, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: "api/automatline/delBatch",
+                url: "api/basic/dealer/dealerDelBatch",
                 type: "post",
                 parameters: {
                     "ids": ids

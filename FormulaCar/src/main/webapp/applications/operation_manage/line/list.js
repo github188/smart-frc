@@ -11,9 +11,7 @@ define(function(require) {
     var AddLine = require("./lineMan-window");
     var SeeLine = require("./seeLine-window");
     var columns = [{
-        "title": locale.get({
-            lang: "line_man_name"
-        }), //线路名称
+    	"title": locale.get({lang: "line_man_name"}), //线路名称
         "dataIndex": "name",
         "cls": null,
         "width": "30%",
@@ -28,30 +26,22 @@ define(function(require) {
             return display;
         }
     }, {
-        "title": locale.get({
-            lang: "area_man_name"
-        }), //区域名称
+        "title": locale.get({lang: "area_man_name"}), //区域名称
         "dataIndex": "areaName",
         "cls": null,
         "width": "30%"
     }, {
-        "title": locale.get({
-            lang: "storefont_number"
-        }), //店面数量
-        "dataIndex": "areaName",
+        "title": locale.get({lang: "storefont_number"}), //店面数量
+        "dataIndex": "siteCount",
         "cls": null,
         "width": "30%"
     }, {
-        "title": locale.get({
-            lang: "area_man_desc"
-        }), //描述
-        "dataIndex": "description",
+        "title": locale.get({lang: "area_man_desc"}), //描述
+        "dataIndex": "desc",
         "cls": null,
         "width": "20%"
     }, { //创建时间
-        "title": locale.get({
-            lang: "create_time"
-        }),
+        "title": locale.get({lang: "create_time"}),
         "dataIndex": "createTime",
         "cls": null,
         "width": "20%",
@@ -155,12 +145,8 @@ define(function(require) {
             cloud.util.mask("#line_list_table");
             var self = this;
             var name = $("#name").val();
-            var areaName = $("#area_name").val();
             if (name) {
                 name = self.stripscript(name);
-            }
-            if (areaName) {
-                areaName = self.stripscript(areaName);
             }
             var userId = cloud.storage.sessionStorage("accountInfo").split(",")[1].split(":")[1];
             var roleType = permission.getInfo().roleType;
@@ -180,7 +166,6 @@ define(function(require) {
                 self.lineIds = lineIds;
                 self.searchData = {
                     "name": name,
-                    "areaName": areaName,
                     "lineId": lineIds
                 };
 
@@ -328,7 +313,7 @@ define(function(require) {
                                     click: function() {
                                         self.listTable.mask();
                                         Service.deleteLineByIds(ids, function(data) {
-                                            if (data.result) {
+                                            if (data.result.error_code) {
                                                 if (data.result.error_code && data.result.error_code == "70014") {
                                                     dialog.render({
                                                         lang: "this_line_has_site"
@@ -341,7 +326,7 @@ define(function(require) {
                                                     self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
                                                 }
                                             } else {
-                                                if (data.status == "OK") {
+                                                if (data.result == "OK") {
                                                     if (self.pageRecordTotal == 1) {
                                                         var cursor = ($(".paging-page-current").val() - 2) * $(".paging-limit-select").val();
                                                         if (cursor < 0) {

@@ -14,7 +14,7 @@ define(function(require) {
            searchData.limit = limit;
            searchData.cursor = cursor;
            cloud.Ajax.request({
-               url: "api/automatline/list",
+               url: "api/basic/dealer/list",
                type: "GET",
                parameters: searchData,
                success: function(data) {

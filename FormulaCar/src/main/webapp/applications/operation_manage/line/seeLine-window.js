@@ -106,7 +106,7 @@ define(function(require){
 			if(this._id){
 				Service.getLineById(this._id,function(data){
 					   $("#lineName").val(data.result.name==null?"":data.result.name);
-		     		   $("#description").val(data.result.description==null?"":data.result.description);
+		     		   $("#description").val(data.result.desc==null?"":data.result.desc);
 		     		   $("#areaName option[value='"+data.result.areaId+"']").attr("selected","selected");
 				});
 			}

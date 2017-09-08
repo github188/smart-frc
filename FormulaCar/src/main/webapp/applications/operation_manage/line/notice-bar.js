@@ -21,8 +21,8 @@ define(function(require){
               "<div id='search-bar' style='width:auto;margin-top:5px;margin-left:5px;'>" +
               "<label style='margin:auto 10px auto 10px;margin-right: 6px;'>"+locale.get({lang:"line_man_name"})+" </label>" +
               "<input style='width:200px;margin-right: -2px;' type='text'  id='name' />&nbsp;&nbsp;"  +
-              "<label style='margin:auto 10px auto 10px;margin-right: 6px;'>"+locale.get({lang:"area_man_name"})+" </label>" +
-              "<input style='width:200px;' type='text'  id='area_name' />"  +
+             /* "<label style='margin:auto 10px auto 10px;margin-right: 6px;'>"+locale.get({lang:"area_man_name"})+" </label>" +
+              "<input style='width:200px;' type='text'  id='area_name' />"  +*/
               "</div>");
               this.element.append($htmls);
 		},
