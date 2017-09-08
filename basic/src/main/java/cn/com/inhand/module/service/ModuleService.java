@@ -9,7 +9,6 @@ import cn.com.inhand.common.service.Collections;
 import cn.com.inhand.common.service.MongoService;
 import cn.com.inhand.common.util.UpdateUtils;
 import cn.com.inhand.module.dao.ModuleDao;
-import cn.com.inhand.smart.formulacar.model.Area;
 import cn.com.inhand.smart.formulacar.model.Module;
 import java.util.Arrays;
 import java.util.List;
@@ -18,11 +17,13 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author lenovo
  */
+@Service
 public class ModuleService extends MongoService implements ModuleDao {
 
     public void createModule(ObjectId oid, Module module) {
