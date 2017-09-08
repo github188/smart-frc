@@ -102,5 +102,12 @@ public class DeviceService extends MongoService implements DeviceDao{
         query.addCriteria(Criteria.where("_id").is(id));
         return template.findOne(query, Device.class, Collections.SMART_FM_DEVICE);
     }
+
+    public boolean isAssetIdExists(ObjectId xOId, String assetId) {
+        MongoTemplate template = factory.getMongoTemplateByOId(xOId);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("assetId").is(assetId));
+        return template.exists(query, Collections.SMART_FM_DEVICE);
+    }
     
 }
