@@ -4,15 +4,14 @@
  */
 package cn.com.inhand.dealers.service;
 
+import cn.com.inhand.common.dto.DealerBean;
 import cn.com.inhand.common.service.Collections;
 import cn.com.inhand.common.service.MongoService;
 import cn.com.inhand.common.util.UpdateUtils;
 import cn.com.inhand.dealers.dao.DealerDao;
-import cn.com.inhand.smart.formulacar.model.Area;
 import cn.com.inhand.smart.formulacar.model.Dealer;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -40,12 +39,15 @@ public class DealerService extends MongoService implements DealerDao{
         template.updateFirst(query, update, Collections.SMART_FM_DEALER);
     }
 
-    public List<Dealer> findDealerByParam(ObjectId oid, Map<String, Object> params, int skip, int limit) {
+    public List<Dealer> findDealerByParam(ObjectId oid, DealerBean queryBean, int skip, int limit) {
         MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(oid);
         Query query = new Query();
         if (limit != -1) {
             query.limit(limit);
             query.skip(skip);
+        }
+        if(queryBean.getName() != null && !queryBean.getName().equals("")){
+            query.addCriteria(Criteria.where("name").regex(".*" + regexFilter(queryBean.getName()) + ".*"));
         }
         return mongoTemplate.find(query, Dealer.class, Collections.SMART_FM_DEALER);
     }
@@ -53,6 +55,37 @@ public class DealerService extends MongoService implements DealerDao{
     public void deleteDealer(ObjectId oid, String[] idsArr) {
         MongoTemplate template = factory.getMongoTemplateByOId(oid);
         template.remove(Query.query(Criteria.where("_id").in(Arrays.asList(idsArr))), Collections.SMART_FM_DEALER);
+    }
+
+    public Dealer findAreaById (ObjectId oid, ObjectId id) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(id));
+        return template.findOne(query, Dealer.class, Collections.SMART_FM_DEALER);
+    }
+
+    public Long getCount(ObjectId oid, DealerBean queryBean) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        if(queryBean.getName() != null && !queryBean.getName().equals("")){
+            query.addCriteria(Criteria.where("name").regex(".*" + regexFilter(queryBean.getName()) + ".*"));
+        }
+        return template.count(query, Collections.SMART_FM_DEALER);
+    }
+
+    public boolean dealerExist(ObjectId oid, String name) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").is(name));
+        return template.exists(query, Collections.SMART_FM_DEALER);
+    }
+    
+    public String regexFilter(String regex) {
+        if (regex.equals("*")) {
+            return "\\" + regex;
+        } else {
+            return regex;
+        }
     }
 
 }

@@ -126,7 +126,7 @@ public class AreaController {
         return result;
     }
 
-    @RequestMapping(value = "/areaDelBatch", method = RequestMethod.POST)
+    @RequestMapping(value = "/area/areaDelBatch", method = RequestMethod.POST)
     public @ResponseBody
     Object deleteAutomat(@RequestParam(value = "access_token", required = true) String access_token,
             @RequestHeader(value = "X-API-OID", required = false) ObjectId xOId,
@@ -135,7 +135,6 @@ public class AreaController {
             @RequestHeader(value = "X-API-UID", required = false) ObjectId xUId,
             @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
             @RequestParam(value = "ids", required = true) String ids) {
-        
         String[] idsArr_ = ids.split(",");
         areaDao.deleteByIds(xOId, idsArr_);
         OnlyResultDTO result = new OnlyResultDTO();
