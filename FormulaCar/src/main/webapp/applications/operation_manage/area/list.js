@@ -26,8 +26,8 @@ define(function(require){
         	 return display;
         }
 	},{
-		"title":locale.get({lang:"area_man_charger"}),//负责人
-		"dataIndex" : "charger",
+		"title":"区域编号",
+		"dataIndex" : "areaNum",
 		"cls" : null,
 		"width" : "20%"
 	},{
@@ -37,7 +37,7 @@ define(function(require){
 		"width" : "25%"
 	},{
 		"title":locale.get({lang:"area_man_desc"}),//描述
-		"dataIndex" : "description",
+		"dataIndex" : "desc",
 		"cls" : null,
 		"width" : "20%"
 	},{                                             //创建时间
@@ -131,15 +131,6 @@ define(function(require){
 	                    },
 	                   scope: this
 				}
-				 /*drawCallback: function ( oSettings ) {
-         			if ( oSettings.bSorted || oSettings.bFiltered )
-         			{
-         				for ( var i=0, iLen=oSettings.aiDisplay.length ; i<iLen ; i++ )
-         				{
-         					$('td:eq(0)', oSettings.aoData[ oSettings.aiDisplay[i] ].nTr ).html( i+1 );
-         				}
-         			}
-         		}*/
 			});
 		    var height = $("#area_list_table").height()+"px";
 	        $("#area_list_table-table").freezeHeader({ 'height': height });

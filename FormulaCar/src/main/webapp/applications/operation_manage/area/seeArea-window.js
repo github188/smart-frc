@@ -53,10 +53,6 @@ define(function(require){
 						+ "<td  height='20px'><input style='border-radius: 0px;width: 270px;height: 22px; margin-left: 0px;' disabled='true' type='text' id='code' name='code' /></td>"
 						+"</tr>"
 						+"<tr style='height:30px;'>"
-					    + "<td width='15%' height='20px' style='font-size: 12px;'><label style='color:red;'>&nbsp;</label> <label>"+locale.get({lang:"area_man_charger"})+":</label></td>"
-						+ "<td  height='20px'><input style='border-radius: 0px;width: 270px;height: 22px; margin-left: 0px;' disabled='true' type='text' id='charger' name='charger'/></td>"
-						+"</tr>"
-						+"<tr style='height:30px;'>"
 					    + "<td width='15%' height='20px' style='font-size: 12px;'><label style='color:red;'>&nbsp;</label> <label>"+locale.get({lang:"area_man_phone"})+":</label></td>"
 						+ "<td  height='20px'><input style='border-radius: 0px;width: 270px;height: 22px; margin-left: 0px;' disabled='true' type='text' id='phone' name='phone'/></td>"
 						+"</tr>"
@@ -80,11 +76,10 @@ define(function(require){
 			var self = this;
 			if(this._id){
 				Service.getAreaById(this._id,function(data){
-		     		 $("#areaname").val(data.result.name==null?"":data.result.name);
-		     		 $("#code").val(data.result.code==null?"":data.result.code);
-		  		     $("#charger").val(data.result.charger==null?"":data.result.charger);
+					 $("#areaname").val(data.result.name==null?"":data.result.name);
+		     		 $("#code").val(data.result.areaNum==null?"":data.result.areaNum);
 		  		     $("#phone").val(data.result.phone==null?"":data.result.phone);	
-		  		     $("#description").val(data.result.description==null?"":data.result.description);	
+		  		     $("#description").val(data.result.desc==null?"":data.result.desc);	
 				});
 			}
 		},

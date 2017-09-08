@@ -35,17 +35,17 @@ define(function(require) {
 				operation: ["r", "w"],
 				url: "./operation_manage/area/areaMain.js"
 			}, {
-				name: "storefront_management", // 店面管理
-				defaultShow: true,
-				order: 2,
-				operation: ["r", "w"],
-				url: "./operation_manage/automat/automat_site_manage/siteMain.js"
-			}, {
 				name: "agency_management", // 经销商管理
 				defaultShow: true,
 				order: 1,
 				operation: ["r", "w"],
 				url: "./operation_manage/line/lineMain.js"
+			}, {
+				name: "storefront_management", // 店面管理
+				defaultShow: true,
+				order: 2,
+				operation: ["r", "w"],
+				url: "./operation_manage/automat/automat_site_manage/siteMain.js"
 			}]
 		}]
 	};

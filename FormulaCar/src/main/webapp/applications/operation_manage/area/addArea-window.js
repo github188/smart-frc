@@ -52,10 +52,6 @@ define(function(require){
 						+ "<td  height='20px'><input style='border-radius: 0px;width: 270px;height: 22px; margin-left: 0px;' type='text' id='code' name='code' /></td>"
 						+"</tr>"
 						+"<tr style='height:30px;'>"
-					    + "<td width='25%' height='20px' style='font-size: 12px;'><label style='color:red;'>&nbsp;</label> <label>"+locale.get({lang:"area_man_charger"})+"</label></td>"
-						+ "<td  height='20px'><input style='border-radius: 0px;width: 270px;height: 22px; margin-left: 0px;' type='text' id='charger' name='charger'/></td>"
-						+"</tr>"
-						+"<tr style='height:30px;'>"
 					    + "<td width='25%' height='20px' style='font-size: 12px;'><label style='color:red;'>&nbsp;</label> <label>"+locale.get({lang:"area_man_phone"})+"</label></td>"
 						+ "<td  height='20px'><input style='border-radius: 0px;width: 270px;height: 22px; margin-left: 0px;' type='text' id='phone' name='phone'/></td>"
 						+"</tr>"
@@ -77,7 +73,6 @@ define(function(require){
             //保存
 		    $("#product-config-save").bind("click",function(){
 	        	   var name=$("#areaname").val();
-	     		   var charger=$("#charger").val();
 	     		   var phone=$("#phone").val();
 	     		   var description=$("#description").val();
 	     		   var code = $("#code").val();
@@ -88,10 +83,9 @@ define(function(require){
 	     		  if(name){//判断不能为空
 	     			    var areadata={
 	 	             		name:name,
-	 	             		code:code,
-	 	             		charger:charger,
+	 	             		areaNum:code,
 	 	             		phone:phone,
-	 	             		description:description
+	 	             		desc:description
 	 	                }
 	     			   if(self._id){
 	     				  Service.updateArea(self._id,areadata,function(data){
@@ -129,10 +123,9 @@ define(function(require){
 			if(this._id){
 				Service.getAreaById(this._id,function(data){
 		     		 $("#areaname").val(data.result.name==null?"":data.result.name);
-		     		 $("#code").val(data.result.code==null?"":data.result.code);
-		  		     $("#charger").val(data.result.charger==null?"":data.result.charger);
+		     		 $("#code").val(data.result.areaNum==null?"":data.result.areaNum);
 		  		     $("#phone").val(data.result.phone==null?"":data.result.phone);	
-		  		     $("#description").val(data.result.description==null?"":data.result.description);	
+		  		     $("#description").val(data.result.desc==null?"":data.result.desc);	
 				});
 			}
 		},
