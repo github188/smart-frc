@@ -40,6 +40,15 @@ public class AreaService extends MongoService implements AreaDao{
         Update update = UpdateUtils.convertBeanToUpdate(area, "_id");
         template.updateFirst(query, update, Collections.SMART_FM_AREA);
     }
+    
+    public String regexFilter(String regex) {
+        if (regex.equals("*")) {
+            return "\\" + regex;
+        } else {
+            return regex;
+        }
+
+    }
 
     public List<Area> findAreaByParam(ObjectId oid, AreaBean queryBean, int skip, int limit) {
         MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(oid);
@@ -48,8 +57,8 @@ public class AreaService extends MongoService implements AreaDao{
             query.limit(limit);
             query.skip(skip);
         }
-        if(queryBean!=null && queryBean.equals("")){
-            query.addCriteria(Criteria.where("name").is(queryBean.getName()));
+        if(queryBean.getName()!=null && !queryBean.getName().equals("")){
+            query.addCriteria(Criteria.where("name").regex(queryBean.getName()));
         }
         return mongoTemplate.find(query, Area.class, Collections.SMART_FM_AREA);
     }
@@ -69,8 +78,8 @@ public class AreaService extends MongoService implements AreaDao{
     public Long getCount(ObjectId oid, AreaBean queryBean) {
         MongoTemplate template = factory.getMongoTemplateByOId(oid);
         Query query = new Query();
-        if(queryBean!=null && queryBean.equals("")){
-            query.addCriteria(Criteria.where("name").is(queryBean.getName()));
+        if(queryBean.getName()!=null && !queryBean.getName().equals("")){
+            query.addCriteria(Criteria.where("name").regex(queryBean.getName()));
         }
         return template.count(query, Collections.SMART_FM_AREA);
     }

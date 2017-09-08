@@ -29,4 +29,6 @@ public interface AreaDao {
     public Long getCount(ObjectId oid,AreaBean queryBean);
     
     public void deleteByIds(ObjectId oId, String[] idsArr);
+
+    public boolean isAreaNameExists(ObjectId xOId, String name);
 }
