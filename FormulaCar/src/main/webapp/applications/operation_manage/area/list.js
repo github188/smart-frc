@@ -301,13 +301,13 @@ define(function(require){
 	                                        click: function() {
 	                                            self.listTable.mask();
 	                                            Service.deleteAreaByIds(ids, function(data) {
-	                                            	if(data.result){
+	                                            	if(data.result.error_code){
 	                                            		if(data.result.error_code && data.result.error_code=="70014"){
 	                                            			dialog.render({lang: "this_area_has_line"});
 	                                                        self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
 	                                                    }
 	                                            	  }else{
-	                                            		if(data.status == "OK"){
+	                                            		if(data.result == "OK"){
 	                                            			  if (self.pageRecordTotal == 1) {
 	                                                              var cursor = ($(".paging-page-current").val() - 2) * $(".paging-limit-select").val();
 	                                                              if (cursor < 0) {

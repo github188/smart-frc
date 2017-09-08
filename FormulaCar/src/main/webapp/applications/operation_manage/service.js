@@ -594,7 +594,7 @@ define(function(require) {
         deleteAreaByIds: function(ids, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: "api/basic/areaDelBatch",
+                url: "api/basic/area/areaDelBatch",
                 type: "post",
                 parameters: {
                     "ids": ids
