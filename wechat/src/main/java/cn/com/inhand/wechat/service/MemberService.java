@@ -5,7 +5,6 @@
 package cn.com.inhand.wechat.service;
 
 import cn.com.inhand.common.service.Collections;
-import cn.com.inhand.common.service.DBNames;
 import cn.com.inhand.common.service.MongoService;
 import cn.com.inhand.common.util.UpdateUtils;
 import cn.com.inhand.smart.formulacar.model.Member;
@@ -14,11 +13,13 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author lenovo
  */
+@Service
 public class MemberService extends MongoService implements MemberDao{
 
     public Member findMemberByOpenId(ObjectId oid,String openId) {
@@ -46,6 +47,12 @@ public class MemberService extends MongoService implements MemberDao{
         query.addCriteria(Criteria.where("_id").is(member.getId()));
         template.updateFirst(query, UpdateUtils.convertBeanToUpdate(member, "_id"), Collections.SMART_FM_MEMBER);
     }
-    
+
+    public boolean findExistMemberByOpenId(ObjectId oid, String openId) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("openId").is(openId));
+        return template.exists(query, Collections.SMART_FM_MEMBER);
+    }
     
 }

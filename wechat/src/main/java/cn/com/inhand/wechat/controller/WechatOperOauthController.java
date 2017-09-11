@@ -32,12 +32,12 @@ import org.springframework.web.client.RestTemplate;
 public class WechatOperOauthController {
 
     private static final Logger logger = LoggerFactory.getLogger(WechatOperOauthController.class);
-    private String appid = "wx1eec87a2ca1af7ce";
-    private String appSecret = "f71e041791a34c5f56756a0ed126421c";
+    private String appid = "wxf0aed31cd2c95a0d";
+    private String appSecret = "59a1202f4528018e46b83111414a644f";
     @Value("#{config.project.webUrl}")
     private String webUrl;
     @Value("#{config.project.oid}")
-    private ObjectId oid;
+    private String oid;
     @Autowired
     RestTemplate template;
     @Autowired
@@ -80,7 +80,7 @@ public class WechatOperOauthController {
         if (type.equals("register")) {
             redirectUrl = "http://" + webUrl + "/FomulaG/register.html?params=" + type + "&token=" + token + "&openid=" + openId;
         } else {
-            Member member = memberDao.findMemberByOpenId(oid, openId);
+            Member member = memberDao.findMemberByOpenId(new ObjectId(oid), openId);
             if (member != null) {
                 if (member.getStatus() == 0) {
                     if (type.equals("myInfo")) {

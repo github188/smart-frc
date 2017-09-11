@@ -20,6 +20,8 @@ public interface MemberDao {
     
     public Member findMemberByPhone(ObjectId oid,String phone);
     
+    public boolean findExistMemberByOpenId(ObjectId oid,String openId);
+    
     public void updateMember(ObjectId oid,Member member);
     
 }
