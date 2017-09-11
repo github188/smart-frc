@@ -217,10 +217,6 @@ define(function(require) {
             selectHtml1 = selectHtml1 + "</select>";
 
             var selectHtml2 = "<select id='automat-toolbar-package2' style='width:100px;height: 28px;'>";
-            /*var data2 = {"result":[{"optionsId":"0","optionsName":locale.get({lang:"automat_site_name"})},
-             {"optionsId":"1","optionsName":locale.get({lang:"automat_name"})},
-             {"optionsId":"2","optionsName":locale.get({lang:"automat_of_group"})}
-             ]};*/
             var data2 = {"result": [{"optionsId": "0", "optionsName": locale.get({lang: "automat_site_name"})},
                     {"optionsId": "1", "optionsName": locale.get({lang: "automat_name"})}
                 ]};
@@ -231,28 +227,6 @@ define(function(require) {
                 });
             }
             selectHtml2 = selectHtml2 + "</select>";
-
-            /* var $htmls = $(
-             "<div id='search-bar' style='width:auto;margin-bottom:4px;margin-left:0px;margin-top: 10px;'>" +
-             selectHtml1+
-             "&nbsp;&nbsp;<label class='notice-bar-calendar-text'>"+locale.get({lang:"automat_list_start_time"})+"</label>&nbsp;&nbsp;"+
-             "<input style='width:120px' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='startTime' />&nbsp;&nbsp;"+
-             "<label class='notice-bar-calendar-text'>"+locale.get({lang:"automat_list_end_time"})+"</label>&nbsp;&nbsp;"+
-             "<input style='width:120px' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='endTime' />&nbsp;&nbsp;"+
-             selectHtml2+
-             "&nbsp;&nbsp;"+
-             "<input style='width:100px' type='text'  id='search_input_name' />"  +
-             "<br/>&nbsp;&nbsp;&nbsp;&nbsp;<span style='margin-top:10px'>"+locale.get({lang:"automat_area"}) +"&nbsp;&nbsp;</span>"+
-             "<select id='devicecity'  name='city' style='width: 100px;height: 28px;margin-top:10px'>"+
-             "<option value='all'>"+locale.get({lang:"all"})+"</option>"+
-             "</select>&nbsp;&nbsp;"+
-             "<select id='devicecode'  name='code' style='width: 100px;height: 28px;margin-top:10px'>"+
-             "<option value='all'>"+locale.get({lang:"all"})+"</option>"+
-             "</select>"+
-             "<input type='hidden'  id='devicecitysValue' />"+
-             "<input type='hidden'  id='devicezonesValue' />"+
-             "</div>"
-             );*/
             var $htmls = $(
                     "<div id='search-bar' style='width:auto;margin-bottom:4px;margin-left:0px;margin-top: 10px;'>" +
                     "<table>" +
@@ -375,33 +349,11 @@ define(function(require) {
                            }
                        }
                    });
-              }else{
-            	   var importBtn = new Button({
-                      text: locale.get({lang: "import"}),
-                      container: $("#buttonDiv"),
-                      events: {
-                          click: function() {
-                              self.fire("imReport");
-                          }
-                      }
-                   });
-	           	   var exportBtn = new Button({
-	                      text: locale.get({lang: "export"}),
-	                      container: $("#buttonDiv"),
-	                      events: {
-	                          click: function() {
-	                              self.fire("exReport");
-	                          }
-	                      }
-	                });
-              	 
-              	  $("#"+exportBtn.id).addClass("readClass");
               }
             //权限控制按钮的显隐
             if(permission.app("vendingMachine_manage").read){
             	if(queryBtn) queryBtn.show();
             	if(catBtn) catBtn.show();
-            	if(exportBtn) exportBtn.show();
             }else{
             	if(queryBtn) queryBtn.hide();
             	if(catBtn) catBtn.hide();
@@ -410,52 +362,16 @@ define(function(require) {
             	if(addBtn) addBtn.show();
             	if(updateBtn) updateBtn.show();
             	if(deleteBtn) deleteBtn.show();
-            	if(importBtn) importBtn.show();
             	if(authenticationBtn) authenticationBtn.show();
             }else{
             	if(addBtn) addBtn.hide();
             	if(updateBtn) updateBtn.hide();
             	if(deleteBtn) deleteBtn.hide();
-            	if(importBtn) importBtn.hide();
             	if(authenticationBtn) authenticationBtn.hide();
             }
             $("#search-bar a").css({
                 margin: "auto 0px auto 6px"
             });
-           // $("#line_div").find("button").css("height","200px"); 
-            /* $("#devicecity").bind('change', function () {
-             $("#devicecode").empty();
-             $("#devicezonesValue").val('');
-             var selectedId = $("#devicecity").find("option:selected").val();
-             if(selectedId == "all"){
-             $("#devicecode").append("<option value='all'>" +locale.get({lang:"all"})+"</option>");
-             $("#devicecitysValue").val('');
-             }else{
-             for(var item in area){  
-             if(item==selectedId){  
-             var value=area[item];
-             if(value){
-             $("#devicecode").append("<option value='all'>" +locale.get({lang:"all"})+"</option>");
-             for(var i=0;i<value.length;i++){
-             $("#devicecode").append("<option value='" +value[i].code + "'>" +value[i].name+"</option>");
-             }
-             }
-             }  
-             }
-             $("#devicecitysValue").val(selectedId);
-             }
-             
-             
-             });
-             
-             $("#devicecode").bind('change', function () {
-             var codeId = $("#devicecode").find("option:selected").val();
-             if(codeId == "all"){
-             $("#devicezonesValue").val('');
-             }else{
-             $("#devicezonesValue").val(codeId);
-             }
-             });*/
 
         },
         destroy: function() {

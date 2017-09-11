@@ -86,7 +86,20 @@ define(function(require) {
         "title": locale.get( "manufacturer"),
         "dataIndex": "vender",
         "cls": null,
-        "width": "10%"
+        "width": "10%",
+        render: function(data, type, row) {
+        	var display ="";
+        	if(data){
+        		if(data=='vender1'){
+        			display="厂家1";
+        		}else if(data=='vender2'){
+        			display="厂家2";
+        		}else if(data=='vender3'){
+        			display="厂家3";
+        		}
+        	}
+        	return display;
+        }
     }, {
         "title": locale.get({ lang: "create_time"}),
         "dataIndex": "createTime",
@@ -465,26 +478,7 @@ define(function(require) {
                             if (this.seeDevice) {
                                 this.seeDevice.destroy();
                             }
-                            var languge = localStorage.getItem("language");
-                            if (languge == "en") {
-                                require(["./see/seedevice-window-en"], function(SeeDevice_en) {
-                                    if (!this.SeeDevice_en) {
-                                        this.seeDevice = new SeeDevice_en({
-                                            selector: "body",
-                                            deviceId: _id,
-                                            automatNo: assetId,
-                                            deviceIdArr: self.automatIds,
-                                            events: {
-                                                "getDeviceList": function() {
-                                                    self.loadTableData($(".paging-limit-select  option:selected").val(), ($(".paging-page-current").val() - 1) * $(".paging-limit-select").val(), "");
-                                                }
-                                            }
-                                        });
-                                    }
-                                });
-
-                            } else {
-                                this.seeDevice = new SeeDevice({
+                            this.seeDevice = new SeeDevice({
                                     selector: "body",
                                     deviceId: _id,
                                     automatNo: assetId,
@@ -494,8 +488,7 @@ define(function(require) {
                                             self.loadTableData($(".paging-limit-select  option:selected").val(), ($(".paging-page-current").val() - 1) * $(".paging-limit-select").val(), "");
                                         }
                                     }
-                                });
-                            }
+                            });
                         }
                     },
                     del: function() {
@@ -534,19 +527,6 @@ define(function(require) {
                                                 self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
                                             }
                                             self.pageRecordTotal = self.pageRecordTotal - 1;
-                                            /*if(data.failure>0){
-                                                var a= locale.get({lang: "total_has"});
-                                                var b = locale.get({lang: "tai"});
-                                                var c =  locale.get({lang: "delete_failed"});
-                                                var d =  locale.get({lang: "delete_failed_reson"});
-                                                var message = a+data.failure+b+c+","+d;
-                                               dialog.render({text:message});
-                                               
-                                               
-                                               
-                                            }else{
-                                               dialog.render({lang: "deletesuccessful"});
-                                            }*/
                                             dialog.render({
                                                 lang: "deletesuccessful"
                                             });
@@ -565,133 +545,10 @@ define(function(require) {
                         }
                     },
                     imReport: function() {
-                        if (this.imPro) {
-                            this.imPro.destroy();
-                        }
-                        this.imPro = new ImportProduct({
-                            selector: "body",
-                            events: {
-                                "getDeviceList": function() {
-                                    self.loadTableData($(".paging-limit-select  option:selected").val(), ($(".paging-page-current").val() - 1) * $(".paging-limit-select").val(), "");
-                                }
-                            }
-                        });
+                        
                     },
                     exReport: function() {
-                        var language = locale._getStorageLang() === "en" ? 1 : 2;
-                        var host = cloud.config.FILE_SERVER_URL;
-                        var reportName = "deviceList.xlsx";
-
-                        var parameters = "&access_token=" + cloud.Ajax.getAccessToken();
-                        var online = $("#online").val();
-                        if (online) {
-                            if (online == -1) {
-                                online = '';
-                            }
-                        }
-                        var userline = $("#userline").multiselect("getChecked").map(function() { //线路                        
-                            return this.value;
-                        }).get();
-                        var search = $("#search").val();
-                        var searchValue = $("#searchValue").val();
-                        if (searchValue) {
-                            searchValue = self.stripscript(searchValue);
-                        }
-
-                        var siteName = null;
-                        var assetId = null;
-                        var name = null;
-                        if (search) {
-                            if (search == 0) {
-                                assetId = $("#searchValue").val();
-                            } else if (search == 1) {
-                                siteName = searchValue; //点位名称
-                            } else if (search == 2) {
-                                name = searchValue; //售货机名称
-                            }
-                        }
-                        var userId = cloud.storage.sessionStorage("accountInfo").split(",")[1].split(":")[1];
-                        var roleType = permission.getInfo().roleType;
-                        Service.getLinesByUserId(userId, function(linedata) {
-                            var lineIds = [];
-                            if (linedata.result && linedata.result.length > 0) {
-                                for (var i = 0; i < linedata.result.length; i++) {
-                                    lineIds.push(linedata.result[i]._id);
-                                }
-                            }
-                            if (roleType == 51) {
-                                lineIds = [];
-                            }
-                            if (roleType != 51 && lineIds.length == 0) {
-                                lineIds = ["000000000000000000000000"];
-                            }
-                            self.lineIds = lineIds;
-                            if (userline.length == 0) {
-                                userline = lineIds;
-                            }
-
-                            if (online != null && online != "") {
-                                parameters += "&online=" + online;
-                            }
-                            if (siteName != null && siteName != "") {
-                                parameters += "&siteName=" + siteName;
-                            }
-                            if (assetId != null && assetId != "") {
-                                parameters += "&assetId=" + assetId;
-                            }
-                            if (name != null && name != "") {
-                                parameters += "&name=" + name;
-                            }
-                            if (userline != null && userline.length > 0) {
-                                parameters += "&lineId=" + userline;
-                            }
-                            if (language) {
-                                parameters += "&language=" + language;
-                            }
-                            var now = Date.parse(new Date()) / 1000;
-                            var oid = cloud.storage.sessionStorage("accountInfo").split(",")[0].split(":")[1];
-                            parameters += "&time=" + now;
-                            parameters += "&oid=" + oid;
-                            var path = "/home/deviceList/" + now + "/" + reportName;
-                            var url = host + "/api/vmreports/getAutomatListExcel?report_name=" + reportName + "&path=" + path + "&access_token=" + cloud.Ajax.getAccessToken();
-                            Service.createDeviceListExcel(parameters, function(data) {
-                                if (data) {
-                                    var len = $("#search-bar").find("a").length;
-                                    var id = $("#search-bar").find("a").eq(len - 1).attr("id");
-                                    $("#" + id).html("");
-                                    if (document.getElementById("bexport") != undefined) {
-                                        $("#bexport").show();
-                                    } else {
-                                        $("#" + id).after("<span style='margin-left:6px;' id='bexport'>" + locale.get({
-                                            lang: "being_export"
-                                        }) + "</span>");
-                                    }
-                                    $("#" + id).hide();
-
-                                    var timer = setInterval(function() {
-                                        Service.findDeviceListExcel(now, "deviceList.txt", function(data) {
-                                            if (data.onlyResultDTO.result.res == "ok") {
-                                                cloud.util.ensureToken(function() {
-                                                    window.open(url, "_self");
-                                                });
-                                                clearInterval(timer);
-                                                $("#" + id).html("");
-                                                if ($("#bexport")) {
-                                                    $("#bexport").hide();
-                                                }
-                                                $("#" + id).append("<span class='cloud-button-item cloud-button-text'>" + locale.get({
-                                                    lang: "export"
-                                                }) + "</span>");
-                                                $("#" + id).show();
-                                            }
-                                        })
-                                    }, 5000);
-                                }
-                            });
-                            /* cloud.util.ensureToken(function() {
-                                 window.open(url+parameters, "_self");
-                             });   */
-                        });
+                        
                     },
                     auth: function() {
                         cloud.util.mask("#content-table");
@@ -710,15 +567,6 @@ define(function(require) {
                                 } else {
                                     ids = ids + idsArr[i]._id + ",";
                                 }
-                                /*var siteName = idsArr[i].siteName;
-                                 var lineName = idsArr[i].lineName;
-                                 
-                                 if(siteName == null || lineName == null){
-                                     dialog.render({lang: "please_add_site_line_for_device"});
-                                     return;
-                                 }*/
-
-
                             }
                             dialog.render({
                                 lang: "affirm_authentication",

@@ -7,11 +7,6 @@ define(function(require) {
     var Table = require("cloud/components/table");
     var Button = require("cloud/components/button");
     var Paging = require("cloud/components/paging");
-    var ImportProduct = require("./importAndOutport/importdevice-window");
-    //var AddDevice = require("./add/adddevice-window");
-    //var SeeDevice = require("./see/seedevice-window");
-   // var UpdateDevice = require("./updateV2/updatedevice-window");
-    //var UpdateDevice_en = require("./updateV2/updatedevice-window-en");
     var columns = [{
             "title": locale.get({lang: "network"}),
             "dataIndex": "online",

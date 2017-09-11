@@ -27,6 +27,17 @@ define(function(require) {
                 }
             });
         },
+        updateDeviceFm: function(deviceId,data, callback, context) {
+            var self = this;
+            cloud.Ajax.request({
+                url: "api/basic/"+deviceId+"/device",
+                type: "PUT",
+                data: data,
+                success: function(data) {
+                    callback.call(context || self, data);
+                }
+            });
+        },
         getAllSites: function(limit, cursor, callback, context) {
             var self = this;
             cloud.Ajax.request({
@@ -389,7 +400,7 @@ define(function(require) {
         getAutomatById: function(id, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: "api/automat/" + id,
+                url: "api/basic/" + id+"/device",
                 type: "GET",
                 success: function(data) {
                     callback.call(context || self, data);
@@ -400,7 +411,7 @@ define(function(require) {
         getSiteById: function(id, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: "api/automatsite/" + id,
+                url: "api/basic/"+id+"/site",
                 type: "GET",
                 success: function(data) {
                     callback.call(context || self, data);
@@ -558,7 +569,7 @@ define(function(require) {
         deleteAutomatsByIds: function(ids, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: self.automatUrl + "/delBatch",
+                url: "api/basic/device/deviceDelBatch",
                 type: "post",
                 parameters: {
                     "ids": ids,
