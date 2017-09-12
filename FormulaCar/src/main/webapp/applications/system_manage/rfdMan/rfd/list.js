@@ -13,16 +13,29 @@ define(function(require) {
 	var Service = require("./service");
 	
 	var columns = [{
-		"title":"RFD",
-		"dataIndex": "name",
-		"width": "25%"
+		"title":"Rfid",
+		"dataIndex": "rfid",
+		"width": "30%"
 	},
 	 {
+		"title":"点数",
+		"dataIndex": "count",
+		"cls": null,
+		"width": "30%"
+	},{
 		"title":locale.get({lang:"create_time"}),
 		"dataIndex": "createTime",
 		"cls": null,
-		"width": "35%"
+		"width": "40%",
+		render: dateConvertor
 	}];
+	var dateConvertor = function(name, type, data) {
+		if ("display" == type) {
+			return cloud.util.dateFormat(new Date(name), "yyyy-MM-dd hh:mm:ss");
+		} else {
+			return name;
+		}
+	};
 	var list = Class.create(cloud.Component, {
 		initialize: function($super, options) {
 			$super(options);
@@ -156,6 +169,9 @@ define(function(require) {
 						        self._renderpage(data, 1);
 						        cloud.util.unmask("#rfd_list_table");
 							});
+					  },
+					  add:function(){
+						    
 					  },
 					  imReport:function(){
 						    

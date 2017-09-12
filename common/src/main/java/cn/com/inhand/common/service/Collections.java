@@ -260,6 +260,5 @@ public class Collections {
     public static final String SMART_FM_DEALER = "smart.fm.dealer";
     public static final String SMART_FM_SITE = "smart.fm.site";
     public static final String SMART_FM_MODULE = "smart.fm.module";
-    
-    
+    public static final String SMART_FM_RFID = "smart.fm.module";    
 }

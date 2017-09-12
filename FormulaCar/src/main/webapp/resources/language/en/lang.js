@@ -4085,6 +4085,7 @@ var lang = {
         stage_duration_time_statistics: "Stage Duration time Statistics",
         stage_id: "StageID",
         automat_maintenanceList: "Maintenance List",
-        rfdList:"RFD list"
+        rfdList:"RFID list",
+        rfd_manage:"RFID list"
     }
 };

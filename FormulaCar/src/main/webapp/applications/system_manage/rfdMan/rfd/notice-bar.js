@@ -36,9 +36,18 @@ define(function(require){
                 }
             });
             $("#"+queryBtn.id).addClass("readClass");
+            var addBtn = new Button({
+                text: locale.get({lang:"add"}),
+                container: $("#search-bar"),
+                events: {
+                    click: function(){
+                        self.fire("add");
+                    }
+                }
+            });
             var importBtn = new Button({
                 text: locale.get({lang: "import"}),
-                container: $("#buttonDiv"),
+                container: $("#search-bar"),
                 events: {
                     click: function() {
                         self.fire("imReport");
