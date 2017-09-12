@@ -277,8 +277,8 @@ define(function(require) {
 		},
 		rfd_manage: {
 			show: [2002],
-			read: [2000, 2002, 5, 7],
-			write: [1107, 6]
+			read: [2000, 2002, 3008],
+			write: [3009]
 		},
 
 		WeChat_payment: {
