@@ -21,8 +21,7 @@ define(function(require) {
 		"title":locale.get({lang:"create_time"}),
 		"dataIndex": "createTime",
 		"cls": null,
-		"width": "35%",
-		render: dateConvertor
+		"width": "35%"
 	}];
 	var list = Class.create(cloud.Component, {
 		initialize: function($super, options) {
@@ -31,15 +30,15 @@ define(function(require) {
 			this.pageDisplay = 30;
 			this.elements = {
 				bar : {
-					id : "role_list_bar",
+					id : "rfd_list_bar",
 					"class" : null
 				},
 				table : {
-					id : "role_list_table",
+					id : "rfd_list_table",
 					"class" : null
 				},
 				paging : {
-					id : "role_list_paging",
+					id : "rfd_list_paging",
 					"class" : null
 				}
 			};
@@ -48,15 +47,15 @@ define(function(require) {
 		render:function(){
 			this._renderHtml();
 			
-			$("#role_list").css("width",$(".wrap").width());
-			$("#role_list_paging").css("width",$(".wrap").width());
+			$("#rfd_list").css("width",$(".wrap").width());
+			$("#rfd_list_paging").css("width",$(".wrap").width());
 			
-			$("#role_list").css("height",$("#content-operation-menu").height() - $(".container-hd").height() - $(".main_hd").height());
+			$("#rfd_list").css("height",$("#content-operation-menu").height() - $(".container-hd").height() - $(".main_hd").height());
 			
-			var listHeight = $("#role_list").height();
-		    var barHeight = $("#role_list_bar").height()*2;
+			var listHeight = $("#rfd_list").height();
+		    var barHeight = $("#rfd_list_bar").height()*2;
 			var tableHeight=listHeight - barHeight - 5;
-			$("#role_list_table").css("height",tableHeight);
+			$("#rfd_list_table").css("height",tableHeight);
 			
 			this._renderTable();
 			this._renderNoticeBar();
@@ -67,7 +66,7 @@ define(function(require) {
 		},
 		_renderTable : function() {
 			this.listTable = new Table({
-				selector : "#role_list_table",
+				selector : "#rfd_list_table",
 				columns : columns,
 				datas : [],
 				pageSize : 100,
@@ -86,24 +85,24 @@ define(function(require) {
 	                   scope: this
 				}
 			});
-			var height = $("#role_list_table").height()+"px";
-	        $("#role_list_table-table").freezeHeader({ 'height': height });
+			var height = $("#rfd_list_table").height()+"px";
+	        $("#rfd_list_table-table").freezeHeader({ 'height': height });
 			this.setDataTable();
 		},
 		setDataTable:function() {
-			this.loadData();
+			//this.loadData();
 		},
 		loadData:function() {
-			cloud.util.mask("#role_list_table");
+			cloud.util.mask("#rfd_list_table");
 			var self = this;
 			var pageDisplay = this.pageDisplay;
-			Service.getRoleInfo(0, pageDisplay,function(data) {
+			Service.getrfdInfo(0, pageDisplay,function(data) {
 				var total = data.total;
 				this.totalCount = data.result.length;
 		        data.total = total;
 		        self.listTable.render(data.result);
 		        self._renderpage(data, 1);
-		        cloud.util.unmask("#role_list_table");
+		        cloud.util.unmask("#rfd_list_table");
 			});
 						
 		},
@@ -113,16 +112,16 @@ define(function(require) {
 	        		this.page.reset(data);
 	        	}else{
 	        		this.page = new Paging({
-	        			selector : $("#role_list_paging"),
+	        			selector : $("#rfd_list_paging"),
 	        			data:data,
 	    				current:1,
 	    				total:data.total,
 	    				limit:this.pageDisplay,
 	        			requestData:function(options,callback){
-	        				cloud.util.mask("#role_list_table");
-	        				Service.getRoleInfo(options.cursor, options.limit,function(data){
+	        				cloud.util.mask("#rfd_list_table");
+	        				Service.getrfdInfo(options.cursor, options.limit,function(data){
    							   callback(data);
-   							cloud.util.unmask("#role_list_table");
+   							cloud.util.unmask("#rfd_list_table");
 	        				});
 
 	        			},
@@ -144,18 +143,18 @@ define(function(require) {
 		_renderNoticeBar : function() {
 			var self = this;
 			this.noticeBar = new NoticeBar({
-				selector : "#role_list_bar",
+				selector : "#rfd_list_bar",
 				events : {
 					  query: function(name){//查询
-						  cloud.util.mask("#role_list_table");
+						  cloud.util.mask("#rfd_list_table");
 							var pageDisplay = 30;
-							Service.getRoleList(name,0, pageDisplay,function(data) {
+							Service.getrfdList(name,0, pageDisplay,function(data) {
 								var total = data.total;
 								this.totalCount = data.result.length;
 						        data.total = total;
 						        self.listTable.render(data.result);
 						        self._renderpage(data, 1);
-						        cloud.util.unmask("#role_list_table");
+						        cloud.util.unmask("#rfd_list_table");
 							});
 					  },
 					  imReport:function(){
