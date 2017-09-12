@@ -4084,6 +4084,7 @@ var lang = {
         storefront_racing_rank: "Storefront Racing Rank",
         stage_duration_time_statistics: "Stage Duration time Statistics",
         stage_id: "StageID",
-        automat_maintenanceList: "Maintenance List"
+        automat_maintenanceList: "Maintenance List",
+        rfdList:"RFD list"
     }
 };

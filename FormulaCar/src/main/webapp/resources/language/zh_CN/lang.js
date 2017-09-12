@@ -4113,5 +4113,6 @@ var lang = {
         sale_car_number: "售出辆",
         car_amount_yuan: "跑车金额",
         game_duration: "比赛时间",
+        rfdList:"rfd列表"
     }
 };

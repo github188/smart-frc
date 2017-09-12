@@ -275,6 +275,11 @@ define(function(require) {
 			read: [2000, 2002, 5, 7],
 			write: [1107, 6]
 		},
+		rfd_manage: {
+			show: [2002],
+			read: [2000, 2002, 5, 7],
+			write: [1107, 6]
+		},
 
 		WeChat_payment: {
 			show: [2003],

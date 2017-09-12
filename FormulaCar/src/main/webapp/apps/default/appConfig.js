@@ -290,6 +290,12 @@ define(function(require) {
 				order: 1,
 				operation: ["r"],
 				url: "./system_manage/logMan/operating/logMain.js"
+			}, {
+				name: "rfd_manage", //RFD列表
+				defaultShow: true,
+				order: 2,
+				operation: ["r", "w"],
+				url: "./system_manage/rfdMan/rfd/rfdMain.js"
 			}]
 		}]
 	};
