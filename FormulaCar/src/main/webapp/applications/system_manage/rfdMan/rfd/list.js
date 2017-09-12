@@ -111,7 +111,7 @@ define(function(require) {
 			var pageDisplay = this.pageDisplay;
 			var Rfid = $("#Rfid").val();
 			self.searchData={
-					Rfid:Rfid
+					rfid:Rfid
 			};
 			Service.getrfdInfo(self.searchData,limit,cursor,function(data) {
 				var total = data.total;

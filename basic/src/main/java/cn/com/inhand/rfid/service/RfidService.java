@@ -14,6 +14,7 @@ import cn.com.inhand.smart.formulacar.model.Rfid;
 import java.util.Arrays;
 import java.util.List;
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -36,6 +37,13 @@ public class RfidService extends MongoService implements RfidDao{
         }
         return template.count(query, Collections.SMART_FM_RFID);
     }
+    public String regexFilter(String regex) {
+        if (regex.equals("*")) {
+            return "\\" + regex;
+        } else {
+            return regex;
+        }
+    }
 
     public List<Rfid> findRfidByParam(ObjectId xOId, RfidBean bean, int skip, int limit) {
         MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(xOId);
@@ -47,6 +55,7 @@ public class RfidService extends MongoService implements RfidDao{
         if(bean.getRfid()!=null && !bean.getRfid().equals("")){
             query.addCriteria(Criteria.where("rfid").regex(bean.getRfid()));
         }
+        query.with(new Sort(Sort.Direction.DESC, "createTime"));
         return mongoTemplate.find(query, Rfid.class, Collections.SMART_FM_RFID);
     }
 
