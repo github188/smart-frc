@@ -11,6 +11,8 @@ define(function(require) {
 	var Table = require("cloud/components/table");
 	var validator = require("cloud/components/validator");
 	var Service = require("./service");
+	var RfidMan = require("./rfidMan-window");
+	var ImportRfid =  require("./importAndOutport/importRfid-window");
 	
 	var columns = [{
 		"title":"Rfid",
@@ -27,15 +29,13 @@ define(function(require) {
 		"dataIndex": "createTime",
 		"cls": null,
 		"width": "40%",
-		render: dateConvertor
-	}];
-	var dateConvertor = function(name, type, data) {
-		if ("display" == type) {
-			return cloud.util.dateFormat(new Date(name), "yyyy-MM-dd hh:mm:ss");
-		} else {
-			return name;
+		render:function(data, type, row){
+			if(data){
+				return cloud.util.dateFormat(new Date(data), "yyyy-MM-dd hh:mm:ss");
+			}
+			
 		}
-	};
+	}];
 	var list = Class.create(cloud.Component, {
 		initialize: function($super, options) {
 			$super(options);
@@ -103,13 +103,17 @@ define(function(require) {
 			this.setDataTable();
 		},
 		setDataTable:function() {
-			//this.loadData();
+			this.loadData(30,0);
 		},
-		loadData:function() {
+		loadData:function(limit,cursor) {
 			cloud.util.mask("#rfd_list_table");
 			var self = this;
 			var pageDisplay = this.pageDisplay;
-			Service.getrfdInfo(0, pageDisplay,function(data) {
+			var Rfid = $("#Rfid").val();
+			self.searchData={
+					Rfid:Rfid
+			};
+			Service.getrfdInfo(self.searchData,limit,cursor,function(data) {
 				var total = data.total;
 				this.totalCount = data.result.length;
 		        data.total = total;
@@ -132,7 +136,7 @@ define(function(require) {
 	    				limit:this.pageDisplay,
 	        			requestData:function(options,callback){
 	        				cloud.util.mask("#rfd_list_table");
-	        				Service.getrfdInfo(options.cursor, options.limit,function(data){
+	        				Service.getrfdInfo(self.searchData, options.limit,options.cursor,function(data){
    							   callback(data);
    							cloud.util.unmask("#rfd_list_table");
 	        				});
@@ -159,22 +163,107 @@ define(function(require) {
 				selector : "#rfd_list_bar",
 				events : {
 					  query: function(name){//查询
-						  cloud.util.mask("#rfd_list_table");
-							var pageDisplay = 30;
-							Service.getrfdList(name,0, pageDisplay,function(data) {
-								var total = data.total;
-								this.totalCount = data.result.length;
-						        data.total = total;
-						        self.listTable.render(data.result);
-						        self._renderpage(data, 1);
-						        cloud.util.unmask("#rfd_list_table");
-							});
+						  self.loadData($(".paging-limit-select").val(),0);
 					  },
 					  add:function(){
-						    
+						  if (this.addPro) {
+	                            this.addPro.destroy();
+	                      }
+	                      this.addPro = new RfidMan({
+	                            selector: "body",
+	                            events: {
+	                                "getRfidList": function() {
+	                                	self.loadData($(".paging-limit-select").val(),0);
+	                                }
+	                            }
+	                     });
+					  },
+					  modify:function(){
+						    var selectedResouces = self.getSelectedResources();
+	                        if (selectedResouces.length == 0) {
+	                            dialog.render({lang: "please_select_at_least_one_config_item"});
+	                        } else if (selectedResouces.length >= 2) {
+	                            dialog.render({lang: "select_one_gateway"});
+	                        } else {
+	                        	var _id = selectedResouces[0]._id;
+	                        	if (this.modifyPro) {
+	                                this.modifyPro.destroy();
+	                            }
+	                            this.modifyPro = new RfidMan({
+	                                selector: "body",
+	                                id: _id,
+	                                events: {
+	                                    "getRfidList": function() {
+	                                    	self.loadData($(".paging-limit-select").val(),0);
+	                                    }
+	                                }
+	                            });
+	                        }
+					  },
+					  drop:function(){
+						  cloud.util.mask("#rfid_list_table");
+	                        var idsArr = self.getSelectedResources();
+	                        if (idsArr.length == 0) {
+	                            cloud.util.unmask("#rfid_list_table");
+	                            dialog.render({lang: "please_select_at_least_one_config_item"});
+	                            return;
+	                        } else {
+	                        	cloud.util.unmask("#rfid_list_table");
+	                            var ids = "";
+	                            for (var i = 0; i < idsArr.length; i++) {
+	                                if (i == idsArr.length - 1) {
+	                                    ids = ids + idsArr[i]._id;
+	                                } else {
+	                                    ids = ids + idsArr[i]._id + ",";
+	                                }
+	                            }
+	                            dialog.render({
+	                                lang: "affirm_delete",
+	                                buttons: [{
+	                                        lang: "affirm",
+	                                        click: function() {
+	                                            self.listTable.mask();
+	                                            Service.deleteRfidByIds(ids, function(data) {
+	                                            	if (self.pageRecordTotal == 1) {
+                                                        var cursor = ($(".paging-page-current").val() - 2) * $(".paging-limit-select").val();
+                                                        if (cursor < 0) {
+                                                            cursor = 0;
+                                                        }
+                                                        self.loadData($(".paging-limit-select  option:selected").val(), cursor, "");
+                                                    } else {
+                                                        self.loadData($(".paging-limit-select  option:selected").val(), cursor, "");
+                                                    }
+                                                    self.pageRecordTotal = self.pageRecordTotal - 1;
+                                                    dialog.render({lang: "deletesuccessful"});
+	                                                
+	                                            }, self);
+	                                            self.listTable.unmask();
+	                                            dialog.close();
+	                                        }
+	                                    },
+	                                    {
+	                                        lang: "cancel",
+	                                        click: function() {
+	                                            self.listTable.unmask();
+	                                            dialog.close();
+	                                        }
+	                                    }]
+	                            });
+	                            
+	                        }
 					  },
 					  imReport:function(){
-						    
+						    if (this.imPro) {
+	                            this.imPro.destroy();
+	                        }
+	                        this.imPro = new ImportRfid({
+	                            selector: "body",
+	                            events: {
+	                                "getRfidList": function() {
+	                                    self.loadData($(".paging-limit-select  option:selected").val(), ($(".paging-page-current").val() - 1) * $(".paging-limit-select").val());
+	                                }
+	                            }
+	                        });
 					  }
 					 
 			    }

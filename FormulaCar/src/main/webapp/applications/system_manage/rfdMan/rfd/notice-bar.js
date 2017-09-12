@@ -18,8 +18,8 @@ define(function(require){
     		  var self = this;
               var $htmls = $(+"<div></div>" +
               "<div id='search-bar' style='width:auto;margin-top:3px;margin-left:3px;'>" +
-              "<label style='margin:auto 10px auto 10px'>RFD</label>" +
-              "<input style='width:200px' type='text'  id='name' />"  +
+              "<label style='margin:auto 10px auto 10px'>Rfid</label>" +
+              "<input style='width:200px' type='text'  id='Rfid' />"  +
               "</div>");
               this.element.append($htmls);
 		},
@@ -42,6 +42,24 @@ define(function(require){
                 events: {
                     click: function(){
                         self.fire("add");
+                    }
+                }
+            });
+            var updateBtn = new Button({
+                text: locale.get({lang:"modify"}),
+                container: $("#search-bar"),
+                events: {
+                    click: function(){
+                        self.fire("modify");
+                    }
+                }
+            });
+            var deleteBtn = new Button({
+                text: locale.get({lang:"delete"}),
+                container: $("#search-bar"),
+                events: {
+                    click: function(){
+                        self.fire("drop");
                     }
                 }
             });

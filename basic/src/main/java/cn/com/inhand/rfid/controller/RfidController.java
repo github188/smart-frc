@@ -114,7 +114,8 @@ public class RfidController {
                    throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, areaBean.getRfid());
                }
             }
-            area = mapper.convertValue(areaBean, Rfid.class);
+            area.setCount(areaBean.getCount());
+            area.setRfid(areaBean.getRfid());
             area.setUpdateTime(DateUtils.getUTC());
             rfidDao.updateRfid(xOId, area);
         }

@@ -43,7 +43,7 @@ import jxl.read.biff.BiffException;
  * @author shixj
  */
 @Controller
-@RequestMapping("api/vmimports")
+@RequestMapping("api/frcimports")
 public class ImportRfidController {
     private final static Logger logger = LoggerFactory.getLogger(ImportRfidController.class);
     @Autowired

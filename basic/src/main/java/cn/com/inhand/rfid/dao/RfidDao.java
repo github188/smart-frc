@@ -30,5 +30,7 @@ public interface RfidDao {
 
     public void deleteByIds(ObjectId xOId, String[] idsArr_);
 
+    public Rfid findRfidInfoByRfid(ObjectId oId, String rfid);
+
     
 }
