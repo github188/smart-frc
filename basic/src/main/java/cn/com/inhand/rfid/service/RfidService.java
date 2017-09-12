@@ -10,8 +10,8 @@ import cn.com.inhand.common.service.MongoService;
 import cn.com.inhand.common.util.UpdateUtils;
 import cn.com.inhand.rfid.dao.RfidDao;
 import cn.com.inhand.rfid.dto.RfidBean;
-import cn.com.inhand.smart.formulacar.model.Area;
 import cn.com.inhand.smart.formulacar.model.Rfid;
+import java.util.Arrays;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -19,6 +19,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 /**
  *
@@ -66,7 +67,7 @@ public class RfidService extends MongoService implements RfidDao{
         MongoTemplate template = factory.getMongoTemplateByOId(xOId);
         template.save(area, Collections.SMART_FM_RFID);
     }
-     public void updateArea(ObjectId oid, Rfid area) {
+     public void updateRfid(ObjectId oid, Rfid area) {
         MongoTemplate template = factory.getMongoTemplateByOId(oid);
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(area.getId()));
@@ -79,6 +80,12 @@ public class RfidService extends MongoService implements RfidDao{
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(id));
         return template.findOne(query, Rfid.class, Collections.SMART_FM_RFID);
+    }
+
+    public void deleteByIds(ObjectId xOId, String[] idsArr) {
+        Assert.notNull(idsArr);
+        MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(xOId);
+        mongoTemplate.remove(Query.query(Criteria.where("_id").in(Arrays.asList(idsArr))), Collections.SMART_FM_RFID);
     }
     
 }

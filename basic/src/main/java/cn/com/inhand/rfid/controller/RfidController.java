@@ -74,6 +74,8 @@ public class RfidController {
            throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, bean.getRfid());
         }
         Rfid area = mapper.convertValue(bean, Rfid.class);
+        area.setCreateTime(DateUtils.getUTC());
+        area.setUpdateTime(DateUtils.getUTC());
         rfidDao.createRfid(xOId, area);
         OnlyResultDTO result = new OnlyResultDTO();
         result.setResult("OK");
@@ -95,5 +97,45 @@ public class RfidController {
         return result;
     }
     
+    @RequestMapping(value = "/{id}/rfid", method = RequestMethod.PUT)
+    public @ResponseBody
+    Object updateAutomat(@RequestParam(value = "access_token", required = true) String access_token,
+            @RequestHeader(value = "X-API-OID", required = false) ObjectId xOId,
+            @RequestHeader(value = "X-API-USERNAME", required = false) String xUsername,
+            @RequestHeader(value = "X-API-IP", required = false) String xIp,
+            @RequestHeader(value = "X-API-UID", required = false) ObjectId xUId,
+            @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
+            @PathVariable ObjectId id,
+            @Valid @RequestBody RfidBean areaBean) {
+        Rfid area = rfidDao.findRfidById(xOId, id);
+        if (area != null) {
+            if(!areaBean.getRfid().equals(area.getRfid())){
+               if(rfidDao.isRfidExists(xOId, areaBean.getRfid())){
+                   throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, areaBean.getRfid());
+               }
+            }
+            area = mapper.convertValue(areaBean, Rfid.class);
+            area.setUpdateTime(DateUtils.getUTC());
+            rfidDao.updateRfid(xOId, area);
+        }
+        OnlyResultDTO result = new OnlyResultDTO();
+        result.setResult("OK");
+        return result;
+    }
     
+    @RequestMapping(value = "/rfid/rfidDelBatch", method = RequestMethod.POST)
+    public @ResponseBody
+    Object deleteAutomat(@RequestParam(value = "access_token", required = true) String access_token,
+            @RequestHeader(value = "X-API-OID", required = false) ObjectId xOId,
+            @RequestHeader(value = "X-API-USERNAME", required = false) String xUsername,
+            @RequestHeader(value = "X-API-IP", required = false) String xIp,
+            @RequestHeader(value = "X-API-UID", required = false) ObjectId xUId,
+            @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
+            @RequestParam(value = "ids", required = true) String ids) {
+        String[] idsArr_ = ids.split(",");
+        rfidDao.deleteByIds(xOId, idsArr_);
+        OnlyResultDTO result = new OnlyResultDTO();
+        result.setResult("OK");
+        return result;
+    }
 }
