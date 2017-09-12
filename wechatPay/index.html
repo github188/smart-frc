@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<link rel="stylesheet" href="js/jquery.mobile-1.4.2.min.css">
+<script src="js/jquery-1.7.2.min.js"></script>
+<script src="js/jquery.mobile-1.4.2.min.js"></script>
+<style type="text/css">
+body{font-family:arial,"微软雅黑"}
+h2{ border-bottom:1px solid #E5DFDF;margin-top: 10px; }
+.count{
+   border: 1px solid #e7e7eb;
+   height: 50px;
+   text-align: center;
+   line-height: 50px;
+   margin:5px;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+     $(".count").click(function(){
+     	$(".count").css("background-color","");
+     	$(this).css("background-color","gainsboro");
+     	
+     	var payValue = $(this)[0].id;
+     	$("#payValue").val(payValue);
+     });
+
+     $("#pay").click(function(){
+     	 var payValue = $("#payValue").val();
+     	 if(payValue){
+     	 	
+           
+     	 }else{
+     	 	alert("请先选择要充值的数额");
+     	 }
+     });
+
+});
+function GetRequest() {
+   var url = location.search; //获取url中"?"符后的字串
+   var theRequest = new Object();
+   if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      strs = str.split("&");
+      for(var i = 0; i < strs.length; i ++) {
+         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+      }
+   }
+   return theRequest;
+}
+</script>
+</head>
+<body>
+<section id="page1" data-role="page" data-title="">
+    <header data-role="header"  data-theme="b" style="background-color: #01AA91;border-color: #01AA91;"><h1>充值</h1></header>
+    <div data-role="content" class="content">
+         <div style="text-align: center;width: 100%;">
+          	 <img src="./image/logo.png">
+         </div>
+         <div style="text-align: center;width: 100%;">
+         	 <table style="text-align: center;width: 100%;">
+         	 	<tr>
+         	 		<td>
+         	 			<div class="count" id='100'>100元</div>
+         	 		</td>
+         	 		<td>
+         	 			<div class="count" id='200'>200元</div>
+         	 		</td>
+         	 	</tr>
+         	 	<tr>
+         	 		<td>
+         	 			<div class="count" id='300'>300元</div>
+         	 		</td>
+         	 		<td>
+         	 			<div class="count" id='400'>400元</div>
+         	 		</td>
+         	 	</tr>
+
+         	 </table>
+         </div>
+    </div>
+    <div class="ui-field-contain" style="margin-left: 5%;width:90%;">
+       <input type="hidden" id='payValue' />
+       <button id="pay" style=" background-color: #01AA91;font-size: 20px;color: white;font-weight: 100;">立即支付</button>   
+	</div>
+</section>
+</body>
+</html>
