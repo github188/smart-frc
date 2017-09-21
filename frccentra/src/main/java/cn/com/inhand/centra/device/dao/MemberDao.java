@@ -17,5 +17,6 @@ public interface MemberDao {
     public void createMember(ObjectId oid,Member member);
     public Member findMemberByMemberId(ObjectId oid,ObjectId memeberId);
     public void updateMember(ObjectId oid,Member member);
+    public Member findMemberByOpenId(ObjectId oid,String openId);
     
 }

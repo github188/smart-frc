@@ -19,23 +19,63 @@ h2{ border-bottom:1px solid #E5DFDF;margin-top: 10px; }
 </style>
 <script type="text/javascript">
 $(function(){
-     $(".count").click(function(){
-     	$(".count").css("background-color","");
-     	$(this).css("background-color","gainsboro");
+	var paramObj = GetRequest();
+	
+    $(".count").click(function(){
+		$(".count").css("background-color","");
+		$(this).css("background-color","gainsboro");
      	
-     	var payValue = $(this)[0].id;
-     	$("#payValue").val(payValue);
-     });
+		var payValue = $(this)[0].id;
+		$("#payValue").val(payValue);
+    });
 
-     $("#pay").click(function(){
-     	 var payValue = $("#payValue").val();
-     	 if(payValue){
-     	 	
-           
-     	 }else{
-     	 	alert("请先选择要充值的数额");
-     	 }
-     });
+	$("#pay").click(function(){
+     	var payValue = $("#payValue").val();
+     	if(payValue){
+			var openid = paramObj.openid;
+			var rfid = paramObj.rfid;
+			var code = paramObj.code;
+			$.ajax({
+				type: 'GET',
+				url: '/wbapi/wechat/prePayId?rfid='+rfid+'&code='+code+'&openId='+openid+'&price='+payValue,
+				"contentType": "application/json",
+				success: function(data){
+					var prePayId = data.prePayId;
+					var appId = data.appId;
+					var nonce_str = data.nonce_str;
+					var time = new Date().getTime()/1000;
+					
+					time = (time+"").substring(0,(time+"").length-4);
+					
+					$.ajax({
+						type:'GET',
+						url:'/wbapi/wechat/paySign?appId='+appId+'&nonceStr='+nonce_str+'&packageName=prepay_id='+prePayId+'&signType=MD5'+'&timeStamp='+time,
+						"contentType": "application/json",
+						success: function(data){
+							var sign = data.paySign;
+							WeixinJSBridge.invoke('getBrandWCPayRequest',{
+								"appId" : appId,
+								"timeStamp":time,
+								"nonceStr" : nonce_str,
+								"package" : "prepay_id="+prePayId,
+								"signType" : "MD5",
+								"paySign" : sign
+							},
+							function(res){
+								 if(res.err_msg.trim() == "get_brand_wcpay_request:ok"){
+									window.location.href = "payback.html?type="+type+"&price="+price;		
+								 }
+							});
+						}
+					})
+					
+				}
+			});
+			
+     	}else{
+			alert("请先选择要充值的数额");
+     	}
+    });
 
 });
 function GetRequest() {
@@ -74,7 +114,7 @@ function GetRequest() {
          	 			<div class="count" id='300'>300元</div>
          	 		</td>
          	 		<td>
-         	 			<div class="count" id='400'>400元</div>
+         	 			<div class="count" id='500'>500元</div>
          	 		</td>
          	 	</tr>
 

@@ -47,5 +47,12 @@ public class MemberService extends MongoService implements MemberDao{
         query.addCriteria(Criteria.where("_id").is(member.getId()));
         template.updateFirst(query, UpdateUtils.convertBeanToUpdate(member, "_id"), Collections.SMART_FM_MEMBER);
     }
+
+    public Member findMemberByOpenId(ObjectId oid, String openId) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("openId").is(openId));
+        return template.findOne(query, Member.class, Collections.SMART_FM_MEMBER);
+    }
     
 }
