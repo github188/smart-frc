@@ -6,6 +6,7 @@ package cn.com.inhand.wechat.controller;
 
 import cn.com.inhand.common.constant.Constant;
 import cn.com.inhand.common.util.DateUtils;
+import cn.com.inhand.pay.factory.AlipayFactory;
 import cn.com.inhand.smart.formulacar.model.Member;
 import cn.com.inhand.smart.formulacar.model.PayTrade;
 import cn.com.inhand.smart.formulacar.model.Rfid;
@@ -14,6 +15,10 @@ import cn.com.inhand.wechat.dao.PayTradeDao;
 import cn.com.inhand.wechat.dao.RfidDao;
 import cn.com.inhand.wechat.util.JsonUtil;
 import cn.com.inhand.wechat.util.RequestHandler;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.request.AlipayTradePrecreateRequest;
+import com.alipay.api.response.AlipayTradePrecreateResponse;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -22,8 +27,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Level;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
@@ -66,11 +73,17 @@ public class WechatRechargeController {
     @Autowired
     private PayTradeDao tradeDao;
     @Autowired
+    private AlipayFactory alipayFactory;
+    @Autowired
     private RestTemplate restTemplate;
     private String appid = "wxf0aed31cd2c95a0d";
     private String appSecret = "59a1202f4528018e46b83111414a644f";
     private String mch_id = "1243189202";
     private String clientSecret = "3zxmDW0dWethJquObwHO9wstpnTgJaOA";
+    private final String ALIPAY_GATWAY_URL_V2 = "https://openapi.alipay.com/gateway.do";
+    private final String appId = "2015030300033631";
+    private final String privateKey = "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBALa+nGRneXk8KTAObIUwtMu1COKyx8tdqVZMEIED/67CM3EY3BWzxocuMX/ELCXxGDpHmOoSiU+muE1VJAALXrFQ6uXkH4t0Li4zz1Ecn8+phtmdV3hp66b6JEiLI6Uf/X7f0O1q9ch3AC/Lhacy2r3+VKw0eVMFInk/nIgvmhdLAgMBAAECgYAl3Sq0VwhBSWjTTznHAweC6bi0mAxzo61xdwM4aCazBAP6nAcF7CDnY3fYHEJ1fhXiBXG2li6jNU0coNZ7t99fje26ANl1eYSo0iZZtwNUCjObX8o0XUKJ/zANmEp+yX0QqWzKtYhWaO6Z+NlZTDslQV6Fn8rhspFD0nlgdxr8aQJBAO7EAnm9Q6PngjHCdfLV/X3m5OcIaTU2n54qFoPM1QvjYjI808uxXoVaQni64/ErH2KFFkYUyIp5mxk1//CWXQUCQQDD72zXJ6lbiblvR3i1OL+4+EA1oO76XCvhytxMmh2BsfeawUmO6865ni4v1UxvsmtgVcKRfwnbo2l51qs6QVQPAkBTHcy20Fnhjs/VvpoMpM2PrHb2rgjhy1gZWRFpZD6t2sPuNRqNh/sddOQ63uRGqfpM84Njdgyxl8+UISYtfEp5AkA9vXUzeujv0j8fZIsRt7caJwe8nmCPfXnKZWzzqmB/3L9kAWIXahCzBrgRFIpIbBVPvtZXmItXrW9wGAfOjIVbAkBP7QfgSW7lDesPKs1O4uvS0td21LP5nxsWoacAR+1cltftZPMw1aLBXOqIPuPLR0iCdIvvAHwrPKK2YnxQ7LiT";
+    private final String alipayPublicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDDI6d306Q8fIfCOaTXyiUeJHkrIvYISRcc73s3vF1ZT7XN8RNPwJxo8pWaJMmvyTn9N4HQ632qJBVHf8sxHi/fEsraprwCtzvzQETrNRwVxLO5jVmRGi60j8Ue1efIlzPXV9je9mkjzOmdssymZkh2QhUrCmZYI/FCEa3/cNMW0QIDAQAB";
 
     @RequestMapping(value = "/rfidInfo", method = RequestMethod.GET)
     public @ResponseBody
@@ -80,15 +93,14 @@ public class WechatRechargeController {
         Map<String, String> result = new HashMap<String, String>();
         result.put("result", "FAIL");
         Rfid rfiddb = rfidDao.findRfidByRfid(new ObjectId(oid), rfid);
-        if(rfiddb != null){
+        if (rfiddb != null) {
             result.put("result", "SUCCESS");
             result.put("nickName", rfiddb.getNickName() != null ? rfiddb.getNickName() : "");
-            result.put("amount", rfiddb.getCount()+"");
+            result.put("amount", rfiddb.getCount() + "");
         }
         return result;
     }
-    
-    
+
     @RequestMapping(value = "/recharge", method = RequestMethod.GET)
     public @ResponseBody
     Object registerWechatOper(@RequestParam(value = "rfid", required = true) String rfid,
@@ -111,14 +123,49 @@ public class WechatRechargeController {
             if (payStyle.equals("2")) {   //微信支付
                 trade.setPayStyle("2");
                 tradeDao.saveTrade(new ObjectId(oid), trade);
-                result = WechatPay(trade,request, response, price, new ObjectId(oid), rfid);
+                result = WechatPay(trade, request, response, price, new ObjectId(oid), rfid);
             } else if (payStyle.equals("3")) {  //支付宝
+                trade.setPayStyle("3");
+                tradeDao.saveTrade(new ObjectId(oid), trade);
+                result = alipayPay(trade, price, new ObjectId(oid), rfid);
             }
         }
         return result;
     }
 
-    public Map WechatPay(PayTrade trade,HttpServletRequest request, HttpServletResponse response, String price, ObjectId oid, String rfid) throws Exception {
+    public Map alipayPay(PayTrade trade, String price, ObjectId oid, String rfid) {
+        Map<String, String> result = new HashMap<String, String>();
+        result.put("result", "FAIL");
+
+        String notifyUrl = Constant.PAYMENT_HTTP + webUrl + "/wbapi/wechat/alipayBack/" + "/" + rfid + "/" + trade.getOrderNo();
+        StringBuilder body = new StringBuilder();
+        body.append("{\"out_trade_no\":\"" + trade.getOrderNo() + "\",");
+        body.append("\"total_amount\":\"" + Float.parseFloat(trade.getPrice() + "") / 100 + "\",");
+        body.append("\"terminal_id\":\"1000001\",");
+        body.append("\"subject\":\"充值\",");
+        body.append("\"goods_detail\":[{\"goods_name\":\"充值\",\"goods_category\":\"110000001\",\"price\":\"" + Float.parseFloat(trade.getPrice() + "") / 100 + "\"}]}");
+
+        AlipayClient alipayClient = alipayFactory.getAlipayClient(ALIPAY_GATWAY_URL_V2, appId, privateKey, Constant.SIGN_INPUT_CHARSET_GBK, alipayPublicKey);
+
+        AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();
+        request.setNotifyUrl(notifyUrl);
+        request.setBizContent(body.toString());
+
+        AlipayTradePrecreateResponse response = null;
+        try {
+            response = alipayClient.execute(request);
+            if (null != response && response.isSuccess()) {
+                result.put("result", "SUCCESS");
+                result.put("qr_code", response.getQrCode());
+                result.put("orderNo", trade.getOrderNo());
+            }
+        } catch (AlipayApiException ex) {
+            java.util.logging.Logger.getLogger(AlipayFactory.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+
+    public Map WechatPay(PayTrade trade, HttpServletRequest request, HttpServletResponse response, String price, ObjectId oid, String rfid) throws Exception {
         InetAddress addr = InetAddress.getLocalHost();
         String ip = addr.getHostAddress().toString();// 获得本机IP
         String nonce_str = getRandomString(7);
@@ -289,6 +336,44 @@ public class WechatRechargeController {
         return map;
     }
 
+    @RequestMapping(value = "/alipayBack/{rfid}/{orderNo}", method = RequestMethod.POST)
+    public void wechatPayBack(@PathVariable String rfid, @PathVariable String orderNo,
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        response.getWriter().println("success");
+        Map<String, String> params = getAliPayBackParameter(request.getParameterMap());
+
+        String trade_no = params.get("trade_no");
+        //交易创建时间
+        String gmt_create = params.get("gmt_create");
+        //交易付款时间
+        String gmt_payment = params.get("gmt_payment");
+        String trade_status = params.get("trade_status");
+
+        if (trade_status != null && trade_status.equals(Constant.ALIPAY_TRADE_PAY_STATUS_SUCCESS) && gmt_payment != null) {
+            PayTrade trade = tradeDao.getTradeByOrderNo(new ObjectId(oid), orderNo);
+            if (trade != null) {
+                trade.setPayStatus(0);
+                trade.setTransaction_id(trade_no);
+                trade.setUpdateTime(DateUtils.getUTC());
+                tradeDao.updateTrade(new ObjectId(oid), trade);
+
+                Rfid rfiddb = rfidDao.findRfidByRfid(new ObjectId(oid), rfid);
+                if (rfiddb != null && rfiddb.getOpenid() != null) {
+                    Member member = memberDao.findMemberByOpenId(new ObjectId(oid), rfiddb.getOpenid());
+                    if (member != null) {
+                        member.setMoney(member.getMoney() + (trade.getPrice() / 100));
+                        memberDao.updateMember(new ObjectId(oid), member);
+                    }
+                }
+                if (rfiddb != null) {
+                    rfiddb.setCount(rfiddb.getCount() + (trade.getPrice() / 100));
+                    rfidDao.updateRfidCount(new ObjectId(oid), rfiddb);
+                }
+            }
+        }
+    }
+
     @RequestMapping(value = "/payBack/{rfid}", method = RequestMethod.POST)
     public void wechatPayBack(@PathVariable String rfid,
             HttpServletRequest request,
@@ -312,22 +397,26 @@ public class WechatRechargeController {
             String total_fee = object.getJSONObject("xml").getString("total_fee");
             String[] arrachA = attach.split(",");
             String oid = arrachA[0];
-            
+
             PayTrade trade = tradeDao.getTradeByOrderNo(new ObjectId(oid), out_trade_no);
-            trade.setPayStatus(0);
-            tradeDao.updateTrade(new ObjectId(oid), trade);
-            
-            Rfid rfiddb = rfidDao.findRfidByRfid(new ObjectId(oid), rfid);
-            if (rfiddb != null && rfiddb.getOpenid() != null) {
-                Member member = memberDao.findMemberByOpenId(new ObjectId(oid), openid);
-                if (member != null) {
-                    member.setMoney(member.getMoney() + (Integer.parseInt(total_fee) / 100));
-                    memberDao.updateMember(new ObjectId(oid), member);
+            if (trade != null) {
+                trade.setPayStatus(0);
+                trade.setTransaction_id(transaction_id);
+                trade.setUpdateTime(DateUtils.getUTC());
+                tradeDao.updateTrade(new ObjectId(oid), trade);
+
+                Rfid rfiddb = rfidDao.findRfidByRfid(new ObjectId(oid), rfid);
+                if (rfiddb != null && rfiddb.getOpenid() != null) {
+                    Member member = memberDao.findMemberByOpenId(new ObjectId(oid), openid);
+                    if (member != null) {
+                        member.setMoney(member.getMoney() + (Integer.parseInt(total_fee) / 100));
+                        memberDao.updateMember(new ObjectId(oid), member);
+                    }
                 }
-            }
-            if (rfiddb != null) {
-                rfiddb.setCount(rfiddb.getCount() + (Integer.parseInt(total_fee) / 100));
-                rfidDao.updateRfidCount(new ObjectId(oid), rfiddb);
+                if (rfiddb != null) {
+                    rfiddb.setCount(rfiddb.getCount() + (Integer.parseInt(total_fee) / 100));
+                    rfidDao.updateRfidCount(new ObjectId(oid), rfiddb);
+                }
             }
         } else {
             System.out.println(result);
@@ -348,5 +437,20 @@ public class WechatRechargeController {
             sb.append(buffer.charAt(random.nextInt(range)));
         }
         return sb.toString();
+    }
+
+    public Map<String, String> getAliPayBackParameter(Map requestParams) {
+        Map<String, String> params = new HashMap<String, String>();
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext();) {
+            String name = (String) iter.next();
+            String[] values = (String[]) requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i]
+                        : valueStr + values[i] + ",";
+            }
+            params.put(name, valueStr);
+        }
+        return params;
     }
 }
