@@ -308,64 +308,22 @@ define(function(require) {
             });
 		 },
 		
-   		getTradeList: function(start,limit,payStyle, searchValue_assetId,searchValue_goodsName,searchValue_orderNo,searchValue_siteName, startTime,endTime,refundStatus,payStatus,userline,deliverStatus,machineType, callback, context) {
+   		getTradeList: function(start,limit,startTime,endTime, callback, context) {
    			var parameters = {};
-   			if(searchValue_assetId != null && searchValue_assetId != ""){
-   				parameters.assetId = searchValue_assetId;
-   			}
-   			if(searchValue_goodsName != null && searchValue_goodsName != ""){
-   				parameters.goodsName = searchValue_goodsName;
-   			}
-   			if(searchValue_orderNo != null && searchValue_orderNo != ""){
-   				parameters.orderNo = searchValue_orderNo;
-   			}
-   			if(searchValue_siteName != null && searchValue_siteName != ""){
-   				parameters.siteName = searchValue_siteName;
-   			}
-   			if(payStyle != null && payStyle.length >0){
-   				parameters.payStyle = payStyle;
-   			}
    			
    			if(startTime != null && startTime != "" && endTime != null && endTime != ""){
    				parameters.startTime = startTime;
    				parameters.endTime = endTime;
    			}
    			
-   			if(refundStatus != null){
-   				parameters.refundStatus = refundStatus;
-   			}
-   			
-   			if(userline != null && userline.length >0){
-   				parameters.lineId = userline;
-   			}
-   			
-   			if(payStatus != null && payStatus != "-1"){
-   				parameters.payStatus = payStatus;
-   			}
-   			
-   			if(machineType != null && machineType != "0"){
-   				parameters.machineType = machineType;
-   			}
-   			
-   			if(deliverStatus != null && deliverStatus != "1"){
-   				parameters.deliverStatus = deliverStatus;
-   			}
-   			
-   			var aucmas = 0;
-        	var currentHost=window.location.hostname;
-        	if(currentHost == "longyuniot.com"){//澳柯玛longyuniot.com
-        		aucmas = 1;
-        	}
-   			
    	    	cloud.Ajax.request({
-   	    		url : "api/order/list",
+   	    		url : "api/basic/trade/list",
 	   	        type : "post",
 	   	        parameters : {
                    cursor : start,
-                   limit:limit,
-                   aucmas:aucmas
+                   limit:limit
                 },
-	   	        data : parameters,
+	   	        //data : parameters,
 	   	       success : function(data) {
 	   	              callback.call(context || this, data);
 	   	        }

@@ -106,6 +106,8 @@ public class WechatRechargeController {
     Object registerWechatOper(@RequestParam(value = "rfid", required = true) String rfid,
             @RequestParam(value = "payStyle", required = true) String payStyle,
             @RequestParam(value = "price", required = true) String price,
+            @RequestParam(value = "cout", required = true) String count,
+            @RequestParam(value = "siteNum", required = false) String siteNum,
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         Map<String, String> result = new HashMap<String, String>();
@@ -123,21 +125,21 @@ public class WechatRechargeController {
             if (payStyle.equals("2")) {   //微信支付
                 trade.setPayStyle("2");
                 tradeDao.saveTrade(new ObjectId(oid), trade);
-                result = WechatPay(trade, request, response, price, new ObjectId(oid), rfid);
+                result = WechatPay(trade, request, response, price, new ObjectId(oid), rfid,count);
             } else if (payStyle.equals("3")) {  //支付宝
                 trade.setPayStyle("3");
                 tradeDao.saveTrade(new ObjectId(oid), trade);
-                result = alipayPay(trade, price, new ObjectId(oid), rfid);
+                result = alipayPay(trade, price, new ObjectId(oid), rfid,count);
             }
         }
         return result;
     }
 
-    public Map alipayPay(PayTrade trade, String price, ObjectId oid, String rfid) {
+    public Map alipayPay(PayTrade trade, String price, ObjectId oid, String rfid,String count) {
         Map<String, String> result = new HashMap<String, String>();
         result.put("result", "FAIL");
 
-        String notifyUrl = Constant.PAYMENT_HTTP + webUrl + "/wbapi/wechat/alipayBack/" + "/" + rfid + "/" + trade.getOrderNo();
+        String notifyUrl = Constant.PAYMENT_HTTP + webUrl + "/wbapi/wechat/alipayBack/" + "/" + rfid + "/" + trade.getOrderNo()+"/"+count;
         StringBuilder body = new StringBuilder();
         body.append("{\"out_trade_no\":\"" + trade.getOrderNo() + "\",");
         body.append("\"total_amount\":\"" + Float.parseFloat(trade.getPrice() + "") / 100 + "\",");
@@ -165,7 +167,7 @@ public class WechatRechargeController {
         return result;
     }
 
-    public Map WechatPay(PayTrade trade, HttpServletRequest request, HttpServletResponse response, String price, ObjectId oid, String rfid) throws Exception {
+    public Map WechatPay(PayTrade trade, HttpServletRequest request, HttpServletResponse response, String price, ObjectId oid, String rfid,String count) throws Exception {
         InetAddress addr = InetAddress.getLocalHost();
         String ip = addr.getHostAddress().toString();// 获得本机IP
         String nonce_str = getRandomString(7);
@@ -179,7 +181,7 @@ public class WechatRechargeController {
         reqHandler.setParameter("total_fee", price);
         reqHandler.setParameter("spbill_create_ip", ip);
         reqHandler.setParameter("attach", oid + "," + price);
-        String notify_url = Constant.PAYMENT_HTTP + webUrl + "/wbapi/wechat/payBack/" + rfid;
+        String notify_url = Constant.PAYMENT_HTTP + webUrl + "/wbapi/wechat/payBack/" + rfid+"/"+count;
         reqHandler.setParameter("notify_url", notify_url);
         reqHandler.setParameter("trade_type", Constant.WECHAT_TRADE_TYPE_NATIVE);
         reqHandler.setParameter("product_id", "10000001");
@@ -336,8 +338,8 @@ public class WechatRechargeController {
         return map;
     }
 
-    @RequestMapping(value = "/alipayBack/{rfid}/{orderNo}", method = RequestMethod.POST)
-    public void wechatPayBack(@PathVariable String rfid, @PathVariable String orderNo,
+    @RequestMapping(value = "/alipayBack/{rfid}/{orderNo}/{count}", method = RequestMethod.POST)
+    public void wechatPayBack(@PathVariable String rfid, @PathVariable String orderNo,@PathVariable String count,
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         response.getWriter().println("success");
@@ -362,12 +364,12 @@ public class WechatRechargeController {
                 if (rfiddb != null && rfiddb.getOpenid() != null) {
                     Member member = memberDao.findMemberByOpenId(new ObjectId(oid), rfiddb.getOpenid());
                     if (member != null) {
-                        member.setMoney(member.getMoney() + (trade.getPrice() / 100));
+                        member.setMoney(member.getMoney() + Integer.parseInt(count));
                         memberDao.updateMember(new ObjectId(oid), member);
                     }
                 }
                 if (rfiddb != null) {
-                    rfiddb.setCount(rfiddb.getCount() + (trade.getPrice() / 100));
+                    rfiddb.setCount(rfiddb.getCount() + Integer.parseInt(count));
                     rfidDao.updateRfidCount(new ObjectId(oid), rfiddb);
                 }
             }
@@ -375,7 +377,7 @@ public class WechatRechargeController {
     }
 
     @RequestMapping(value = "/payBack/{rfid}", method = RequestMethod.POST)
-    public void wechatPayBack(@PathVariable String rfid,
+    public void wechatPayBack(@PathVariable String rfid,@PathVariable String count,
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         java.io.BufferedReader bis = new java.io.BufferedReader(new java.io.InputStreamReader(request.getInputStream()));
@@ -409,12 +411,12 @@ public class WechatRechargeController {
                 if (rfiddb != null && rfiddb.getOpenid() != null) {
                     Member member = memberDao.findMemberByOpenId(new ObjectId(oid), openid);
                     if (member != null) {
-                        member.setMoney(member.getMoney() + (Integer.parseInt(total_fee) / 100));
+                        member.setMoney(member.getMoney() + Integer.parseInt(count));
                         memberDao.updateMember(new ObjectId(oid), member);
                     }
                 }
                 if (rfiddb != null) {
-                    rfiddb.setCount(rfiddb.getCount() + (Integer.parseInt(total_fee) / 100));
+                    rfiddb.setCount(rfiddb.getCount() + Integer.parseInt(count));
                     rfidDao.updateRfidCount(new ObjectId(oid), rfiddb);
                 }
             }

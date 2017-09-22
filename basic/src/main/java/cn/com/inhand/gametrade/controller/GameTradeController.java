@@ -7,7 +7,6 @@ package cn.com.inhand.gametrade.controller;
 import cn.com.inhand.common.dto.BasicResultDTO;
 import cn.com.inhand.common.dto.GameTradeBean;
 import cn.com.inhand.gametrade.dao.GameTradeDao;
-import cn.com.inhand.smart.formulacar.model.Area;
 import cn.com.inhand.smart.formulacar.model.TradeRecord;
 import java.util.List;
 import org.bson.types.ObjectId;

@@ -15,6 +15,7 @@ import cn.com.inhand.common.dto.OnlyResultDTO;
 import cn.com.inhand.common.exception.ErrorCode;
 import cn.com.inhand.common.exception.ErrorCodeException;
 import cn.com.inhand.common.model.DeviceKey;
+import cn.com.inhand.common.service.RedisFactory;
 import cn.com.inhand.common.util.DateUtils;
 import cn.com.inhand.smart.formulacar.model.Cards;
 import cn.com.inhand.smart.formulacar.model.Device;
@@ -24,6 +25,8 @@ import cn.com.inhand.smart.formulacar.model.Site;
 import cn.com.inhand.smart.formulacar.model.TradeRecord;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,11 +64,13 @@ public class DeviceTraddRecodeController {
     private SiteDAO siteDao;
     @Autowired
     private RfidDao rfidDao;
+    @Autowired
+    private RedisFactory redisFactory;
 
     @RequestMapping(value = "/game/record", method = RequestMethod.POST)
     public @ResponseBody
     Object syncAssetStatus(@RequestParam(value = "access_token", required = true) String access_token,
-            @Valid @RequestBody List<DeviceGameRecord> recordList) throws JsonProcessingException {
+            @Valid @RequestBody List<DeviceGameRecord> recordList) throws JsonProcessingException, ParseException {
 
         DeviceKey key = oauthHandler.verifyDeviceKey(access_token);//deviceKeyDAO.getDeviceKeyByKey(access_token);
         if (key == null) {
@@ -108,18 +113,31 @@ public class DeviceTraddRecodeController {
             tr.setUserName2("");
             tradeRecordDao.createTradeRecord(key.getOid(), tr);
 
-            Rfid rfid = rfidDao.findRfidByRfid(key.getOid(), tr.getCardId());
-            if (rfid != null && rfid.getCount() != null && rfid.getCount() >= site.getPrice()) {
-                rfid.setCount(rfid.getCount() - site.getPrice());
-                rfidDao.updateRfidCount(key.getOid(), rfid);
-            }
-            if (rfid != null && rfid.getOpenid() != null) {
-                Member member = memberDao.findMemberByOpenId(key.getOid(), rfid.getOpenid());
-                if (member != null && member.getMoney() != null && member.getMoney() >= site.getPrice()) {
-                    member.setMoney(member.getMoney() - site.getPrice());
-                    memberDao.updateMember(key.getOid(), member);
+
+            String rfidOnRedis = redisFactory.get(tr.getCardId() + ":RFIDINFO");
+            logger.info("Device Trade Record controller card Pay result is {}",rfidOnRedis);
+            if (rfidOnRedis != null && rfidOnRedis.equals(tr.getCardId())) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                String dateStr = format.format(System.currentTimeMillis()) + " 23:59:59";
+                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Long time1 = format1.parse(dateStr).getTime() / 1000;
+                int timeout = Integer.parseInt((time1 - DateUtils.getUTC()) + "");
+                redisFactory.setex(rfidOnRedis + ":RFIDINFO", timeout, "alreadyPay");
+
+                Rfid rfid = rfidDao.findRfidByRfid(key.getOid(), tr.getCardId());
+                if (rfid != null && rfid.getCount() != null && rfid.getCount() >= site.getPrice()) {
+                    rfid.setCount(rfid.getCount() - site.getPrice());
+                    rfidDao.updateRfidCount(key.getOid(), rfid);
+                }
+                if (rfid != null && rfid.getOpenid() != null) {
+                    Member member = memberDao.findMemberByOpenId(key.getOid(), rfid.getOpenid());
+                    if (member != null && member.getMoney() != null && member.getMoney() >= site.getPrice()) {
+                        member.setMoney(member.getMoney() - site.getPrice());
+                        memberDao.updateMember(key.getOid(), member);
+                    }
                 }
             }
+
         }
         OnlyResultDTO result = new OnlyResultDTO();
         result.setResult("OK");

@@ -45,28 +45,7 @@ define(function(require) {
                             this.trade_list = new tradeMg({
                                 "container": ".main_bd"
                             });
-                        }/*else if (id == "code_list") {//列表
-                            if (this.code_list) {
-                                this.code_list.destroy();
-                            }
-                            this.code_list = new codeMg({
-                                "container": ".main_bd"
-                            });
-                        }else if(id =="code_third_party"){//取货码(第三方)
-                        	 if (this.code_list) {
-                                 this.code_list.destroy();
-                             }
-                             this.code_third_list = new codeThirdMg({
-                                 "container": ".main_bd"
-                             });
-                        }else if(id="code_activity_party"){//取货码(活动)
-                        	 if (this.codeActivity_list) {
-                                 this.codeActivity_list.destroy();
-                             }
-                             this.codeActivity_list = new codeActivicyMg({
-                                 "container": ".main_bd"
-                             });
-                        }*/
+                        }
                     }
                 }
             });

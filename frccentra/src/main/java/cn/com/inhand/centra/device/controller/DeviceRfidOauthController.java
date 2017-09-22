@@ -73,9 +73,13 @@ public class DeviceRfidOauthController {
                     if (rfiddb != null) {
                         if (rfiddb.getOpenid() != null) {  //如果这个rfid绑定了微信账号，校验账号时在微信账号中校验
                             Member member = memberDao.findMemberByOpenId(key.getOid(), rfiddb.getOpenid());
-                            if (member.getMoney() >= site.getPrice()) {     //当总金额大于等于店面里面设备的价格是可以进行游戏
-                                member.setMoney(member.getMoney() - site.getPrice());
-                                memberDao.updateMember(key.getOid(), member);
+                            if (member.getMoney() > 0) {     //当总金额大于等于店面里面设备的价格是可以进行游戏  = site.getPrice()
+//                                member.setMoney(member.getMoney() - 1);   //site.getPrice()
+//                                memberDao.updateMember(key.getOid(), member);
+//                                
+//                                rfiddb.setCount(rfiddb.getCount()-1);
+//                                rfidDao.updateRfidCount(key.getOid(), rfiddb);
+                                
                                 content.put("result", "OK");
                                 content.put("rfid", rfid);
                                 
@@ -89,10 +93,11 @@ public class DeviceRfidOauthController {
                                 content.put("result", "FAIL");
                                 content.put("rfid", rfid);
                             }
-                        } else if (rfiddb.getOpenid() == null) {   //这个rfid没有绑定微信账号
-                            if(rfiddb.getCount() >= site.getPrice()){
-                                rfiddb.setCount(rfiddb.getCount() - site.getPrice());
-                                rfidDao.updateRfidCount(key.getOid(), rfiddb);
+                        } else if (rfiddb.getOpenid() == null) {   //这个rfid没有绑定微信账号  = site.getPrice()
+                            if(rfiddb.getCount() > 0){
+//                                rfiddb.setCount(rfiddb.getCount() - site.getPrice());
+//                                rfidDao.updateRfidCount(key.getOid(), rfiddb);
+                                
                                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                                 String dateStr = format.format(System.currentTimeMillis()) + " 23:59:59";
                                 SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -79,19 +79,11 @@ define(function(require) {
                 "<li style='display:none;margin-left: -5px;' id='endTime'>" +
                 "<input style='width:120px;' class='notice-bar-calendar-input datepicker' type='text' readonly='readonly' id='times_end' />&nbsp;&nbsp;" +
                 "</li>" +
-                "</ul>" +
-                "<ul style='clear:both;padding: 5px 0;'>" +
                 "<li>" +
                 "<input style='width:160px;' type='text' placeholder='" + locale.get('automatNo_Name') + "'  id='searchValue_assetId' />&nbsp;&nbsp;" +
                 "</li>" +
                 "<li style ='margin-left: -5px;'>" +
                 "<input style='width:125px;' type='text' placeholder='" + locale.get('car_id') + "'  id='searchValue_orderNo' />&nbsp;&nbsp;" +
-                "</li>" +
-                "<li style ='margin-left: -5px;'>" +
-                "<select  id='userline'  multiple='multiple'  style='width:180px;height: 28px;'></select>&nbsp;&nbsp;" + //线路
-                "</li>" +
-                "<li style ='margin-left: -5px;'>" +
-                "<input style='width:126px;' type='text' placeholder='" + locale.get('automat_name_of_commodity') + "'  id='searchValue_goodsName' />&nbsp;&nbsp;" +
                 "</li>" +
                 "<li style ='margin-left: -5px; margin-right: 5px;'>" +
                 "<input style='width:126px;' type='text' placeholder='" + locale.get('site_name') + "'  id='searchValue_siteName' />&nbsp;&nbsp;" +
@@ -272,44 +264,6 @@ define(function(require) {
                 container: $("#buttonDiv"),
                 events: {
                     click: function() {
-                        var searchValue_assetId = $("#searchValue_assetId").val();
-                        var searchValue_siteName = $("#searchValue_siteName").val();
-                        var searchValue_goodsName = $("#searchValue_goodsName").val();
-                        var searchValue_orderNo = $("#searchValue_orderNo").val();
-                        var deliverStatus = $("#deliverStatus").val(); //出货状态
-                        if (deliverStatus) {
-
-                        } else {
-                            deliverStatus = 1;
-                        }
-
-                        var userline = $("#userline").multiselect("getChecked").map(function() { //线路
-                            return this.value;
-                        }).get();
-
-                        var payStyle = $("#payStyle").multiselect("getChecked").map(function() { //支付方式
-                            return this.value;
-                        }).get();
-
-                        var selectedId = $("#reportType").find("option:selected").val();
-                        if (selectedId == undefined || selectedId == 0) {
-                            $("#times_date").val("");
-                            $("#times_month").val("");
-                            $("#times_start").val("");
-                            $("#times_end").val("");
-                        }
-
-                        var payStatus = $("#payStatus").val(); //支付状态
-                        if (payStatus) {
-                            payStatus = payStatus - 1;
-                        } else {
-                            payStatus = 1;
-                        }
-
-                        var refundStatus = $("#refundStatus").val();
-
-                        var machineType = $("#machineType").val();
-
 
                         var start = '';
                         var end = '';
@@ -348,30 +302,7 @@ define(function(require) {
                             return;
                         }
 
-                        var userId = cloud.storage.sessionStorage("accountInfo").split(",")[1].split(":")[1];
-                        var roleType = permission.getInfo().roleType;
-                        Service.getLinesByUserId(userId, function(linedata) {
-                            var lineIds = [];
-                            if (linedata && linedata.result && linedata.result.length > 0) {
-                                for (var i = 0; i < linedata.result.length; i++) {
-                                    lineIds.push(linedata.result[i]._id);
-                                }
-                            }
-                            if (roleType == 51) {
-                                lineIds = [];
-                            }
-                            if (roleType != 51 && lineIds.length == 0) {
-                                lineIds = ["000000000000000000000000"];
-                            }
-
-                            if (userline.length == 0) {
-                                userline = lineIds;
-                            }
-                            self.fire("query", payStyle, searchValue_assetId, searchValue_goodsName, searchValue_orderNo, searchValue_siteName, start, end, refundStatus, payStatus, userline, deliverStatus, machineType);
-
-
-                        });
-
+                        self.fire("query", start, end);                        
                     }
                 }
             });
@@ -486,13 +417,15 @@ define(function(require) {
                 }
             });
             $("#" + addBtn.id).addClass("readClass");
-            if (permission.app("transaction_detail").read) {
-                if (queryBtn) queryBtn.show();
-                if (addBtn) addBtn.show();
-            } else {
-                if (queryBtn) queryBtn.hide();
-                if (addBtn) addBtn.hide();
-            }
+            
+            
+//            if (permission.app("transaction_detail").read) {
+//                if (queryBtn) queryBtn.show();
+//                if (addBtn) addBtn.show();
+//            } else {
+//                if (queryBtn) queryBtn.hide();
+//                if (addBtn) addBtn.hide();
+//            }
             //            $("#search-bar a").css({
             //                margin: "auto 10px auto 10px"
             //            });

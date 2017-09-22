@@ -18,7 +18,7 @@ public class Rfid {
     private ObjectId id;	         //唯一标识
     private ObjectId oid;	         //机构ID
     private String rfid;
-    private Integer count;    //点数， 默认导入和添加时点数
+    private Integer count;    //次数， 默认导入和添加时点数
     private String openid;    //微信绑定用户
     private String nickName;  //微信用户昵称
     private Long createTime;
