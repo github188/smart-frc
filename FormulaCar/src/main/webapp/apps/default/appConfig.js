@@ -256,6 +256,27 @@ define(function(require) {
 		}]
 	};
 
+	//增值服务
+	var services={
+			name : "services",
+			order :1,
+			id:"smartvm-services",
+			subNavs:[{
+				name:"services_manage",
+				order : 0,
+				defaultOpen : false,
+				defaultShow : true,
+				subModule:[//二级菜单
+		           {
+						name:"special_offer",//优惠打折
+						defaultShow : true,
+						order : 1,
+						operation:["r","w"],
+						url : "./addValueService_manage/specialoffer/specialofferMain.js"
+					}]
+			}]  
+	};
+	
 	//系统
 	var system = {
 		name: "system_vm",
@@ -300,7 +321,7 @@ define(function(require) {
 		}]
 	};
 	var appConfig = {
-		modules: [monitor, storefront, the_stage, statistics, alarm, system]
+		modules: [monitor, storefront, the_stage, statistics, alarm, services,system]
 	}
 
 	return appConfig;

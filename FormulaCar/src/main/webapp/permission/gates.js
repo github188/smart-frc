@@ -4,36 +4,23 @@ define(function(require) {
 		monitor: {
 			apGis: [1010]
 		},
-		storefront: {
-			point_manage: [1200]  //区域管理
+		storefront: {   //店面管理
+			point_manage: [1200]  
 		},
-		the_stage: {
+		the_stage: {    //赛台
 			smartVm_manage: [1300]
 		},
-		product: {
-			product_manage: [1400]
-		},
-		statistics: {
+		statistics: {   //统计
 			statistics_manage: [1500]
 		},
-		replenish: {
-			replenish_manage: [1600]
-		},
-		reconciliation: {
-			reconciliation_manage: [1700]
-		},
-		alarm: {
+		alarm: {    //告警
 			alarm_manage: [1800]
 		},
-		services: {
-			services_manage: [1900]
+		services : {
+			services_manage : [ 1900 ]
 		},
-
-		system_vm: {
+		system_vm: { //系统管理
 			system_manage: [2000]
-		},
-		wechatApp: {
-			wechatapp_manage: [2100]
 		}
 
 	};

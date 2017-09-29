@@ -38,8 +38,12 @@ public class GameTradeController {
             @RequestHeader(value = "X-API-USERNAME", required = false) String xUsername,
             @RequestHeader(value = "X-API-IP", required = false) String xIp,
             @RequestHeader(value = "X-API-UID", required = false) ObjectId xUId,
-            @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls) {
+            @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
+            @RequestParam("startTime") Long startTime,
+            @RequestParam("endTime") Long endTime) {
         GameTradeBean bean = new GameTradeBean();
+        bean.setStartTime(startTime);
+        bean.setEndTime(endTime);
         long total = gameTradeDao.getCount(xOId, bean);
         List<TradeRecord> areaList = gameTradeDao.findTradeRecordByParam(xOId, bean, cursor, limit);
         return new BasicResultDTO(total, cursor, limit, areaList);

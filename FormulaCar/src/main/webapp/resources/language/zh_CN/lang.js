@@ -2830,7 +2830,7 @@ var lang = {
         local_file: "本地文件",
         remote_file: "远程文件",
         file_tip: "请输入文件全称",
-        automatNo_Name: "赛台编号/名称",
+        automatNo_Name: "赛台编号",
         site_name: "店面名称",
         smart_vending_status_list: "已认证赛台状态列表",
         upper_lower_limit_of_refrigeration_temperature: "制冷温度(上/下)",

@@ -72,7 +72,13 @@ define(function(require) {
             "title": "比赛时间",
             "dataIndex": "time",
             "cls": null,
-            "width": "100px"
+            "width": "50px"
+        }, {
+            "title": "创建时间",
+            "dataIndex": "createTime",
+            "cls": null,
+            "width": "100px",
+            render: dateConvertor
         }, {
             "title": "",
             "dataIndex": "id",
@@ -80,6 +86,14 @@ define(function(require) {
         }
     ];
 
+    function dateConvertor(value, type) {
+        if (type === "display") {
+            return cloud.util.dateFormat(new Date(value), "yyyy-MM-dd hh:mm:ss");
+        } else {
+            return value;
+        }
+    }
+    
     function priceConvertor(value, type) {
         if (value == null) {
             return value
@@ -219,7 +233,7 @@ define(function(require) {
                         this.listTable.unselectAllRows();
                         var rows = this.listTable.getClickedRow();
                         this.listTable.selectRows(rows);
-                        self.fire("click", data._id);
+//                        self.fire("click", data._id);
                     },
                     onRowRendered: function(tr, data, index) {
                         var self = this;
@@ -270,7 +284,7 @@ define(function(require) {
             
             cloud.util.mask("#trade_list_table");
 
-            Service.getTradeList(0, pageDisplay, payStyle, searchValue_assetId, searchValue_goodsName, searchValue_orderNo, searchValue_siteName, start, end, refundStatus, payStatus, userline, deliverStatus, machineType, function(data) {
+            Service.getTradeList(0, pageDisplay, start, end, function(data) {
                 var total = data.total;
                 this.totalCount = data.result.length;
                 data.total = total;

@@ -66,54 +66,59 @@ public class DeviceRfidOauthController {
         String rfidStr = redisFactory.get(rfid + ":RFIDINFO");
         if (rfidStr == null) {
             Device device = siteDao.getDeviceByAssetId(key.getOid(), assetId);
-            if (device != null && device.getSiteId() != null && !device.getSiteId().toString().equals("")) {
-                Site site = siteDao.getSiteById(key.getOid(), device.getSiteId());
-                if (site != null) {
-                    Rfid rfiddb = rfidDao.findRfidByRfid(key.getOid(), rfid);
-                    if (rfiddb != null) {
-                        if (rfiddb.getOpenid() != null) {  //如果这个rfid绑定了微信账号，校验账号时在微信账号中校验
-                            Member member = memberDao.findMemberByOpenId(key.getOid(), rfiddb.getOpenid());
-                            if (member.getMoney() > 0) {     //当总金额大于等于店面里面设备的价格是可以进行游戏  = site.getPrice()
-//                                member.setMoney(member.getMoney() - 1);   //site.getPrice()
-//                                memberDao.updateMember(key.getOid(), member);
-//                                
-//                                rfiddb.setCount(rfiddb.getCount()-1);
-//                                rfidDao.updateRfidCount(key.getOid(), rfiddb);
-                                
-                                content.put("result", "OK");
-                                content.put("rfid", rfid);
-                                
-                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                                String dateStr = format.format(System.currentTimeMillis()) + " 23:59:59";
-                                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                Long time1 = format1.parse(dateStr).getTime()/1000;
-                                int timeout = Integer.parseInt((time1 - DateUtils.getUTC())+"");
-                                redisFactory.setex(rfid+":RFIDINFO", timeout, rfid);
-                            } else {
-                                content.put("result", "FAIL");
-                                content.put("rfid", rfid);
-                            }
-                        } else if (rfiddb.getOpenid() == null) {   //这个rfid没有绑定微信账号  = site.getPrice()
-                            if(rfiddb.getCount() > 0){
-//                                rfiddb.setCount(rfiddb.getCount() - site.getPrice());
-//                                rfidDao.updateRfidCount(key.getOid(), rfiddb);
-                                
-                                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                                String dateStr = format.format(System.currentTimeMillis()) + " 23:59:59";
-                                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                                Long time1 = format1.parse(dateStr).getTime()/1000;
-                                int timeout = Integer.parseInt((time1 - DateUtils.getUTC())+"");
-                                redisFactory.setex(rfid+":RFIDINFO", timeout, rfid);
-                            }
+            if (device != null) {
+                Rfid rfiddb = rfidDao.findRfidByRfid(key.getOid(), rfid);
+                if (rfiddb != null) {
+                    if (rfiddb.getOpenid() != null) {  //如果这个rfid绑定了微信账号，校验账号时在微信账号中校验
+                        Member member = memberDao.findMemberByOpenId(key.getOid(), rfiddb.getOpenid());
+                        if (member.getMoney() > 0) {     //当总金额大于等于店面里面设备的价格是可以进行游戏  = site.getPrice()
+                            content.put("result", "OK");
+                            content.put("rfid", rfid);
+                            content.put("nickName", rfiddb.getNickName() != null ? rfiddb.getNickName() : "");
+                            content.put("name", rfiddb.getName() != null ? rfiddb.getName() : "");
+
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String dateStr = format.format(System.currentTimeMillis()) + " 23:59:59";
+                            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            Long time1 = format1.parse(dateStr).getTime() / 1000;
+                            int timeout = Integer.parseInt((time1 - DateUtils.getUTC()) + "");
+                            redisFactory.setex(rfid + ":RFIDINFO", timeout, rfid);
+                        } else {
+                            content.put("result", "FAIL");
+                            content.put("msg", "次数已用完");
+                            content.put("nickName", rfiddb.getNickName() != null ? rfiddb.getNickName() : "");
+                            content.put("name", rfiddb.getName() != null ? rfiddb.getName() : "");
+                            content.put("rfid", rfid);
                         }
-                    } else {
-                        //rfid不存在
-                        content.put("result", "FAIL");
-                        content.put("rfid", rfid);
+                    } else if (rfiddb.getOpenid() == null) {   //这个rfid没有绑定微信账号  = site.getPrice()
+                        if (rfiddb.getCount() > 0) {
+                            content.put("result", "OK");
+                            content.put("rfid", rfid);
+                            content.put("nickName", rfiddb.getNickName() != null ? rfiddb.getNickName() : "");
+                            content.put("name", rfiddb.getName() != null ? rfiddb.getName() : "");
+
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            String dateStr = format.format(System.currentTimeMillis()) + " 23:59:59";
+                            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            Long time1 = format1.parse(dateStr).getTime() / 1000;
+                            int timeout = Integer.parseInt((time1 - DateUtils.getUTC()) + "");
+                            redisFactory.setex(rfid + ":RFIDINFO", timeout, rfid);
+                        }else{
+                            content.put("result", "FAIL");
+                            content.put("msg", "次数已用完");
+                            content.put("nickName", rfiddb.getNickName() != null ? rfiddb.getNickName() : "");
+                            content.put("name", rfiddb.getName() != null ? rfiddb.getName() : "");
+                            content.put("rfid", rfid);
+                        }
                     }
+                } else {
+                    //rfid不存在
+                    content.put("result", "FAIL");
+                    content.put("msg", "芯片不存在");
+                    content.put("rfid", rfid);
                 }
             }
-        }else{
+        } else {
             content.put("result", "OK");
             content.put("rfid", rfid);
         }

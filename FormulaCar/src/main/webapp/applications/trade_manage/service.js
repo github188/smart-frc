@@ -316,13 +316,13 @@ define(function(require) {
    				parameters.endTime = endTime;
    			}
    			
+   			parameters.cursor = start;
+   			parameters.limit = limit;
+   			
    	    	cloud.Ajax.request({
    	    		url : "api/basic/trade/list",
-	   	        type : "post",
-	   	        parameters : {
-                   cursor : start,
-                   limit:limit
-                },
+	   	        type : "get",
+	   	        parameters : parameters,
 	   	        //data : parameters,
 	   	       success : function(data) {
 	   	              callback.call(context || this, data);

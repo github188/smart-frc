@@ -17,6 +17,7 @@ public class Rfid {
     @JsonProperty("_id")
     private ObjectId id;	         //唯一标识
     private ObjectId oid;	         //机构ID
+    private String name;     //车的名字
     private String rfid;
     private Integer count;    //次数， 默认导入和添加时点数
     private String openid;    //微信绑定用户
@@ -86,6 +87,14 @@ public class Rfid {
 
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
 }

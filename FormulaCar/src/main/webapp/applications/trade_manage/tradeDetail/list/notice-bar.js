@@ -19,30 +19,33 @@ define(function(require) {
 
             var userId = cloud.storage.sessionStorage("accountInfo").split(",")[1].split(":")[1];
             var roleType = permission.getInfo().roleType;
-            Service.getLinesByUserId(userId, function(line) {
-                if (line && line.result) {
-                    var lineData = line;
-                    Service.getGoodsTypeInfo(function(data) {
-                        self._renderForm(lineData, data);
-                    });
-                } else {
-                    var searchData = {
-
-                    };
-
-                    if (roleType != 51) {
-                        searchData.lineId = ["000000000000000000000000"];
-                    }
-                    Service.getAllLine(searchData, -1, 0, function(datas) {
-                        var lineData = datas;
-                        Service.getGoodsTypeInfo(function(data) {
-                            self._renderForm(lineData, data);
-                        });
-                    });
-                }
-            });
+            
+            self._renderForm();
+            
+//            Service.getLinesByUserId(userId, function(line) {
+//                if (line && line.result) {
+//                    var lineData = line;
+//                    Service.getGoodsTypeInfo(function(data) {
+//                        self._renderForm(lineData, data);
+//                    });
+//                } else {
+//                    var searchData = {
+//
+//                    };
+//
+//                    if (roleType != 51) {
+//                        searchData.lineId = ["000000000000000000000000"];
+//                    }
+//                    Service.getAllLine(searchData, -1, 0, function(datas) {
+//                        var lineData = datas;
+//                        Service.getGoodsTypeInfo(function(data) {
+//                            self._renderForm(lineData, data);
+//                        });
+//                    });
+//                }
+//            });
         },
-        _renderForm: function(lineData, goodTypeData) {
+        _renderForm: function() {   //lineData, goodTypeData
             var self = this;
             var htmlmo;
             if (!(localStorage.getItem("language") == "en")) {
@@ -92,48 +95,7 @@ define(function(require) {
                 "</ul>" +
                 "</div>");
             this.element.append($htmls);
-            require(["cloud/lib/plugin/jquery.multiselect"], function() {
-                $("#payStyle").multiselect({
-                    header: true,
-                    checkAllText: locale.get({
-                        lang: "check_all"
-                    }),
-                    uncheckAllText: locale.get({
-                        lang: "uncheck_all"
-                    }),
-                    noneSelectedText: locale.get({
-                        lang: "all_payment_types"
-                    }),
-                    selectedText: "# " + locale.get({
-                        lang: "is_selected"
-                    }),
-                    minWidth: 180,
-                    height: 120
-                });
-                $("#userline").multiselect({
-                    header: true,
-                    checkAllText: locale.get({
-                        lang: "check_all"
-                    }),
-                    uncheckAllText: locale.get({
-                        lang: "uncheck_all"
-                    }),
-                    noneSelectedText: locale.get({
-                        lang: "automat_line"
-                    }),
-                    selectedText: "# " + locale.get({
-                        lang: "is_selected"
-                    }),
-                    minWidth: 180,
-                    height: 120
-                });
-            });
-            if (lineData && lineData.result.length > 0) {
-                for (var i = 0; i < lineData.result.length; i++) {
-                    $("#userline").append("<option value='" + lineData.result[i]._id + "'>" + lineData.result[i].name + "</option>");
-                }
-            }
-            //            $("#dateTime").css("display", "none");
+            
             $("#dateMonth").css("display", "none");
             $("#startTime").css("display", "none");
             $("#endTime").css("display", "none");
@@ -269,7 +231,9 @@ define(function(require) {
                         var end = '';
                         var byDate = $("#times_date").val(); //日
                         var byMonth = $("#times_month").val(); //月
-
+                        
+                        var selectedId = $("#reportType").find("option:selected").val();
+                        
                         var startTime = $("#times_start").val(); //开始时间
                         var endTime = $("#times_end").val(); //结束时间
                         if (selectedId == "1") {
@@ -393,26 +357,6 @@ define(function(require) {
                         }
                         var userId = cloud.storage.sessionStorage("accountInfo").split(",")[1].split(":")[1];
                         var roleType = permission.getInfo().roleType;
-                        Service.getLinesByUserId(userId, function(linedata) {
-                            var lineIds = [];
-                            if (linedata && linedata.result && linedata.result.length > 0) {
-                                for (var i = 0; i < linedata.result.length; i++) {
-                                    lineIds.push(linedata.result[i]._id);
-                                }
-                            }
-                            if (roleType == 51) {
-                                lineIds = [];
-                            }
-                            if (roleType != 51 && lineIds.length == 0) {
-                                lineIds = ["000000000000000000000000"];
-                            }
-
-                            if (userline.length == 0) {
-                                userline = lineIds;
-                            }
-
-                            self.fire("exports", payStyle, searchValue_assetId, searchValue_goodsName, searchValue_orderNo, searchValue_siteName, start, end, goodsType, payStatus, userline, deliverStatus, machineType, refundStatus);
-                        });
                     }
                 }
             });

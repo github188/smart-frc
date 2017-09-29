@@ -41,7 +41,7 @@ define(function(require) {
         renderContent: function() {
             var self = this;
             var listFlag = true;
-            var alarm_Array = ["smart_vending_list", "unsmart_vending_list"];
+            var alarm_Array = ["smart_vending_list"];
             if (this.statusMg) {
                 this.statusMg.destroy();
             }
@@ -75,20 +75,20 @@ define(function(require) {
                                 "lineId": lineIds
                             };
                             $("#topTab").css("width", $(".wrap").width());
-                            Service.getCount(datas, function(data) {
-                                var insertHtml = "<div id='shu' style='float:right;margin-right:10px;'>" +
-                                    "<div style='float: left; margin-top: 5px;'><img id='sum' src='./operation_manage/vendingMachine/images/count.png' style='height:20px'/></div>" +
-                                    "<div style='float: left; margin-left: 5px;'><label style='color:#03825c;'>" + locale.get('total') + "</label><label style='color:#03825c;' id='count'>" + data.count + "</label></div>" +
-                                    "<div style='float: left; margin-top: 5px; margin-left: 10px;'><img id='sum' src='./operation_manage/vendingMachine/images/online.png' style='height:20px'/></div>" +
-                                    "<div style='float: left;margin-left: 5px;'><label style='color:#03825c;'>" + locale.get('online') + "：</label><label style='color:#03825c;'>" + data.countOnline + "</label></div>" +
-                                    "<div style='float: left; margin-top: 5px;margin-left: 10px;'><img id='sum' src='./operation_manage/vendingMachine/images/offline.png' style='height:20px'/></div>" +
-                                    "<div style='float: left;margin-left: 5px;'><label style='color:grey;'>" + locale.get('offline') + "：</label><label style='color:grey;'>" + data.countOffline + "</label></div>" +
-                                    "<div style='float: left; margin-top: 5px;margin-left: 10px;'><img id='sum' src='./operation_manage/vendingMachine/images/unrz.png' style='height:20px'/></div>" +
-                                    "<div style='float: left;margin-left: 5px;'><label style='color:#03825c;'>未认证：</label><label style='color:#03825c;'>" + data.onlineType + "</label></div>" +
-                                    "</div>";
-                                $("#all").append(insertHtml);
-                                //self.magic_number(data.count,"count");
-                            });
+//                            Service.getCount(datas, function(data) {
+//                                var insertHtml = "<div id='shu' style='float:right;margin-right:10px;'>" +
+//                                    "<div style='float: left; margin-top: 5px;'><img id='sum' src='./operation_manage/vendingMachine/images/count.png' style='height:20px'/></div>" +
+//                                    "<div style='float: left; margin-left: 5px;'><label style='color:#03825c;'>" + locale.get('total') + "</label><label style='color:#03825c;' id='count'>" + data.count + "</label></div>" +
+//                                    "<div style='float: left; margin-top: 5px; margin-left: 10px;'><img id='sum' src='./operation_manage/vendingMachine/images/online.png' style='height:20px'/></div>" +
+//                                    "<div style='float: left;margin-left: 5px;'><label style='color:#03825c;'>" + locale.get('online') + "：</label><label style='color:#03825c;'>" + data.countOnline + "</label></div>" +
+//                                    "<div style='float: left; margin-top: 5px;margin-left: 10px;'><img id='sum' src='./operation_manage/vendingMachine/images/offline.png' style='height:20px'/></div>" +
+//                                    "<div style='float: left;margin-left: 5px;'><label style='color:grey;'>" + locale.get('offline') + "：</label><label style='color:grey;'>" + data.countOffline + "</label></div>" +
+//                                    "<div style='float: left; margin-top: 5px;margin-left: 10px;'><img id='sum' src='./operation_manage/vendingMachine/images/unrz.png' style='height:20px'/></div>" +
+//                                    "<div style='float: left;margin-left: 5px;'><label style='color:#03825c;'>未认证：</label><label style='color:#03825c;'>" + data.onlineType + "</label></div>" +
+//                                    "</div>";
+//                                $("#all").append(insertHtml);
+//                                //self.magic_number(data.count,"count");
+//                            });
 
                         })
 
@@ -106,14 +106,6 @@ define(function(require) {
                                 });
                             }
 
-                        } else if (id == "unsmart_vending_list") {
-                            if (this.automat_lists) {
-                                this.automat_lists.destroy();
-                            }
-                            this.automat_lists = new automat_lists({
-                                "container": ".main_bd",
-                                onlineType: 1 //未认证售货机列表
-                            });
                         }
                     }
                 }

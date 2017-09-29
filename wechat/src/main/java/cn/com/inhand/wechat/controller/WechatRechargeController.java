@@ -106,7 +106,7 @@ public class WechatRechargeController {
     Object registerWechatOper(@RequestParam(value = "rfid", required = true) String rfid,
             @RequestParam(value = "payStyle", required = true) String payStyle,
             @RequestParam(value = "price", required = true) String price,
-            @RequestParam(value = "cout", required = true) String count,
+            @RequestParam(value = "count", required = true) String count,
             @RequestParam(value = "siteNum", required = false) String siteNum,
             HttpServletRequest request,
             HttpServletResponse response) throws Exception {

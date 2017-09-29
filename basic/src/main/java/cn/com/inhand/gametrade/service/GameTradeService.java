@@ -27,6 +27,10 @@ public class GameTradeService extends MongoService implements GameTradeDao{
     public Long getCount(ObjectId oid, GameTradeBean queryBean) {
         MongoTemplate template = factory.getMongoTemplateByOId(oid);
         Query query = new Query();
+        if(queryBean.getStartTime() != null && queryBean.getEndTime() != null){
+            query.addCriteria(Criteria.where("createTime").lte(queryBean.getStartTime()));
+            query.addCriteria(Criteria.where("createTime").gte(queryBean.getEndTime()));
+        }
         return template.count(query, Collections.SMART_FM_TRADE);
     }
 
@@ -36,6 +40,10 @@ public class GameTradeService extends MongoService implements GameTradeDao{
         if (limit != -1) {
             query.limit(limit);
             query.skip(skip);
+        }
+        if(queryBean.getStartTime() != null && queryBean.getEndTime() != null){
+            query.addCriteria(Criteria.where("createTime").lte(queryBean.getStartTime()));
+            query.addCriteria(Criteria.where("createTime").gte(queryBean.getEndTime()));
         }
         return mongoTemplate.find(query, TradeRecord.class, Collections.SMART_FM_TRADE);
     }
