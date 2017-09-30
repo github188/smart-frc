@@ -73,11 +73,11 @@ define(function(require) {
         renderSelect:function(){
 
             require(["cloud/lib/plugin/jquery.multiselect"], function() {
-                $("#payStyle").multiselect({
+                $("#money").multiselect({
                     header: true,
                     checkAllText: locale.get({lang: "check_all"}),
                     uncheckAllText: locale.get({lang: "uncheck_all"}),
-                    noneSelectedText: locale.get({lang: "all_payment_types"}),
+                    noneSelectedText: "优惠金额",
                     selectedText: "# " + locale.get({lang: "is_selected"}),
                     minWidth: 180,
                     height: 120
@@ -198,142 +198,76 @@ define(function(require) {
 				});
         	});
         	
-        	var url = "http://"+window.location.hostname + "/app/wechat_handshake";
-        	$("#noticeUrl").text(url);
-        	$("#noticeToken").text("C2B8A36D2E15F66JC1E63D36H8FAD1SC");
         	$("#specialtype").bind("change",function(){
-        		
-        		if($(this).val() == 3){//立减
+        		if($(this).val() == 2){//立减
         			$("#amount").show();
-        			$("#specialofferPayStyle").show();
-        			
         			$("#scale").hide();
-        			$("#appid").hide();
-        			$("#appsecret").hide();
-        			$("#notice").hide();
-        			$("#notice1").hide();
-        			$("#notice2").hide();
-        			$("#noticeDiv").hide();
-        			$("#getProduct").hide();
-        			
-        		}else if($(this).val() == 4){//折扣
+        		}else if($(this).val() == 1){//折扣
         			$("#scale").show();
-        			$("#specialofferPayStyle").show();
-        			
         			$("#amount").hide();
-        			$("#appid").hide();
-        			$("#appsecret").hide();
-        			$("#notice").hide();
-        			$("#notice1").hide();
-        			$("#notice2").hide();
-        			$("#noticeDiv").hide();
-        			$("#getProduct").hide();
-        		}else if($(this).val() == 1){//关注有奖
-        			$("#appid").show();
-        			$("#appsecret").show();
-        			$("#notice").show();
-        			$("#notice1").show();
-        			$("#notice2").show();
-        			$("#noticeDiv").show();
-        			$("#getProduct").show();
-        			
-        			$("#amount").hide();
-        			$("#specialofferPayStyle").hide();
-        			$("#scale").hide();
-        		}else{
-        			$("#amount").hide();
-        			$("#specialofferPayStyle").show();
-        			$("#scale").hide();
-        			$("#appid").hide();
-        			$("#appsecret").hide();
-        			$("#notice").hide();
-        			$("#notice1").hide();
-        			$("#notice2").hide();
-        			$("#noticeDiv").hide();
-        			$("#getProduct").hide();
         		}
-        		
-        		
         	});
         	
         	$("#nextBase").unbind("click").bind("click", function() {
- //       		self.deviceLists = [];
         		var specialname = $("#specialname").val();
         		var specialtype = $("#specialtype").val();
         		
         		var amount = $("#special_amount").val();
         		var scale = $("#special_scale").val();
-        		//var consume = $("#special_threshold").val();
-        		
-        		var appid = $("#wechat_appid").val();
-        		var appsecret = $("#wechat_appsecret").val();
         		
         		var startTime = (new Date($("#startTime").val() + " 00:00:00")).getTime() / 1000;
         		var endTime = (new Date($("#endTime").val() + " 23:59:59")).getTime() / 1000;
         		
-        	    var pickupMethod = $("#pickupMethod").find("option:selected").val();
-        		
-        		var payStyle = $("#payStyle").multiselect("getChecked").map(function() {//支付方式
+        		var money = $("#money").multiselect("getChecked").map(function() {//支付方式
                     return this.value;
                 }).get();
+        		
+        		if(money.length == 0){
+        			dialog.render({text:"请选择优惠金额"});
+           			return;
+        		}
         		
         		if(specialname==null||specialname.replace(/(^\s*)|(\s*$)/g,"")==""){
            			dialog.render({lang:"please_enter_special_name"});
            			return;
            		}
                 
-        		if(specialtype == 3 && (amount == null || amount.replace(/(^\s*)|(\s*$)/g,"")=="")){
+        		if(specialtype == 2 && (amount == null || amount.replace(/(^\s*)|(\s*$)/g,"")=="")){
         			dialog.render({lang:"please_enter_special_amount"});
            			return;
         		}
-        		if(specialtype == 4 && (scale == null || scale.replace(/(^\s*)|(\s*$)/g,"")=="")){
+        		if(specialtype == 1 && (scale == null || scale.replace(/(^\s*)|(\s*$)/g,"")=="")){
         			dialog.render({lang:"please_enter_special_rate"});
            			return;
         		}
         		
-/*        		if((specialtype == 3 || specialtype == 4) && (consume == null || consume.replace(/(^\s*)|(\s*$)/g,"")=="")){
-        			dialog.render({lang:"please_enter_special_consume"});
-           			return;
-        		}*/
-        		
-        		if((specialtype == 1) && (appid == null || appid.replace(/(^\s*)|(\s*$)/g,"")=="")){
-        			dialog.render({lang:"please_enter_appid"});
-           			return;
-        		}
-        		if((specialtype == 1) && (appsecret == null || appsecret.replace(/(^\s*)|(\s*$)/g,"")=="")){
-        			dialog.render({lang:"please_enter_appSecret"});
-           			return;
-        		}
         		var bool=/^[0-9]{0}([0-9]|[.])+$/;
-        		if(specialtype==3&&(!bool.test(amount))){
+        		if(specialtype==2&&(!bool.test(amount))){
         			dialog.render({lang:"amount_must_be_number"});
         			return;
         		}
         		var bool1=/^([1-9](.[0-9])?||10)$/;
-        		if(specialtype==4&&(!bool1.test(scale))){
+        		if(specialtype==1&&(!bool1.test(scale))){
         			dialog.render({lang:"scale_must_be_number"});
         			return;
         		}
         		amount=parseFloat(amount);
-        		//consume=parseFloat(consume);
-/*        		if(specialtype==3&&!(amount==0&&consume==0)&&(amount>=consume)){
-        			dialog.render({lang:"amount_not_gt_consume"});
-        			return;
-        		}*/
+        		
         		if (startTime>endTime) {
         			dialog.render({lang:"starttime_gt_endtime"});
            			return;
 				}
-        		var config = {};
-        		if(specialtype == 3){//立减
-        			config.amount = amount;
-        			//config.threshold = consume;
-        		}else if(specialtype == 4){//折扣
-        			config.rate = scale;
-        			//config.threshold = consume;
-        		}else if(specialtype == 1){//送水
-        			config.appId = appid;
-        			config.appSecret = appsecret;
+        		var configArray = [];
+        		
+        		for(var i=0;i<money.length;i++){
+        			var config = {};
+        			config.money = money[i];
+        			if(specialtype == 2){//立减
+        				config.discount = amount;
+            		}else if(specialtype == 1){//折扣
+            			config.discount = scale;
+            		}
+        			configArray.push(config);
         		}
         		
                 self.basedata={
@@ -341,11 +275,9 @@ define(function(require) {
                 		type:parseInt(specialtype),
                 		startTime:startTime,
                 		endTime:endTime,
-                		config:config,
-                		payStyles:payStyle,
-                		pickupMethod:pickupMethod//取货方式
+                		config:configArray
                 };
-            						
+                
 				$("#devicelist").css("display", "block");
                 $("#selfConfig").css("display", "none");
                 $("#baseInfo").css("display", "none");

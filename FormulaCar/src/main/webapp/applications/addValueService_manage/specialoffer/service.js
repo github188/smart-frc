@@ -249,7 +249,7 @@ define(function(require) {
             searchData.cursor = cursor;
             searchData.verbose = 100;
             cloud.Ajax.request({
-                url: "api/automat/list_new",
+                url: "api/basic/site/list",
                 type: "GET",
                 parameters: searchData,
                 success: function(data) {

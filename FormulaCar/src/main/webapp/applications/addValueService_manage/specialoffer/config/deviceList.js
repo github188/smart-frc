@@ -11,58 +11,20 @@ define(function(require) {
     var Paging = require("cloud/components/paging");
     var SelfConfigInfo = require("../config/selfConfig");
     var columns = [{
-        "title": locale.get({lang: "network"}),
-        "dataIndex": "online",
+        "title": "店面编号",
+        "dataIndex": "siteNum",
         "cls": null,
-        "width": "10%",
-        render: function(data, type, row) {
-            var display = "";
-            if ("display" == type) {
-                switch (data) {
-                    case 1:
-                        var offlineStr = locale.get({lang: "offline"});
-                        display += new Template(
-                                "<div  style = \"display : inline-block;\" class = \"cloud-table-offline\" title = \"#{status}\"}></div>")
-                                .evaluate({
-                            status: offlineStr
-                        });
-                        break;
-                    case 0:
-                        var onlineStr = locale.get({lang: "online"});
-                        display += new Template(
-                                "<div  style = \"display : inline-block;\" class = \"cloud-table-online\" title = \"#{status}\"}></div>")
-                                .evaluate({
-                            status: onlineStr
-                        });
-                        break;
-                    default:
-                        break;
-                }
-                return display;
-            } else {
-                return data;
-            }
-        }
-    },{
-        "title": locale.get({lang: "automat_no1"}),
-        "dataIndex": "assetId",
-        "cls": null,
-        "width": "25%"
+        "width": "33%"
     }, {
-        "title": locale.get({lang: "automat_name"}),
+        "title": "店面名称",
         "dataIndex": "name",
         "cls": null,
-        "width": "25%"
-    }, {
-        "title": locale.get({lang: "automat_site_name"}),
-        "dataIndex": "siteName",
-        "cls": null,
-        "width": "20%"
+        "width": "33%"
     }, {
         "title": locale.get({lang: "automat_line"}),
-        "dataIndex": "lineName",
+        "dataIndex": "dealerName",
         "cls": null,
-        "width": "20%"
+        "width": "33%"
     }];
     var list = Class.create(cloud.Component, {
         initialize: function($super, options) {
@@ -174,41 +136,23 @@ define(function(require) {
             }
             var userId = cloud.storage.sessionStorage("accountInfo").split(",")[1].split(":")[1];
             var roleType = permission.getInfo().roleType;
-            Service.getLinesByUserId(userId,function(linedata){
-            	  var lineIds=[];
-                  if(linedata.result && linedata.result.length>0){
- 	    			  for(var i=0;i<linedata.result.length;i++){
- 	    				  lineIds.push(linedata.result[i]._id);
- 	    			  }
-                  }
-                  if(roleType == 51){
-		    			 lineIds = [];
-                   }
-                  if(roleType != 51 && lineIds.length == 0){
-	                    lineIds = ["000000000000000000000000"];
-	              }
-                  
-                  self.searchData = {
-                      	"online":"0",
-                      	"lineId": lineIds,
-                        "assetId": assetId,
-                        "name":name,
-                        "startTime":self.basedata.startTime,
-                        "endTime":self.basedata.endTime,
-                        "type":self.basedata.type
-                   };  
-                   if(self.specialData != null){
-                	    self.searchData.id = self.specialData._id;
-                   }
-                   Service.getAllAutomatsByPageLimitSpecial(self.searchData, limit, cursor, function(data) {
-                       var total = data.result.length;
-                       self.pageRecordTotal = total;
-                       self.totalCount = data.result.length;
-                       self.listTable.render(data.result);
-                       self._renderpage(data, 1);
-                       cloud.util.unmask("#device_list_table1");
-                   }, self);
-            });
+            
+            self.searchData = {
+              	"online":"0",
+                "assetId": assetId,
+                "name":name
+           };  
+           if(self.specialData != null){
+        	    self.searchData.id = self.specialData._id;
+           }
+           Service.getAllAutomatsByPage(self.searchData, limit, cursor, function(data) {
+               var total = data.result.length;
+               self.pageRecordTotal = total;
+               self.totalCount = data.result.length;
+               self.listTable.render(data.result);
+               self._renderpage(data, 1);
+               cloud.util.unmask("#device_list_table1");
+           }, self);
         },
         _renderpage: function(data, start) {
             var self = this;
@@ -223,7 +167,7 @@ define(function(require) {
                     limit: this.pageDisplay,
                     requestData: function(options, callback) {
                     	cloud.util.mask("#device_list_table1");
-                        Service.getAllAutomatsByPageLimitSpecial(self.searchData, options.limit, options.cursor, function(data) {
+                        Service.getAllAutomatsByPage(self.searchData, options.limit, options.cursor, function(data) {
                             self.pageRecordTotal = data.total - data.cursor;
                             callback(data);
                             cloud.util.unmask("#device_list_table1");
@@ -267,64 +211,60 @@ define(function(require) {
             });
             
             
-            $("#device_next_step").bind("click", function() {
-            	
-	                var deviceArr = self.getSelectedResources();
-	                if (deviceArr.length == 0) {
-	                     dialog.render({lang: "please_select_at_least_one_config_item"});
-	                     return;
-	                }
+            $("#device_save").bind("click", function() {
+                var deviceArr = self.getSelectedResources();
+                if (deviceArr.length == 0) {
+                     dialog.render({lang: "please_select_at_least_one_config_item"});
+                     return;
+                }
 
-                 	var deviceConfigs = [];
-                 	for(var j=0;j<deviceArr.length;j++){
-                 		var device = deviceArr[j];
-                 		console.log(deviceArr);
-                 		var deviceConfig = {};
-                 		deviceConfig.deviceId = device._id;
-                 		deviceConfig.gwId = device.gwId;
-                 		deviceConfig.assetId = device.assetId;
-                 		var counters = [];
-                 		
-                 		
-                 		if(self.specialData != null && self.specialData.config != null){
-                        	var lists = self.specialData.config.deviceConfig;
-                        	if(lists != null && lists.length>0){
-                        		for(var i=0;i<lists.length;i++){
-                        			var deviceId = lists[i].deviceId;
-                        			if(deviceConfig.deviceId == deviceId){
-                        				counters = lists[i].offerCids;
-                        			}
-                        			
-                        		}
-                        	}
-                        	
-                        }
-                 		
-                 		deviceConfig.counters = counters;
-                 		
-                 		deviceConfigs.push(deviceConfig);
-                 	}
+             	var deviceConfigs = [];
+             	for(var j=0;j<deviceArr.length;j++){
+             		var device = deviceArr[j];
+             		console.log(deviceArr);
+             		var deviceConfig = {};
+             		deviceConfig.deviceId = device._id;
+             		deviceConfig.gwId = device.gwId;
+             		deviceConfig.assetId = device.assetId;
+             		var counters = [];
+             		
+             		if(self.specialData != null && self.specialData.config != null){
+                    	var lists = self.specialData.config.deviceConfig;
+                    	if(lists != null && lists.length>0){
+                    		for(var i=0;i<lists.length;i++){
+                    			var deviceId = lists[i].deviceId;
+                    			if(deviceConfig.deviceId == deviceId){
+                    				counters = lists[i].offerCids;
+                    			}
+                    		}
+                    	}
+                    }
+             		
+             		deviceConfig.counters = counters;
+             		
+             		deviceConfigs.push(deviceConfig);
+             	}
                  	
-                 	$("#devicelist").css("display", "none");
- 	            	$("#selfConfig").css("display", "block");
- 	                $("#baseInfo").css("display", "none");
- 	                $("#tab1").removeClass("active");
- 	                $("#tab2").removeClass("active");
- 	                $("#tab3").addClass("active");
-
- 	                this.SelfConfig = new SelfConfigInfo({
- 	                    selector: "#selfConfigInfo",
- 	                    automatWindow: self.automatWindow,
- 	                    deviceList:self.deviceLists,
- 	                    basedata:self.basedata,
- 	                    deviceConfigs:deviceConfigs,
- 	                    specialData:self.specialData,
- 	                    events: {
- 	                        "rendTableData": function() {
- 	                            self.fire("rendTableData");
- 	                        }
- 	                    }
- 	                });
+//                 	$("#devicelist").css("display", "none");
+// 	            	$("#selfConfig").css("display", "block");
+// 	                $("#baseInfo").css("display", "none");
+// 	                $("#tab1").removeClass("active");
+// 	                $("#tab2").removeClass("active");
+// 	                $("#tab3").addClass("active");
+//
+// 	                this.SelfConfig = new SelfConfigInfo({
+// 	                    selector: "#selfConfigInfo",
+// 	                    automatWindow: self.automatWindow,
+// 	                    deviceList:self.deviceLists,
+// 	                    basedata:self.basedata,
+// 	                    deviceConfigs:deviceConfigs,
+// 	                    specialData:self.specialData,
+// 	                    events: {
+// 	                        "rendTableData": function() {
+// 	                            self.fire("rendTableData");
+// 	                        }
+// 	                    }
+// 	                });
         });
         },
         getSelectedResources: function() {

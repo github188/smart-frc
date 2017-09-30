@@ -67,9 +67,9 @@ public class DeviceController {
             @RequestParam(value = "deviceType", required = false) Integer deviceType) {
 
         DeviceBean db = new DeviceBean();
-        if (vflag == 1) { //店面名称
+        if (vflag != null && vflag == 1) { //店面名称
             db.setSiteName(searchName);
-        } else if (vflag == 2) {   //赛台名称
+        } else if (vflag != null && vflag == 2) {   //赛台名称
             db.setName(searchName);
         }
         if (dealerIds != null) {

@@ -6,7 +6,7 @@
 #status li{float:left;color:#fff;padding:8px 70px;font-size: 14px;}
 #status li.active{background-color:#09c;font-weight:normal;}
 .input{width:200px; height:22px; margin:10px auto; line-height:20px; border:1px solid #d3d3d3; padding:2px;}
-.page{padding:5px 20px;width:93%;float:left;}
+.page{padding:50px 20px;width:93%;float:left;}
 .page h3{height:42px; font-size:16px; border-bottom:1px dotted #ccc; margin-bottom:20px; padding-bottom:5px}
 .page h3 em{font-size:12px; font-weight:500; font-style:normal}
 .page p{line-height:24px;}
@@ -20,7 +20,6 @@
     <ul id="status">
 		<li class="active" id="tab1" style="height: 19px;"><strong>1.</strong><span lang="text:add_basic_information"></span></li>
 		<li id="tab2" style="height: 19px;"><strong>2.</strong><span lang="text:choose_device"></span></li>
-	    <li id="tab3" style="height: 19px;"><strong>3.</strong><span lang="text:special_offer_config"></span></li>
 	</ul>
 	<div class="items">
 	    
@@ -36,72 +35,27 @@
 	                <td width="25%"><label style='color:red;'>*</label><label><span lang="text:special_offer_type"></span></label></td>
 	                <td>
 	                <select  id='specialtype'  style='width:202px;height: 31px;'>
-	                        <option value='1' lang="text:focus_deliver_water" ></option>
-                            <option value='2' lang="text:buy_deliver_one" ></option>
-			                <option value='3' lang="text:buy_discount"></option>
-			                <option value='4' lang="text:buy_discount_perference"></option>
-                    
+		                <option value='2' lang="text:buy_discount"></option>
+		                <option value='1' lang="text:buy_discount_perference"></option>
                     </select>
 	                </td>
-	          
 	             </tr>
-	             
-	             <tr id="specialofferPayStyle" style="display:none;">
-                            <td width="15%" ><label style='color:red;'>*</label><label><span lang="text:specialoffer_pay_style"></span></label></td>
-                            <td><select multiple='multiple' id="payStyle" style="width:200px;height: 35px;">
-                                
-			                    <option value='2' lang="{text:trade_wx_pay}"></option>
-			                    <option value='3' lang="{text:trade_alipay}"></option>
-			                    <option value='9' lang="{text:trade_soundwave_pay}"></option>
-			                    <option value='13' lang="{text:wechat_reversescan_pay}"></option>
-			                    <option value='15' lang="{text:trade_best_pay}"></option>
-			                    <option value='16' lang="{text:trade_jd_pay}"></option>
-			                    <option value='19' lang="{text:trade_reversescan_pay}"></option>
-			                    <option value='20'>农行掌银支付</option>
-			                    <option value='21'>银联支付</option>
-			                    <option value='23'>扫码支付</option>
-			                    <option value='24'>融e联</option>
+	             <tr id="specialofferMoney">
+                            <td width="15%" ><label style='color:red;'>*</label><label><span>优惠金额</span></label></td>
+                            <td><select multiple='multiple' id="money" style="width:200px;height: 35px;">
+			                    <option value='300'>300</option>
+			                    <option value='500'>500</option>
+			                    <option value='1000'>1000</option>
                             </select></td>
                  </tr>
-                 
-                 <tr id="getProduct">
-                         <td width="15%" ><label style='color:red;'>*</label><label><span>取货方式</span></label></td>
-                         <td>
-                           <select  id="pickupMethod" style="width:200px;height: 35px;">
-			                    <option value='1'>自动出货</option>
-			                    <option value='2'>取货码取货</option>
-                           </select>
-                         </td>
-                 </tr>
-                 
-	             <tr id="appid" ><!-- appid -->
-	                <td width="15%"><label style='color:red;'>*</label><label><span lang="text:wechat_appID">AppID</span></label></td>
-	                <td><input type="text" class="input"  id="wechat_appid" name="wechat_appid" style="width:200px;height:25px;"/></td>
-	             </tr>
-	             <tr id="appsecret" ><!-- appsecret-->
-	                <td width="15%"><label style='color:red;'>*</label><label><span lang="text:wechat_appSecret">AppSecret</span></label></td>
-	                <td><input type="text" class="input"  id="wechat_appsecret" name="wechat_appsecret" style="width:200px;height:25px;"/></td>
-	             </tr>
-	             
-	             
-	             <tr id="scale" style="display:none"><!-- 支付方式 -->
-	                <td width="15%"><label style='color:red;'>*</label><label><span lang="text:special_offer_scale"></span></label></td>
-	                <td><input type="text" class="input"  id="special_scale" name="special_scale" style="width:100px;height:25px;"/><span style="color:#ddd" lang="text:special_offer_perference_notice"></span></td>
-	             </tr>
-	             
-	             
 	             <tr id="scale" style="display:none"><!-- 折扣 -->
 	                <td width="15%"><label style='color:red;'>*</label><label><span lang="text:special_offer_scale"></span></label></td>
 	                <td><input type="text" class="input"  id="special_scale" onkeypress = "return event.keyCode>=48&&event.keyCode<=57||event.keyCode==46" onpaste = "return !clipboardData.getData('text').match(/\D/)" ondragenter = "return false" style= "ime-mode:Disabled" name="special_scale" style="width:100px;height:25px;"/><span style="color:#948d8d" lang="text:special_offer_perference_notice"></span></td>
 	             </tr>
-	             <tr id="amount" style="display:none"><!-- 立减 -->
+	             <tr id="amount"><!-- 立减 -->
 	                <td width="15%"><label style='color:red;'>*</label><label><span lang="text:special_offer_discount_amount"></span></label></td>
 	                <td><input type="text" class="input"  onkeypress = "return event.keyCode>=48&&event.keyCode<=57||event.keyCode==46" onpaste = "return !clipboardData.getData('text').match(/\D/)" ondragenter = "return false" style= "ime-mode:Disabled" id="special_amount" name="special_amount" style="width:100px;height:25px;"/></td>
 	             </tr>
-<!-- 	             <tr id="consume" style="display:none">门槛
-	                <td width="15%"><label style='color:red;'>*</label><label><span lang="text:special_offer_perference_amount"></span></label></td>
-	                <td><label><span lang="text:special_offer_consume"></span><input type="text" class="input"  id="special_threshold" name="special_threshold" style="width:104px;height:25px;"/><label><span lang="text:special_offer_enjoy"></span></label></td>
-	             </tr> -->
 	             <tr>
 	                <td width="15%"><label style='color:red;'>*</label><label><span lang="text:special_start_time"></span></label></td>
 	                <td>
@@ -116,28 +70,9 @@
 	                   
 	                </td>
 	             </tr>
-
-                <tr id="notice">
-	                <td><label><span>微信公众平台配置如下:</span></label></td>
-	                <td></td>
-	            </tr>
-                <tr id="notice1">
-	                <td><label><span style="font-size: 12px;" lang="text:special_offer_notice1"></span></label></td>
-	                <td><span style="font-size: 12px;color: red;" id="noticeUrl"></span></td>
-	            </tr>
-	            
-	             <tr id="notice2">
-	                <td><label><span style="font-size: 12px;" lang="text:special_offer_notice2"></span></label></td><br>
-	                <td><span style="font-size: 12px;color: red;" id="noticeToken"></span></td>
-	             </tr>
-
-
 	            </table>
 	           </div>
 	         </div>
-	         
-             <span id="noticeDiv" class="special-notice"></span>
-	         
 	         
 	         <div class="btn_nav" style="position: absolute;top: 10px;right: 30px;margin-right: 4px;">
                   <input type="button" class='btn btn-primary submit' id="nextBase" style="margin-left:10px;width:105px;height:32px;"/>
