@@ -16,7 +16,7 @@
         <entry key="x-ha-policy" value="all" />
     </rabbit:queue-arguments>
     
-    <!-- RABBITMQ Organziation Initialize Handler CONFIG -->
+    <!-- RABBITMQ Organziation Initialize Handler CONFIG 
     <rabbit:queue id="newOrganization"
                   name="dn.smart.vending.organization.initial" queue-arguments="haArgs"/>  	
     <rabbit:topic-exchange name="dn.exchange.resource">
@@ -32,7 +32,7 @@
                                    message-converter="mqMessageConverter">
         <rabbit:listener ref="organizationInitMessageHandler"
                                  queues="dn.smart.vending.organization.initial" />
-    </rabbit:listener-container>
+    </rabbit:listener-container>-->
     
     <!-- Organziation Initialize handler END -->
     

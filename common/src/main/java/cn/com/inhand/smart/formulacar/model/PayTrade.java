@@ -21,7 +21,9 @@ public class PayTrade {
     private String payStyle;
     private String orderNo;
     private String openId;
-    private Integer price;
+    private Integer price;    //实际支付价格
+    private Integer price1;   //优惠价格
+    private Integer price2;   //原价
     private Integer payStatus;
     private String rfid;
     private String transaction_id;    //线上交易的订单号
@@ -114,6 +116,22 @@ public class PayTrade {
 
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getPrice1() {
+        return price1;
+    }
+
+    public void setPrice1(Integer price1) {
+        this.price1 = price1;
+    }
+
+    public Integer getPrice2() {
+        return price2;
+    }
+
+    public void setPrice2(Integer price2) {
+        this.price2 = price2;
     }
     
 }

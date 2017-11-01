@@ -84,7 +84,9 @@ public class DeviceTraddRecodeController {
             for (DeviceGameRecord record : recordList) {
                 assetId = record.getAssetId();
                 Cards cards = cardsDao.findCardByRfid(key.getOid(), record.getCardId());
-                rfidMap.put(record.getCardId(), cards.getMemberNickName());
+                if(cards != null){
+                    rfidMap.put(record.getCardId(), cards.getMemberNickName());
+                }
             }
         }
 

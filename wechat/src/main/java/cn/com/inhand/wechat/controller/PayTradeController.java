@@ -48,7 +48,7 @@ public class PayTradeController {
             result.put("payStatus", trade.getPayStatus()+"");
         }else{
             result.put("result", "FAIL");
-            result.put("orderNo", trade.getOrderNo());
+            result.put("orderNo", orderNo);
         }
         return result;
     }

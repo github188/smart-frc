@@ -64,6 +64,7 @@ public class DeviceRfidOauthController {
         Map<String, String> content = new HashMap<String, String>();
 
         String rfidStr = redisFactory.get(rfid + ":RFIDINFO");
+        
         if (rfidStr == null) {
             Device device = siteDao.getDeviceByAssetId(key.getOid(), assetId);
             if (device != null) {
@@ -103,7 +104,7 @@ public class DeviceRfidOauthController {
                             Long time1 = format1.parse(dateStr).getTime() / 1000;
                             int timeout = Integer.parseInt((time1 - DateUtils.getUTC()) + "");
                             redisFactory.setex(rfid + ":RFIDINFO", timeout, rfid);
-                        }else{
+                        } else {
                             content.put("result", "FAIL");
                             content.put("msg", "次数已用完");
                             content.put("nickName", rfiddb.getNickName() != null ? rfiddb.getNickName() : "");
@@ -121,6 +122,9 @@ public class DeviceRfidOauthController {
         } else {
             content.put("result", "OK");
             content.put("rfid", rfid);
+            Rfid rfiddb = rfidDao.findRfidByRfid(key.getOid(), rfid);
+            content.put("nickName", rfiddb.getNickName() != null ? rfiddb.getNickName() : "");
+            content.put("name", rfiddb.getName() != null ? rfiddb.getName() : "");
         }
         return content;
     }
