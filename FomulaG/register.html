@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://www.chocyt123.com/register?from=/home -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="format-detection" content="telephone=no, email=no">
+		<title></title>
+		<link rel="stylesheet" href="./css/base.css">
+		<link rel="stylesheet" href="./css/register.css">
+		<script src="./js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="logo-wrapper">
+				<img src="./images/logo.png">
+			</div>
+			<div class="login-form-wrapper">
+				<div>
+					<label class="error"></label>
+				</div>
+				<div class="form-item">
+				<input id="phone" name="phone" placeholder="手机号">
+				</div>
+				<div class="form-item">
+					<input id="smscode" name="smscode" placeholder="验证码">
+					<input id="smsBtn" type="button" value="点击发送验证码">
+				</div>
+				<div class="form-item">
+					<input id="password" name="password" placeholder="密码">
+				</div>
+				<div class="form-item">
+					<button id="registerBtn" class="btn" type="submit">注册</button>
+				</div>
+				<div class="link">
+					<a class="login-link" href="./login.html?params=myInfo">已有账户，请点击登录</a>
+				</div>
+			</div>
+		</div>
+	<script>
+		
+		var paramObj = GetRequest();
+		var token = paramObj.token;
+		var openid = paramObj.openid;
+		var params = paramObj.params;
+		
+		$("#registerBtn").click(function(e){
+			var phone = $("#phone").val();
+			if(!phone){
+				$('label.error').text('请输入正确手机号');
+				return;
+			}else{
+				$('label.error').text('');
+			}
+			
+			var smscode = $("#smscode").val();
+			if(!smscode){
+				$('label.error').text('请输入正确验证码');
+				return;
+			}else{
+				$('label.error').text('');
+			}
+			
+			
+			var password = $("#password").val();
+			if(!password){
+				$('label.error').text('请输密码');
+				return;
+			}else{
+				$('label.error').text('');
+			}
+			var formData = {
+				phone:phone,
+				smscode:smscode,
+				password:password,
+				token:token,
+				params:params,
+				openid:openid
+			};
+			$.ajax({
+				type: 'POST',
+				url: '/wbapi/wechat/register',
+				"contentType": "application/json", 
+				data:JSON.stringify(formData),
+				success: function(data){
+					if(data.result && data.result == "SUCCESS"){
+						if(params == "myInfo"){
+							window.location.href = '/FomulaG/home.html?params=myInfo';
+						}
+					} else{
+						$('label.error').text(data.errorMsg);
+					}
+				}
+			});
+		});
+		
+		function GetRequest() {
+			var url = location.search; //获取url中"?"符后的字串
+			var theRequest = new Object();
+			if (url.indexOf("?") != -1) {
+				var str = url.substr(1);
+				strs = str.split("&");
+				for(var i = 0; i < strs.length; i ++) {
+					theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+				}
+			}
+		   return theRequest;
+		}
+	</script>
+	</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://www.chocyt123.com/info -->
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="format-detection" content="telephone=no, email=no">
+		<title></title>
+		<link rel="stylesheet" href="./css/base.css">
+		<link rel="stylesheet" href="./css/info.css">
+		<script src="./js/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="welcome">
+				<span id="userName"></span><span>&nbsp;小朋友，欢迎来到泥巴方程式社区</span>
+			</div>
+			<div class="info-wrapper">
+				<div class="required-info">
+					<span>*</span>为必填项目
+				</div>
+				<input class="hidden" name="isRegister" value="false">
+				<div class="form-item">
+					<label><span class="required">*</span>姓名</label>
+					<input id="name" name="name" value="" type="text">
+				</div>
+				<div class="form-item">
+					<label>性别</label>
+					<span class="radio-group">
+						<label for="gender-male"> 
+							<input id="gender-male" name="gender" value="male" type="radio">男
+						</label>
+						<label for="gender-female">
+							<input id="gender-female" name="gender" value="female" type="radio">女
+						</label>
+					</span>
+				</div>
+				<div class="form-item">
+					<label><span class="required">*</span>年龄</label>
+					<input id="age" name="age" value="" type="text">
+				</div>
+				<div class="form-item">
+					<label>联系电话</label>
+					<input id="phone" name="phone" value="" disabled="" type="text">
+				</div>
+				<div class="form-item">
+					<button class="btn" id="saveBtn">保存</button>
+				</div>
+			</div>
+		</div>
+		<script>
+			var paramObj = GetRequest();
+			var openid = paramObj.openid;
+			
+			$.ajax({
+				type: 'GET',
+				url: '/wbapi/wechat/getUserInfo?openid='+openid,
+				"contentType": "application/json",
+				success: function(data){
+					if(data.name){
+						$("#userName").text(data.name);
+						$("#name").val(data.name);
+					}
+					if(data.sex){
+						if(data.sex == "男"){
+							$("#gender-male").attr("checked","checked");
+						}else if(data.sex == "女"){
+							$("#gender-female").attr("checked","checked");
+						}
+					}
+					if(data.phone){
+						$("#phone").val(data.phone);
+					}
+					if(data.age){
+						$("#age").val(data.age);
+					}
+				}
+			});
+			
+			function GetRequest() {
+				var url = location.search; //获取url中"?"符后的字串
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for(var i = 0; i < strs.length; i ++) {
+						theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+					}
+				}
+			   return theRequest;
+			}
+		</script>
+	</body>
+</html>

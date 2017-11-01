@@ -1,0 +1,165 @@
+.info-wrapper {
+  width: 320px;
+  margin: 12px auto 0 auto;
+  padding: 0 16px 16px 16px;
+  border-top: 4px solid #add8f7;
+  background-color: #ecf6fd;
+}
+
+.info-title {
+  margin: 4px 0 16px 0;
+}
+
+.info-title .title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.info-title .edit-link {
+  float: right;
+  color: #108ee9;
+  text-decoration: none;
+}
+
+.info-item {
+  line-height: 32px;
+  font-size: 16px;
+  border-top: 1px solid #d2eafb;
+}
+
+.info-item + .info-item {
+  margin-top: 12px;
+}
+
+.info-item label {
+  display: inline-block;
+  width: 80px;
+  text-align: right;
+}
+
+.info-item span {
+  margin-left: 12px;
+  text-decoration: none;
+}
+
+.image-wrapper {
+  width: 320px;
+  margin: 24px auto 0 auto;
+  padding: 0 16px 16px 16px;
+  border-top: 4px solid #add8f7;  
+}
+
+.image-title {
+  margin: 4px 0 16px 0;
+}
+
+.image-title .title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.image-title .upload-link {
+  float: right;
+  color: #108ee9;
+  text-decoration: none;
+}
+
+.image-item img {
+  width: 100%;
+}
+
+.image-item + .image-item {
+  margin-top: 16px;
+}
+
+.welcome {
+  font-size: 13px;
+  width: 320px;
+  margin: 12px auto 0 auto;
+}
+
+.logout {
+  float: right;
+  color: #108ee9;
+}
+
+.preview-image {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position-x: 50%;
+  background-position-y: 50%;
+}
+
+.image-item{
+  position: relative;
+}
+
+.image-remove{
+    border: transparent;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.40);
+    background-color: rgba(128, 128, 128, 0.19);
+}
+
+.popwin-wrapper{
+  display: none;
+  position: fixed;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+  background-color:rgba(0, 0, 0, 0.44);
+}
+
+.popwin{
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.88);
+  margin: 180px auto 0 auto;
+  padding: 16px 24px;
+}
+
+.prompt{
+  text-align: center;
+  font-size:17px;
+}
+
+.btns{
+  width: 80%;
+  margin:0 auto;
+  font-size:17px;
+  margin-top: 32px;
+}
+
+.accept, .reject{
+  font-size:15px;
+  padding: 8px;
+}
+
+.reject{
+  float: right;
+}
+
+.message-success, .message-fail{
+    display: none;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 300px;
+    border: 1px solid #fff;
+    text-align: center;
+    background-color: white;
+}
+
