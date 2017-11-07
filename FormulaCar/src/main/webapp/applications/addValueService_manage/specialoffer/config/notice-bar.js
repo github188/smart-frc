@@ -18,9 +18,9 @@ define(function(require){
     		  var self = this;
               var $htmls = $(+"<div></div>" +
             		  "<div id='search-bar1' style='width:auto;margin:5px;'>" +
-    	              "<select id='automatSearch'  name='search' style='width:100px;height: 28px; border-radius: 4px;'>" +
-    	              "<option value='0'>" + locale.get({lang: "automat_name"}) + "</option>" +
-    	              "<option value='1'>" + locale.get({lang: "automat_no1"}) + "</option>" +
+    	              "<select id='automatSearch'  name='search' style='width:100px;height: 28px;'>" +
+    	              "<option value='0'>" + locale.get({lang: "automat_list_point_name"}) + "</option>" +
+    	              "<option value='1'>" + locale.get({lang: "automat_list_point_number"}) + "</option>" +
     	              "</select>&nbsp;&nbsp;" +
     	              "<input style='width:200px;margin-right: 7px;' type='text'  id='automatValue' />" +
     	              "</div>");

@@ -28,4 +28,10 @@ public interface SiteDao {
     
     public boolean isSiteNameExists(ObjectId xOId, String name);
     
+    public boolean isSiteNumberExists(ObjectId xOId,String siteNum);
+    
+    public List<Site> getListSite(ObjectId oId,SiteBean queryBean, int skip, int limit,List<String> siteNums);
+
+    public long getCount(ObjectId oId, SiteBean queryBean,List<String> siteNums);
+    
 }

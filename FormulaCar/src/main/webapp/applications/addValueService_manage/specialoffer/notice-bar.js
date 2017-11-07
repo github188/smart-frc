@@ -23,10 +23,8 @@ define(function(require){
               "<input style='width:200px' type='text'  id='name' />&nbsp;&nbsp;"  +
 
               "<select  id='specialTypeList' multiple='multiple' name='specialTypeList' style='width:180px;height: 28px; border-radius: 4px;'>" + //优惠方式
-              "<option value='1'>" + locale.get({lang: "focus_deliver_water"}) + "</option>" +
-              "<option value='2'>" + locale.get({lang: "buy_deliver_one"}) + "</option>" +
-              "<option value='3'>" + locale.get({lang: "buy_discount"}) + "</option>" +
-              "<option value='4'>" + locale.get({lang: "buy_discount_perference"}) + "</option>" +
+              "<option value='2'>" + locale.get({lang: "buy_discount"}) + "</option>" +
+              "<option value='1'>" + locale.get({lang: "buy_discount_perference"}) + "</option>" +
               "</select>&nbsp;&nbsp;" +
               "</div>");
               this.element.append($htmls);

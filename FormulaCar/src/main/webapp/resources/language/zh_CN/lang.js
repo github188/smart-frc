@@ -4114,6 +4114,9 @@ var lang = {
         car_amount_yuan: "跑车金额",
         game_duration: "比赛时间",
         rfdList:"RFID列表",
-        rfd_manage:"RFID列表"
+        rfd_manage:"RFID列表",
+        select_site:"选择店面",
+        special_save:"保存",
+        special_name_exists:"优惠活动名称已存在"
     }
 };

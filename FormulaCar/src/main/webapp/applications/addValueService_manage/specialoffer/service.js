@@ -67,7 +67,7 @@ define(function(require) {
         getSpecialOfferById:function(id, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: "api/special/" + id,
+                url: "api/basic/" + id+"/special",
                 type: "GET",
                 success: function(data) {
                     callback.call(context || self, data);
@@ -76,7 +76,7 @@ define(function(require) {
         },
         addSpecialOffer:function(data,callback,context){
         	cloud.Ajax.request({
-				url:"api/special/add",
+				url:"api/basic/special",
 				type : "post",
 				data:data,
 				success: function(data) {
@@ -90,7 +90,7 @@ define(function(require) {
         updateSpecialOffer: function(contentData, id, callback, context) {
             var self = this;
             cloud.Ajax.request({
-                url: "api/special/" + id,
+                url: "api/basic/" + id+"/special",
                 type: "PUT",
                 data: contentData,
                 success: function(data) {
@@ -106,6 +106,22 @@ define(function(require) {
             cloud.Ajax.request({
                 url: "api/special/" + id,
                 type: "DELETE",
+                success: function(data) {
+                    callback.call(context || self, data);
+                },
+                error: function(data) {
+                    callback.call(context || self, data);
+                }
+            });
+        },
+        deleteSpecialByIds: function(ids, callback, context) {
+            var self = this;
+            cloud.Ajax.request({
+                url: "api/basic/special/specialDelBatch",
+                type: "post",
+                parameters: {
+                    "ids": ids
+                },
                 success: function(data) {
                     callback.call(context || self, data);
                 },
@@ -188,7 +204,7 @@ define(function(require) {
             searchData.limit = limit;
             searchData.cursor = cursor;
             cloud.Ajax.request({
-                url: "api/special/list",
+                url: "api/basic/special/list",
                 type: "GET",
                 parameters: searchData,
                 success: function(data) {
@@ -243,6 +259,21 @@ define(function(require) {
                 }
             });
         },
+        getAllSitesByPage: function(searchData, limit, cursor, callback, context) {
+            var self = this;
+            searchData.limit = limit;
+            searchData.cursor = cursor;
+            searchData.verbose = 100;
+            cloud.Ajax.request({
+                url: "api/basic/sitelist",
+                type: "GET",
+                parameters: searchData,
+                success: function(data) {
+                    callback.call(context || self, data);
+                }
+            });
+        },
+        
         getAllAutomatsByPage: function(searchData, limit, cursor, callback, context) {
             var self = this;
             searchData.limit = limit;

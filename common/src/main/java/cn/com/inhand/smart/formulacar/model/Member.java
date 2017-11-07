@@ -5,6 +5,7 @@
 package cn.com.inhand.smart.formulacar.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
@@ -26,7 +27,18 @@ public class Member {
     private Long money;        //账号总金额
     private Integer status;    //0 登录状态  1 退出状态
     private String password;
+    private List<String> picId;  //赛车作品图片列表
 
+    public List<String> getPicId() {
+        return picId;
+    }
+
+    public void setPicId(List<String> picId) {
+        this.picId = picId;
+    }
+
+    
+    
     public ObjectId getId() {
         return id;
     }

@@ -1,17 +1,23 @@
+
 <!DOCTYPE html>
-<!-- saved from url=(0029)http://www.chocyt123.com/home -->
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="format-detection" content="telephone=no, email=no">
-		<title></title>
-		<link rel="stylesheet" href="./css/base.css">
+<head>
+<meta charset="UTF-8">
+<meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
+
+	<title lang="{text:faults_monitor}"></title>
+	
+	<link href="mzui/css/mzui.min.css" rel="stylesheet">
+	<link href="mzui/css/common.css" rel="stylesheet">
+	
+	<script src="mzui/js/mzui.min.js"></script>
+<link rel="stylesheet" href="./css/base.css">
 		<link rel="stylesheet" href="./css/home.css">
-		<script src="./js/jquery.min.js"></script>
-	</head>
-	<body>
-		<div class="wrapper">
+<script src="js/dropzone.js"></script>
+</head>
+<body style="font-size: 14px;margin-left: 10px;margin-right: 10px;">
+
+<div class="wrapper">
 			<div class="welcome"> 
 				<span id="userName"></span><span> 小朋友，欢迎来到泥巴方程式社区</span>
 				<a class="logout" id="logout" href="javascript:;">退出登录</a>
@@ -37,7 +43,8 @@
 			<div class="image-wrapper">
 				<div class="image-title">
 					<span class="title">作品图片</span>
-					<a class="upload-link" href="http://www.chocyt123.com/upload">上传作品</a>
+					<a class="upload-link" href="upload.html">上传作品</a>
+					
 				</div>
 				
 				<div class="popwin-wrapper">    
@@ -54,28 +61,44 @@
 			</div>
 			<div class="preview-image"></div>
 		</div>
-		<script>
+
+  
+<div id="piclist">
+<div><img src="" /></div>
+
+
+</div>
+
+
+
+</body>
+<script>
+
 			var paramObj = GetRequest();
 			var openid = paramObj.openid;
-			
+			$(".upload-link").attr("href","upload.html?openid="+openid);
+			$("#piclist").html("");
 			$.ajax({
 				type: 'GET',
 				url: '/wbapi/wechat/getUserInfo?openid='+openid,
 				"contentType": "application/json",
 				success: function(data){
-					if(data.name){
-						$("#userName").text(data.name);
-						$("#userName1").text(data.name);
+					if(data.result){
+						$("#userName").text(data.result.nickname);
+						$("#userName1").text(data.result.nickname);
+						$("#sex").text(data.result.sex);
+						$("#phone").text(data.result.phone);
+						$("#age").text(data.result.age);
+						if(data.result.picId){
+							for(var i=0;i<data.result.picId.length;i++){
+								
+								$("#piclist").append("<div style='width: 46%;float: left;border: 2px dashed #ddd;text-align: center;margin: 5px;'><img src='http://121.42.28.70/carfile/"+data.result.picId[i]+"' style='width:150px;height:120px' /></div>");
+								
+							}
+							
+						}
 					}
-					if(data.sex){
-						$("#sex").text(data.sex);
-					}
-					if(data.phone){
-						$("#phone").text(data.phone);
-					}
-					if(data.age){
-						$("#age").text(data.age);
-					}
+					
 				}
 			});
 			
@@ -109,5 +132,8 @@
 			   return theRequest;
 			}
 		</script>
-	</body>
+
 </html>
+
+
+

@@ -473,9 +473,9 @@ define(function(require) {
                     self.renderUpdate(flag, self.id, data);
                 } else {//不存在点位  新增
                     Service.addSite(data, function(retData) { 
-                        if (retData.error_code && retData.error_code == 20007) {//点位编号已存在
+                        if (retData.error_code && retData.error_code == 70002) {//点位编号已存在
                             dialog.render({lang: "automat_point_number_exists"});
-                        } else if (retData.error_code && retData.error_code == 21322) {//点位名称已存在
+                        } else if (retData.error_code && retData.error_code == 70045) {//点位名称已存在
                             dialog.render({lang: "automat_site_name_exists"});
                         } 
                         else if (!retData.error_code) {
@@ -497,10 +497,10 @@ define(function(require) {
                         self.automatWindow.destroy();
                         self.fire("getsiteList");
                         dialog.render({lang: "automat_goods_model_update_success"});
-                    }else if (data.error_code && data.error_code == 20007) {//点位编号已存在
+                    }else if (data.error_code && data.error_code == 70001) {//点位编号已存在
                         dialog.render({lang: "automat_point_number_exists"});
                     }  
-                    else if (data.error_code == "21322") {
+                    else if (data.error_code == 70045) {
                         dialog.render({lang: "automat_site_name_exists"});
                         return;
                     }

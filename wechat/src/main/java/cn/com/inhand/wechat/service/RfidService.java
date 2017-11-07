@@ -34,4 +34,9 @@ public class RfidService extends MongoService implements RfidDao{
         query.addCriteria(Criteria.where("_id").is(rfid.getId()));
         template.updateFirst(query, UpdateUtils.convertBeanToUpdate(rfid, "_id"), Collections.SMART_FM_RFID);
     }
+
+    public void deleteRfid(ObjectId oid, String rfid) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oid);
+        template.remove(Query.query(Criteria.where("rfid").is(rfid)), Collections.SMART_FM_RFID);
+    }
 }

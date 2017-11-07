@@ -59,7 +59,7 @@ define(function(require) {
             this._renderNoticeBar();
             this._renderBtn();
             $("#device_last_step").val(locale.get({lang: "price_step"}));
-            $("#device_next_step").val(locale.get({lang: "next_step"}));
+            $("#device_save").val(locale.get({lang: "special_save"}));
            
         },
         
@@ -91,12 +91,12 @@ define(function(require) {
                     onRowRendered: function(tr, data, index) {
                         var self = this;      
              
-                        if(self.specialData != null && self.specialData.config != null){
-                        	var lists = self.specialData.config.deviceConfig;
-                        	if(lists != null && lists.length>0){
+                        if(self.specialData != null && self.specialData.siteNum != null){
+                        	var lists = self.specialData.siteNum;
+                        	if(lists.length>0){
                         		for(var i=0;i<lists.length;i++){
-                        			var deviceId = lists[i].deviceId;
-                        			if(data._id == deviceId){
+                        			var siteNum = lists[i];
+                        			if(data.siteNum == siteNum){
                         				$(tr).find('a').click();
                         			}
                         			
@@ -125,27 +125,26 @@ define(function(require) {
             if (automatValue) {
           	  automatValue = self.stripscript(automatValue);
             }
-            var assetId = null;
             var name = null;
+            var number = null;
             if (search) {
-                if (search == 1) {
-                    assetId = $("#automatValue").val();
+                if (search == 1) {//店面编号
+                	number = automatValue;
                 } else if (search == 0) {
-                    name = automatValue;//售货机名称
+                    name = automatValue;//店面名称
                 }
             }
             var userId = cloud.storage.sessionStorage("accountInfo").split(",")[1].split(":")[1];
             var roleType = permission.getInfo().roleType;
             
             self.searchData = {
-              	"online":"0",
-                "assetId": assetId,
+                "number": number,
                 "name":name
            };  
            if(self.specialData != null){
         	    self.searchData.id = self.specialData._id;
            }
-           Service.getAllAutomatsByPage(self.searchData, limit, cursor, function(data) {
+           Service.getAllSitesByPage(self.searchData, limit, cursor, function(data) {
                var total = data.result.length;
                self.pageRecordTotal = total;
                self.totalCount = data.result.length;
@@ -167,7 +166,7 @@ define(function(require) {
                     limit: this.pageDisplay,
                     requestData: function(options, callback) {
                     	cloud.util.mask("#device_list_table1");
-                        Service.getAllAutomatsByPage(self.searchData, options.limit, options.cursor, function(data) {
+                        Service.getAllSitesByPage(self.searchData, options.limit, options.cursor, function(data) {
                             self.pageRecordTotal = data.total - data.cursor;
                             callback(data);
                             cloud.util.unmask("#device_list_table1");
@@ -203,68 +202,53 @@ define(function(require) {
         	var self = this;
             $("#device_last_step").bind("click", function() {
             	$("#devicelist").css("display", "none");
-                $("#selfConfig").css("display", "none");
                 $("#baseInfo").css("display", "block");
                 $("#tab2").removeClass("active");
-                $("#tab3").removeClass("active");
                 $("#tab1").addClass("active");
             });
             
             
             $("#device_save").bind("click", function() {
-                var deviceArr = self.getSelectedResources();
-                if (deviceArr.length == 0) {
+                var siteArr = self.getSelectedResources();
+                if (siteArr.length == 0) {
                      dialog.render({lang: "please_select_at_least_one_config_item"});
                      return;
                 }
 
-             	var deviceConfigs = [];
-             	for(var j=0;j<deviceArr.length;j++){
-             		var device = deviceArr[j];
-             		console.log(deviceArr);
-             		var deviceConfig = {};
-             		deviceConfig.deviceId = device._id;
-             		deviceConfig.gwId = device.gwId;
-             		deviceConfig.assetId = device.assetId;
-             		var counters = [];
+             	var siteNums = [];
+             	for(var j=0;j<siteArr.length;j++){
+             		var site = siteArr[j];
+             		siteNums.push(site.siteNum);
              		
-             		if(self.specialData != null && self.specialData.config != null){
-                    	var lists = self.specialData.config.deviceConfig;
-                    	if(lists != null && lists.length>0){
-                    		for(var i=0;i<lists.length;i++){
-                    			var deviceId = lists[i].deviceId;
-                    			if(deviceConfig.deviceId == deviceId){
-                    				counters = lists[i].offerCids;
-                    			}
-                    		}
-                    	}
-                    }
-             		
-             		deviceConfig.counters = counters;
-             		
-             		deviceConfigs.push(deviceConfig);
              	}
+             	self.basedata.siteNum = siteNums;
+             	if(self.specialData != null){
+            		Service.updateSpecialOffer(self.basedata, self.specialData._id,function(data) {
+                        
+            			if(data.error_code && data.error_code == 70002){
+            				dialog.render({lang:"special_name_exists"});
+							return;
+            			}else{
+            				self.automatWindow.destroy();
+                            self.fire("rendTableData");
+            			}
+            			
+                    });
+            		
+            	}else{
+            		Service.addSpecialOffer(self.basedata, function(data) {
+            			if(data.error_code && data.error_code == 70002){
+            				dialog.render({lang:"special_name_exists"});
+							return;
+            			}else{
+            				self.automatWindow.destroy();
+                            self.fire("rendTableData");
+            			}
+                    });
+            		
+            	}
                  	
-//                 	$("#devicelist").css("display", "none");
-// 	            	$("#selfConfig").css("display", "block");
-// 	                $("#baseInfo").css("display", "none");
-// 	                $("#tab1").removeClass("active");
-// 	                $("#tab2").removeClass("active");
-// 	                $("#tab3").addClass("active");
-//
-// 	                this.SelfConfig = new SelfConfigInfo({
-// 	                    selector: "#selfConfigInfo",
-// 	                    automatWindow: self.automatWindow,
-// 	                    deviceList:self.deviceLists,
-// 	                    basedata:self.basedata,
-// 	                    deviceConfigs:deviceConfigs,
-// 	                    specialData:self.specialData,
-// 	                    events: {
-// 	                        "rendTableData": function() {
-// 	                            self.fire("rendTableData");
-// 	                        }
-// 	                    }
-// 	                });
+
         });
         },
         getSelectedResources: function() {

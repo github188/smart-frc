@@ -24,6 +24,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,7 +50,8 @@ public class DeviceRfidOauthController {
     private RfidDao rfidDao;
     @Autowired
     private RedisFactory redisFactory;
-
+    @Value("#{config.project.webUrl}")
+    private String host;
     @RequestMapping(value = "/rfid/oauth", method = RequestMethod.GET)
     public synchronized @ResponseBody
     Object syncAssetStatus(@RequestParam(value = "access_token", required = true) String access_token,
@@ -127,5 +129,14 @@ public class DeviceRfidOauthController {
             content.put("name", rfiddb.getName() != null ? rfiddb.getName() : "");
         }
         return content;
+    }
+    
+    @RequestMapping(value = "/rfid/code", method = RequestMethod.GET)
+    public synchronized @ResponseBody
+    Object getRfidCode(@RequestParam(value = "access_token", required = true) String access_token,
+            @RequestParam(value = "rfid", required = true) String rfid) throws ParseException {
+        
+        String code = "http://"+host+"/wbapi/oper/bind/"+rfid;
+        return code;
     }
 }

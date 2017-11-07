@@ -8,6 +8,7 @@ import cn.com.inhand.centra.device.dao.CardsDao;
 import cn.com.inhand.common.service.Collections;
 import cn.com.inhand.common.service.MongoService;
 import cn.com.inhand.smart.formulacar.model.Cards;
+import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -33,4 +34,10 @@ public class CardService extends MongoService implements CardsDao{
         template.save(card, Collections.SMART_FM_CARDS);
     }
     
+    public List<Cards> getCarListByMember(ObjectId oid, ObjectId memberId) {
+        MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(oid);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("memberId").is(memberId));
+        return mongoTemplate.find(query, Cards.class, Collections.SMART_FM_CARDS);
+    }
 }

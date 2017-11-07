@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
+
+	<title lang="{text:faults_monitor}"></title>
+	
+	<link href="mzui/css/mzui.min.css" rel="stylesheet">
+	<link href="mzui/css/common.css" rel="stylesheet">
+	
+	<script src="mzui/js/mzui.min.js"></script>
+<link rel="stylesheet" href="./css/base.css">
+		<link rel="stylesheet" href="./css/home.css">
+<script src="js/dropzone.js"></script>
+<style>
+.bind-span{
+    display: inline-block;
+    float: left;
+    line-height: 30px;
+
+}
+
+
+</style>
+</head>
+<body style="font-size: 14px;margin-left: 10px;margin-right: 10px;text-align: center;">
+
+<div class="wrapper">
+			<div class="welcome" style="text-align: left;"> 
+				<span id="userName"></span><span> 小朋友，欢迎来到泥巴方程式社区</span>
+				<a class="logout" id="logout" href="javascript:;">退出登录</a>
+			</div>
+			<div><label class="error"></label></div>
+			<div style="margin-top: 80px;">
+			<div><span class="bind-span">昵称</span><input name="nickname" type="text" id="nickname" class="input" style="width: 60%;margin-left: 20%;" /></div>
+			<div style="margin-top: 20px;"><span class="bind-span">编号</span><input name="rfid" type="text" disabled="disabled" id="rfid" class="input" style="width: 60%;margin-left: 20%;" /></div>
+			</div>
+			
+			<input id="memberId" type="hidden" value="" />
+			<input id="memberNickName" type="hidden" value="" />
+			<div id="bind_car" class="btn info" style="width: 3.6rem;margin-top: 20px;">绑定</div>
+</div>
+
+</body>
+<script>
+
+			var paramObj = GetRequest();
+			var openid = paramObj.openid;
+			var rfid = paramObj.rfid;
+			
+			$("#rfid").val(rfid);
+			$.ajax({
+				type: 'GET',
+				url: '/wbapi/wechat/getUserInfo?openid='+openid,
+				"contentType": "application/json",
+				success: function(data){
+					if(data.result){
+						
+						$("#userName").text(data.result.nickname);
+						
+						$("#memberId").val(data.result._id);
+						$("#memberNickName").val(data.result.nickname);
+					}
+					
+				}
+			});
+			
+			$("#logout").click(function(e){
+				$.ajax({
+					type: 'GET',
+					url: '/wbapi/wechat/logout?openid='+openid,
+					"contentType": "application/json",
+					success: function(data){
+						if(data.result == "SUCCESS"){
+							window.location.href = '/FomulaG/login.html?params=myInfo';
+						}
+					}
+				})
+			});
+			
+			$("#userInfo").click(function(e){
+				window.location.href = '/FomulaG/info.html?openid='+openid;
+			});
+		
+			$("#bind_car").click(function(e){
+				
+				var nickname = $("#nickname").val();
+				if(!nickname){
+					$('.error').text('请输入昵称');
+					return;
+				}else{
+					$('.error').text('');
+				}
+				var rfid = $("#rfid").val();
+				var memberId = $("#memberId").val();
+				var memberNickName = $("#memberNickName").val();
+				var formData = {
+						"memberId":memberId,
+						"memberNickName":memberNickName,
+						"name":nickname,
+						"rfid":rfid
+				}
+				$.ajax({
+					type: 'POST',
+					url: '/wbapi/wechat/car',
+					"contentType": "application/json", 
+					data:JSON.stringify(formData),
+					success: function(data){
+						if(data.result && data.result == "success"){
+							window.location.href = '/FomulaG/carlist.html?openid='+openid;
+						} else{
+							$('.error').text("绑定失败!");
+						}
+					}
+				});
+				
+			});
+			function GetRequest() {
+				var url = location.search; //获取url中"?"符后的字串
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for(var i = 0; i < strs.length; i ++) {
+						theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+					}
+				}
+			   return theRequest;
+			}
+		</script>
+
+</html>
+
+
+

@@ -26,6 +26,17 @@ public class Special {
     private Long startTime;
     private Long endTime;
     private Long createTime;
+    private Long updateTime;
+
+    public Long getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
+    }
+    
+    
 
     public ObjectId getId() {
         return id;

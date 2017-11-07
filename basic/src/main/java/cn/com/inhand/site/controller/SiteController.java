@@ -49,10 +49,14 @@ public class SiteController {
             @RequestHeader(value = "X-API-IP", required = false) String xIp,
             @RequestHeader(value = "X-API-UID", required = false) ObjectId xUId,
             @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
-            @RequestParam(value = "name", required = false) String name) {
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "siteNums", required = false) List<String> siteNums) {
         SiteBean bean = new SiteBean();
         if (name != null && !name.equals("")) {
             bean.setName(name);
+        }
+        if(siteNums != null && siteNums.size()>0){
+            bean.setSiteNums(siteNums);
         }
         long total = siteDao.getCount(xOId, bean);
         List<Site> areaList = siteDao.findSiteByParam(xOId, bean, cursor, limit);
@@ -69,7 +73,10 @@ public class SiteController {
             @RequestHeader(value = "X-API-ACLS", required = false) List<ObjectId> xAcls,
             @Valid @RequestBody SiteBean siteBean) {
         if (siteDao.isSiteNameExists(xOId, siteBean.getName())) {
-            throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, siteBean.getName());
+            throw new ErrorCodeException(ErrorCode.SMART_NAME_ALREADY_EXISTS, siteBean.getName());
+        }
+        if(siteDao.isSiteNumberExists(xOId, siteBean.getSiteNum())){
+            throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, siteBean.getSiteNum());
         }
         Site site = new Site();
         site.setCreateTime(DateUtils.getUTC());
@@ -105,7 +112,12 @@ public class SiteController {
         if (site != null) {
             if (!site.getName().equals(siteBean.getName())) {
                 if (siteDao.isSiteNameExists(xOId, siteBean.getName())) {
-                    throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, siteBean.getName());
+                    throw new ErrorCodeException(ErrorCode.SMART_NAME_ALREADY_EXISTS, siteBean.getName());
+                }
+            }
+            if (!site.getSiteNum().equals(siteBean.getSiteNum())) {
+                if (siteDao.isSiteNumberExists(xOId, siteBean.getSiteNum())) {
+                    throw new ErrorCodeException(ErrorCode.SMART_ASSERT_ALREADY_EXISTS, siteBean.getSiteNum());
                 }
             }
             site.setDealerId(siteBean.getDealerId());

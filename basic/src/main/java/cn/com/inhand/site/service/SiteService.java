@@ -65,6 +65,9 @@ public class SiteService extends MongoService implements SiteDao{
         if(queryBean.getName()!=null && !queryBean.getName().equals("")){
             query.addCriteria(Criteria.where("name").regex(queryBean.getName()));
         }
+        if(queryBean.getSiteNums()!=null && queryBean.getSiteNums().size()>0){
+            query.addCriteria(Criteria.where("siteNum").in(queryBean.getSiteNums()));
+        }
         return mongoTemplate.find(query, Site.class, Collections.SMART_FM_SITE);
     }
 
@@ -81,6 +84,9 @@ public class SiteService extends MongoService implements SiteDao{
         if(queryBean.getName()!=null && !queryBean.getName().equals("")){
             query.addCriteria(Criteria.where("name").regex(queryBean.getName()));
         }
+        if(queryBean.getSiteNums()!=null && queryBean.getSiteNums().size()>0){
+            query.addCriteria(Criteria.where("siteNum").in(queryBean.getSiteNums()));
+        }
         return template.count(query, Collections.SMART_FM_SITE);
     }
 
@@ -88,6 +94,44 @@ public class SiteService extends MongoService implements SiteDao{
         MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(xOId);
         Query query = new Query();
         query.addCriteria(Criteria.where("name").is(name));
+        return mongoTemplate.exists(query, Collections.SMART_FM_SITE);
+    }
+
+    public List<Site> getListSite(ObjectId oId, SiteBean queryBean, int skip, int limit, List<String> siteNums) {
+        MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(oId);
+        Query query = new Query();
+        if (limit != -1) {
+            query.limit(limit);
+            query.skip(skip);
+        }
+        if(siteNums != null && siteNums.size()>0){
+            query.addCriteria(Criteria.where("siteNum").nin(siteNums));
+        }
+        if(queryBean.getSiteNum() != null && !queryBean.getSiteNum().equals("")){
+            query.addCriteria(Criteria.where("siteNum").is(queryBean.getSiteNum()));
+        }
+        if(queryBean.getName()!=null && !queryBean.getName().equals("")){
+            query.addCriteria(Criteria.where("name").regex(queryBean.getName()));
+        }
+        return mongoTemplate.find(query, Site.class, Collections.SMART_FM_SITE);
+    }
+
+    public long getCount(ObjectId oId, SiteBean queryBean, List<String> siteNums) {
+        MongoTemplate template = factory.getMongoTemplateByOId(oId);
+        Query query = new Query();
+        if(siteNums != null && siteNums.size()>0){
+            query.addCriteria(Criteria.where("siteNum").nin(siteNums));
+        }
+        if(queryBean.getName()!=null && !queryBean.getName().equals("")){
+            query.addCriteria(Criteria.where("name").regex(queryBean.getName()));
+        }
+        return template.count(query, Collections.SMART_FM_SITE);
+    }
+
+    public boolean isSiteNumberExists(ObjectId xOId, String siteNum) {
+        MongoTemplate mongoTemplate = factory.getMongoTemplateByOId(xOId);
+        Query query = new Query();
+        query.addCriteria(Criteria.where("siteNum").is(siteNum));
         return mongoTemplate.exists(query, Collections.SMART_FM_SITE);
     }
 }

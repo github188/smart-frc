@@ -14,6 +14,7 @@ import org.bson.types.ObjectId;
  * @author lenovo
  */
 public class SiteBean {
+    private List<String> siteNums;
     private String siteNum;
     private String name;
     private ObjectId dealerId;
@@ -25,6 +26,15 @@ public class SiteBean {
     private String siteType;  //行业
     private String desc;  //备注
 
+    public List<String> getSiteNums() {
+        return siteNums;
+    }
+
+    public void setSiteNums(List<String> siteNums) {
+        this.siteNums = siteNums;
+    }
+
+    
     public String getSiteNum() {
         return siteNum;
     }

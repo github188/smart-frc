@@ -35,13 +35,9 @@ define(function(require){
 		render:function(data){
 			if(data){
 				if(data == 1){
-					return locale.get({lang:"focus_deliver_water"});
-				}else if(data == 2){
-					return locale.get({lang:"buy_deliver_one"});
-				}else if(data == 3){
-					return locale.get({lang:"buy_discount"});
-				}else if(data == 4){
 					return locale.get({lang:"buy_discount_perference"});
+				}else if(data == 2){
+					return locale.get({lang:"buy_discount"});
 				}
 				
 			}
@@ -86,7 +82,7 @@ define(function(require){
 				return cloud.util.dateFormat(new Date(data), "yyyy-MM-dd hh:mm:ss");
 			}
 		}
-	},{
+	},/*{
 		"title":locale.get({lang:"state"}),//状态
 		"dataIndex" : "status",
 		"cls" : null,
@@ -106,29 +102,12 @@ define(function(require){
 				
 			}
 		}
-	}, {
+	},*/ {
         "title": "",
         "dataIndex": "id",
         "cls": "_id" + " " + "hide"
     }];
-	function statusConvertor(value, type) {
-        var display = "";
-        if ("display" == type) {
-            switch (value) {
-                case 1:
-                    display = locale.get({lang: "lottery_status_save"});
-                    break;
-                case 2:
-                    display = locale.get({lang: "lottery_status_send"});
-                    break;
-                default:
-                    break;
-            }
-            return display;
-        } else {
-            return value;
-        }
-    }
+
 	var list = Class.create(cloud.Component,{
 		initialize:function($super,options){
 			$super(options);
@@ -257,10 +236,8 @@ define(function(require){
                         }).get();
                 	}
                 	
-                	
         			self.searchData = {
         				"name":name,
-        				"deviceIds":deviceIds,
         				"types":specialType
         			};
 
@@ -277,6 +254,7 @@ define(function(require){
           			 }, self);
                 
             }, self);  
+            
 		},
 		
 		_bindBtnEvent:function(){
@@ -406,32 +384,72 @@ define(function(require){
 					  },
 					  drop:function(){
 						  var selectedResouces = self.getSelectedResources();
-	                        if (selectedResouces.length === 0) {
-	                            dialog.render({lang: "please_select_at_least_one_config_item"});
+						  var idsArr = self.getSelectedResources();
+	                        if (idsArr.length == 0) {
+	                            cloud.util.unmask("#content-table");
+	                            dialog.render({
+	                                lang: "please_select_at_least_one_config_item"
+	                            });
+	                            return;
 	                        } else {
+	                            cloud.util.unmask("#content-table");
+	                            var ids = "";
+	                            for (var i = 0; i < idsArr.length; i++) {
+	                                if (i == idsArr.length - 1) {
+	                                    ids = ids + idsArr[i]._id;
+	                                } else {
+	                                    ids = ids + idsArr[i]._id + ",";
+	                                }
+	                            }
 	                            dialog.render({
 	                                lang: "affirm_delete",
 	                                buttons: [{
-	                                        lang: "affirm",
-	                                        click: function() {
-	                                            for (var i = 0; i < selectedResouces.length; i++) {
-	                                                var _id = selectedResouces[i]._id;
-	                                                Service.deleteSpecialOffer(_id, function(data) {
-	                                                	self.loadTableData($(".paging-limit-select").val(),0);
-	                                                });
-	                                                
+	                                    lang: "affirm",
+	                                    click: function() {
+	                                        //cloud.util.mask("#site_list_table");
+	                                        self.listTable.mask();
+	                                        Service.deleteSpecialByIds(ids, function(data) {
+	                                            if (data.result.error_code) {
+	                                                if (data.result.error_code && data.result.error_code == "70013") {
+	                                                    dialog.render({
+	                                                        lang: data.result.error_code
+	                                                    });
+	                                                    self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
+	                                                } else if (data.result.error_code == "70060") {
+	                                                    dialog.render({
+	                                                        lang: data.result.error_code
+	                                                    });
+	                                                    self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
+	                                                }
+	                                            } else {
+	                                                if (data.result == "OK") {
+	                                                    if (self.pageRecordTotal == 1) {
+	                                                        var cursor = ($(".paging-page-current").val() - 2) * $(".paging-limit-select").val();
+	                                                        if (cursor < 0) {
+	                                                            cursor = 0;
+	                                                        }
+	                                                        self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
+	                                                    } else {
+	                                                        self.loadTableData($(".paging-limit-select  option:selected").val(), cursor, "");
+	                                                    }
+	                                                    self.pageRecordTotal = self.pageRecordTotal - 1;
+	                                                    dialog.render({
+	                                                        lang: "deletesuccessful"
+	                                                    });
+	                                                }
 	                                            }
-	                                            
-	                                            dialog.render({lang: "deletesuccessful"});
-	                                            dialog.close();
-	                                        }
-	                                    },
-	                                    {
-	                                        lang: "cancel",
-	                                        click: function() {
-	                                            dialog.close();
-	                                        }
-	                                    }]
+
+	                                        }, self);
+	                                        self.listTable.unmask();
+	                                        dialog.close();
+	                                    }
+	                                }, {
+	                                    lang: "cancel",
+	                                    click: function() {
+	                                        self.listTable.unmask();
+	                                        dialog.close();
+	                                    }
+	                                }]
 	                            });
 	                        }
 					  },

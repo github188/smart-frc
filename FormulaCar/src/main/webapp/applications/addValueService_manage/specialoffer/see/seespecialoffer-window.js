@@ -9,43 +9,20 @@ define(function(require) {
     require("cloud/lib/plugin/jquery.form");
     var Service = require("../service");
     var columns = [{
-        "title": "售货机编号",
-        "dataIndex": "assetId",
+        "title": "店面编号",
+        "dataIndex": "siteNum",
         "cls": null,
         "width": "20%"
     }, {
-        "title": "货柜编号",
-        "dataIndex": "cid",
+        "title": "店面名称",
+        "dataIndex": "siteName",
         "cls": null,
         "width": "20%"
     }, {
-        "title": "货道号",
-        "dataIndex": "channelId",
+        "title": "经销商",
+        "dataIndex": "dealerName",
         "cls": null,
         "width": "20%"
-    }, {
-        "title": "商品名称",
-        "dataIndex": "goodsName",
-        "cls": null,
-        "width": "20%"
-    }, {
-        "title": "商品图片",
-        "dataIndex": "imagepath",
-        "cls": null,
-        "width": "20%",
-        render:function(data, type, row){
-			    var productsImage = locale.get({lang:"products"});
-			    var  display = "";
-			    if(data){
-			    	var src = cloud.config.FILE_SERVER_URL + "/api/file/" +data + "?access_token=" + cloud.Ajax.getAccessToken();
-	                display += new Template(
-	                    "<img src='"+src+"' style='width: 18px;height: 28px;'/>")
-	                    .evaluate({
-	                        status : productsImage
-	                    });
-			    }
-            return display;
-        }
     },{
         "title": "",
         "dataIndex": "id",
@@ -91,39 +68,12 @@ define(function(require) {
         		self.specialData = data.result;
         		$("#specialname").val(data.result.name);
         		$("#specialtype").val(data.result.type);
-        		if(data.result.type == 3){//立减
-        			$("#special_amount").val(data.result.config.amount);
-        			$("#specialofferPayStyle").show();
+        		if(data.result.type == 2){//立减
+        			$("#special_amount").val(data.result.specialConfig[0].discount);
         			$("#amount").show();
-        			$("#getProduct").hide();
-        			$("#notice").hide();
-        			$("#notice1").hide();
-        			$("#notice2").hide();
-        		}else if(data.result.type == 4){//折扣
-        			$("#special_scale").val(data.result.config.rate);
-        			$("#specialofferPayStyle").show();
+        		}else if(data.result.type == 1){//折扣
+        			$("#special_scale").val(data.result.specialConfig[0].discount);
         			$("#scale").show();
-        			$("#notice").hide();
-        			$("#notice1").hide();
-        			$("#notice2").hide();
-        			$("#getProduct").hide();
-        		}else if(data.result.type == 1){//送水
-        			$("#wechat_appid").val(data.result.config.appId);
-        			$("#wechat_appsecret").val(data.result.config.appSecret);
-        			$("#appid").show();
-        			$("#appsecret").show();
-        			$("#notice").show();
-        			$("#notice1").show();
-        			$("#notice2").show();
-        			$("#noticeDiv").show();
-        			$("#getProduct").show();
-        			$("#pickupMethod option[value='"+data.result.pickupMethod+"']").attr("selected","selected");
-        		}else if(data.result.type == 2){
-        			$("#specialofferPayStyle").show();
-        			$("#notice").hide();
-        			$("#notice1").hide();
-        			$("#notice2").hide();
-        			$("#getProduct").hide();
         		}
         		
 				$("#startTime").val(cloud.util.dateFormat(new Date(data.result.startTime),"yyyy-MM-dd")).datetimepicker({
@@ -163,118 +113,43 @@ define(function(require) {
                     }
 				});  
 				
-				var paystyle="";
-				var payStyles = data.result.payStyles;
-				if(payStyles != null && payStyles.length>0){
-					for (var i = 0; i < payStyles.length; i++) {
-                        if(payStyles[i] == 1){
-                        	paystyle=paystyle+"百付宝 ";
-                        }else if(payStyles[i] == 2){
-                        	paystyle=paystyle+"微信支付 ";
-                        }else if(payStyles[i] == 3){
-                        	paystyle=paystyle+"支付宝 ";
-                        }else if(payStyles[i] == 4){
-                        	paystyle=paystyle+"现金 ";
-                        }else if(payStyles[i] == 5){
-                        	paystyle=paystyle+"刷卡 ";
-                        }else if(payStyles[i] == 7){
-                        	paystyle=paystyle+"取货码 ";
-                        }else if(payStyles[i] == 8){
-                        	paystyle=paystyle+"游戏 ";
-                        }else if(payStyles[i] == 9){
-                        	paystyle=paystyle+"声波支付 ";
-                        }else if(payStyles[i] == 10){
-                        	paystyle=paystyle+"POS机 ";
-                        }else if(payStyles[i] == 11){
-                        	paystyle=paystyle+"一卡通 ";
-                        }else if(payStyles[i] == 12){
-                        	paystyle=paystyle+"农行掌银 ";
-                        }else if(payStyles[i] == 13){
-                        	paystyle=paystyle+"微信反扫 ";
-                        }else if(payStyles[i] == 14){
-                        	paystyle=paystyle+"会员支付 ";
-                        }else if(payStyles[i] == 15){
-                        	paystyle=paystyle+"翼支付 ";
-                        }else if(payStyles[i] == 16){
-                        	paystyle=paystyle+"京东支付 ";
-                        }else if(payStyles[i] == 19){
-                        	paystyle=paystyle+"支付宝反扫 ";
-                        }else if(payStyles[i] == 20){
-                        	paystyle=paystyle+"积分兑换 ";
-                        }else if(payStyles[i] == 21){
-                        	paystyle=paystyle+"银联支付 ";
-                        }else if(payStyles[i] == 23){
-                        	paystyle=paystyle+"扫码支付 ";
-                        }else if(payStyles[i] == 24){
-                        	paystyle=paystyle+" 融e联 ";
-                        }
+				var specialConfigText="";
+				var specialConfig = data.result.specialConfig;
+				if(specialConfig != null && specialConfig.length>0){
+					for (var i = 0; i < specialConfig.length; i++) {
+						specialConfigText = specialConfigText +" "+specialConfig[i].money;
                     }
 				}
-				$("#payStyle").val(paystyle);
+				$("#specialConfig").val(specialConfigText);
 				
-				var deviceList=[];
-	        	if(data.result.config && data.result.config.deviceConfig && data.result.config.deviceConfig.length>0){
-	        		for(var i=0;i<data.result.config.deviceConfig.length;i++){
-	        			if(data.result.config.deviceConfig[i].offerCids && data.result.config.deviceConfig[i].offerCids.length>0){
-	        				for(var j=0;j<data.result.config.deviceConfig[i].offerCids.length;j++){
-	        					if(data.result.config.deviceConfig[i].offerCids[j].channels && data.result.config.deviceConfig[i].offerCids[j].channels.length>0){
-	        						for(var k=0;k<data.result.config.deviceConfig[i].offerCids[j].channels.length;k++){
-	        							var deviceObj={};
-	        		        			deviceObj.assetId = data.result.config.deviceConfig[i].assetId;
-	    	        					deviceObj.cid=data.result.config.deviceConfig[i].offerCids[j].cid;
-	        							deviceObj.channelId = data.result.config.deviceConfig[i].offerCids[j].channels[k].channelId;
-	        							deviceObj.goodsId = data.result.config.deviceConfig[i].offerCids[j].channels[k].goodsId;
-	        							deviceObj.goodsName = "";
-	        							deviceObj.imagepath = "";
-	        							deviceList.push(deviceObj);
-	        						}
-	        					}
-	        				}
-	        			}
+				var siteList=[];
+	        	if(data.result.siteNum && data.result.siteNum.length>0){
+	        		for(var i=0;i<data.result.siteNum.length;i++){
+	        			var siteObj={};
+	        			siteObj.siteNum = data.result.siteNum[i];
+	        			siteObj.siteName = "";
+	        			siteObj.dealerName = "";
+	        			siteList.push(siteObj);
 	        		}
 	        	}
-	        	if(deviceList.length>0){
+	        	if(siteList.length>0){
 	        		self.searchData = {
-                          	"online":"0"
+                          	"siteNums":data.result.siteNum
                     };   
 	        		cloud.util.mask("#deviceInfo");
-	        		Service.getAllAutomatsByPage(self.searchData, 10000, 0, function(data_device) {
-	        			 console.log(data_device);
+	        		Service.getAllAutomatsByPage(self.searchData, -1, 0, function(data_device) {
+	        			 
 	        			if(data_device.result && data_device.result.length>0){
-	        				for(var i=0;i<deviceList.length;i++){
+	        				for(var i=0;i<siteList.length;i++){
                       		  for(var j=0;j<data_device.result.length;j++){
-                      			if(deviceList[i].assetId == data_device.result[j].assetId){
-                      				 if(deviceList[i].cid == "master"){
-                      					deviceList[i].cid = data_device.result[j].assetId;
-                      				   if(data_device.result[j].goodsConfigs){
-                      					 for(var n=0;n<data_device.result[j].goodsConfigs.length;n++){
-                         		    		if(deviceList[i].channelId == data_device.result[j].goodsConfigs[n].location_id){
-                         		    			if(data_device.result[j].goodsConfigs[n].goods_id){
-                         		    				deviceList[i].goodsName = data_device.result[j].goodsConfigs[n].goods_name;
-                     		        				deviceList[i].imagepath = data_device.result[j].goodsConfigs[n].img;
-                         		    			}
-                         		    		}
-                         		    	}
-                      				   }
-                      				 }else{
-                         		    	if(data_device.result[j].containers){
-                        		    		for(var m=0;m<data_device.result[j].containers.length;m++){
-                        		    			if(deviceList[i].cid == data_device.result[j].containers[m].cid){
-                        		    				for(var n=0;n<data_device.result[j].containers[m].shelves.length;n++){
-                        		    					if(deviceList[i].channelId == data_device.result[j].containers[m].shelves[n].location_id){
-                        		    						deviceList[i].goodsName = data_device.result[j].containers[m].shelves[n].goodsName;
-                            		        				deviceList[i].imagepath = data_device.result[j].containers[m].shelves[n].img;
-                        		    					}
-                        		    				}
-                        		    			}
-                        		    		}
-                        		    	}
-                        		    }
+                      			if(siteList[i].siteNum == data_device.result[j].siteNum){
+                      				siteList[i].siteName = data_device.result[j].name;
+                      				siteList[i].dealerName = data_device.result[j].dealerName;
                       			}
                       		  }
 	        				}
 	        			}
-	        			self.DeviceListTable.render(deviceList);
+	        			self.DeviceListTable.render(siteList);
 	        			cloud.util.unmask("#deviceInfo");
 	        		});
 	        	}

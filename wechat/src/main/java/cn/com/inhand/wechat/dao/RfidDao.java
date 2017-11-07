@@ -15,4 +15,7 @@ public interface RfidDao {
     public Rfid findRfidByRfid(ObjectId oid,String rfid);
     
     public void updateRfidCount(ObjectId oid,Rfid rfid);
+    
+    public void deleteRfid(ObjectId oid,String rfid);
+    
 }

@@ -5,6 +5,7 @@
 package cn.com.inhand.centra.device.dao;
 
 import cn.com.inhand.smart.formulacar.model.Cards;
+import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
@@ -16,6 +17,6 @@ public interface CardsDao {
     public Cards findCardByRfid(ObjectId oid,String rfid);
     public void createCard(ObjectId oid,Cards card);
     
-    
+    public List<Cards> getCarListByMember(ObjectId oid,ObjectId memberId);
     
 }

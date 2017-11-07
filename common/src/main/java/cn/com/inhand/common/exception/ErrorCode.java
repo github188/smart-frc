@@ -196,7 +196,8 @@ public enum ErrorCode {
     VENDER_NUMBER_ALREADY_EXISTS(70041,"vender number (%s) already exists!"),
     CONTRACT_NUMBER_ALREADY_EXISTS(70042,"contract number (%s) already exists!"),
     WAREHOUSE_NAME_ALREADY_EXISTS(70043,"warehouse name already exists!"),
-    ORGNAME_NOT_CONNECTION_PLAT(70044,"The connection number overflow!");
+    ORGNAME_NOT_CONNECTION_PLAT(70044,"The connection number overflow!"),
+    SMART_NAME_ALREADY_EXISTS(70045, "Resource number (%s) already exists");
     private int errorCode;
     private String error;
 

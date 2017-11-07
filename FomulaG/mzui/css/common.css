@@ -1,0 +1,54 @@
+.disopt{
+	opacity:0;
+}
+.primary-blue{
+	color:#77a3ee;
+}
+.primary-orange{
+	color:#fe9c5f;
+}
+.avatar-mlg{
+	font-size: 2.55rem;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+}
+.task-title{
+	width: 50%;
+    float: left;
+    text-align: center;
+}
+.avatar-sml{
+    font-size: .7rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    line-height: 1.2rem;
+}
+.task-tips{
+	position: absolute;
+    top: 30px;
+    margin-left: -22px;
+}
+
+.username{
+	
+	background: transparent url(../../images/username.png) no-repeat 50%;
+    background-size: 20px;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    margin-top: 5px;
+    position: absolute;
+	
+}
+.password{
+	
+	background: transparent url(../../images/password.png) no-repeat 50%;
+    background-size: 20px;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    margin-top: 5px;
+    position: absolute;
+	
+}

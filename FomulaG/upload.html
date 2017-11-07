@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://www.chocyt123.com/upload -->
+<html>
+	<head>
+	<meta charset="UTF-8">
+<meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
+
+	<title lang="{text:faults_monitor}"></title>
+	
+	<link href="mzui/css/mzui.min.css" rel="stylesheet">
+	<link href="mzui/css/common.css" rel="stylesheet">
+	
+	<script src="mzui/js/mzui.min.js"></script>
+<link rel="stylesheet" href="./css/base.css">
+		<link rel="stylesheet" href="./css/home.css">
+
+		<link rel="stylesheet" href="./upload_files/base.css">
+		<link rel="stylesheet" href="./upload_files/upload.css">
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="welcome"> 
+				<span id="userName"></span>&nbsp;小朋友，欢迎来到泥巴方程式社区</span>
+			</div>
+			<div class="error"></div>
+			<div class="upload-area" id="uploadArea">点击选择图片</div>
+			<form id= "uploadForm">
+				<input class="hidden" name="file" type="file" id="uploadInput" accept="image/*">
+				<input id="upload" type="button" value="上传" onclick="doUpload()" /> 
+			</form>
+
+			<script>
+			var paramObj = GetRequest();
+			var openid = paramObj.openid;
+			var picList = [];
+			$.ajax({
+				type: 'GET',
+				url: '/wbapi/wechat/getUserInfo?openid='+openid,
+				"contentType": "application/json",
+				success: function(data){
+                    if(data.result){
+						
+						$("#userName").text(data.result.nickname);
+						if(data.result.picId){
+							picList = data.result.picId;
+						}
+						
+						
+					}
+				}
+			});
+			
+			function doUpload() {  
+
+			    var formData = new FormData($("#uploadForm")[0]);  
+			    $.ajax({  
+			         url: '/fapi/file' ,  
+			         type: 'POST',  
+			         data: formData,  
+			         async: false,  
+			         cache: false,  
+			         contentType: false,  
+			         processData: false,  
+			         success: function (data) {  
+			             //console.log(returndata);
+			             if(data && data.result == "success"){
+			            	 picList.push(data.fileName);
+			            	 var formData = {
+			 						"picId":picList,
+			 				 }
+			            	 $.ajax({
+			     				type: 'POST',
+			     				url: '/wbapi/wechat/editUserInfo?openid='+openid,
+			     				"contentType": "application/json",
+			     				data:JSON.stringify(formData),
+			     				success: function(data){
+			     					if(data.result){
+			     						window.location.href = '/FomulaG/home.html?openid='+openid;
+			     					}
+			     				}
+			     			});
+			            	 
+			             }
+			         },  
+			         error: function (returndata) {  
+			             alert(returndata);  
+			         }  
+			    });  
+			} 
+			
+			var uploadArea = document.querySelector('#uploadArea');
+			var uploadInput = document.querySelector('#uploadInput');
+
+			uploadArea.addEventListener('click', function () {
+			  return uploadInput.click();
+			}, false);
+
+			uploadInput.addEventListener('change', function () {
+			  uploadArea.innerText = '图片已添加';
+			  uploadArea.classList.add('selected');
+			  $("#upload").addClass('selected');
+			 // document.querySelector('input').classList.add('selected');
+			}, false);
+			
+			
+			function GetRequest() {
+				var url = location.search; //获取url中"?"符后的字串
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for(var i = 0; i < strs.length; i ++) {
+						theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+					}
+				}
+			   return theRequest;
+			}
+			</script>
+		</div>
+	</body>
+</html>

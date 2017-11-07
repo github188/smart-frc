@@ -1,5 +1,4 @@
 .info-wrapper {
-  width: 320px;
   margin: 12px auto 0 auto;
   padding: 0 16px 16px 16px;
   border-top: 4px solid #add8f7;
@@ -43,7 +42,7 @@
 }
 
 .image-wrapper {
-  width: 320px;
+
   margin: 24px auto 0 auto;
   padding: 0 16px 16px 16px;
   border-top: 4px solid #add8f7;  
@@ -74,7 +73,6 @@
 
 .welcome {
   font-size: 13px;
-  width: 320px;
   margin: 12px auto 0 auto;
 }
 

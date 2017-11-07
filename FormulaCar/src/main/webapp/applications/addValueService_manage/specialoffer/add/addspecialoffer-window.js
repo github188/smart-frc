@@ -66,7 +66,6 @@ define(function(require) {
             });
             this.adWindow.show();
             $("#nextBase").val(locale.get({lang: "next_step"}));
-          //  this.renderDeviceTable();
             this.renderSelect();
             this._renderBtn();
         },
@@ -84,75 +83,6 @@ define(function(require) {
                 });
             });
         	
-        },
-        renderDeviceTable:function(){
-        	var self=this;
-            this.listTable = new Table({
-                selector: "#devicelist",
-                columns: columns,
-                datas: [],
-                pageSize: 100,
-                autoWidth: false,
-                pageToolBar: false,
-                checkbox: "full",
-                events: {
-                    onRowClick: function(data) { 
-                    	
-                        this.listTable.unselectAllRows();
-                        var rows = this.listTable.getClickedRow();
-                        this.listTable.selectRows(rows);
-                    },
-                    onRowRendered: function(tr, data, index) {
-                        var self = this;      
-             
-                    },
-                    scope: this
-                }
-            });
-
-            this.setDataTable();
-        },
-        setDataTable: function() {
-            this.loadTableData(1000, 0);
-        }, 
-        loadTableData: function(limit, cursor) {
-            cloud.util.mask("#devicelist");
-            var self = this;
-           
-            var userId = cloud.storage.sessionStorage("accountInfo").split(",")[1].split(":")[1];
-            var roleType = permission.getInfo().roleType;
-            Service.getLinesByUserId(userId,function(linedata){
-            	  var lineIds=[];
-                  if(linedata.result && linedata.result.length>0){
- 	    			  for(var i=0;i<linedata.result.length;i++){
- 	    				  lineIds.push(linedata.result[i]._id);
- 	    			  }
-                  }
-                  if(roleType == 51){
-		    			 lineIds = [];
-                  }
-                  if(roleType != 51 && lineIds.length == 0){
-                	  lineIds = ["000000000000000000000000"];
-                  }
-                  if(linedata!=null){
-                	  self.searchData = {
-                            	//"online":"0",
-                            	"lineId": lineIds
-                        };
-                  }else{
-                	  self.searchData = {
-                            	//"online":"0"
-                        };
-                  }
-                  Service.getAllAutomatsByPage(self.searchData, limit, cursor, function(data) {
-                      var total = data.result.length;
-                      self.pageRecordTotal = total;
-                      self.totalCount = data.result.length;
-                      self.listTable.render(data.result);
-                      cloud.util.unmask("#devicelist");
-                  }, self);
-            });
-          
         },
         _renderBtn: function() {
         	var self = this;
@@ -275,11 +205,10 @@ define(function(require) {
                 		type:parseInt(specialtype),
                 		startTime:startTime,
                 		endTime:endTime,
-                		config:configArray
+                		specialConfig:configArray
                 };
                 
 				$("#devicelist").css("display", "block");
-                $("#selfConfig").css("display", "none");
                 $("#baseInfo").css("display", "none");
                 $("#tab1").removeClass("active");
                 $("#tab2").addClass("active");

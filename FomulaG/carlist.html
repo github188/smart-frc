@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
+
+	<title lang="{text:faults_monitor}"></title>
+	
+	<link href="mzui/css/mzui.min.css" rel="stylesheet">
+	<link href="mzui/css/common.css" rel="stylesheet">
+	
+	<script src="mzui/js/mzui.min.js"></script>
+<link rel="stylesheet" href="./css/base.css">
+		<link rel="stylesheet" href="./css/home.css">
+<script src="js/dropzone.js"></script>
+</head>
+<body style="font-size: 14px;margin-left: 10px;margin-right: 10px;">
+
+<div class="wrapper">
+	<div class="welcome"> 
+		<span id="userName" ></span><span> 小朋友，欢迎来到泥巴方程式社区</span>
+		<a class="logout" id="logout" href="javascript:;">退出登录</a>
+	</div>
+
+</div>
+
+<div class="info-title" style="margin-top: 30px;">
+	<span class="title">我的赛车</span>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>编号</th>
+      <th>昵称</th>
+      <th>点数</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody id="carlist">
+    
+
+  </tbody>
+  <tfoot>
+
+  </tfoot>
+</table>
+
+</body>
+<script>
+
+			var paramObj = GetRequest();
+			var openid = paramObj.openid;
+			$("#carlist").html("");
+			$.ajax({
+				type: 'GET',
+				url: '/wbapi/wechat/getUserInfo?openid='+openid,
+				"contentType": "application/json",
+				success: function(data){
+                    if(data.result){
+						
+						$("#userName").text(data.result.nickname);
+						
+						$("#memberId").val(data.result._id);
+						$("#memberNickName").val(data.result.nickname);
+						
+						$.ajax({
+							type: 'GET',
+							url: '/wbapi/wechat/car/list?memberId='+data.result._id,
+							"contentType": "application/json",
+							success: function(data){
+			                    if(data.result){
+									
+			                    	for(var i=0;i<data.total;i++){
+			                    		var carTemp = data.result[i];
+			                    		$("#carlist").append("<tr>"
+			                    		+"<td>"+carTemp.rfid+"</td><td>"+carTemp.name+"</td><td>"+carTemp.count+"</td>"
+			                    		+"<td class='text-red'><div id='"+carTemp._id+"' class='avatar removecar' style='display: initial;'><i class='icon icon-remove-sign'></i></div></td></tr>");
+			                    		
+			                    	}
+			                    	
+			                    	$(".removecar").click(function(e){
+			            				console.log(11);
+			            				var id = $(this).attr("id");
+			            				$.ajax({
+			            					type: 'GET',
+			            					url: '/wbapi/wechat/car/delete?id='+id,
+			            					"contentType": "application/json",
+			            					success: function(data){
+			            						if(data.result == "success"){
+			            							
+			            							$("#"+data.id).parent().parent().remove();
+			            							
+			            							//window.location.href = '/FomulaG/login.html?params=myInfo';
+			            						}
+			            					}
+			            				})
+			            				
+			            			});
+									
+								}
+							}
+						});
+					}
+				}
+			});
+			
+			$("#logout").click(function(e){
+				$.ajax({
+					type: 'GET',
+					url: '/wbapi/wechat/logout?openid='+openid,
+					"contentType": "application/json",
+					success: function(data){
+						if(data.result == "SUCCESS"){
+							window.location.href = '/FomulaG/login.html?params=myInfo';
+						}
+					}
+				})
+			});
+			
+			
+			
+		
+			function GetRequest() {
+				var url = location.search; //获取url中"?"符后的字串
+				var theRequest = new Object();
+				if (url.indexOf("?") != -1) {
+					var str = url.substr(1);
+					strs = str.split("&");
+					for(var i = 0; i < strs.length; i ++) {
+						theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+					}
+				}
+			   return theRequest;
+			}
+		</script>
+
+</html>
+
+
+

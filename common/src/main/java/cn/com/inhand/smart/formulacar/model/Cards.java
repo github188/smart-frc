@@ -24,6 +24,17 @@ public class Cards {
     private Long createTime;
     private Long updateTime;
     private String rfid;
+    private Integer count;
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+    
+    
 
     public ObjectId getId() {
         return id;
