@@ -36,7 +36,7 @@ public class WechatOauthHandler {
     public String getWechatOauthCodeUrl(String rfid){
         
         String url = "";
-        String redirect_uri = "http://"+webUrl+"/wapi/opera/wechat_code?rfid="+rfid;
+        String redirect_uri = "http://"+webUrl+"/wbapi/oper/wechat_code?rfid="+rfid;
          try {
             url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+Constant.WECHAT_SUBSCRIPTION_APPID
                            +"&redirect_uri="

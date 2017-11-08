@@ -482,13 +482,13 @@ public class Constant {
     //冰山：wxb6b9ee729bd085c5
     //映翰通：wxef7cb53cab2eb437
     //澳柯码：wxf275f67c77e5910e
-    public static final String WECHAT_SUBSCRIPTION_APPID = "wxf275f67c77e5910e";//"wxef7cb53cab2eb437";
-    public static final String WECHAT_CODE_TEST_APPID = "wxf275f67c77e5910e";
-    public static final String WECHAT_CODE_TEST_SECRET = "f7019d81f9afca8121a6d47cf41bd429";
+    public static final String WECHAT_SUBSCRIPTION_APPID = "wxf0aed31cd2c95a0d";//"wxef7cb53cab2eb437";
+    public static final String WECHAT_CODE_TEST_APPID = "wxf0aed31cd2c95a0d";
+    public static final String WECHAT_CODE_TEST_SECRET = "59a1202f4528018e46b83111414a644f";
     //冰山：47282d09183dd5825ccf26afb4062d90
     //映翰通智能售货机管家：66c44f0ba16db341da8e012da8277701
     //澳玛码：f7019d81f9afca8121a6d47cf41bd429
-    public static final String WECHAT_SUBSCRIPTION_SECRET = "f7019d81f9afca8121a6d47cf41bd429";//"66c44f0ba16db341da8e012da8277701";
+    public static final String WECHAT_SUBSCRIPTION_SECRET = "59a1202f4528018e46b83111414a644f";//"66c44f0ba16db341da8e012da8277701";
     //冰山：bS0BtcSog0DkTMePaRX4StafBfScJ-a8R7PgW7kkjss
     //映翰通：iULk4EPROyz3fJ7eLgM4mcaU5uTkzLZ4PU6wfVqjhbw(智能售货机管家)
     //澳柯玛：rrwXmBxQd9oiUCqpORroQZGR8pVJl5nGXAdIDAeGdkg

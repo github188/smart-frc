@@ -133,8 +133,8 @@ public class DeviceRfidOauthController {
     
     @RequestMapping(value = "/rfid/code", method = RequestMethod.GET)
     public synchronized @ResponseBody
-    Object getRfidCode(@RequestParam(value = "access_token", required = true) String access_token,
-            @RequestParam(value = "rfid", required = true) String rfid) throws ParseException {
+    Object getRfidCode(@RequestParam(value = "access_token", required = false) String access_token,
+            @RequestParam(value = "rfid", required = true) String rfid) {
         
         String code = "http://"+host+"/wbapi/oper/bind/"+rfid;
         return code;

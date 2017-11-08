@@ -92,15 +92,15 @@ public class WechatOperOauthController {
                 if (member.getStatus() == 0) {
                         response.sendRedirect("http://"+webUrl+"/FomulaG/bindcar.html?rfid="+rfid+"&openid="+openId);
                 }else{
-                    response.sendRedirect("http://" + webUrl + "/FomulaG/login.html?params=myInfo");
+                    response.sendRedirect("http://" + webUrl + "/FomulaG/login.html?params=bindCar&rfid="+rfid);
                 }
                 
             }else{
-                response.sendRedirect("http://" + webUrl + "/FomulaG/register.html?token=" + token + "&openid=" + openId);
+                response.sendRedirect("http://" + webUrl + "/FomulaG/register.html?token=" + token + "&openid=" + openId+"&params=bindCar&rfid="+rfid);
             }
                 
         }else{
-            response.sendRedirect("http://" + webUrl + "/FomulaG/login.html?params=myInfo");
+            response.sendRedirect("http://" + webUrl + "/FomulaG/login.html?params=bindCar&rfid="+rfid);
         }
 
     }
